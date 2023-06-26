@@ -65,6 +65,21 @@ services:
       - mariadb
     networks:
       - low_auto_erp_network
+  # react:
+  #   build:
+  #     context: .
+  #     dockerfile: ./react.dockerfile
+  #   container_name: low_auto_erp_react
+  #   restart: unless-stopped
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - ./client:/usr/src/app
+  #   depends_on:
+  #     - nginx
+  #   networks:
+  #     - low_auto_erp_network
+  #   command: yarn install && yarn dev
 
 networks:
   low_auto_erp_network:
