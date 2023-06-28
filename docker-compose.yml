@@ -21,12 +21,12 @@ services:
   php:
     build:
       context: .
-      dockerfile: ./php.dockerfile
+      dockerfile: ./docker/php.dockerfile
     container_name: low_auto_erp_php
     restart: unless-stopped
     volumes:
       - ./server:/var/www/html:cached
-      - ./php-fpm.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./docker/php-fpm.ini:/usr/local/etc/php/conf.d/custom.ini
       - ~/.ssh:/root/.ssh
     depends_on:
       - mariadb
@@ -42,10 +42,10 @@ services:
       - 443:443
     volumes:
       - ./server:/var/www/html:cached
-      - ./default.conf:/etc/nginx/conf.d/default.conf
-      - ./ssl.conf:/etc/nginx/conf.d/ssl/ssl.conf
-      - ./cert.pem:/etc/nginx/conf.d/ssl/cert.pem
-      - ./cert-key.pem:/etc/nginx/conf.d/ssl/cert-key.pem
+      - ./docker/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/ssl.conf:/etc/nginx/conf.d/ssl/ssl.conf
+      - ./docker/cert.pem:/etc/nginx/conf.d/ssl/cert.pem
+      - ./docker/cert-key.pem:/etc/nginx/conf.d/ssl/cert-key.pem
     depends_on:
       - php
     networks:
@@ -68,7 +68,7 @@ services:
   # react:
   #   build:
   #     context: .
-  #     dockerfile: ./react.dockerfile
+  #     dockerfile: ./docker/react.dockerfile
   #   container_name: low_auto_erp_react
   #   restart: unless-stopped
   #   ports:
