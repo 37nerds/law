@@ -6,10 +6,10 @@ import { themeChange } from "theme-change";
 
 // Importing pages
 const Layout = lazy(() => import("@containers/Layout"));
-const Login = lazy(() => import("@pages/Login"));
-const ForgotPassword = lazy(() => import("@pages/ForgotPassword"));
-const Register = lazy(() => import("@pages/Register"));
-const Documentation = lazy(() => import("@pages/Documentation"));
+const Login = lazy(() => import("@pages/public/Login"));
+const ForgotPassword = lazy(() => import("@pages/public/ForgotPassword"));
+const Register = lazy(() => import("@pages/public/Register"));
+const Documentation = lazy(() => import("@pages/public/Documentation"));
 
 // Initializing different libraries
 initializeApp();

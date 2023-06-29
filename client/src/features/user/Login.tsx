@@ -1,5 +1,5 @@
-import InputText, { TUpdateFormValue } from "@components/Input/InputText";
-import ErrorText from "@components/Typography/ErrorText";
+import InputText, { TUpdateFormValue } from "@components/inputs/InputText";
+import ErrorText from "@components/typographys/ErrorText";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import LandingIntro from "./LandingIntro";

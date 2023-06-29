@@ -1,4 +1,4 @@
-import TitleCard from "@components/Cards/TitleCard";
+import TitleCard from "@components/cards/TitleCard";
 import {
     CategoryScale,
     Chart as ChartJS,

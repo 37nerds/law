@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@app/hooks";
-import InputText, { TUpdateFormValue } from "@components/Input/InputText";
-import ErrorText from "@components/Typography/ErrorText";
+import InputText, { TUpdateFormValue } from "@components/inputs/InputText";
+import ErrorText from "@components/typographys/ErrorText";
 import { useState } from "react";
 import { showNotification } from "../../common/headerSlice";
 import { TLeadObj, addNewLead } from "../leadSlice";

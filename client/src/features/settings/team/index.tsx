@@ -1,7 +1,7 @@
 import { useAppDispatch } from "@app/hooks";
 import moment from "moment";
 import { useState } from "react";
-import TitleCard from "../../../components/Cards/TitleCard";
+import TitleCard from "../../../components/cards/TitleCard";
 import { showNotification } from "../../common/headerSlice";
 
 const TopSideButtons = () => {

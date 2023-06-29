@@ -1,7 +1,7 @@
 import { useAppSelector } from "@app/hooks";
 import { Suspense, lazy, useEffect, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
-import routes from "@routes/index";
+import protectedRoutes from "@routes/protectedRoutes";
 import Header from "./Header";
 import SuspenseContent from "./SuspenseContent";
 
@@ -23,12 +23,12 @@ function PageContent() {
         <div className="drawer-content flex flex-col ">
             <Header />
             <main
-                className="flex-1 overflow-y-auto bg-base-200 px-6  pt-8"
+                className="flex-1 overflow-y-auto bg-base-200 px-4 pt-4"
                 ref={mainContentRef}
             >
                 <Suspense fallback={<SuspenseContent />}>
                     <Routes>
-                        {routes.map((route, key) => {
+                        {protectedRoutes.map((route, key) => {
                             return (
                                 <Route
                                     key={key}

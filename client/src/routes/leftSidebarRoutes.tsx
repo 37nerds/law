@@ -5,6 +5,7 @@ import ChartBarIcon from "@heroicons/react/24/outline/ChartBarIcon";
 import CodeBracketSquareIcon from "@heroicons/react/24/outline/CodeBracketSquareIcon";
 import Cog6ToothIcon from "@heroicons/react/24/outline/Cog6ToothIcon";
 import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
+import AdjustmentsHorizontalIcon from "@heroicons/react/24/outline/AdjustmentsHorizontalIcon";
 import DocumentIcon from "@heroicons/react/24/outline/DocumentIcon";
 import DocumentTextIcon from "@heroicons/react/24/outline/DocumentTextIcon";
 import ExclamationTriangleIcon from "@heroicons/react/24/outline/ExclamationTriangleIcon";
@@ -26,11 +27,23 @@ export type TSubmenu = {
     name: string;
 };
 
-const routes = [
+const leftSidebarRoutes = [
     {
         path: "/app/dashboard",
         icon: <Squares2X2Icon className={iconClasses} />,
         name: "Dashboard",
+    },
+    {
+        path: "",
+        icon: <AdjustmentsHorizontalIcon className={`${iconClasses} inline`} />, // icon component
+        name: "Setups",
+        submenu: [
+            {
+                path: "/app/setups/customers",
+                icon: <UserIcon className={submenuIconClasses} />,
+                name: "Customers Setup",
+            },
+        ],
     },
     {
         path: "/app/leads", // url
@@ -130,4 +143,4 @@ const routes = [
     },
 ];
 
-export default routes;
+export default leftSidebarRoutes;

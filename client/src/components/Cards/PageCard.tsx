@@ -2,23 +2,19 @@ import Subtitle from "@components/typographys/Subtitle";
 import { ReactNode } from "react";
 
 type Props = {
-    title: string;
     children: ReactNode;
     topMargin?: string;
     TopSideButtons?: ReactNode;
 };
 
-const TitleCard = ({ title, children, topMargin, TopSideButtons }: Props) => {
+const PageCard = ({ children, topMargin, TopSideButtons }: Props) => {
     return (
         <div
             className={
-                "card w-full bg-base-100 p-6 shadow-xl " + (topMargin || "mt-6")
+                "card w-full bg-base-100 p-6 shadow-xl " + (topMargin || "mt-[1px]")
             }
         >
-            {/* Title for Card */}
             <Subtitle styleClass={TopSideButtons ? "inline-block" : ""}>
-                {title}
-
                 {/* Top side button, show only if present */}
                 {TopSideButtons && (
                     <div className="float-right inline-block">
@@ -26,13 +22,9 @@ const TitleCard = ({ title, children, topMargin, TopSideButtons }: Props) => {
                     </div>
                 )}
             </Subtitle>
-
-            <div className="divider mt-2"></div>
-
-            {/** Card Body */}
             <div className="h-full w-full bg-base-100 pb-6">{children}</div>
         </div>
     );
 };
 
-export default TitleCard;
+export default PageCard;

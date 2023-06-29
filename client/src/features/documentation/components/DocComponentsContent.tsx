@@ -1,11 +1,11 @@
-import InputText from "../../../components/Input/InputText";
-import ErrorText from "../../../components/Typography/ErrorText";
-import HelperText from "../../../components/Typography/HelperText";
-import Subtitle from "../../../components/Typography/Subtitle";
-import Title from "../../../components/Typography/Title";
+import InputText from "../../../components/inputs/InputText";
+import ErrorText from "../../../components/typographys/ErrorText";
+import HelperText from "../../../components/typographys/HelperText";
+import Subtitle from "../../../components/typographys/Subtitle";
+import Title from "../../../components/typographys/Title";
 
 import { useAppDispatch } from "@app/hooks";
-import TitleCard from "../../../components/Cards/TitleCard";
+import TitleCard from "../../../components/cards/TitleCard";
 
 function DocComponentsContent() {
     const dispatch = useAppDispatch();

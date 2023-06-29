@@ -1,8 +1,8 @@
 import { useAppDispatch } from "@app/hooks";
-import TitleCard from "@components/Cards/TitleCard";
-import InputText from "@components/Input/InputText";
-import TextAreaInput from "@components/Input/TextAreaInput";
-import ToggleInput from "@components/Input/ToggleInput";
+import TitleCard from "@components/cards/TitleCard";
+import InputText from "@components/inputs/InputText";
+import TextAreaInput from "@components/inputs/TextAreaInput";
+import ToggleInput from "@components/inputs/ToggleInput";
 import { showNotification } from "../../common/headerSlice";
 
 const ProfileSettings = () => {

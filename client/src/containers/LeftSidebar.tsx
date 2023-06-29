@@ -1,4 +1,4 @@
-import routes from "@routes/sidebar";
+import leftSidebarRoutes from "@routes/leftSidebarRoutes";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import SidebarSubmenu from "./SidebarSubmenu";
 
@@ -22,7 +22,7 @@ const LeftSidebar = () => {
                         DashWind
                     </Link>{" "}
                 </li>
-                {routes.map((route, k) => {
+                {leftSidebarRoutes.map((route, k) => {
                     return (
                         <li className="" key={k}>
                             {route.submenu ? (

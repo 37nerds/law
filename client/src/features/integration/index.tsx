@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@app/hooks";
-import TitleCard from "@components/Cards/TitleCard";
+import TitleCard from "@components/cards/TitleCard";
 import { useState } from "react";
 import { showNotification } from "../common/headerSlice";
 
