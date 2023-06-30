@@ -45,6 +45,7 @@ const MarkIcon = ({ visible = false }: { visible?: boolean }) => (
 
 const themes = [
     "light",
+    "dracula",
     "dark",
     "cupcake",
     "bumblebee",
@@ -64,7 +65,6 @@ const themes = [
     "wireframe",
     "black",
     "luxury",
-    "dracula",
     "cmyk",
     "autumn",
     "business",

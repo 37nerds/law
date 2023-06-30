@@ -8,6 +8,7 @@ export default {
     daisyui: {
         themes: [
             "light",
+            "dracula",
             "dark",
             "cupcake",
             "bumblebee",
@@ -27,7 +28,6 @@ export default {
             "wireframe",
             "black",
             "luxury",
-            "dracula",
             "cmyk",
             "autumn",
             "business",

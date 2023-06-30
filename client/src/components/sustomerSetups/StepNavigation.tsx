@@ -1,30 +1,37 @@
 import { Dispatch, SetStateAction } from "react";
+import { customerSetupSteps } from "src/config/customerSetup";
 
-const steps = [
-    "Group of Company Setup",
-    "Company Setup",
-    "Unit Setup",
-    "Client Setup",
-];
+type Props = {
+    currentStepLabel: string;
+    setCurrentStepLabel: Dispatch<SetStateAction<string>>;
+};
 
-const StepNavigation = ({
-    currentStep,
-    setCurrentStep,
-}: {
-    currentStep: string;
-    setCurrentStep: Dispatch<SetStateAction<string>>;
-}) => {
+<ul className="">
+    <li>
+        <a>Item 1</a>
+    </li>
+    <li>
+        <a>Item 2</a>
+    </li>
+    <li>
+        <a>Item 3</a>
+    </li>
+</ul>;
+
+const StepNavigation = ({ currentStepLabel, setCurrentStepLabel }: Props) => {
     return (
-        <div className="tabs">
-            {steps.map(step => (
-                <a
-                    onClick={() => setCurrentStep(step)}
-                    className={`tab-lifted tab ${
-                        step == currentStep ? "tab-active " : ""
+        <div className="menu rounded-b-none rounded-box menu-vertical bg-base-100 lg:menu-horizontal">
+            {customerSetupSteps.map(step => (
+                <li
+                    onClick={() => setCurrentStepLabel(step.label)}
+                    className={`${
+                        step.label == currentStepLabel
+                            ? "active bg-base-200"
+                            : "bg-base-200/50"
                     }`}
                 >
-                    {step}
-                </a>
+                    <a>{step.label}</a>
+                </li>
             ))}
         </div>
     );

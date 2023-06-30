@@ -7,11 +7,13 @@ import StepNavigation from "@components/sustomerSetups/StepNavigation";
 import { showNotification } from "@features/common/headerSlice";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import { useState } from "react";
+import { customerSetupSteps } from "src/config/customerSetup";
 
 const CustomerSetup = () => {
     const dispatch = useAppDispatch();
 
-    const [currentStep, setCurrentStep] = useState("Group of Company Setup");
+    const [currentStepLabel, setCurrentStepLabel] =
+        useState("Group of Company");
 
     useSetPageTitle("Customer Setup");
 
@@ -24,30 +26,19 @@ const CustomerSetup = () => {
         console.log(updateType);
     };
 
+    const currentStep = customerSetupSteps.find(
+        c => c.label == currentStepLabel
+    );
+
+    const StepComponent = currentStep ? currentStep.component : () => <></>;
+
     return (
         <PageCard>
-            <div className="rounded-md bg-[#242933]">
-                <StepNavigation
-                    currentStep={currentStep}
-                    setCurrentStep={setCurrentStep}
-                />
-                <div className="p-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Harum, nam earum dicta tenetur, quis praesentium eius
-                    perferendis eos excepturi tempora cupiditate omnis officia,
-                    nesciunt expedita minus blanditiis asperiores aliquid soluta
-                    ex temporibus necessitatibus pariatur recusandae. Aliquam,
-                    iste modi voluptate necessitatibus dolore earum numquam
-                    praesentium, ipsam unde iusto ex, minus veritatis quod?
-                    Placeat ducimus assumenda tempora voluptate quam obcaecati.
-                    Commodi odit voluptatum veritatis placeat! Aliquid iste,
-                    magni doloribus animi atque ad! Quos libero itaque fugiat
-                    incidunt mollitia. Excepturi sequi blanditiis modi quia,
-                    fugit ipsam amet? Reiciendis delectus veritatis autem
-                    necessitatibus vitae, laudantium quia illo porro aut? Vel
-                    repellat similique perferendis illo!
-                </div>
-            </div>
+            <StepNavigation
+                currentStepLabel={currentStepLabel}
+                setCurrentStepLabel={setCurrentStepLabel}
+            />
+            <div className="p-4 bg-base-200">{<StepComponent />}</div>
         </PageCard>
     );
 
