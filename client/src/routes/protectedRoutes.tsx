@@ -21,7 +21,7 @@ const protectedRoutes = [
         component: Dashboard, // view rendered
     },
     {
-        path: "/setups/customers",
+        path: "/customers/setup",
         component: CustomerSetup,
     },
     {

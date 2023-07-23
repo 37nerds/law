@@ -5,7 +5,6 @@ import ChartBarIcon from "@heroicons/react/24/outline/ChartBarIcon";
 import CodeBracketSquareIcon from "@heroicons/react/24/outline/CodeBracketSquareIcon";
 import Cog6ToothIcon from "@heroicons/react/24/outline/Cog6ToothIcon";
 import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
-import AdjustmentsHorizontalIcon from "@heroicons/react/24/outline/AdjustmentsHorizontalIcon";
 import DocumentIcon from "@heroicons/react/24/outline/DocumentIcon";
 import DocumentTextIcon from "@heroicons/react/24/outline/DocumentTextIcon";
 import ExclamationTriangleIcon from "@heroicons/react/24/outline/ExclamationTriangleIcon";
@@ -17,6 +16,7 @@ import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
 import WalletIcon from "@heroicons/react/24/outline/WalletIcon";
 import { ReactNode } from "react";
+import { CogIcon, QueueListIcon } from "@heroicons/react/24/outline";
 
 const iconClasses = `h-6 w-6`;
 const submenuIconClasses = `h-5 w-5`;
@@ -27,7 +27,7 @@ export type TSubmenu = {
     name: string;
 };
 
-const leftSidebarRoutes = [
+const leftSidebarLinks = [
     {
         path: "/app/dashboard",
         icon: <Squares2X2Icon className={iconClasses} />,
@@ -35,12 +35,17 @@ const leftSidebarRoutes = [
     },
     {
         path: "",
-        icon: <AdjustmentsHorizontalIcon className={`${iconClasses} inline`} />, // icon component
-        name: "Setups",
+        icon: <UserIcon className={`${iconClasses} inline`} />,
+        name: "Customers",
         submenu: [
             {
-                path: "/app/setups/customers",
-                icon: <UserIcon className={submenuIconClasses} />,
+                path: "/app/customers/list",
+                icon: <QueueListIcon className={submenuIconClasses} />,
+                name: "Customers List",
+            },
+            {
+                path: "/app/customers/setup",
+                icon: <CogIcon className={submenuIconClasses} />,
                 name: "Customers Setup",
             },
         ],
@@ -143,4 +148,4 @@ const leftSidebarRoutes = [
     },
 ];
 
-export default leftSidebarRoutes;
+export default leftSidebarLinks;

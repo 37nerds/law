@@ -1,5 +1,5 @@
 export type Response = {
-    data: any;
+    payload: any;
     code: number;
 };
 
@@ -21,7 +21,7 @@ class ApiSingleton {
     private async makeRequest(
         method: string,
         endpoint: string,
-        payload?: any
+        requestPayload?: any
     ): Promise<Response> {
         const url = `${this.baseUrl}${endpoint}`;
         const requestOptions: RequestInit = {
@@ -32,22 +32,22 @@ class ApiSingleton {
             },
         };
 
-        if (payload) {
-            requestOptions.body = JSON.stringify(payload);
+        if (requestPayload) {
+            requestOptions.body = JSON.stringify(requestPayload);
         }
 
         let code: number;
-        let data: any;
+        let payload: any;
 
         try {
             const response = await fetch(url, requestOptions);
-            data = await response.json();
+            payload = await response.json();
             code = response.status;
         } catch (e: any) {
             code = 500;
-            data.message = e.message;
+            payload.message = e.message;
         }
-        return { data, code };
+        return { payload, code };
     }
 
     async get(endpoint: string) {

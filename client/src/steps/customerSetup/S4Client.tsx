@@ -4,7 +4,7 @@ import { selectClientSetup } from "@states/customers/customerSelector";
 import { TBottomButton, TOption } from "@utils/types";
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
-import useCreateClient from "@hooks/customers/useCreateClient";
+import useCreateRequest from "@hooks/http/useCreateRequest";
 
 const options: TOption[] = [
     { name: "Foo", value: "foo" },
@@ -179,21 +179,21 @@ const fields = [
 
 const S4Client = () => {
     const dispatch = useAppDispatch();
-    const { save, loading, errors } = useCreateClient();
+    const { save, loading, errors } = useCreateRequest("/customers/clients");
     const clientSetup = selectClientSetup();
-
-    const handleDispatch = (field: string, value: string) => {
-        dispatch(setClientSetupField({ field, value }));
-    };
 
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
-        { type: "Save & New", handler: save },
+        { type: "Save & New", handler: () => save(clientSetup) },
         { type: "Save & Close" },
         { type: "Edit" },
         { type: "Export" },
         { type: "Inactive" },
     ];
+
+    const handleDispatch = (field: string, value: string) => {
+        dispatch(setClientSetupField({ field, value }));
+    };
 
     return (
         <RenderStep
