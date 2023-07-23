@@ -8,11 +8,13 @@ const CustomerSetupStepLayout = ({
     title,
     buttons,
     onButtonClick,
+    loading = false,
 }: {
     children: ReactNode;
     title: string;
     buttons: string[];
     onButtonClick: (type: string) => void;
+    loading?: boolean;
 }) => {
     return (
         <div className="flex flex-col gap-10">
@@ -21,6 +23,7 @@ const CustomerSetupStepLayout = ({
             <BottomButtons
                 buttons={buttons}
                 onClick={type => onButtonClick(type)}
+                loading={loading}
             />
         </div>
     );

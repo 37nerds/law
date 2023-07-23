@@ -27,7 +27,7 @@ return new class extends Migration
             $table->text("member_of_the_association")->nullable();
             $table->string("business_field")->nullable();
             $table->string("legal_form")->nullable();
-            $table->string("special_notes")->nullable();
+            $table->text("special_notes")->nullable();
             $table->string("is_active")->default(true);
             $table->timestamps();
         });

@@ -32,7 +32,7 @@ class GroupOfCompanyFactory extends Factory
             'member_of_the_association' => fake()->optional()->text(),
             'business_field' => fake()->optional()->word(),
             'legal_form' => fake()->optional()->word(),
-            'special_notes' => fake()->optional()->paragraph(),
+            'special_notes' => fake()->optional()->text(),
         ];
     }
 }

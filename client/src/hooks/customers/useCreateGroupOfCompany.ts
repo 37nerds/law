@@ -4,21 +4,28 @@ import { selectGroupOfCompanySetup } from "@states/customers/customerSelector";
 
 const useCreateGroupOfCompany = () => {
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    const data = selectGroupOfCompanySetup();
+    const [errorMessage, setErrorMessage] = useState("");
+    const [errors, setErrors] = useState<any>({});
+
+    const payload = selectGroupOfCompanySetup();
 
     const save = async () => {
         setLoading(true);
+        setErrors({});
         const response = await httpClient.post(
             "/customers/group-of-companies",
-            data
+            payload
         );
-        if (response.status !== 201) {
-            setError(response.message);
+
+        if (response.code !== 201) {
+            setErrorMessage(response.data.message);
+            setErrors(response.data.errors);
+        } else {
+            // window.location.href = "/";
         }
         setLoading(false);
     };
-    return { save, loading, error };
+    return { save, loading, errorMessage, errors };
 };
 
 export default useCreateGroupOfCompany;

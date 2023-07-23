@@ -21,11 +21,5 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::prefix("/v1")->group(function () {
-    Route::get("/group-of-companies", [GroupOfCompanyController::class, "index"]);
-    Route::get("/group-of-companies/{groupOfCompany}", [GroupOfCompanyController::class, "show"]);
-    Route::post("/group-of-companies", [GroupOfCompanyController::class, "store"]);
-    Route::patch("/group-of-companies/{groupOfCompany}", [GroupOfCompanyController::class, "update"]);
-    Route::delete("/group-of-companies", [GroupOfCompanyController::class, "destroy"]);
-
-
+    Route::apiResource("/customers/group-of-companies", GroupOfCompanyController::class);
 });

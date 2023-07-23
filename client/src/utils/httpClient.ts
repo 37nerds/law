@@ -1,3 +1,8 @@
+export type Response = {
+    data: any;
+    code: number;
+};
+
 class ApiSingleton {
     private static instance: ApiSingleton;
     private readonly baseUrl: string;
@@ -16,8 +21,8 @@ class ApiSingleton {
     private async makeRequest(
         method: string,
         endpoint: string,
-        data?: any
-    ): Promise<any> {
+        payload?: any
+    ): Promise<Response> {
         const url = `${this.baseUrl}${endpoint}`;
         const requestOptions: RequestInit = {
             method,
@@ -27,31 +32,37 @@ class ApiSingleton {
             },
         };
 
-        if (data) {
-            requestOptions.body = JSON.stringify(data);
+        if (payload) {
+            requestOptions.body = JSON.stringify(payload);
         }
 
-        const response = await fetch(url, requestOptions);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        let code: number;
+        let data: any;
 
-        return response.json();
+        try {
+            const response = await fetch(url, requestOptions);
+            data = await response.json();
+            code = response.status;
+        } catch (e: any) {
+            code = 500;
+            data.message = e.message;
+        }
+        return { data, code };
     }
 
-    async get(endpoint: string): Promise<any> {
+    async get(endpoint: string) {
         return this.makeRequest("GET", endpoint);
     }
 
-    async post(endpoint: string, data: any): Promise<any> {
+    async post(endpoint: string, data: any) {
         return this.makeRequest("POST", endpoint, data);
     }
 
-    async patch(endpoint: string, data: any): Promise<any> {
+    async patch(endpoint: string, data: any) {
         return this.makeRequest("PATCH", endpoint, data);
     }
 
-    async delete(endpoint: string): Promise<any> {
+    async delete(endpoint: string) {
         return this.makeRequest("DELETE", endpoint);
     }
 }
