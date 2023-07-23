@@ -14,7 +14,7 @@ const NavigatorCard = ({
     steps: TNavigatorStep[];
 }) => {
     return (
-        <div className="card rounded-box rounded-t-box w-full bg-base-300 shadow-xl">
+        <div className="card rounded-box rounded-t-box m-auto w-full max-w-7xl bg-base-300 text-sm shadow-xl">
             <StepNavigator
                 currentStepLabel={step}
                 setCurrentStepLabel={setStep}

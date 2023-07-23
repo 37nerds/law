@@ -10,12 +10,12 @@ const SingleInputBox = ({
     required?: boolean;
 }) => {
     return (
-        <div className="flex w-full flex-col items-center gap-1 lg:flex-row">
-            <div className="w-full lg:w-1/5">
+        <div className="flex w-full flex-col items-center lg:flex-row">
+            <div className="w-full lg:w-1/6">
                 {label}
                 {required ? " * " : ""}
             </div>
-            <div className="w-full lg:w-4/5">{element}</div>
+            <div className="w-full lg:w-5/6">{element}</div>
         </div>
     );
 };

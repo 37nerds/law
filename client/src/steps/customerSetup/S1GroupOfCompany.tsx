@@ -41,7 +41,6 @@ const fields: any = [
             required: true,
         },
     },
-
     {
         box: "double",
         first: {

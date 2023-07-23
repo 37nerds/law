@@ -16,17 +16,15 @@ const DoubleInputBox = ({
     required2?: boolean;
 }) => {
     return (
-        <div className="flex w-full flex-col items-center gap-1 lg:flex-row">
-            <div className="w-full lg:w-1/5">
+        <div className="flex w-full flex-col items-center lg:flex-row">
+            <div className="w-full lg:w-1/6">
                 {label1} {required1 ? " * " : ""}
             </div>
-            <div className="flex w-full flex-col items-center gap-1 lg:w-4/5 lg:flex-row lg:gap-5">
-                <div className="w-full lg:w-[42.85%]">{element1}</div>
-                <div className="w-full lg:w-[14.29%]">
-                    {label2} {required2 ? " * " : ""}
-                </div>
-                <div className="w-full lg:w-[42.85%]">{element2}</div>
+            <div className="w-full lg:w-2/6">{element1}</div>
+            <div className="w-full lg:w-1/6 lg:pl-3">
+                {label2} {required2 ? " * " : ""}
             </div>
+            <div className="w-full lg:w-2/6">{element2}</div>
         </div>
     );
 };

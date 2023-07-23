@@ -89,7 +89,7 @@ const ThemeDropDown = () => {
         <div title="Change Theme" className="dropdown-end dropdown ">
             <div tabIndex={0} className="btn-ghost btn gap-1 normal-case">
                 <ThemeIcon />
-                <span className="hidden md:inline">Theme</span>
+                <span className="c hidden capitalize md:inline">{theme}</span>
                 <DownIcon />
             </div>
             <div className="dropdown-content rounded-t-box rounded-b-box top-px mt-16 h-[70vh] max-h-96 w-52 overflow-y-auto bg-base-200 text-base-content shadow-2xl">
@@ -98,7 +98,7 @@ const ThemeDropDown = () => {
                         <button
                             key={index}
                             onClick={() => setTheme($theme)}
-                            className="overflow-hidden rounded-lg text-left outline-base-content"
+                            className="overflow-hidden rounded-lg text-left capitalize outline-base-content"
                             data-set-theme={$theme}
                             data-act-class="[&_svg]:visible"
                         >
