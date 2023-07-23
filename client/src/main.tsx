@@ -1,4 +1,4 @@
-import store from "@app/store";
+import store from "./store";
 import SuspenseContent from "@containers/SuspenseContent";
 import { Suspense } from "react";
 import { createRoot } from "react-dom/client";

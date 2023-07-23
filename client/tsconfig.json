@@ -25,7 +25,9 @@
             "@utils/*": ["src/utils/*"],
             "@app/*": ["src/app/*"],
             "@containers/*": ["src/containers/*"],
-            "@routes/*": ["src/routes/*"]
+            "@routes/*": ["src/routes/*"],
+            "@states/*": ["src/states/*"],
+            "@steps/*": ["src/steps/*"]
         }
     },
     "include": ["src"],

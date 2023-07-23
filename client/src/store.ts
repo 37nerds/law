@@ -1,8 +1,10 @@
+import { configureStore } from "@reduxjs/toolkit";
+
 import headerSlice from "@features/common/headerSlice";
 import modalSlice from "@features/common/modalSlice";
 import rightDrawerSlice from "@features/common/rightDrawerSlice";
 import leadsSlice from "@features/leads/leadSlice";
-import { configureStore } from "@reduxjs/toolkit";
+import customerSlice from "@states/customers/customerSlice";
 
 const store = configureStore({
     reducer: {
@@ -10,6 +12,7 @@ const store = configureStore({
         rightDrawer: rightDrawerSlice,
         modal: modalSlice,
         lead: leadsSlice,
+        customers: customerSlice.reducer,
     },
 });
 

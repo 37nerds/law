@@ -37,7 +37,7 @@ const Header = () => {
                     >
                         <div className="w-10 rounded-full">
                             <img
-                                src="https://placeimg.com/80/80/people"
+                                src="https://avatars.githubusercontent.com/u/67628903?v=4"
                                 alt="profile"
                             />
                         </div>

@@ -25,7 +25,7 @@ function RightSidebar() {
         >
             <section
                 className={
-                    "delay-400 absolute  right-0 h-full w-80 transform bg-base-100 shadow-xl transition-all duration-500 ease-in-out md:w-96  " +
+                    "delay-400 bg-layouts-100  absolute right-0 h-full w-80 transform shadow-xl transition-all duration-500 ease-in-out md:w-96  " +
                     (isOpen ? " translate-x-0 " : " translate-x-full ")
                 }
             >

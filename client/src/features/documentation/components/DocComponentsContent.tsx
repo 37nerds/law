@@ -5,7 +5,7 @@ import Subtitle from "../../../components/typographys/Subtitle";
 import Title from "../../../components/typographys/Title";
 
 import { useAppDispatch } from "@app/hooks";
-import TitleCard from "../../../components/cards/TitleCard";
+import TitleCard from "@components/cards/TitleCard";
 
 function DocComponentsContent() {
     const dispatch = useAppDispatch();
@@ -24,7 +24,7 @@ function DocComponentsContent() {
                 <h2 id="component1">Typography</h2>
                 <div>
                     These components are present under{" "}
-                    <span className="badge-ghost badge mb-0 mt-0">
+                    <span className="badge badge-ghost mb-0 mt-0">
                         /components/Typography
                     </span>{" "}
                     folder. It accepts styleClass as props which can be used to
@@ -74,7 +74,7 @@ function DocComponentsContent() {
                     management, here we have added global form component that
                     can be used in any file and state variables can be managed
                     by passing props to it. It is present in{" "}
-                    <span className="badge-ghost badge mb-0 mt-0">
+                    <span className="badge badge-ghost mb-0 mt-0">
                         /components/Input
                     </span>{" "}
                     folder.
@@ -127,7 +127,7 @@ function DocComponentsContent() {
                         Function of parent component to update state variable
                     </li>
                 </ul>
-                {/* Cards */}
+                {/* cards */}
                 <h2 id="component3">Cards</h2>
                 <p>
                     <a

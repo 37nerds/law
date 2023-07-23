@@ -1,12 +1,13 @@
 import { ReactNode } from "react";
 
-type Props = {
-    className?: string;
+const Title = ({
+    className,
+    children,
+}: {
     children: ReactNode;
-};
-
-const Title = ({ className, children }: Props) => {
-    return <p className={`text-2xl font-bold  ${className}`}>{children}</p>;
+    className?: string;
+}) => {
+    return <h2 className={`text-2xl font-bold  ${className}`}>{children}</h2>;
 };
 
 export default Title;

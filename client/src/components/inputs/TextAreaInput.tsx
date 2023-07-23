@@ -31,7 +31,9 @@ const TextAreaInput = ({
     return (
         <div className={`form-control w-full ${containerStyle}`}>
             <label className="label">
-                <span className={"label-text text-base-content " + labelStyle}>
+                <span
+                    className={"text-layouts-content label-text " + labelStyle}
+                >
                     {labelTitle}
                 </span>
             </label>

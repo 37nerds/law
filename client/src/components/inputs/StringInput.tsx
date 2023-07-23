@@ -1,20 +1,16 @@
-type Props = {
-    value: string;
-    setValue: (_: string) => void;
-    type?: string;
-    placeholder?: string;
-};
-
-const InputField2 = ({
+const StringInput = ({
     value,
     setValue,
-    type = "text",
     placeholder = "",
-}: Props) => {
+}: {
+    value: string;
+    setValue: (_: string) => void;
+    placeholder?: string;
+}) => {
     return (
         <input
             value={value}
-            type={type}
+            type="text"
             placeholder={placeholder}
             onChange={e => setValue(e.target.value)}
             className="input-bordered input w-full"
@@ -22,4 +18,4 @@ const InputField2 = ({
     );
 };
 
-export default InputField2;
+export default StringInput;

@@ -34,7 +34,7 @@ const LeftSidebar = () => {
                                     className={({ isActive }) =>
                                         `${
                                             isActive
-                                                ? "bg-base-200  font-semibold "
+                                                ? "bg-layouts-200  font-semibold "
                                                 : "font-normal"
                                         }`
                                     }

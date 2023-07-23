@@ -1,7 +1,7 @@
 import { useAppDispatch } from "@app/hooks";
 import moment from "moment";
 import { useState } from "react";
-import TitleCard from "../../../components/cards/TitleCard";
+import TitleCard from "@components/cards/TitleCard";
 import { showNotification } from "../../common/headerSlice";
 
 const TopSideButtons = () => {
@@ -93,13 +93,13 @@ function Team() {
 
     const getRoleComponent = (role: string) => {
         if (role === "Admin")
-            return <div className="badge-secondary badge">{role}</div>;
+            return <div className="badge badge-secondary">{role}</div>;
         if (role === "Manager") return <div className="badge">{role}</div>;
         if (role === "Owner")
-            return <div className="badge-primary badge">{role}</div>;
+            return <div className="badge badge-primary">{role}</div>;
         if (role === "Support")
-            return <div className="badge-accent badge">{role}</div>;
-        else return <div className="badge-ghost badge">{role}</div>;
+            return <div className="badge badge-accent">{role}</div>;
+        else return <div className="badge badge-ghost">{role}</div>;
     };
 
     return (

@@ -1,15 +1,16 @@
 import { ReactElement } from "react";
 
-type Props = {
+const SingleInputBox = ({
+    label,
+    element,
+}: {
     label: string;
     element: ReactElement;
-};
-
-const SingleInputBox = ({ label, element }: Props) => {
+}) => {
     return (
-        <div className="flex w-full items-center">
-            <div className="w-1/5">{label}</div>
-            <div className="w-4/5">{element}</div>
+        <div className="flex w-full flex-col items-center gap-1 lg:flex-row">
+            <div className="w-full lg:w-1/5">{label}</div>
+            <div className="w-full lg:w-4/5">{element}</div>
         </div>
     );
 };

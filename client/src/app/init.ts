@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const initializeApp = () => {
-    // Setting base URL for all API request via axios
+    // Setting layouts URL for all API request via axios
     axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
     if (

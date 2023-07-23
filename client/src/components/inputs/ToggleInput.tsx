@@ -32,7 +32,9 @@ const ToggleInput = ({
     return (
         <div className={`form-control w-full ${containerStyle}`}>
             <label className="label cursor-pointer">
-                <span className={"label-text text-base-content " + labelStyle}>
+                <span
+                    className={"text-layouts-content label-text " + labelStyle}
+                >
                     {labelTitle}
                 </span>
                 <input
