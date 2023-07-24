@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static create(mixed $validated)
- * @method static select(string $string, string $string1, string $string2)
+ * @method static select(string $string, string $string1 = "", string $string2 = "")
  * @property mixed $address
  * @property mixed $name
  * @property mixed $id

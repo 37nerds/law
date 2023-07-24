@@ -5,9 +5,13 @@ namespace App\Models;
 use App\Traits\ModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static create(mixed $validated)
+ * @method static select(string $string, string $string1 = "", string $string3 = "")
+ * @property mixed $id
+ * @property mixed $name
  */
 class Client extends Model
 {
@@ -38,4 +42,9 @@ class Client extends Model
         'bill_to',
         'notes',
     ];
+
+    public function unit(): BelongsTo
+    {
+        return $this->belongsTo(Unit::class, "unit_id");
+    }
 }

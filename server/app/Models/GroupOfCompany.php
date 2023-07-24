@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static create(mixed $validated)
- * @method static select(string $string, string $string1, string $string2)
+ * @method static select(string $string, string $string1 = "", string $string2 = "")
  * @property mixed $id
  * @property mixed $name
  * @property mixed $address

@@ -1,13 +1,10 @@
 import { useAppDispatch } from "@app/hooks";
-import {
-    setGroupOfCompanySetupField,
-    setRefetchPopUpDate,
-} from "@states/customers/customerSlice";
+import { setGroupOfCompanySetupField } from "@states/customers/customerSlice";
 import { selectGroupOfCompanySetup } from "@states/customers/customerSelector";
 import { TBottomButton, TOption } from "@utils/types";
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
-import useCreateRequest from "@hooks/http/useCreateRequest";
+import { useCreateGroupOfCompanyMutation } from "@states/customers/customerApi";
 
 const legalFromOptions: TOption[] = [
     { name: "Foo", value: "foo" },
@@ -124,19 +121,18 @@ const fields2 = [
 
 const S1GroupOfCompany = () => {
     const dispatch = useAppDispatch();
-    const { save, loading, errors } = useCreateRequest(
-        "/customers/group-of-companies"
-    );
+    const [save, { isLoading, error }] = useCreateGroupOfCompanyMutation();
+    // noinspection UnnecessaryLocalVariableJS
+    const errorX: any = error;
+    const errors = errorX?.data?.errors;
+
     const groupOfCompanySetup = selectGroupOfCompanySetup();
 
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
         {
             type: "Save & New",
-            handler: () => {
-                save(groupOfCompanySetup);
-                dispatch(setRefetchPopUpDate());
-            },
+            handler: () => save(groupOfCompanySetup),
         },
         { type: "Save & Close" },
         { type: "Edit" },
@@ -152,7 +148,7 @@ const S1GroupOfCompany = () => {
         <RenderStep
             bottomButtons={bottomButtons}
             title="Group of Company Setup"
-            loading={loading}
+            loading={isLoading}
         >
             <div className="flex flex-col gap-6">
                 <RenderFields

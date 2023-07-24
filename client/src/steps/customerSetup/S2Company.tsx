@@ -1,8 +1,5 @@
 import { useAppDispatch } from "@app/hooks";
-import {
-    setCompanySetupField,
-    setRefetchPopUpDate,
-} from "@states/customers/customerSlice";
+import { setCompanySetupField } from "@states/customers/customerSlice";
 import {
     selectCompanySetup,
     selectPopUpData,
@@ -11,6 +8,7 @@ import { TBottomButton, TOption } from "@utils/types";
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
 import useCreateRequest from "@hooks/http/useCreateRequest";
+import { useCreateCompanyMutation } from "@states/customers/customerApi";
 
 const options: TOption[] = [
     { name: "Foo", value: "foo" },
@@ -179,17 +177,18 @@ const S2Company = () => {
         },
     ];
 
-    const { save, loading, errors } = useCreateRequest("/customers/companies");
+    const [save, { isLoading, error }] = useCreateCompanyMutation();
+    // noinspection UnnecessaryLocalVariableJS
+    const errorX: any = error;
+    const errors = errorX?.data?.errors;
+
     const companySetup = selectCompanySetup();
 
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
         {
             type: "Save & New",
-            handler: () => {
-                save(companySetup);
-                dispatch(setRefetchPopUpDate());
-            },
+            handler: () => save(companySetup),
         },
         { type: "Save & Close" },
         { type: "Edit" },
@@ -205,7 +204,7 @@ const S2Company = () => {
         <RenderStep
             bottomButtons={bottomButtons}
             title="Company Setup"
-            loading={loading}
+            loading={isLoading}
         >
             <div className="flex flex-col gap-6">
                 <RenderFields

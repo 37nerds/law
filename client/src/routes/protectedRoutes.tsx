@@ -14,6 +14,7 @@ const GettingStarted = lazy(() => import("@pages/public/GettingStarted"));
 const DocFeatures = lazy(() => import("@pages/public/DocFeatures"));
 const DocComponents = lazy(() => import("@pages/public/DocComponents"));
 const CustomerSetup = lazy(() => import("@pages/protected/CustomerSetup"));
+const CustomerList = lazy(() => import("@pages/protected/CustomerList"));
 
 const protectedRoutes = [
     {
@@ -23,6 +24,10 @@ const protectedRoutes = [
     {
         path: "/customers/setup",
         component: CustomerSetup,
+    },
+    {
+        path: "/customers/list",
+        component: CustomerList,
     },
     {
         path: "/welcome", // the url

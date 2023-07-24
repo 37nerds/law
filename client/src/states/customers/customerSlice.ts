@@ -136,7 +136,6 @@ export const customerSlice = createSlice({
             notes: "",
         },
         popUpData: {},
-        refetchPopUpData: false,
     },
     reducers: {
         setGroupOfCompanySetupField(state, action) {
@@ -162,7 +161,6 @@ export const customerSlice = createSlice({
             };
             // @ts-ignore
             state.unitSetup[field] = value;
-            state.refetchPopUpData = !state.refetchPopUpData;
         },
         setClientSetupField(state, action) {
             const { field, value } = action.payload as {
@@ -175,9 +173,6 @@ export const customerSlice = createSlice({
         setPopUpData(state, action) {
             state.popUpData = action.payload;
         },
-        setRefetchPopUpDate: state => {
-            state.refetchPopUpData = !state.refetchPopUpData;
-        },
     },
 });
 
@@ -187,6 +182,5 @@ export const {
     setUnitSetupField,
     setClientSetupField,
     setPopUpData,
-    setRefetchPopUpDate,
 } = customerSlice.actions;
 export default customerSlice;

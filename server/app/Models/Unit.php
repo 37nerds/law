@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Traits\ModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static create(mixed $validated)
- * @method static select(string $string, string $string1, string $string2)
+ * @method static select(string $string, string $string1 = "", string $string2 = "")
  */
 class Unit extends Model
 {
@@ -35,4 +36,9 @@ class Unit extends Model
         'contact_person_mobile',
         'contact_person_email',
     ];
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, "company_id");
+    }
 }

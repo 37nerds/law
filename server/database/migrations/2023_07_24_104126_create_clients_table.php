@@ -16,14 +16,14 @@ return new class extends Migration {
             $table->string('name');
             $table->foreignIdFor(Unit::class, "unit_id");
             $table->string('client_id')->nullable();
-            $table->string('passport_no');
-            $table->date('passport_issue_date')->nullable();
-            $table->date('passport_valid_date')->nullable();
+            $table->string('passport_no')->nullable();
+            $table->string('passport_issue_date')->nullable();
+            $table->string('passport_valid_date')->nullable();
             $table->string('gender')->nullable();
             $table->string('position_hold')->nullable();
             $table->string('mobile');
             $table->string('email');
-            $table->date('date_of_birth');
+            $table->string('date_of_birth')->nullable();
             $table->string('nationality')->nullable();
             $table->string('father_name');
             $table->string('mother_name');

@@ -1,15 +1,13 @@
 import useSetPageTitle from "@hooks/useSetPageTitle";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
     customersSetupSteps,
     getStepComponentByLabel,
 } from "@steps/customerSetup";
 import NavigatorCard from "@components/cards/NavigatorCard";
-import useFetchRequest from "@hooks/http/useFetchRequest";
 import Loading from "@components/Loading";
 import ErrorText from "@components/typographys/ErrorText";
-import { setPopUpData } from "@states/customers/customerSlice";
-import { selectCustomers } from "@states/customers/customerSelector";
+import { useFetchPopUpDataQuery } from "@states/customers/customerApi";
 
 const CustomerSetup = () => {
     useSetPageTitle("Customer Setup");
@@ -19,20 +17,16 @@ const CustomerSetup = () => {
 
     const component = getStepComponentByLabel(currentStepLabel);
 
-    const { loading, errorMessage, setRefetch } = useFetchRequest(
-        "/customers/pop-up-data",
-        setPopUpData
-    );
+    // @ts-ignore
+    const { isLoading, error } = useFetchPopUpDataQuery();
 
-    const refetchPopUpData = selectCustomers().refetchPopUpData;
-
-    useEffect(() => {
-        setRefetch(x => !x);
-    }, [refetchPopUpData]);
+    // noinspection UnnecessaryLocalVariableJS
+    const errorX: any = error;
+    const errorMessage = errorX?.data?.message;
 
     return (
         <>
-            {loading ? (
+            {isLoading ? (
                 <Loading />
             ) : errorMessage ? (
                 <ErrorText>{errorMessage}</ErrorText>

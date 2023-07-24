@@ -40,7 +40,8 @@ class CompanyResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return ['id' => $this->id,
+        return [
+            'id' => $this->id,
             'name' => $this->name,
             'group_of_company' => $this->group_of_company,
             'address' => $this->address,
