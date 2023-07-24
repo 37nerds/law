@@ -1,10 +1,15 @@
 import useSetPageTitle from "@hooks/useSetPageTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     customersSetupSteps,
     getStepComponentByLabel,
 } from "@steps/customerSetup";
 import NavigatorCard from "@components/cards/NavigatorCard";
+import useFetchRequest from "@hooks/http/useFetchRequest";
+import Loading from "@components/Loading";
+import ErrorText from "@components/typographys/ErrorText";
+import { setPopUpData } from "@states/customers/customerSlice";
+import { selectCustomers } from "@states/customers/customerSelector";
 
 const CustomerSetup = () => {
     useSetPageTitle("Customer Setup");
@@ -14,14 +19,33 @@ const CustomerSetup = () => {
 
     const component = getStepComponentByLabel(currentStepLabel);
 
+    const { loading, errorMessage, setRefetch } = useFetchRequest(
+        "/customers/pop-up-data",
+        setPopUpData
+    );
+
+    const refetchPopUpData = selectCustomers().refetchPopUpData;
+
+    useEffect(() => {
+        setRefetch(x => !x);
+    }, [refetchPopUpData]);
+
     return (
-        <NavigatorCard
-            steps={customersSetupSteps}
-            step={currentStepLabel}
-            setStep={setCurrentStepLabel}
-        >
-            {component}
-        </NavigatorCard>
+        <>
+            {loading ? (
+                <Loading />
+            ) : errorMessage ? (
+                <ErrorText>{errorMessage}</ErrorText>
+            ) : (
+                <NavigatorCard
+                    steps={customersSetupSteps}
+                    step={currentStepLabel}
+                    setStep={setCurrentStepLabel}
+                >
+                    {component}
+                </NavigatorCard>
+            )}
+        </>
     );
 };
 

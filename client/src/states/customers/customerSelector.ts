@@ -1,17 +1,25 @@
 import { useAppSelector } from "@app/hooks";
 
+export const selectCustomers = () => {
+    return useAppSelector(state => state.customers);
+};
+
 export const selectGroupOfCompanySetup = () => {
-    return useAppSelector(state => state.customers.groupOfCompanySetup);
+    return selectCustomers().groupOfCompanySetup;
 };
 
 export const selectCompanySetup = () => {
-    return useAppSelector(state => state.customers.companySetup);
+    return selectCustomers().companySetup;
 };
 
 export const selectUnitSetup = () => {
-    return useAppSelector(state => state.customers.unitSetup);
+    return selectCustomers().unitSetup;
 };
 
 export const selectClientSetup = () => {
-    return useAppSelector(state => state.customers.clientSetup);
+    return selectCustomers().clientSetup;
+};
+
+export const selectPopUpData = (): any => {
+    return selectCustomers().popUpData;
 };

@@ -1,5 +1,8 @@
 import { useAppDispatch } from "@app/hooks";
-import { setClientSetupField } from "@states/customers/customerSlice";
+import {
+    setClientSetupField,
+    setRefetchPopUpDate,
+} from "@states/customers/customerSlice";
 import { selectClientSetup } from "@states/customers/customerSelector";
 import { TBottomButton, TOption } from "@utils/types";
 import RenderFields from "@components/renderers/RenderFields";
@@ -184,7 +187,13 @@ const S4Client = () => {
 
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
-        { type: "Save & New", handler: () => save(clientSetup) },
+        {
+            type: "Save & New",
+            handler: () => {
+                save(clientSetup);
+                dispatch(setRefetchPopUpDate());
+            },
+        },
         { type: "Save & Close" },
         { type: "Edit" },
         { type: "Export" },

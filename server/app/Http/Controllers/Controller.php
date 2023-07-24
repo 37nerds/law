@@ -11,8 +11,13 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function json($data = [], $status = 200): JsonResponse
+    public function json($payload = [], $status = 200): JsonResponse
     {
-        return new JsonResponse($data, $status);
+        return new JsonResponse($payload, $status);
+    }
+
+    public function success($data, string $message = "", int $status = 200): JsonResponse
+    {
+        return $this->json(["message" => $message, "data" => $data], $status);
     }
 }

@@ -1,12 +1,13 @@
 import { useAppDispatch } from "@app/hooks";
-import { setGroupOfCompanySetupField } from "@states/customers/customerSlice";
+import {
+    setGroupOfCompanySetupField,
+    setRefetchPopUpDate,
+} from "@states/customers/customerSlice";
 import { selectGroupOfCompanySetup } from "@states/customers/customerSelector";
 import { TBottomButton, TOption } from "@utils/types";
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
 import useCreateRequest from "@hooks/http/useCreateRequest";
-import { useEffect } from "react";
-import Log from "@utils/Log";
 
 const legalFromOptions: TOption[] = [
     { name: "Foo", value: "foo" },
@@ -123,18 +124,20 @@ const fields2 = [
 
 const S1GroupOfCompany = () => {
     const dispatch = useAppDispatch();
-    const { save, loading, errors, data } = useCreateRequest(
+    const { save, loading, errors } = useCreateRequest(
         "/customers/group-of-companies"
     );
     const groupOfCompanySetup = selectGroupOfCompanySetup();
 
-    useEffect(() => {
-        Log.print(data);
-    }, [data]);
-
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
-        { type: "Save & New", handler: () => save(groupOfCompanySetup) },
+        {
+            type: "Save & New",
+            handler: () => {
+                save(groupOfCompanySetup);
+                dispatch(setRefetchPopUpDate());
+            },
+        },
         { type: "Save & Close" },
         { type: "Edit" },
         { type: "Export" },

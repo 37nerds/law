@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGroupOfCompanyRequest;
 use App\Http\Requests\UpdateGroupOfCompanyRequest;
+use App\Http\Resources\CompanyResource;
+use App\Http\Resources\GroupOfCompanyResource;
 use App\Models\GroupOfCompany;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -16,7 +18,7 @@ class GroupOfCompanyController extends Controller
     public function index(Request $request): JsonResponse
     {
         $perPage = $request->query("per_page", 10);
-        return $this->json(GroupOfCompany::query()->paginate($perPage));
+        return $this->json(CompanyResource::collection(GroupOfCompany::query()->paginate($perPage)));
     }
 
     /**
@@ -27,7 +29,7 @@ class GroupOfCompanyController extends Controller
         $validated = $request->validated();
 
         $item = GroupOfCompany::create($validated);
-        return $this->json($item, 201);
+        return $this->success(new GroupOfCompanyResource($item), "", 201);
     }
 
     /**

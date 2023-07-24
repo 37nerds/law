@@ -1,5 +1,8 @@
 import { useAppDispatch } from "@app/hooks";
-import { setUnitSetupField } from "@states/customers/customerSlice";
+import {
+    setRefetchPopUpDate,
+    setUnitSetupField,
+} from "@states/customers/customerSlice";
 import { selectUnitSetup } from "@states/customers/customerSelector";
 import { TBottomButton, TOption } from "@utils/types";
 import RenderFields from "@components/renderers/RenderFields";
@@ -152,7 +155,13 @@ const S3Unit = () => {
 
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
-        { type: "Save & New", handler: () => save(unitSetup) },
+        {
+            type: "Save & New",
+            handler: () => {
+                save(unitSetup);
+                dispatch(setRefetchPopUpDate());
+            },
+        },
         { type: "Save & Close" },
         { type: "Edit" },
         { type: "Export" },

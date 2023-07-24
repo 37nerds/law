@@ -9,16 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @method static create(mixed $validated)
  * @method static select(string $string, string $string1, string $string2)
- * @property mixed $id
- * @property mixed $name
- * @property mixed $address
  */
-class GroupOfCompany extends Model
+class Unit extends Model
 {
     use HasFactory, ModelTrait;
 
     protected $fillable = [
         'name',
+        'company_id',
         'address',
         'telephone',
         'mobile',
@@ -27,12 +25,14 @@ class GroupOfCompany extends Model
         'trade_license_no',
         'tin',
         'bin',
+        'bida_reg_no',
         'incorporation_no',
         'membership_no',
         'member_of_the_association',
         'business_field',
         'legal_form',
-        'special_notes',
-        "is_active"
+        'contact_person',
+        'contact_person_mobile',
+        'contact_person_email',
     ];
 }
