@@ -1,14 +1,17 @@
 import Subtitle from "@components/typographys/Subtitle";
 import { ReactNode } from "react";
 
-type Props = {
+const TitleCard = ({
+    title,
+    children,
+    topMargin,
+    TopSideButtons,
+}: {
     title: string;
     children: ReactNode;
     topMargin?: string;
     TopSideButtons?: ReactNode;
-};
-
-const TitleCard = ({ title, children, topMargin, TopSideButtons }: Props) => {
+}) => {
     return (
         <div
             className={

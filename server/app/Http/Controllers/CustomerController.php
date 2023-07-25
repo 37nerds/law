@@ -26,7 +26,7 @@ class CustomerController extends Controller
 
     public function customersList(Request $request): JsonResponse
     {
-        $perPage = $request->query("per_page", 1000);
+        $perPage = $request->query("per_page", 10);
         $paginates = collect(Client::with('unit.company.group_of_company')->paginate($perPage));
         $paginates["data"] = collect($paginates["data"])->map(fn($x) => [
             "id" => $x["id"],

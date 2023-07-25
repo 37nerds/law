@@ -5,7 +5,7 @@ import { setPopUpData } from "@states/customers/customerSlice";
 const customerApi = apiSlice.injectEndpoints({
     endpoints: builder => ({
         fetchCustomerList: builder.query({
-            query: () => "/customers/list",
+            query: ({ page = 1 }) => `/customers/list?per_page=6&&page=${page}`,
             // onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
             //     const { data } = await queryFulfilled;
             //     dispatch(setPopUpData(data?.data));
