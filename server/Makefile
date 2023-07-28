@@ -1,2 +1,2 @@
 dev:
-	php artisan serve
+	brew services run mysql; php artisan serve

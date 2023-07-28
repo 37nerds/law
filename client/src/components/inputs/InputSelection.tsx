@@ -1,17 +1,19 @@
-import { TOption } from "@utils/types";
-import StringInput from "@components/inputs/StringInput";
-import TextInput from "@components/inputs/TextInput";
-import SelectInput from "@components/inputs/SelectInput";
-import SelectEditablInput from "@components/inputs/SelectEditablInput";
-import NumberInput from "@components/inputs/NumberInput";
+import { TLadderOption, TOption } from "@utils/types";
+import StringInput from "@components/inputs/fields/StringInput";
+import TextInput from "@components/inputs/fields/TextInput";
+import SelectInput from "@components/inputs/fields/SelectInput";
+import SelectEditableInput from "@components/inputs/wrappers/SelectEditableInput";
+import NumberInput from "@components/inputs/fields/NumberInput";
+import LadderSelectInput from "@components/inputs/fields/LadderSelectInput";
 
-const InputRenderer = ({
+const InputSelection = ({
     type,
     field,
     values,
     setValue,
     errors,
     options,
+    ladderOptions,
 }: {
     type: string;
     field: string;
@@ -19,6 +21,7 @@ const InputRenderer = ({
     setValue: (field: string, value: any) => void;
     errors: any;
     options?: TOption[];
+    ladderOptions?: TLadderOption[];
 }): JSX.Element => {
     const inputComponents: any = {
         string: (
@@ -61,10 +64,30 @@ const InputRenderer = ({
             />
         ),
         editableSelect: (
-            <SelectEditablInput
+            <SelectEditableInput
                 value={values[field]}
                 setValue={value => setValue(field, value)}
                 options={options || []}
+                placeholder="Select"
+                errorMessage={errors[field]}
+                type={type}
+            />
+        ),
+        ladderSelect: (
+            <LadderSelectInput
+                value={values[field]}
+                setValue={value => setValue(field, value)}
+                options={ladderOptions || []}
+                placeholder="Select"
+                errorMessage={errors[field]}
+            />
+        ),
+        editableLadderSelect: (
+            <SelectEditableInput
+                value={values[field]}
+                setValue={value => setValue(field, value)}
+                options={options || []}
+                ladderOptions={ladderOptions || []}
                 placeholder="Select"
                 errorMessage={errors[field]}
                 type={type}
@@ -75,4 +98,4 @@ const InputRenderer = ({
     return inputComponents[type] || <></>;
 };
 
-export default InputRenderer;
+export default InputSelection;

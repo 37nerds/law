@@ -1,4 +1,4 @@
-import InputFieldBox from "@components/wrappers/InputFieldBox";
+import InputFieldLayout from "@components/layouts/InputFieldLayout";
 
 const StringInput = ({
     value,
@@ -16,7 +16,7 @@ const StringInput = ({
     type?: string;
 }) => {
     return (
-        <InputFieldBox errorMessage={errorMessage}>
+        <InputFieldLayout errorMessage={errorMessage}>
             <input
                 value={value}
                 type={type}
@@ -25,7 +25,7 @@ const StringInput = ({
                 className="input-bordered input w-full"
                 required={required}
             />
-        </InputFieldBox>
+        </InputFieldLayout>
     );
 };
 

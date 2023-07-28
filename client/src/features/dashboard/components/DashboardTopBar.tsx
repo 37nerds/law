@@ -3,7 +3,7 @@ import ArrowPathIcon from "@heroicons/react/24/outline/ArrowPathIcon";
 import EllipsisVerticalIcon from "@heroicons/react/24/outline/EllipsisVerticalIcon";
 import EnvelopeIcon from "@heroicons/react/24/outline/EnvelopeIcon";
 import ShareIcon from "@heroicons/react/24/outline/ShareIcon";
-import SelectBox, { TUpdateFormValue } from "@components/inputs/SelectBox";
+import SelectBox, { TUpdateFormValue } from "@components/inputs/old/SelectBox";
 
 const periodOptions = [
     { name: "Today", value: "TODAY" },
@@ -48,7 +48,7 @@ function DashboardTopBar({ updateDashboardPeriod }: Props) {
                     Share
                 </button>
 
-                <div className="dropdown-bottom dropdown-end dropdown  ml-2">
+                <div className="dropdown dropdown-bottom dropdown-end  ml-2">
                     <label
                         tabIndex={0}
                         className="btn-ghost btn-square btn-sm btn normal-case "

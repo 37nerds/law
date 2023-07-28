@@ -1,5 +1,4 @@
-import InputError from "@components/inputs/InputError";
-import InputFieldBox from "@components/wrappers/InputFieldBox";
+import InputFieldLayout from "@components/layouts/InputFieldLayout";
 import { TOption } from "@utils/types";
 
 const SelectInput = ({
@@ -16,7 +15,7 @@ const SelectInput = ({
     errorMessage?: string;
 }) => {
     return (
-        <InputFieldBox errorMessage={errorMessage}>
+        <InputFieldLayout errorMessage={errorMessage}>
             <select
                 className="select-bordered select w-full"
                 value={value}
@@ -33,7 +32,7 @@ const SelectInput = ({
                     );
                 })}
             </select>
-        </InputFieldBox>
+        </InputFieldLayout>
     );
 };
 

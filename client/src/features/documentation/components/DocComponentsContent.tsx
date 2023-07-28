@@ -1,4 +1,4 @@
-import InputText from "../../../components/inputs/InputText";
+import InputText from "@components/inputs/old/InputText";
 import ErrorText from "../../../components/typographys/ErrorText";
 import HelperText from "../../../components/typographys/HelperText";
 import Subtitle from "../../../components/typographys/Subtitle";
@@ -24,7 +24,7 @@ function DocComponentsContent() {
                 <h2 id="component1">Typography</h2>
                 <div>
                     These components are present under{" "}
-                    <span className="badge badge-ghost mb-0 mt-0">
+                    <span className="badge-ghost badge mb-0 mt-0">
                         /components/Typography
                     </span>{" "}
                     folder. It accepts styleClass as props which can be used to
@@ -66,7 +66,7 @@ function DocComponentsContent() {
                         </li>
                     </ul>
                 </div>
-                {/* Form Input*/}
+                {/* Form InputSelection*/}
                 <h2 id="component2">Form Input</h2>
                 <p>
                     Many times we have to use form input like text, select one
@@ -74,7 +74,7 @@ function DocComponentsContent() {
                     management, here we have added global form component that
                     can be used in any file and state variables can be managed
                     by passing props to it. It is present in{" "}
-                    <span className="badge badge-ghost mb-0 mt-0">
+                    <span className="badge-ghost badge mb-0 mt-0">
                         /components/Input
                     </span>{" "}
                     folder.

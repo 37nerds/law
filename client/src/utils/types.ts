@@ -7,3 +7,8 @@ export type TOption = {
     name: string;
     value: string;
 };
+
+export type TLadderOption = {
+    name: string[];
+    value: string;
+};

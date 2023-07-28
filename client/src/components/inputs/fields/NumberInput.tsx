@@ -1,4 +1,4 @@
-import InputFieldBox from "@components/wrappers/InputFieldBox";
+import InputFieldLayout from "@components/layouts/InputFieldLayout";
 import { NumericFormat } from "react-number-format";
 
 const NumberInput = ({
@@ -17,7 +17,7 @@ const NumberInput = ({
     disabled?: boolean;
 }) => {
     return (
-        <InputFieldBox errorMessage={errorMessage}>
+        <InputFieldLayout errorMessage={errorMessage}>
             <NumericFormat
                 value={value}
                 onValueChange={values => {
@@ -30,7 +30,7 @@ const NumberInput = ({
                 fixedDecimalScale
                 disabled={disabled}
             />
-        </InputFieldBox>
+        </InputFieldLayout>
     );
 };
 

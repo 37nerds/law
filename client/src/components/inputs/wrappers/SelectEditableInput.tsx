@@ -1,18 +1,21 @@
-import { TOption } from "@utils/types";
-import SelectInput from "@components/inputs/SelectInput";
+import { TLadderOption, TOption } from "@utils/types";
+import SelectInput from "@components/inputs/fields/SelectInput";
 import { useState } from "react";
-import StringInput from "@components/inputs/StringInput";
+import StringInput from "@components/inputs/fields/StringInput";
+import LadderSelectInput from "@components/inputs/fields/LadderSelectInput";
 
 const SelectEditableInput = ({
     value,
     setValue,
     options,
+    ladderOptions,
     errorMessage = "",
     type = "text",
 }: {
     value: string;
     setValue: (_: string) => void;
     options: TOption[];
+    ladderOptions?: TLadderOption[];
     placeholder?: string;
     errorMessage?: string;
     type?: string;
@@ -27,6 +30,14 @@ const SelectEditableInput = ({
                         type={type}
                         value={value}
                         setValue={setValue}
+                        errorMessage={errorMessage}
+                    />
+                ) : type === "editableLadderSelect" ? (
+                    <LadderSelectInput
+                        value={value}
+                        setValue={setValue}
+                        options={ladderOptions || []}
+                        placeholder="Select"
                         errorMessage={errorMessage}
                     />
                 ) : (

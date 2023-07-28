@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import InputText, { TUpdateFormValue } from "@components/inputs/InputText";
+import InputText, { TUpdateFormValue } from "@components/inputs/old/InputText";
 import ErrorText from "@components/typographys/ErrorText";
 import LandingIntro from "./LandingIntro";
 

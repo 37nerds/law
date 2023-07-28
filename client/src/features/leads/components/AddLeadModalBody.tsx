@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@app/hooks";
-import InputText, { TUpdateFormValue } from "@components/inputs/InputText";
+import InputText, { TUpdateFormValue } from "@components/inputs/old/InputText";
 import ErrorText from "@components/typographys/ErrorText";
 import { useState } from "react";
 import { showNotification } from "../../common/headerSlice";

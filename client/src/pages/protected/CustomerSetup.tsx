@@ -12,8 +12,7 @@ import { useFetchPopUpDataQuery } from "@states/customers/customerApi";
 const CustomerSetup = () => {
     useSetPageTitle("Customer Setup");
 
-    const [currentStepLabel, setCurrentStepLabel] =
-        useState<string>("Group of Company");
+    const [currentStepLabel, setCurrentStepLabel] = useState<string>("Client");
 
     const component = getStepComponentByLabel(currentStepLabel);
 

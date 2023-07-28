@@ -41,7 +41,7 @@ const S4Client = () => {
                 required: true,
             },
             second: {
-                type: "select",
+                type: "ladderSelect",
                 label: "Unit",
                 field: "unit_id",
                 options: unitsOptions,

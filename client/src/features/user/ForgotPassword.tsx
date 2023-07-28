@@ -1,10 +1,10 @@
-import InputText from "@components/inputs/InputText";
+import InputText from "@components/inputs/old/InputText";
 import ErrorText from "@components/typographys/ErrorText";
 import CheckCircleIcon from "@heroicons/react/24/solid/CheckCircleIcon";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import LandingIntro from "./LandingIntro";
-import { TUpdateFormValue } from "@components/inputs/InputText";
+import { TUpdateFormValue } from "@components/inputs/old/InputText";
 
 function ForgotPassword() {
     const INITIAL_USER_OBJ = {

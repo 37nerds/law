@@ -1,7 +1,7 @@
-import InputError from "@components/inputs/InputError";
+import InputError from "@components/inputs/fields/InputError";
 import { ReactNode } from "react";
 
-const InputFieldBox = ({
+const InputFieldLayout = ({
     children,
     errorMessage,
 }: {
@@ -16,4 +16,4 @@ const InputFieldBox = ({
     );
 };
 
-export default InputFieldBox;
+export default InputFieldLayout;
