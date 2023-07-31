@@ -4,8 +4,8 @@ import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
 import { MODAL_BODY_TYPES } from "@utils/globalConstantUtil";
 import moment from "moment";
 import { useEffect } from "react";
-import { showNotification } from "../common/headerSlice";
-import { openModal } from "../common/modalSlice";
+import { showNotification } from "@states/app/headerSlice";
+import { openModal } from "@states/app/modalSlice";
 import { deleteLead, getLeadsContent } from "./leadSlice";
 
 const TopSideButtons = () => {

@@ -1,9 +1,9 @@
-import DocComponentsContent from "../../screens/features/documentation/components/DocComponentsContent";
-import DocComponentsNav from "../../screens/features/documentation/components/DocComponentsNav";
-import FeaturesContent from "../../screens/features/documentation/components/FeaturesContent";
-import FeaturesNav from "../../screens/features/documentation/components/FeaturesNav";
-import GettingStartedContent from "../../screens/features/documentation/components/GettingStartedContent";
-import GettingStartedNav from "../../screens/features/documentation/components/GettingStartedNav";
+import DocComponentsContent from "@components/features/documentation/components/DocComponentsContent";
+import DocComponentsNav from "@components/features/documentation/components/DocComponentsNav";
+import FeaturesContent from "@components/features/documentation/components/FeaturesContent";
+import FeaturesNav from "@components/features/documentation/components/FeaturesNav";
+import GettingStartedContent from "@components/features/documentation/components/GettingStartedContent";
+import GettingStartedNav from "@components/features/documentation/components/GettingStartedNav";
 import { Link } from "react-router-dom";
 
 function Documentation() {

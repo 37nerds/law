@@ -5,7 +5,6 @@ import TitleCard from "@components/cards/TitleCard";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import Paginator from "@components/Paginator";
 import { useState } from "react";
-import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 import CustomerTable from "../../screens/customerList/CustomerTable";
 
 const CustomerList = () => {
@@ -29,7 +28,7 @@ const CustomerList = () => {
             ) : (
                 <>
                     <TitleCard title="List all Customers" topMargin="mt-2">
-                        <div className="flex w-full flex-col gap-3 overflow-x-auto">
+                        <div className="flex w-full flex-col gap-12">
                             <CustomerTable data={data.data} />
                             <Paginator
                                 currentPage={currentPage}

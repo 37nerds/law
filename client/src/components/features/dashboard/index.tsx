@@ -3,7 +3,7 @@ import CircleStackIcon from "@heroicons/react/24/outline/CircleStackIcon";
 import CreditCardIcon from "@heroicons/react/24/outline/CreditCardIcon";
 import UserGroupIcon from "@heroicons/react/24/outline/UserGroupIcon";
 import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
-import { showNotification } from "../common/headerSlice";
+import { showNotification } from "@states/app/headerSlice";
 import AmountStats from "./components/AmountStats";
 import BarChart from "./components/BarChart";
 import DashboardStats from "./components/DashboardStats";

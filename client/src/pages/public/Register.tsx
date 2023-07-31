@@ -1,4 +1,4 @@
-import Register from "../../screens/features/user/Register";
+import Register from "@components/features/user/Register";
 
 function ExternalPage() {
     return (

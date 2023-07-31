@@ -1,4 +1,4 @@
-import Login from "../../screens/features/user/Login";
+import Login from "@components/features/user/Login";
 
 function ExternalPage() {
     return (

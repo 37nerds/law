@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@app/hooks";
-import { removeNotificationMessage } from "../../screens/features/common/headerSlice";
+import { removeNotificationMessage } from "@states/app/headerSlice";
 import { useEffect } from "react";
 import LeftSidebar from "./LeftSidebar";
 import ModalLayout from "./ModalLayout";
@@ -38,7 +38,7 @@ const Layout = () => {
             {/* Right drawer - containing secondary content like notifications list etc.. */}
             <RightSidebar />
 
-            {/** Notification layout container */}
+            {/** NotificationButton layout container */}
             {/* todo */}
 
             {/* Modal layout container */}

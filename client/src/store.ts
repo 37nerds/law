@@ -1,20 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import headerSlice from "./screens/features/common/headerSlice";
-import modalSlice from "./screens/features/common/modalSlice";
-import rightDrawerSlice from "./screens/features/common/rightDrawerSlice";
-import leadsSlice from "./screens/features/leads/leadSlice";
+import headerSlice from "@states/app/headerSlice";
+import modalSlice from "@states/app/modalSlice";
+import leadsSlice from "@components/features/leads/leadSlice";
 import customerSlice from "@states/customers/customerSlice";
-import apiSlice from "@states/apiSlice";
+import apiSlice from "@states/app/apiSlice";
+import appSlice from "@states/app/appSlice";
 
 const store = configureStore({
     reducer: {
         header: headerSlice,
-        rightDrawer: rightDrawerSlice,
         modal: modalSlice,
         lead: leadsSlice,
         customers: customerSlice.reducer,
         [apiSlice.reducerPath]: apiSlice.reducer,
+        app: appSlice.reducer,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(apiSlice.middleware),

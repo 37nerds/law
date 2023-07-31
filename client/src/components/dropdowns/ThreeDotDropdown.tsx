@@ -14,14 +14,15 @@ const ThreeDotDropdown = ({ options }: { options: TDropDownOption[] }) => {
     }, [open]);
 
     return (
-        <div className="dropdown-left dropdown">
+        <div className="dropdown dropdown-left dropdown-hover">
             <label tabIndex={0}>
                 <ThreeDotButton />
             </label>
             {open && (
                 <ul
                     tabIndex={0}
-                    className="dropdown-content menu rounded-box bg-base-100 bg-base-300 p-2 shadow"
+                    className="dropdown-content menu rounded-box bg-base-300 p-2 shadow"
+                    style={{ zIndex: 2000 }}
                 >
                     {options.map((option, index) => (
                         <li

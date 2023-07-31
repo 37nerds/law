@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "../../screens/features/common/headerSlice";
+import { setPageTitle } from "@states/app/headerSlice";
 import FaceFrownIcon from "@heroicons/react/24/solid/FaceFrownIcon";
 import { useEffect } from "react";
 

@@ -1,21 +1,15 @@
 import { useAppDispatch } from "@app/hooks";
-import { openRightDrawer } from "../../screens/features/common/rightDrawerSlice";
 import BellIcon from "@heroicons/react/24/outline/BellIcon";
-import { RIGHT_DRAWER_TYPES } from "@utils/globalConstantUtil";
+import { selectNotificationsCount } from "@states/app/appSelectors";
+import { openRightDrawer } from "@states/app/appSlice";
 
-const Notification = () => {
+const NotificationButton = () => {
     const dispatch = useAppDispatch();
 
-    const noOfNotifications = 100;
+    const noOfNotifications = selectNotificationsCount();
 
-    // Opening right sidebar for notification
     const openNotification = () => {
-        dispatch(
-            openRightDrawer({
-                header: "Notifications",
-                bodyType: RIGHT_DRAWER_TYPES.NOTIFICATION,
-            })
-        );
+        dispatch(openRightDrawer());
     };
 
     return (
@@ -35,4 +29,4 @@ const Notification = () => {
     );
 };
 
-export default Notification;
+export default NotificationButton;

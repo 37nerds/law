@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "../../screens/features/common/headerSlice";
-import Leads from "../../screens/features/leads/index";
+import { setPageTitle } from "@states/app/headerSlice";
+import Leads from "@components/features/leads/index";
 import { useEffect } from "react";
 
 function InternalPage() {

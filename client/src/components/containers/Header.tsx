@@ -1,8 +1,9 @@
 import { useAppSelector } from "@app/hooks";
 import Bars3Icon from "@heroicons/react/24/outline/Bars3Icon";
 import { Link } from "react-router-dom";
-import Notification from "./Notification";
+import NotificationButton from "../notifications/NotificationButton";
 import ThemeDropDown from "./ThemeDropDown";
+import ToastNotification from "@components/notifications/ToastNotification";
 
 const Header = () => {
     const { pageTitle } = useAppSelector(state => state.header);
@@ -18,7 +19,7 @@ const Header = () => {
             <div className="">
                 <label
                     htmlFor="left-sidebar-drawer"
-                    className="btn-primary drawer-button btn lg:hidden"
+                    className="drawer-button btn-primary btn lg:hidden"
                 >
                     <Bars3Icon className="inline-block h-5 w-5" />
                 </label>
@@ -27,7 +28,7 @@ const Header = () => {
 
             <div className="order-last">
                 <ThemeDropDown />
-                <Notification />
+                <NotificationButton />
 
                 {/* Profile icon, opening menu on click */}
                 <div className="dropdown-end dropdown ml-4">
@@ -63,6 +64,8 @@ const Header = () => {
                         </li>
                     </ul>
                 </div>
+
+                <ToastNotification />
             </div>
         </div>
     );

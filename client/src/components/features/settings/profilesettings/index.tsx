@@ -3,7 +3,7 @@ import TitleCard from "@components/cards/TitleCard";
 import InputText from "@components/inputs/old/InputText";
 import TextAreaInput from "@components/inputs/old/TextAreaInput";
 import ToggleInput from "@components/inputs/old/ToggleInput";
-import { showNotification } from "../../common/headerSlice";
+import { showNotification } from "@states/app/headerSlice";
 
 const ProfileSettings = () => {
     const dispatch = useAppDispatch();

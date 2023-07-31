@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "../../screens/features/common/headerSlice";
-import TemplatePointers from "../../screens/features/user/components/TemplatePointers";
+import { setPageTitle } from "@states/app/headerSlice";
+import TemplatePointers from "@components/features/user/components/TemplatePointers";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 

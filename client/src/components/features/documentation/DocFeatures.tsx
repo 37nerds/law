@@ -1,10 +1,10 @@
 import { useAppDispatch } from "@app/hooks";
 import { useEffect } from "react";
-import { setPageTitle } from "../common/headerSlice";
-import GettingStartedContent from "./components/GettingStartedContent";
-import GettingStartedNav from "./components/GettingStartedNav";
+import { setPageTitle } from "@states/app/headerSlice";
+import FeaturesContent from "./components/FeaturesContent";
+import FeaturesNav from "./components/FeaturesNav";
 
-function GettingStarted() {
+function Features() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -18,15 +18,15 @@ function GettingStarted() {
                 style={{ height: "82vh" }}
             >
                 <div className="flex-none p-4">
-                    <GettingStartedNav activeIndex={1} />
+                    <FeaturesNav activeIndex={1} />
                 </div>
 
                 <div className="grow overflow-y-scroll  pt-16">
-                    <GettingStartedContent />
+                    <FeaturesContent />
                 </div>
             </div>
         </>
     );
 }
 
-export default GettingStarted;
+export default Features;

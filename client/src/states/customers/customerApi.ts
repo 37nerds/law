@@ -1,4 +1,4 @@
-import apiSlice from "../apiSlice";
+import apiSlice from "../app/apiSlice";
 import { setPopUpData } from "@states/customers/customerSlice";
 
 // noinspection JSUnusedGlobalSymbols

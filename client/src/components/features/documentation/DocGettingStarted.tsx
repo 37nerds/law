@@ -1,10 +1,10 @@
 import { useAppDispatch } from "@app/hooks";
 import { useEffect } from "react";
-import { setPageTitle } from "../common/headerSlice";
-import DocComponentsContent from "./components/DocComponentsContent";
-import DocComponentsNav from "./components/DocComponentsNav";
+import { setPageTitle } from "@states/app/headerSlice";
+import GettingStartedContent from "./components/GettingStartedContent";
+import GettingStartedNav from "./components/GettingStartedNav";
 
-function DocComponents() {
+function GettingStarted() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -18,15 +18,15 @@ function DocComponents() {
                 style={{ height: "82vh" }}
             >
                 <div className="flex-none p-4">
-                    <DocComponentsNav activeIndex={1} />
+                    <GettingStartedNav activeIndex={1} />
                 </div>
 
                 <div className="grow overflow-y-scroll  pt-16">
-                    <DocComponentsContent />
+                    <GettingStartedContent />
                 </div>
             </div>
         </>
     );
 }
 
-export default DocComponents;
+export default GettingStarted;

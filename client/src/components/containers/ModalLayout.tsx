@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@app/hooks";
-import { closeModal } from "../../screens/features/common/modalSlice";
-import AddLeadModalBody from "../../screens/features/leads/components/AddLeadModalBody";
+import { closeModal } from "@states/app/modalSlice";
+import AddLeadModalBody from "@components/features/leads/components/AddLeadModalBody";
 import { MODAL_BODY_TYPES } from "@utils/globalConstantUtil";
 
 function ModalLayout() {

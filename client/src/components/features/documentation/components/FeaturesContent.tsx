@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@app/hooks";
-import { showNotification } from "../../common/headerSlice";
+import { showNotification } from "@states/app/headerSlice";
 
 function FeaturesContent() {
     const dispatch = useAppDispatch();
@@ -253,7 +253,7 @@ function FeaturesContent() {
                     </ul>
                 </div>
 
-                {/* Notification*/}
+                {/* NotificationButton*/}
                 <h2 id="feature7">Notification</h2>
                 <p>
                     Many times we have to show notification to user be it on

@@ -1,7 +1,7 @@
 import { useAppDispatch } from "@app/hooks";
 import TitleCard from "@components/cards/TitleCard";
 import { useState } from "react";
-import { showNotification } from "../common/headerSlice";
+import { showNotification } from "@states/app/headerSlice";
 
 const INITIAL_INTEGRATION_LIST = [
     {

@@ -2,7 +2,7 @@ import { useAppDispatch } from "@app/hooks";
 import moment from "moment";
 import { useState } from "react";
 import TitleCard from "@components/cards/TitleCard";
-import { showNotification } from "../../common/headerSlice";
+import { showNotification } from "@states/app/headerSlice";
 
 const TopSideButtons = () => {
     const dispatch = useAppDispatch();

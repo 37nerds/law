@@ -1,10 +1,10 @@
 import { useAppDispatch } from "@app/hooks";
 import { useEffect } from "react";
-import { setPageTitle } from "../common/headerSlice";
-import FeaturesContent from "./components/FeaturesContent";
-import FeaturesNav from "./components/FeaturesNav";
+import { setPageTitle } from "@states/app/headerSlice";
+import DocComponentsContent from "./components/DocComponentsContent";
+import DocComponentsNav from "./components/DocComponentsNav";
 
-function Features() {
+function DocComponents() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -18,15 +18,15 @@ function Features() {
                 style={{ height: "82vh" }}
             >
                 <div className="flex-none p-4">
-                    <FeaturesNav activeIndex={1} />
+                    <DocComponentsNav activeIndex={1} />
                 </div>
 
                 <div className="grow overflow-y-scroll  pt-16">
-                    <FeaturesContent />
+                    <DocComponentsContent />
                 </div>
             </div>
         </>
     );
 }
 
-export default Features;
+export default DocComponents;

@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "../../screens/features/common/headerSlice";
-import Team from "../../screens/features/settings/team";
+import { setPageTitle } from "@states/app/headerSlice";
+import Team from "@components/features/settings/team";
 import { useEffect } from "react";
 
 function InternalPage() {
