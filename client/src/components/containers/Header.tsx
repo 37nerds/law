@@ -14,7 +14,7 @@ const Header = () => {
     }
 
     return (
-        <div className="navbar  z-10 flex justify-between  bg-base-100 shadow-md ">
+        <div className="navbar z-10 flex justify-between bg-base-100 shadow-md ">
             {/* Menu toggle for mobile view or small screen */}
             <div className="">
                 <label

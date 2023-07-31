@@ -1,9 +1,11 @@
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 import confirmDelete from "@components/confirmDelete";
 import { useDeleteClientMutation } from "@states/customers/customerApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NOTIFICATION_TYPE } from "@states/app/appSlice";
 import useNotify from "@hooks/useNotify";
+import ModalOpener from "@components/dropdowns/ModalOpener";
+import CustomerModal, { TModalOpenFor } from "./CustomerModal";
 
 const DropDown = ({ clientId }: { clientId: number }) => {
     const [deleteClient, { isSuccess, error }] = useDeleteClientMutation();
@@ -71,41 +73,85 @@ const DropDown = ({ clientId }: { clientId: number }) => {
 };
 
 const CustomerTable = ({ data }: { data: any }) => {
-    const tableStructures = [
-        { title: "Client Name", key: "name" },
-        { title: "Unit Name", key: "unit_name" },
-        { title: "Company Name", key: "company_name" },
-        { title: "Group of Company Name", key: "group_of_company_name" },
-    ];
+    const [modalOpenFor, setModalOpenFor] = useState<TModalOpenFor | null>(
+        null
+    );
 
     return (
-        <table className="table-compact table w-full text-xs">
-            <thead>
-                <tr>
-                    {tableStructures.map((x, index) => (
-                        <th key={index}>{x.title}</th>
-                    ))}
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {data.map((customer: any, index: number) => {
-                    return (
+        <>
+            <CustomerModal modalOpenFor={modalOpenFor} />
+            <table className="table-compact table w-full text-xs">
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Unit Name</th>
+                        <th>Company Name</th>
+                        <th>Group of Company Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map((customer: any, index: number) => (
                         <tr
                             key={index}
                             className={`${index % 2 === 1 ? "active" : ""}`}
                         >
-                            {tableStructures.map((x, index) => (
-                                <th key={index}>{customer[x.key]}</th>
-                            ))}
+                            <th>
+                                <ModalOpener
+                                    onClick={() => {
+                                        setModalOpenFor({
+                                            type: "client",
+                                            id: customer.id,
+                                        });
+                                    }}
+                                >
+                                    {customer["name"]}
+                                </ModalOpener>
+                            </th>
+                            <th>
+                                <ModalOpener
+                                    onClick={() => {
+                                        setModalOpenFor({
+                                            type: "unit",
+                                            id: customer.unit_id,
+                                        });
+                                    }}
+                                >
+                                    {customer["unit_name"]}
+                                </ModalOpener>
+                            </th>
+                            <th>
+                                <ModalOpener
+                                    onClick={() => {
+                                        setModalOpenFor({
+                                            type: "company",
+                                            id: customer.unit_id,
+                                        });
+                                    }}
+                                >
+                                    {customer["company_name"]}
+                                </ModalOpener>
+                            </th>
+                            <th>
+                                <ModalOpener
+                                    onClick={() => {
+                                        setModalOpenFor({
+                                            type: "group_of_company",
+                                            id: customer.group_of_company_id,
+                                        });
+                                    }}
+                                >
+                                    {customer["group_of_company_name"]}
+                                </ModalOpener>
+                            </th>
                             <th>
                                 <DropDown clientId={customer.id} />
                             </th>
                         </tr>
-                    );
-                })}
-            </tbody>
-        </table>
+                    ))}
+                </tbody>
+            </table>
+        </>
     );
 };
 

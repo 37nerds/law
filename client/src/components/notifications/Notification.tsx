@@ -10,9 +10,9 @@ const Notification = () => {
     };
 
     return (
-        <div className="relative flex h-full flex-col bg-base-100 pb-5">
+        <div className="relative flex h-full flex-col bg-base-100/95 pb-5">
             {/* Header */}
-            <div className="navbar flex justify-between pl-4 pr-4   shadow-md ">
+            <div className="navbar flex justify-between pl-4 pr-4  shadow-md ">
                 <div>
                     <button
                         className="btn-outline btn-sm btn-circle btn float-left"

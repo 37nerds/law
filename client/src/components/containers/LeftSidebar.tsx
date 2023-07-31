@@ -6,7 +6,7 @@ const LeftSidebar = () => {
     const location = useLocation();
 
     return (
-        <div className="drawer-side ">
+        <div className="drawer-side">
             <label
                 htmlFor="left-sidebar-drawer"
                 className="drawer-overlay"

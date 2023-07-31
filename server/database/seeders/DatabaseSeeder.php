@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->truncate(GroupOfCompany::class, 15);
         $this->truncate(Company::class, 15);
         $this->truncate(Unit::class, 15);
-        $this->truncate(Client::class, 1);
+        $this->truncate(Client::class, 50);
     }
 }
