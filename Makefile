@@ -6,8 +6,8 @@ start:
 stop:
 	docker compose down
 
-dev\:server:
-	cd server && php artisan serve
+dev-server:
+	cd server && brew services run mysql; php artisan serve
 
-dev\:client:
+dev-client:
 	cd client && yarn dev

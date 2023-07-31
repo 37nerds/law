@@ -1,8 +1,8 @@
 import InputText from "@components/inputs/old/InputText";
-import ErrorText from "../../../components/typographys/ErrorText";
-import HelperText from "../../../components/typographys/HelperText";
-import Subtitle from "../../../components/typographys/Subtitle";
-import Title from "../../../components/typographys/Title";
+import ErrorText from "@components/typographys/ErrorText";
+import HelperText from "@components/typographys/HelperText";
+import Subtitle from "@components/typographys/Subtitle";
+import Title from "@components/typographys/Title";
 
 import { useAppDispatch } from "@app/hooks";
 import TitleCard from "@components/cards/TitleCard";

@@ -109,10 +109,10 @@ function Billing() {
 
     const getPaymentStatus = (status: string) => {
         if (status === "Paid")
-            return <div className="badge-success badge">{status}</div>;
+            return <div className="badge badge-success">{status}</div>;
         if (status === "Pending")
-            return <div className="badge-primary badge">{status}</div>;
-        else return <div className="badge-ghost badge">{status}</div>;
+            return <div className="badge badge-primary">{status}</div>;
+        else return <div className="badge badge-ghost">{status}</div>;
     };
 
     return (

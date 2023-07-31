@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@app/hooks";
-import NotificationBodyRightDrawer from "@features/common/components/NotificationBodyRightDrawer";
-import { closeRightDrawer } from "@features/common/rightDrawerSlice";
+import NotificationBodyRightDrawer from "../../screens/features/common/components/NotificationBodyRightDrawer";
+import { closeRightDrawer } from "../../screens/features/common/rightDrawerSlice";
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
 import { RIGHT_DRAWER_TYPES } from "@utils/globalConstantUtil";
 

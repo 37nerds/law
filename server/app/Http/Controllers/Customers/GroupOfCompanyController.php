@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGroupOfCompanyRequest;
 use App\Http\Requests\UpdateGroupOfCompanyRequest;
 use App\Http\Resources\CompanyResource;
 use App\Http\Resources\GroupOfCompanyResource;
 use App\Models\GroupOfCompany;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class GroupOfCompanyController extends Controller
 {

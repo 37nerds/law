@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@app/hooks";
-import Charts from "@features/charts/index";
-import { setPageTitle } from "@features/common/headerSlice";
+import Charts from "../../screens/features/charts/index";
+import { setPageTitle } from "../../screens/features/common/headerSlice";
 import { useEffect } from "react";
 
 function InternalPage() {

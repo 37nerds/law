@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customers;
 
-use App\Models\Client;
+use App\Http\Controllers\Controller;
 use App\Models\GroupOfCompany;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -61,22 +60,5 @@ class CustomerController extends Controller
             "companies" => $companies,
             "units" => $unitsX,
         ]);
-    }
-
-    public function customersList(Request $request): JsonResponse
-    {
-        $perPage = $request->query("per_page", 10);
-        $paginates = collect(Client::with('unit.company.group_of_company')->paginate($perPage));
-        $paginates["data"] = collect($paginates["data"])->map(fn($x) => [
-            "id" => $x["id"],
-            "name" => $x["name"],
-            "unit_id" => $x["unit"]["id"],
-            "unit_name" => $x["unit"]["name"],
-            "company_id" => $x["unit"]["company"]["id"],
-            "company_name" => $x["unit"]["company"]["name"],
-            "group_of_company_id" => $x["unit"]["company"]["group_of_company"]["id"],
-            "group_of_company_name" => $x["unit"]["company"]["group_of_company"]["name"],
-        ]);
-        return $this->json($paginates);
     }
 }

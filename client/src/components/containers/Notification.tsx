@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@app/hooks";
-import { openRightDrawer } from "@features/common/rightDrawerSlice";
+import { openRightDrawer } from "../../screens/features/common/rightDrawerSlice";
 import BellIcon from "@heroicons/react/24/outline/BellIcon";
 import { RIGHT_DRAWER_TYPES } from "@utils/globalConstantUtil";
 
@@ -26,7 +26,7 @@ const Notification = () => {
             <div className="indicator">
                 <BellIcon className="h-6 w-6" />
                 {noOfNotifications > 0 ? (
-                    <span className="badge-secondary badge badge-sm indicator-item">
+                    <span className="badge badge-secondary badge-sm indicator-item">
                         {noOfNotifications}
                     </span>
                 ) : null}

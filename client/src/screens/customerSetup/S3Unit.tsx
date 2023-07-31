@@ -1,17 +1,17 @@
-import {useAppDispatch} from "@app/hooks";
-import {setUnitSetupField} from "@states/customers/customerSlice";
+import { useAppDispatch } from "@app/hooks";
+import { setUnitSetupField } from "@states/customers/customerSlice";
 import {
     selectPopUpData,
     selectUnitSetup,
 } from "@states/customers/customerSelector";
-import {TBottomButton, TOption} from "@utils/types";
+import { TBottomButton, TOption } from "@utils/types";
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
-import {useCreateUnitMutation} from "@states/customers/customerApi";
+import { useCreateUnitMutation } from "@states/customers/customerApi";
 
 const options: TOption[] = [
-    {name: "Foo", value: "foo"},
-    {name: "Bar", value: "bar"},
+    { name: "Foo", value: "foo" },
+    { name: "Bar", value: "bar" },
 ];
 
 const S3Unit = () => {
@@ -165,7 +165,7 @@ const S3Unit = () => {
         },
     ];
 
-    const [save, {isLoading, error}] = useCreateUnitMutation();
+    const [save, { isLoading, error }] = useCreateUnitMutation();
     // noinspection UnnecessaryLocalVariableJS
     const errorX: any = error;
     const errors = errorX?.data?.errors;
@@ -173,19 +173,19 @@ const S3Unit = () => {
     const unitSetup = selectUnitSetup();
 
     const bottomButtons: TBottomButton[] = [
-        {type: "Previous"},
+        { type: "Previous" },
         {
             type: "Save & New",
             handler: () => save(unitSetup),
         },
-        {type: "Save & Close"},
-        {type: "Edit"},
-        {type: "Export"},
-        {type: "Inactive"},
+        { type: "Save & Close" },
+        { type: "Edit" },
+        { type: "Export" },
+        { type: "Inactive" },
     ];
 
     const handleDispatch = (field: string, value: string) => {
-        dispatch(setUnitSetupField({field, value}));
+        dispatch(setUnitSetupField({ field, value }));
     };
 
     return (

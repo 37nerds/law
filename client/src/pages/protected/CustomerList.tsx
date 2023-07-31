@@ -3,9 +3,10 @@ import Loading from "@components/Loading";
 import ErrorText from "@components/typographys/ErrorText";
 import TitleCard from "@components/cards/TitleCard";
 import useSetPageTitle from "@hooks/useSetPageTitle";
-import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
 import Paginator from "@components/Paginator";
 import { useState } from "react";
+import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
+import CustomerTable from "../../screens/customerList/CustomerTable";
 
 const CustomerList = () => {
     useSetPageTitle("Customer List");
@@ -19,13 +20,6 @@ const CustomerList = () => {
     const errorX: any = error;
     const errorMessage = errorX?.data?.message;
 
-    const tableStructures = [
-        { title: "Client Name", key: "name" },
-        { title: "Unit Name", key: "unit_name" },
-        { title: "Company Name", key: "company_name" },
-        { title: "Group of Company Name", key: "group_of_company_name" },
-    ];
-
     return (
         <>
             {isLoading ? (
@@ -36,45 +30,7 @@ const CustomerList = () => {
                 <>
                     <TitleCard title="List all Customers" topMargin="mt-2">
                         <div className="flex w-full flex-col gap-3 overflow-x-auto">
-                            <table className="table w-full">
-                                <thead>
-                                    <tr>
-                                        {tableStructures.map((x, index) => (
-                                            <th key={index}>{x.title}</th>
-                                        ))}
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {data.data.map(
-                                        (customer: any, index: number) => {
-                                            return (
-                                                <tr key={index}>
-                                                    {tableStructures.map(
-                                                        (x, index) => (
-                                                            <th key={index}>
-                                                                {
-                                                                    customer[
-                                                                        x.key
-                                                                    ]
-                                                                }
-                                                            </th>
-                                                        )
-                                                    )}
-                                                    <td>
-                                                        <button
-                                                            className="btn-ghost btn-square btn"
-                                                            onClick={() => {}}
-                                                        >
-                                                            <TrashIcon className="w-5" />
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            );
-                                        }
-                                    )}
-                                </tbody>
-                            </table>
+                            <CustomerTable data={data.data} />
                             <Paginator
                                 currentPage={currentPage}
                                 totalPages={data.last_page}

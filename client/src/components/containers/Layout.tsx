@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@app/hooks";
-import { removeNotificationMessage } from "@features/common/headerSlice";
+import { removeNotificationMessage } from "../../screens/features/common/headerSlice";
 import { useEffect } from "react";
 import LeftSidebar from "./LeftSidebar";
 import ModalLayout from "./ModalLayout";

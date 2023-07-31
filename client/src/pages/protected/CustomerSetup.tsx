@@ -3,7 +3,7 @@ import { useState } from "react";
 import {
     customersSetupSteps,
     getStepComponentByLabel,
-} from "@steps/customerSetup";
+} from "../../screens/customerSetup";
 import NavigatorCard from "@components/cards/NavigatorCard";
 import Loading from "@components/Loading";
 import ErrorText from "@components/typographys/ErrorText";

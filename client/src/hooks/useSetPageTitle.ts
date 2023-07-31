@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "@features/common/headerSlice";
+import { setPageTitle } from "../screens/features/common/headerSlice";
 import { useEffect } from "react";
 
 const useSetPageTitle = (title: string) => {

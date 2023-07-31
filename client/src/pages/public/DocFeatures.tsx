@@ -1,4 +1,4 @@
-import DocFeatures from "@features/documentation/DocFeatures";
+import DocFeatures from "../../screens/features/documentation/DocFeatures";
 
 function ExternalPage() {
     return (

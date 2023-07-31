@@ -1,4 +1,4 @@
-import DocGettingStarted from "@features/documentation/DocGettingStarted";
+import DocGettingStarted from "../../screens/features/documentation/DocGettingStarted";
 
 function ExternalPage() {
     return (

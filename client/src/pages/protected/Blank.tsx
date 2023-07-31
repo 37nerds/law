@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "@features/common/headerSlice";
+import { setPageTitle } from "../../screens/features/common/headerSlice";
 import DocumentIcon from "@heroicons/react/24/solid/DocumentIcon";
 import { useEffect } from "react";
 

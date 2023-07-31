@@ -43,12 +43,12 @@ function Leads() {
     const getDummyStatus = (index: number) => {
         if (index % 5 === 0) return <div className="badge">Not Interested</div>;
         else if (index % 5 === 1)
-            return <div className="badge-primary badge">In Progress</div>;
+            return <div className="badge badge-primary">In Progress</div>;
         else if (index % 5 === 2)
-            return <div className="badge-secondary badge">Sold</div>;
+            return <div className="badge badge-secondary">Sold</div>;
         else if (index % 5 === 3)
-            return <div className="badge-accent badge">Need Followup</div>;
-        else return <div className="badge-ghost badge">Open</div>;
+            return <div className="badge badge-accent">Need Followup</div>;
+        else return <div className="badge badge-ghost">Open</div>;
     };
 
     const deleteCurrentLead = (index: number) => {

@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "@features/common/headerSlice";
-import ProfileSettings from "@features/settings/profilesettings";
+import { setPageTitle } from "../../screens/features/common/headerSlice";
+import ProfileSettings from "../../screens/features/settings/profilesettings";
 import { useEffect } from "react";
 
 function InternalPage() {

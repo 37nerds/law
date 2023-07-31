@@ -5,7 +5,8 @@ import { setPopUpData } from "@states/customers/customerSlice";
 const customerApi = apiSlice.injectEndpoints({
     endpoints: builder => ({
         fetchCustomerList: builder.query({
-            query: ({ page = 1 }) => `/customers/list?per_page=6&&page=${page}`,
+            query: ({ page = 1 }) =>
+                `/customers/clients?per_page=6&&page=${page}`,
             // onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
             //     const { data } = await queryFulfilled;
             //     dispatch(setPopUpData(data?.data));
@@ -37,20 +38,27 @@ const customerApi = apiSlice.injectEndpoints({
             invalidatesTags: ["fetchCustomersPopUpData"],
         }),
         createUnit: builder.mutation({
-            query: units => ({
+            query: unit => ({
                 url: "/customers/units",
                 method: "POST",
-                body: units,
+                body: unit,
             }),
             invalidatesTags: ["fetchCustomersPopUpData"],
         }),
         createClient: builder.mutation({
-            query: units => ({
+            query: client => ({
                 url: "/customers/clients",
                 method: "POST",
-                body: units,
+                body: client,
             }),
             invalidatesTags: ["fetchCustomersPopUpData", "fetchCustomersList"],
+        }),
+        deleteClient: builder.mutation({
+            query: id => ({
+                url: `/customers/clients/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["fetchCustomersList"],
         }),
     }),
 });
@@ -62,4 +70,5 @@ export const {
     useCreateCompanyMutation,
     useCreateUnitMutation,
     useCreateClientMutation,
+    useDeleteClientMutation,
 } = customerApi;

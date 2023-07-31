@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\GroupOfCompanyController;
-use App\Http\Controllers\UnitController;
+use App\Http\Controllers\Customers\ClientController;
+use App\Http\Controllers\Customers\CompanyController;
+use App\Http\Controllers\Customers\CustomerController;
+use App\Http\Controllers\Customers\GroupOfCompanyController;
+use App\Http\Controllers\Customers\UnitController;
 use Illuminate\Support\Facades\Route;
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -13,10 +13,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix("/v1")->group(function () {
     Route::get("/customers/pop-up-data", [CustomerController::class, "popUpData"]);
-    Route::get("/customers/list", [CustomerController::class, "customersList"]);
 
-    Route::apiResource("/customers/group-of-companies", GroupOfCompanyController::class);
-    Route::apiResource("/customers/companies", CompanyController::class);
-    Route::apiResource("/customers/units", UnitController::class);
-    Route::apiResource("/customers/clients", ClientController::class);
+    Route::apiResource("/customers/group-of-companies", GroupOfCompanyController::class)
+        ->only("store");
+    Route::apiResource("/customers/companies", CompanyController::class)
+        ->only("store");
+    Route::apiResource("/customers/units", UnitController::class)
+        ->only("store");
+    Route::apiResource("/customers/clients", ClientController::class)
+        ->only(["store", "index", "destroy"]);
 });

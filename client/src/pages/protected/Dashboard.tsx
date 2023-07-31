@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "@features/common/headerSlice";
-import Dashboard from "@features/dashboard/index";
+import { setPageTitle } from "../../screens/features/common/headerSlice";
+import Dashboard from "../../screens/features/dashboard/index";
 import { useEffect } from "react";
 
 function InternalPage() {

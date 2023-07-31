@@ -131,13 +131,10 @@ const S1GroupOfCompany = () => {
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
         {
-            type: "Save & New",
+            type: "Save",
             handler: () => save(groupOfCompanySetup),
         },
-        { type: "Save & Close" },
-        { type: "Edit" },
-        { type: "Export" },
-        { type: "Inactive" },
+        { type: "Save & Next" },
     ];
 
     const handleDispatch = (field: string, value: string) => {
