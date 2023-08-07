@@ -20,6 +20,10 @@ export const selectClientSetup = () => {
     return selectCustomers().clientSetup;
 };
 
+export const selectClient = () => {
+    return selectCustomers().client;
+};
+
 export const selectPopUpData = (): any => {
     return selectCustomers().popUpData;
 };

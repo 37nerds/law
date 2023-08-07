@@ -7,6 +7,7 @@ const StringInput = ({
     errorMessage = "",
     required = false,
     type = "text",
+    disabled = false,
 }: {
     value: string;
     setValue: (_: string) => void;
@@ -14,6 +15,7 @@ const StringInput = ({
     errorMessage?: string;
     required?: boolean;
     type?: string;
+    disabled?: boolean;
 }) => {
     return (
         <InputFieldLayout errorMessage={errorMessage}>
@@ -21,9 +23,10 @@ const StringInput = ({
                 value={value}
                 type={type}
                 placeholder={placeholder}
-                onChange={e => setValue(e.target.value)}
+                onChange={e => setValue && setValue(e.target.value)}
                 className="input-bordered input w-full"
                 required={required}
+                disabled={disabled}
             />
         </InputFieldLayout>
     );

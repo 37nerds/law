@@ -21,7 +21,7 @@ const ToastNotification = () => {
             {lastNotification ? (
                 <div
                     className="toast-end toast toast-top"
-                    style={{ zIndex: 99 }}
+                    style={{ zIndex: 99999 }}
                 >
                     <div
                         className={`alert w-72 ${

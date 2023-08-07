@@ -135,7 +135,41 @@ export const customerSlice = createSlice({
             bill_to: "",
             notes: "",
         },
-        popUpData: {},
+
+        popUpData: {
+            group_of_companies: [],
+            companies: [],
+            units: [],
+        },
+        client: {
+            isEdit: false,
+            data: {
+                name: "",
+                unit_id: "",
+                client_id: "",
+                unit_name: "",
+                passport_no: "",
+                passport_issue_date: "",
+                passport_valid_date: "",
+                gender: "",
+                position_hold: "",
+                mobile: "",
+                email: "",
+                date_of_birth: "",
+                nationality: "",
+                father_name: "",
+                mother_name: "",
+                tin_no: "",
+                date_of_joining: "",
+                current_wp_validity_date: "",
+                visa_expire_date: "",
+                max_entry_limit: "",
+                entry_terms: "",
+                address: "",
+                bill_to: "",
+                notes: "",
+            },
+        },
     },
     reducers: {
         setGroupOfCompanySetupField(state, action) {
@@ -173,6 +207,22 @@ export const customerSlice = createSlice({
         setPopUpData(state, action) {
             state.popUpData = action.payload;
         },
+        setClientField(state, action) {
+            const { key, value } = action.payload as {
+                key: string;
+                value: any;
+            };
+            // @ts-ignore
+            state.client[key] = value;
+        },
+        setClientDataField(state, action) {
+            const { key, value } = action.payload as {
+                key: string;
+                value: any;
+            };
+            // @ts-ignore
+            state.client.data[key] = value;
+        },
     },
 });
 
@@ -180,7 +230,9 @@ export const {
     setGroupOfCompanySetupField,
     setCompanySetupField,
     setUnitSetupField,
+    setClientField,
     setClientSetupField,
     setPopUpData,
+    setClientDataField,
 } = customerSlice.actions;
 export default customerSlice;

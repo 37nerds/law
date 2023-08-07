@@ -7,12 +7,14 @@ const SelectInput = ({
     options,
     placeholder = "",
     errorMessage = "",
+    disabled = false,
 }: {
     value: string;
     setValue: (_: string) => void;
     options: TOption[];
     placeholder?: string;
     errorMessage?: string;
+    disabled?: boolean;
 }) => {
     return (
         <InputFieldLayout errorMessage={errorMessage}>
@@ -20,6 +22,7 @@ const SelectInput = ({
                 className="select-bordered select w-full"
                 value={value}
                 onChange={e => setValue(e.target.value)}
+                disabled={disabled}
             >
                 <option disabled value="">
                     {placeholder}

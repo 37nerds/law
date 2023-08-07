@@ -46,6 +46,7 @@ class ClientResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'unit_id' => $this->unit_id,
+            "unit_name" => $this->unit->name,
             'client_id' => $this->client_id,
             'passport_no' => $this->passport_no,
             'passport_issue_date' => $this->passport_issue_date,

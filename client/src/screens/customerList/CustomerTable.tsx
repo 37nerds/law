@@ -1,35 +1,20 @@
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 import confirmDelete from "@components/confirmDelete";
 import { useDeleteClientMutation } from "@states/customers/customerApi";
-import { useEffect, useState } from "react";
-import { NOTIFICATION_TYPE } from "@states/app/appSlice";
-import useNotify from "@hooks/useNotify";
+import { useState } from "react";
 import ModalOpener from "@components/dropdowns/ModalOpener";
 import CustomerModal, { TModalOpenFor } from "./CustomerModal";
+import useNotifyEffect from "@hooks/useNotifyEffect";
 
 const DropDown = ({ clientId }: { clientId: number }) => {
     const [deleteClient, { isSuccess, error }] = useDeleteClientMutation();
 
-    const notify = useNotify();
-
-    useEffect(() => {
-        if (error) {
-            const { data } = (error as any) || {};
-            notify(
-                NOTIFICATION_TYPE.ERROR,
-                `Error in delete customer: ${data?.message}`
-            );
-        }
-    }, [error]);
-
-    useEffect(() => {
-        if (isSuccess) {
-            notify(
-                NOTIFICATION_TYPE.SUCCESS,
-                `You successfully deleted the client`
-            );
-        }
-    }, [isSuccess]);
+    useNotifyEffect(
+        error,
+        "Error in delete customer",
+        isSuccess,
+        "You successfully deleted the client ! xx"
+    );
 
     return (
         <ThreeDotDropdown

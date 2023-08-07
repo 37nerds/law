@@ -21,5 +21,5 @@ Route::prefix("/v1")->group(function () {
     Route::apiResource("/customers/units", UnitController::class)
         ->only("store");
     Route::apiResource("/customers/clients", ClientController::class)
-        ->only(["store", "index", "destroy", "show"]);
+        ->only(["store", "index", "destroy", "show", "update"]);
 });

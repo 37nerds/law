@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputFieldLayout from "@components/layouts/InputFieldLayout";
 import { TLadderOption } from "@utils/types";
 
@@ -8,31 +8,39 @@ const SelectInput = ({
     options,
     placeholder = "",
     errorMessage = "",
+    disabled = false,
 }: {
     value: string;
     setValue: (_: string) => void;
     options: TLadderOption[];
     placeholder?: string;
     errorMessage?: string;
+    disabled?: boolean;
 }) => {
     const [isOpen, setIsOpen] = useState(true);
 
     const currentName = options.find(option => option.value === value)?.name[0];
 
-    useEffect(() => {
-        setIsOpen(true);
-    }, [isOpen]);
-
     return (
         <InputFieldLayout errorMessage={errorMessage}>
             <div className="dropdown w-full ">
-                <label
-                    tabIndex={0}
-                    className="select-bordered select flex w-full items-center"
-                >
-                    {currentName || placeholder || "Select"}
-                </label>
-                {isOpen && (
+                {disabled ? (
+                    <input
+                        value={currentName}
+                        type="text"
+                        className="input-bordered input w-full"
+                        disabled={disabled}
+                    />
+                ) : (
+                    <label
+                        tabIndex={0}
+                        className="select-bordered select flex w-full items-center"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        {currentName || placeholder || "Select"}
+                    </label>
+                )}
+                {!disabled && isOpen && (
                     <ul
                         tabIndex={0}
                         className="dropdown-content menu rounded-box flex h-96 w-full flex-col flex-nowrap gap-2 overflow-auto bg-base-100 p-2 shadow"

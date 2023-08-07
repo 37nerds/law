@@ -11,8 +11,6 @@ const CustomerModal = ({
 }: {
     modalOpenFor: TModalOpenFor | null;
 }) => {
-    console.log(modalOpenFor);
-
     return (
         <>
             {modalOpenFor && (

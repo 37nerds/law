@@ -45,7 +45,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        return $client;
+        return $this->success(new ClientResource($client));
     }
 
     /**
@@ -53,7 +53,8 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        //
+        $client->update($request->all());
+        return $this->success(new ClientResource($client));
     }
 
     public function destroy(Client $client)

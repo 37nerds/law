@@ -13,7 +13,7 @@ const NotificationBody = () => {
                         notification.type === NOTIFICATION_TYPE.ERROR
                             ? "bg-error text-white"
                             : notification.type === NOTIFICATION_TYPE.SUCCESS
-                            ? "bg-success"
+                            ? "bg-success text-white"
                             : "bg-base-200"
                     }`}
                 >
