@@ -19,7 +19,7 @@ Route::prefix("/v1")->group(function () {
     Route::apiResource("/customers/companies", CompanyController::class)
         ->only("store");
     Route::apiResource("/customers/units", UnitController::class)
-        ->only("store");
+        ->only("store", "show", "update");
     Route::apiResource("/customers/clients", ClientController::class)
         ->only(["store", "index", "destroy", "show", "update"]);
 });

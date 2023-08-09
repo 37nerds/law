@@ -1,7 +1,9 @@
 import InputFieldLayout from "@components/layouts/InputFieldLayout";
-import { NumericFormat } from "react-number-format";
 
-const NumberInput = ({
+/**
+ * Select date with native html api
+ */
+const DateInput = ({
     value,
     setValue,
     placeholder = "",
@@ -9,8 +11,8 @@ const NumberInput = ({
     required = false,
     disabled = false,
 }: {
-    value: number | "";
-    setValue: (_: number) => void;
+    value: string;
+    setValue: (_: string) => void;
     placeholder?: string;
     errorMessage?: string;
     required?: boolean;
@@ -18,20 +20,17 @@ const NumberInput = ({
 }) => {
     return (
         <InputFieldLayout errorMessage={errorMessage}>
-            <NumericFormat
+            <input
                 value={value || ""}
-                onValueChange={values => {
-                    setValue(Number(values.value));
-                }}
+                type="date"
                 placeholder={placeholder}
+                onChange={e => setValue && setValue(e.target.value)}
                 className="input-bordered input w-full"
                 required={required}
-                decimalScale={2}
-                fixedDecimalScale
                 disabled={disabled}
             />
         </InputFieldLayout>
     );
 };
 
-export default NumberInput;
+export default DateInput;

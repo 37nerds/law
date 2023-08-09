@@ -1,5 +1,6 @@
 import InputFieldLayout from "@components/layouts/InputFieldLayout";
-import { TOption } from "@utils/types";
+import { TOption } from "@config/general";
+import LadderSelectInput from "@components/inputs/fields/LadderSelectInput";
 
 const SelectInput = ({
     value,
@@ -20,7 +21,7 @@ const SelectInput = ({
         <InputFieldLayout errorMessage={errorMessage}>
             <select
                 className="select-bordered select w-full"
-                value={value}
+                value={value || ""}
                 onChange={e => setValue(e.target.value)}
                 disabled={disabled}
             >

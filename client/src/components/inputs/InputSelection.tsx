@@ -1,10 +1,10 @@
-import { TLadderOption, TOption } from "@utils/types";
 import StringInput from "@components/inputs/fields/StringInput";
 import TextInput from "@components/inputs/fields/TextInput";
 import SelectInput from "@components/inputs/fields/SelectInput";
-import SelectEditableInput from "@components/inputs/wrappers/SelectEditableInput";
+import SelectEditableInput from "@components/inputs/fields/SelectEditableInput";
 import NumberInput from "@components/inputs/fields/NumberInput";
 import LadderSelectInput from "@components/inputs/fields/LadderSelectInput";
+import { TLadderOption, TOption } from "@config/general";
 
 const InputSelection = ({
     type,
@@ -26,7 +26,7 @@ const InputSelection = ({
     const inputComponents: any = {
         string: (
             <StringInput
-                type={type}
+                type={type as any}
                 value={values[field]}
                 setValue={value => setValue(field, value)}
                 errorMessage={errors[field]}
@@ -34,7 +34,7 @@ const InputSelection = ({
         ),
         email: (
             <StringInput
-                type={type}
+                type={type as any}
                 value={values[field]}
                 setValue={value => setValue(field, value)}
                 errorMessage={errors[field]}

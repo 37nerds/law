@@ -1,8 +1,8 @@
 import { useState } from "react";
 import InputFieldLayout from "@components/layouts/InputFieldLayout";
-import { TLadderOption } from "@utils/types";
+import { TLadderOption } from "@config/general";
 
-const SelectInput = ({
+const LadderSelectInput = ({
     value,
     setValue,
     options,
@@ -19,17 +19,21 @@ const SelectInput = ({
 }) => {
     const [isOpen, setIsOpen] = useState(true);
 
-    const currentName = options.find(option => option.value === value)?.name[0];
+    const currentName = options.find(option => {
+        console.log("Here x: ", option.value, value);
+        return option.value === value;
+    })?.name[0];
+
+    console.log(options, value, currentName);
 
     return (
         <InputFieldLayout errorMessage={errorMessage}>
             <div className="dropdown w-full ">
                 {disabled ? (
                     <input
-                        value={currentName}
-                        type="text"
+                        value={currentName || ""}
+                        disabled={true}
                         className="input-bordered input w-full"
-                        disabled={disabled}
                     />
                 ) : (
                     <label
@@ -78,4 +82,4 @@ const SelectInput = ({
     );
 };
 
-export default SelectInput;
+export default LadderSelectInput;

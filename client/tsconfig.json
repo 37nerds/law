@@ -27,7 +27,8 @@
             "@containers/*": ["src/containers/*"],
             "@routes/*": ["src/routes/*"],
             "@states/*": ["src/states/*"],
-            "@steps/*": ["src/steps/*"]
+            "@steps/*": ["src/steps/*"],
+            "@config/*": ["src/config/*"]
         }
     },
     "include": ["src"],

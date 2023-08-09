@@ -1,15 +1,17 @@
 import Modal from "@components/dropdowns/Modal";
-import ShowClientInModal from "./ShowClientInModal";
 
-export type TModalOpenFor = {
+import ShowClientInModal from "./ShowClientInModal";
+import ShowUnitInModal from "./ShowUnitInModal";
+
+export type TCustomerModalOpenFor = {
     id: number;
-    type: string;
+    type: "client" | "unit" | "company" | "group_of_company";
 };
 
 const CustomerModal = ({
     modalOpenFor,
 }: {
-    modalOpenFor: TModalOpenFor | null;
+    modalOpenFor: TCustomerModalOpenFor | null;
 }) => {
     return (
         <>
@@ -17,6 +19,8 @@ const CustomerModal = ({
                 <Modal>
                     {modalOpenFor.type === "client" ? (
                         <ShowClientInModal id={modalOpenFor.id} />
+                    ) : modalOpenFor.type === "unit" ? (
+                        <ShowUnitInModal id={modalOpenFor.id} />
                     ) : (
                         <></>
                     )}

@@ -1,5 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export type TPopUpCompany = {
+    id: number;
+    name: string[];
+    address: string;
+};
+
+export type TPopUpUnit = {
+    id: number;
+    name: string[];
+    address: string;
+};
+
 // interface UnitSetup {
 //     name: string;
 //     company_id: string;
@@ -141,6 +153,7 @@ export const customerSlice = createSlice({
             companies: [],
             units: [],
         },
+
         client: {
             isEdit: false,
             data: {
@@ -168,6 +181,31 @@ export const customerSlice = createSlice({
                 address: "",
                 bill_to: "",
                 notes: "",
+            },
+        },
+
+        unit: {
+            isEdit: false,
+            data: {
+                name: "",
+                company_id: "",
+                address: "",
+                telephone: "",
+                mobile: "",
+                email: "",
+                website: "",
+                trade_license_no: "",
+                tin: "",
+                bin: "",
+                bida_reg_no: "",
+                incorporation_no: "",
+                membership_no: "",
+                member_of_the_association: "",
+                business_field: "",
+                legal_form: "",
+                contact_person: "",
+                contact_person_mobile: "",
+                contact_person_email: "",
             },
         },
     },
@@ -223,6 +261,22 @@ export const customerSlice = createSlice({
             // @ts-ignore
             state.client.data[key] = value;
         },
+        setUnitField(state, action) {
+            const { key, value } = action.payload as {
+                key: string;
+                value: any;
+            };
+            // @ts-ignore
+            state.unit[key] = value;
+        },
+        setUnitDataField(state, action) {
+            const { key, value } = action.payload as {
+                key: string;
+                value: any;
+            };
+            // @ts-ignore
+            state.unit.data[key] = value;
+        },
     },
 });
 
@@ -234,5 +288,7 @@ export const {
     setClientSetupField,
     setPopUpData,
     setClientDataField,
+    setUnitField,
+    setUnitDataField,
 } = customerSlice.actions;
 export default customerSlice;

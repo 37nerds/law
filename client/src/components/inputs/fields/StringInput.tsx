@@ -14,13 +14,13 @@ const StringInput = ({
     placeholder?: string;
     errorMessage?: string;
     required?: boolean;
-    type?: string;
+    type?: "text" | "email";
     disabled?: boolean;
 }) => {
     return (
         <InputFieldLayout errorMessage={errorMessage}>
             <input
-                value={value}
+                value={value || ""}
                 type={type}
                 placeholder={placeholder}
                 onChange={e => setValue && setValue(e.target.value)}

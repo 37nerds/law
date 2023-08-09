@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
+use App\Http\Resources\ClientResource;
 use App\Http\Resources\UnitResource;
 use App\Models\Unit;
 use Illuminate\Http\JsonResponse;
@@ -35,7 +36,7 @@ class UnitController extends Controller
      */
     public function show(Unit $unit)
     {
-        //
+        return $this->success(new UnitResource($unit));
     }
 
     /**
@@ -43,7 +44,8 @@ class UnitController extends Controller
      */
     public function update(UpdateUnitRequest $request, Unit $unit)
     {
-        //
+        $unit->update($request->all());
+        return $this->success(new ClientResource($unit));
     }
 
     /**

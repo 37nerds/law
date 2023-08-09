@@ -27,3 +27,7 @@ export const selectClient = () => {
 export const selectPopUpData = (): any => {
     return selectCustomers().popUpData;
 };
+
+export const selectUnit = () => {
+    return selectCustomers().unit;
+};

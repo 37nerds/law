@@ -1,24 +1,34 @@
-import { TLadderOption, TOption } from "@utils/types";
-import SelectInput from "@components/inputs/fields/SelectInput";
 import { useState } from "react";
+
+import SelectInput from "@components/inputs/fields/SelectInput";
 import StringInput from "@components/inputs/fields/StringInput";
 import LadderSelectInput from "@components/inputs/fields/LadderSelectInput";
 
+import { TLadderOption, TOption } from "@config/general";
+
+/**
+ * Select input field with editable capability.
+ *
+ * User can select options or ladder options also can be able
+ * to edit the value with pressing edit button
+ */
 const SelectEditableInput = ({
     value,
     setValue,
-    options,
-    ladderOptions,
+    options = [],
+    ladderOptions = [],
     errorMessage = "",
     type = "text",
+    disabled = false,
 }: {
     value: string;
     setValue: (_: string) => void;
-    options: TOption[];
+    options?: TOption[];
     ladderOptions?: TLadderOption[];
     placeholder?: string;
     errorMessage?: string;
     type?: string;
+    disabled?: boolean;
 }) => {
     const [isEdit, setIsEdit] = useState(false);
 
@@ -27,10 +37,10 @@ const SelectEditableInput = ({
             <div className="w-full">
                 {isEdit ? (
                     <StringInput
-                        type={type}
                         value={value}
                         setValue={setValue}
                         errorMessage={errorMessage}
+                        disabled={disabled}
                     />
                 ) : type === "editableLadderSelect" ? (
                     <LadderSelectInput
@@ -39,6 +49,7 @@ const SelectEditableInput = ({
                         options={ladderOptions || []}
                         placeholder="Select"
                         errorMessage={errorMessage}
+                        disabled={disabled}
                     />
                 ) : (
                     <SelectInput
@@ -47,10 +58,15 @@ const SelectEditableInput = ({
                         options={options || []}
                         placeholder="Select"
                         errorMessage={errorMessage}
+                        disabled={disabled}
                     />
                 )}
             </div>
-            <button onClick={() => setIsEdit(!isEdit)} className="btn">
+            <button
+                disabled={disabled}
+                onClick={() => setIsEdit(!isEdit)}
+                className="btn"
+            >
                 {isEdit ? "Select" : "Edit"}
             </button>
         </div>

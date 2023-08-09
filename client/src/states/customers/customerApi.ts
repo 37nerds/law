@@ -1,5 +1,9 @@
 import apiSlice from "../app/apiSlice";
-import { setClientField, setPopUpData } from "@states/customers/customerSlice";
+import {
+    setClientField,
+    setPopUpData,
+    setUnitField,
+} from "@states/customers/customerSlice";
 
 // noinspection JSUnusedGlobalSymbols
 const customerApi = apiSlice.injectEndpoints({
@@ -78,6 +82,24 @@ const customerApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["fetchCustomersPopUpData", "fetchCustomersList"],
         }),
+        fetchUnit: builder.query({
+            query: (id: number) => ({
+                url: `/customers/units/${id}`,
+                method: "GET",
+            }),
+            onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
+                const { data } = await queryFulfilled;
+                dispatch(setUnitField({ key: "data", value: data?.data }));
+            },
+        }),
+        updateUnit: builder.mutation({
+            query: ({ id, unit }) => ({
+                url: `/customers/clients/${id}`,
+                method: "PATCH",
+                body: unit,
+            }),
+            invalidatesTags: ["fetchCustomersPopUpData", "fetchCustomersList"],
+        }),
     }),
 });
 
@@ -91,4 +113,6 @@ export const {
     useDeleteClientMutation,
     useFetchClientQuery,
     useUpdateClientMutation,
+    useFetchUnitQuery,
+    useUpdateUnitMutation,
 } = customerApi;

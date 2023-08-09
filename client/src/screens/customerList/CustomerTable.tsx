@@ -1,66 +1,16 @@
-import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
-import confirmDelete from "@components/confirmDelete";
-import { useDeleteClientMutation } from "@states/customers/customerApi";
 import { useState } from "react";
+
 import ModalOpener from "@components/dropdowns/ModalOpener";
-import CustomerModal, { TModalOpenFor } from "./CustomerModal";
-import useNotifyEffect from "@hooks/useNotifyEffect";
 
-const DropDown = ({ clientId }: { clientId: number }) => {
-    const [deleteClient, { isSuccess, error }] = useDeleteClientMutation();
+import CustomerModal, { TCustomerModalOpenFor } from "./CustomerModal";
+import CustomerListDropDown from "./CustomerListDropDown";
 
-    useNotifyEffect(
-        error,
-        "Error in delete customer",
-        isSuccess,
-        "You successfully deleted the client ! xx"
-    );
-
-    return (
-        <ThreeDotDropdown
-            options={[
-                {
-                    content: (
-                        <button className="btn-primary btn-sm btn w-full text-xs">
-                            Export
-                        </button>
-                    ),
-                    handler: () => {
-                        console.log("Hello");
-                    },
-                },
-                {
-                    content: (
-                        <button className="btn-accent btn-sm btn w-full text-xs">
-                            Inactive
-                        </button>
-                    ),
-                    handler: () => {},
-                },
-                {
-                    content: (
-                        <button className="btn-sm btn w-full text-xs">
-                            Delete
-                        </button>
-                    ),
-                    handler: () => {
-                        confirmDelete({
-                            onDelete: () => {
-                                deleteClient(clientId);
-                            },
-                            onCancel: () => {},
-                        });
-                    },
-                },
-            ]}
-        />
-    );
-};
-
+/**
+ * Show all customers in a paginated table
+ */
 const CustomerTable = ({ data }: { data: any }) => {
-    const [modalOpenFor, setModalOpenFor] = useState<TModalOpenFor | null>(
-        null
-    );
+    const [modalOpenFor, setModalOpenFor] =
+        useState<TCustomerModalOpenFor | null>(null);
 
     return (
         <>
@@ -130,7 +80,7 @@ const CustomerTable = ({ data }: { data: any }) => {
                                 </ModalOpener>
                             </th>
                             <th>
-                                <DropDown clientId={customer.id} />
+                                <CustomerListDropDown clientId={customer.id} />
                             </th>
                         </tr>
                     ))}
