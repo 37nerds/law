@@ -1,8 +1,9 @@
+import { ReactNode } from "react";
+
 import S1GroupOfCompany from "./S1GroupOfCompany";
 import S2Company from "./S2Company";
 import S3Unit from "./S3Unit";
 import S4Client from "./S4Client";
-import { ReactNode } from "react";
 
 export type TNavigatorStep = {
     label: string;

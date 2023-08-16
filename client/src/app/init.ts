@@ -11,10 +11,6 @@ const initializeApp = () => {
         // dev code
     } else {
         // Prod build code
-
-        // Removing console.log from prod
-        console.log = () => {};
-
         // init analytics here
     }
 };

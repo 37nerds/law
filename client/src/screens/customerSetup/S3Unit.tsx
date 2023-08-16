@@ -1,30 +1,27 @@
-import { useAppDispatch } from "@app/hooks";
-import { setUnitSetupField } from "@states/customers/customerSlice";
-import {
-    selectPopUpData,
-    selectUnitSetup,
-} from "@states/customers/customerSelector";
-import { TBottomButton, TOption } from "@utils/types";
+import { useEffect } from "react";
+
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
-import { useCreateUnitMutation } from "@states/customers/customerApi";
-
-const options: TOption[] = [
-    { name: "Foo", value: "foo" },
-    { name: "Bar", value: "bar" },
-];
+import useCustomerSetupStore from "@states/useCustomerSetupStore";
+import { TBottomButton, TOption } from "@kinds/general";
+import { legalFromOptions } from "@config/general";
+import { useMutation, useQueryClient } from "react-query";
+import { saveUnit } from "@services/customersService";
+import { FETCH_POPUP_DATA_QUERY_CACHE } from "@config/customers";
+import { TUnit } from "@kinds/customers";
 
 const S3Unit = () => {
-    const dispatch = useAppDispatch();
+    const { popUpData, unit, setUnitField, setActiveStep, setClientField } =
+        useCustomerSetupStore();
 
-    const companiesOptions: TOption[] = selectPopUpData()?.companies?.map(
+    const companiesOptions: TOption[] = popUpData.companies?.map(
         (goc: any) => ({
             name: goc.name,
             value: goc.id,
         })
     );
 
-    const addressesOptions: TOption[] = selectPopUpData()?.companies?.map(
+    const addressesOptions: TOption[] = popUpData.companies?.map(
         (goc: any) => ({
             name: goc.address,
             value: goc.address,
@@ -141,7 +138,7 @@ const S3Unit = () => {
                 type: "select",
                 label: "Legal form",
                 field: "legal_form",
-                options: options,
+                options: legalFromOptions,
             },
         },
         {
@@ -165,41 +162,49 @@ const S3Unit = () => {
         },
     ];
 
-    const [save, { isLoading, error }] = useCreateUnitMutation();
-    // noinspection UnnecessaryLocalVariableJS
-    const errorX: any = error;
-    const errors = errorX?.data?.errors;
+    const handleDispatch = (field: any, value: string) => {
+        setUnitField(field, value);
+    };
 
-    const unitSetup = selectUnitSetup();
+    const queryClient = useQueryClient();
+
+    const saveUnitMutation = useMutation(saveUnit, {
+        onSuccess: () => {
+            return queryClient.invalidateQueries(FETCH_POPUP_DATA_QUERY_CACHE);
+        },
+    });
 
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
         {
-            type: "Save & New",
-            handler: () => save(unitSetup),
+            type: "Save & Next",
+            handler: () => {
+                saveUnitMutation.mutate(unit);
+            },
         },
-        { type: "Save & Close" },
-        { type: "Edit" },
-        { type: "Export" },
-        { type: "Inactive" },
     ];
 
-    const handleDispatch = (field: string, value: string) => {
-        dispatch(setUnitSetupField({ field, value }));
-    };
+    useEffect(() => {
+        if (saveUnitMutation.isSuccess) {
+            setActiveStep("Client");
+            const unit: TUnit = saveUnitMutation.data;
+            setClientField("unit_id", unit?.id);
+            setClientField("address", unit.address);
+        }
+    }, [saveUnitMutation]);
 
     return (
         <RenderStep
             bottomButtons={bottomButtons}
             title="Unit Setup"
-            loading={isLoading}
+            loading={saveUnitMutation.isLoading}
         >
             <div className="flex flex-col gap-6">
                 <RenderFields
                     fields={fields}
-                    values={unitSetup}
+                    values={unit}
                     handler={handleDispatch}
-                    errors={errors}
+                    errors={saveUnitMutation.error}
                 />
             </div>
         </RenderStep>

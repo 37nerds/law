@@ -6,7 +6,7 @@ import CustomerModal, { TCustomerModalOpenFor } from "./CustomerModal";
 import CustomerListDropDown from "./CustomerListDropDown";
 
 /**
- * Show all customers in a paginated table
+ * Show all customers.ts in a paginated table
  */
 const CustomerTable = ({ data }: { data: any }) => {
     const [modalOpenFor, setModalOpenFor] =

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import InputFieldLayout from "@components/layouts/InputFieldLayout";
-import { TLadderOption } from "@config/general";
+import { TLadderOption } from "@kinds/general";
 
 const LadderSelectInput = ({
     value,
@@ -20,11 +20,8 @@ const LadderSelectInput = ({
     const [isOpen, setIsOpen] = useState(true);
 
     const currentName = options.find(option => {
-        console.log("Here x: ", option.value, value);
         return option.value === value;
     })?.name[0];
-
-    console.log(options, value, currentName);
 
     return (
         <InputFieldLayout errorMessage={errorMessage}>

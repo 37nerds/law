@@ -1,15 +1,9 @@
-import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "@states/app/headerSlice";
-import TemplatePointers from "@components/features/user/components/TemplatePointers";
-import { useEffect } from "react";
+import TemplatePointers from "@components/TemplatePointers";
 import { Link } from "react-router-dom";
+import useSetPageTitle from "@hooks/useSetPageTitle";
 
 function InternalPage() {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(setPageTitle({ title: "" }));
-    }, []);
+    useSetPageTitle("");
 
     return (
         <div className="hero h-4/5 bg-base-200">

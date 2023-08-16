@@ -1,14 +1,8 @@
-import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "@states/app/headerSlice";
 import Integration from "@components/features/integration";
-import { useEffect } from "react";
+import useSetPageTitle from "@hooks/useSetPageTitle";
 
 function InternalPage() {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(setPageTitle({ title: "Integrations" }));
-    }, []);
+    useSetPageTitle("Integrations");
 
     return <Integration />;
 }

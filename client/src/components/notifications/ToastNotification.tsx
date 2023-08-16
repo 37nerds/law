@@ -1,17 +1,13 @@
-import { selectLastNotification } from "@states/app/appSelectors";
-import { clearLastNotification, NOTIFICATION_TYPE } from "@states/app/appSlice";
 import useDelayedFunction from "@hooks/useDelayedFunction";
-import { useAppDispatch } from "@app/hooks";
+import useNotificationStore from "@states/useNotificationStore";
 
 const ToastNotification = () => {
-    const dispatch = useAppDispatch();
-
-    const lastNotification = selectLastNotification();
+    const { lastNotification, clearLastNotification } = useNotificationStore();
 
     useDelayedFunction(
         2 * 1000,
         () => {
-            dispatch(clearLastNotification());
+            clearLastNotification();
         },
         [lastNotification]
     );
@@ -25,10 +21,9 @@ const ToastNotification = () => {
                 >
                     <div
                         className={`alert w-72 ${
-                            lastNotification.type === NOTIFICATION_TYPE.ERROR
+                            lastNotification.type === "error"
                                 ? "alert-error"
-                                : lastNotification.type ===
-                                  NOTIFICATION_TYPE.SUCCESS
+                                : lastNotification.type === "success"
                                 ? "alert-success"
                                 : "alert-info"
                         }`}

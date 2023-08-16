@@ -1,14 +1,8 @@
-import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "@states/app/headerSlice";
 import Leads from "@components/features/leads/index";
-import { useEffect } from "react";
+import useSetPageTitle from "@hooks/useSetPageTitle";
 
 function InternalPage() {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(setPageTitle({ title: "Leads" }));
-    }, []);
+    useSetPageTitle("Leads");
 
     return <Leads />;
 }

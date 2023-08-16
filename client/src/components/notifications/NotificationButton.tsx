@@ -1,26 +1,20 @@
-import { useAppDispatch } from "@app/hooks";
 import BellIcon from "@heroicons/react/24/outline/BellIcon";
-import { selectNotificationsCount } from "@states/app/appSelectors";
-import { openRightDrawer } from "@states/app/appSlice";
+import useNotificationStore from "@states/useNotificationStore";
 
 const NotificationButton = () => {
-    const dispatch = useAppDispatch();
+    const { notifications, openNotification } = useNotificationStore();
 
-    const noOfNotifications = selectNotificationsCount();
-
-    const openNotification = () => {
-        dispatch(openRightDrawer());
-    };
+    const noOfNotifications = notifications?.length || 0;
 
     return (
         <button
             className="btn-ghost btn-circle btn  ml-4"
-            onClick={() => openNotification()}
+            onClick={openNotification}
         >
             <div className="indicator">
                 <BellIcon className="h-6 w-6" />
                 {noOfNotifications > 0 ? (
-                    <span className="badge badge-secondary badge-sm indicator-item">
+                    <span className="badge-secondary badge badge-sm indicator-item">
                         {noOfNotifications}
                     </span>
                 ) : null}

@@ -1,15 +1,9 @@
-import { useAppDispatch } from "@app/hooks";
-import { useEffect } from "react";
-import { setPageTitle } from "@states/app/headerSlice";
 import FeaturesContent from "./components/FeaturesContent";
 import FeaturesNav from "./components/FeaturesNav";
+import useSetPageTitle from "@hooks/useSetPageTitle";
 
 function Features() {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(setPageTitle({ title: "Documentation" }));
-    }, []);
+    useSetPageTitle("Documentation");
 
     return (
         <>

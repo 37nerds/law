@@ -1,7 +1,6 @@
-import { useAppDispatch } from "@app/hooks";
 import TitleCard from "@components/cards/TitleCard";
 import { useState } from "react";
-import { showNotification } from "@states/app/headerSlice";
+import notify from "@helpers/notify";
 
 const INITIAL_INTEGRATION_LIST = [
     {
@@ -56,8 +55,6 @@ const INITIAL_INTEGRATION_LIST = [
 ];
 
 const Integration = () => {
-    const dispatch = useAppDispatch();
-
     const [integrationList, setIntegrationList] = useState(
         INITIAL_INTEGRATION_LIST
     );
@@ -70,13 +67,11 @@ const Integration = () => {
                 return i;
             })
         );
-        dispatch(
-            showNotification({
-                message: `${integration.name} ${
-                    integration.isActive ? "disabled" : "enabled"
-                }`,
-                status: 1,
-            })
+        notify(
+            "success",
+            `${integration.name} ${
+                integration.isActive ? "disabled" : "enabled"
+            }`
         );
     };
 

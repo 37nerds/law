@@ -1,15 +1,9 @@
-import { useAppDispatch } from "@app/hooks";
-import { useEffect } from "react";
-import { setPageTitle } from "@states/app/headerSlice";
 import GettingStartedContent from "./components/GettingStartedContent";
 import GettingStartedNav from "./components/GettingStartedNav";
+import useSetPageTitle from "@hooks/useSetPageTitle";
 
 function GettingStarted() {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(setPageTitle({ title: "Documentation" }));
-    }, []);
+    useSetPageTitle("Documentation");
 
     return (
         <>

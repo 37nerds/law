@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import NotificationButton from "../notifications/NotificationButton";
 import ThemeDropDown from "./ThemeDropDown";
 import ToastNotification from "@components/notifications/ToastNotification";
+import useAppStore from "@states/useAppStore";
 
 const Header = () => {
-    const { pageTitle } = useAppSelector(state => state.header);
+    const { pageTitle } = useAppStore();
 
     function logoutUser() {
         localStorage.clear();
@@ -19,7 +20,7 @@ const Header = () => {
             <div className="">
                 <label
                     htmlFor="left-sidebar-drawer"
-                    className="drawer-button btn-primary btn lg:hidden"
+                    className="btn-primary drawer-button btn lg:hidden"
                 >
                     <Bars3Icon className="inline-block h-5 w-5" />
                 </label>

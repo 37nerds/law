@@ -1,12 +1,12 @@
 import { useAppDispatch, useAppSelector } from "@app/hooks";
 import TitleCard from "@components/cards/TitleCard";
 import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
-import { MODAL_BODY_TYPES } from "@utils/globalConstantUtil";
 import moment from "moment";
 import { useEffect } from "react";
-import { showNotification } from "@states/app/headerSlice";
 import { openModal } from "@states/app/modalSlice";
 import { deleteLead, getLeadsContent } from "./leadSlice";
+import { MODAL_BODY_TYPES } from "@config/general";
+import notify from "@helpers/notify";
 
 const TopSideButtons = () => {
     const dispatch = useAppDispatch();
@@ -43,17 +43,17 @@ function Leads() {
     const getDummyStatus = (index: number) => {
         if (index % 5 === 0) return <div className="badge">Not Interested</div>;
         else if (index % 5 === 1)
-            return <div className="badge badge-primary">In Progress</div>;
+            return <div className="badge-primary badge">In Progress</div>;
         else if (index % 5 === 2)
-            return <div className="badge badge-secondary">Sold</div>;
+            return <div className="badge-secondary badge">Sold</div>;
         else if (index % 5 === 3)
-            return <div className="badge badge-accent">Need Followup</div>;
-        else return <div className="badge badge-ghost">Open</div>;
+            return <div className="badge-accent badge">Need Followup</div>;
+        else return <div className="badge-ghost badge">Open</div>;
     };
 
     const deleteCurrentLead = (index: number) => {
         dispatch(deleteLead({ index }));
-        dispatch(showNotification({ message: "Lead Deleted!", status: 1 }));
+        notify("success", "Lead Deleted!");
     };
 
     return (

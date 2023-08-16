@@ -1,20 +1,18 @@
-import { useAppDispatch } from "@app/hooks";
 import TitleCard from "@components/cards/TitleCard";
 import InputText from "@components/inputs/old/InputText";
 import TextAreaInput from "@components/inputs/old/TextAreaInput";
 import ToggleInput from "@components/inputs/old/ToggleInput";
-import { showNotification } from "@states/app/headerSlice";
+import Log from "@helpers/Log";
+import notify from "@helpers/notify";
 
 const ProfileSettings = () => {
-    const dispatch = useAppDispatch();
-
     // Call API to update profile settings changes
     const updateProfile = () => {
-        dispatch(showNotification({ message: "Profile Updated", status: 1 }));
+        notify("success", "Profile Updated");
     };
 
     const updateFormValue = ({ updateType, value }: any) => {
-        console.log(updateType);
+        Log.print(updateType, value);
     };
 
     return (

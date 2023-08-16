@@ -8,7 +8,7 @@ const RenderFields = ({
 }: {
     fields: any;
     values: any;
-    handler: (filed: string, value: any) => void;
+    handler: (filed: any, value: any) => void;
     errors: any;
 }) => {
     return (

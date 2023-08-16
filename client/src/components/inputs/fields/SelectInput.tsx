@@ -1,6 +1,5 @@
 import InputFieldLayout from "@components/layouts/InputFieldLayout";
-import { TOption } from "@config/general";
-import LadderSelectInput from "@components/inputs/fields/LadderSelectInput";
+import { TOption } from "@kinds/general";
 
 const SelectInput = ({
     value,

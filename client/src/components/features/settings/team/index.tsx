@@ -1,16 +1,11 @@
-import { useAppDispatch } from "@app/hooks";
 import moment from "moment";
 import { useState } from "react";
 import TitleCard from "@components/cards/TitleCard";
-import { showNotification } from "@states/app/headerSlice";
+import notify from "@helpers/notify";
 
 const TopSideButtons = () => {
-    const dispatch = useAppDispatch();
-
     const addNewTeamMember = () => {
-        dispatch(
-            showNotification({ message: "Add New Member clicked", status: 1 })
-        );
+        notify("success", "Add New Member clicked");
     };
 
     return (
@@ -31,9 +26,7 @@ const TEAM_MEMBERS = [
         avatar: "https://reqres.in/img/faces/1-image.jpg",
         email: "alex@dashwind.com",
         role: "Owner",
-        joinedOn: moment(new Date())
-            .add(-5 * 1, "days")
-            .format("DD MMM YYYY"),
+        joinedOn: moment(new Date()).add(-5, "days").format("DD MMM YYYY"),
         lastActive: "5 hr ago",
     },
     {
@@ -89,17 +82,17 @@ const TEAM_MEMBERS = [
 ];
 
 function Team() {
-    const [members, setMembers] = useState(TEAM_MEMBERS);
+    const [members] = useState(TEAM_MEMBERS);
 
     const getRoleComponent = (role: string) => {
         if (role === "Admin")
-            return <div className="badge badge-secondary">{role}</div>;
+            return <div className="badge-secondary badge">{role}</div>;
         if (role === "Manager") return <div className="badge">{role}</div>;
         if (role === "Owner")
-            return <div className="badge badge-primary">{role}</div>;
+            return <div className="badge-primary badge">{role}</div>;
         if (role === "Support")
-            return <div className="badge badge-accent">{role}</div>;
-        else return <div className="badge badge-ghost">{role}</div>;
+            return <div className="badge-accent badge">{role}</div>;
+        else return <div className="badge-ghost badge">{role}</div>;
     };
 
     return (

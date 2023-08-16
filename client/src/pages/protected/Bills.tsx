@@ -1,14 +1,8 @@
-import { useAppDispatch } from "@app/hooks";
-import { useEffect } from "react";
-import { setPageTitle } from "@states/app/headerSlice";
 import Billing from "@components/features/settings/billing";
+import useSetPageTitle from "@hooks/useSetPageTitle";
 
 const InternalPage = () => {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(setPageTitle({ title: "Bills" }));
-    }, []);
+    useSetPageTitle("Bills");
 
     return <Billing />;
 };

@@ -1,27 +1,16 @@
-import { useEffect } from "react";
-
-import { useFetchPopUpDataQuery } from "@states/customers/customerApi";
-import { selectPopUpData } from "@states/customers/customerSelector";
-import useNotify from "@hooks/useNotify";
-import { NOTIFICATION_TYPE } from "@states/app/appSlice";
+import { useQuery } from "react-query";
+import { FETCH_POPUP_DATA_QUERY_CACHE } from "@config/customers";
+import { fetchPopUpData } from "@services/customersService";
 
 const useFetchPopUpDataMid = () => {
-    const { error, isLoading } = useFetchPopUpDataQuery({});
-    const notify = useNotify();
+    const fetchPopUpDataQuery = useQuery({
+        queryKey: [FETCH_POPUP_DATA_QUERY_CACHE],
+        queryFn: fetchPopUpData,
+    });
 
-    useEffect(() => {
-        if (error) {
-            const { data } = (error as any) || {};
-            notify(
-                NOTIFICATION_TYPE.ERROR,
-                `In fetching pop up data: ${data?.message}`
-            );
-        }
-    }, [error]);
+    const { companies, units } = fetchPopUpDataQuery.data || {};
 
-    const { companies, units } = selectPopUpData() || {};
-
-    return { isLoading, companies, units };
+    return { isLoading: fetchPopUpDataQuery.isLoading, companies, units };
 };
 
 export default useFetchPopUpDataMid;

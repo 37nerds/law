@@ -10,7 +10,7 @@ import LadderSelectInput from "@components/inputs/fields/LadderSelectInput";
 
 import useNotifyEffect from "@hooks/useNotifyEffect";
 import { useAppDispatch } from "@app/hooks";
-import { genders } from "@config/general";
+import { gendersOptions } from "@config/general";
 
 import {
     useFetchClientQuery,
@@ -137,7 +137,7 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                             value={data["gender"]}
                             disabled={!isEdit}
                             setValue={value => setValue("gender", value)}
-                            options={genders}
+                            options={gendersOptions}
                         />
                     }
                     label2="Position hold"

@@ -1,6 +1,6 @@
-import useNotify from "@hooks/useNotify";
 import { useEffect } from "react";
-import { NOTIFICATION_TYPE } from "@states/app/appSlice";
+
+import notify from "@helpers/notify";
 
 const useNotifyEffect = (
     error: any,
@@ -8,21 +8,16 @@ const useNotifyEffect = (
     isSuccess: boolean = false,
     successMessage: string = ""
 ) => {
-    const notify = useNotify();
-
     useEffect(() => {
         if (error) {
             const { data } = (error as any) || {};
-            notify(
-                NOTIFICATION_TYPE.ERROR,
-                `${errorPrefix || "X"}: ${data?.message}`
-            );
+            notify("error", `${errorPrefix || "X"}: ${data?.message}`);
         }
     }, [error]);
 
     useEffect(() => {
         if (isSuccess) {
-            notify(NOTIFICATION_TYPE.SUCCESS, successMessage);
+            notify("success", successMessage);
         }
     }, [isSuccess]);
 };

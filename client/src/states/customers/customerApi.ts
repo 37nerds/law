@@ -1,11 +1,6 @@
 import apiSlice from "../app/apiSlice";
-import {
-    setClientField,
-    setPopUpData,
-    setUnitField,
-} from "@states/customers/customerSlice";
+import { setClientField, setUnitField } from "@states/customers/customerSlice";
 
-// noinspection JSUnusedGlobalSymbols
 const customerApi = apiSlice.injectEndpoints({
     endpoints: builder => ({
         fetchCustomerList: builder.query({
@@ -16,46 +11,6 @@ const customerApi = apiSlice.injectEndpoints({
             //     dispatch(setPopUpData(data?.data));
             // },
             providesTags: ["fetchCustomersList"],
-        }),
-        fetchPopUpData: builder.query({
-            query: () => "/customers/pop-up-data",
-            onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
-                const { data } = await queryFulfilled;
-                dispatch(setPopUpData(data?.data));
-            },
-            providesTags: ["fetchCustomersPopUpData"],
-        }),
-        createGroupOfCompany: builder.mutation({
-            query: groupOfCompany => ({
-                url: "/customers/group-of-companies",
-                method: "POST",
-                body: groupOfCompany,
-            }),
-            invalidatesTags: ["fetchCustomersPopUpData"],
-        }),
-        createCompany: builder.mutation({
-            query: company => ({
-                url: "/customers/companies",
-                method: "POST",
-                body: company,
-            }),
-            invalidatesTags: ["fetchCustomersPopUpData"],
-        }),
-        createUnit: builder.mutation({
-            query: unit => ({
-                url: "/customers/units",
-                method: "POST",
-                body: unit,
-            }),
-            invalidatesTags: ["fetchCustomersPopUpData"],
-        }),
-        createClient: builder.mutation({
-            query: client => ({
-                url: "/customers/clients",
-                method: "POST",
-                body: client,
-            }),
-            invalidatesTags: ["fetchCustomersPopUpData", "fetchCustomersList"],
         }),
         deleteClient: builder.mutation({
             query: id => ({
@@ -105,11 +60,6 @@ const customerApi = apiSlice.injectEndpoints({
 
 export const {
     useFetchCustomerListQuery,
-    useFetchPopUpDataQuery,
-    useCreateGroupOfCompanyMutation,
-    useCreateCompanyMutation,
-    useCreateUnitMutation,
-    useCreateClientMutation,
     useDeleteClientMutation,
     useFetchClientQuery,
     useUpdateClientMutation,

@@ -1,39 +1,34 @@
 import useSetPageTitle from "@hooks/useSetPageTitle";
-import { useState } from "react";
 import {
     customersSetupSteps,
     getStepComponentByLabel,
-} from "../../screens/customerSetup";
+} from "@screens/customerSetup";
 import NavigatorCard from "@components/cards/NavigatorCard";
 import Loading from "@components/Loading";
 import ErrorText from "@components/typographys/ErrorText";
-import { useFetchPopUpDataQuery } from "@states/customers/customerApi";
+import useCustomerSetupStore from "@states/useCustomerSetupStore";
+import useFetchCustomerPopUpData from "@hooks/useFetchCustomerPopUpData";
 
 const CustomerSetup = () => {
     useSetPageTitle("Customer Setup");
 
-    const [currentStepLabel, setCurrentStepLabel] = useState<string>("Client");
+    const { activeStep, setActiveStep } = useCustomerSetupStore();
 
-    const component = getStepComponentByLabel(currentStepLabel);
+    const component = getStepComponentByLabel(activeStep);
 
-    // @ts-ignore
-    const { isLoading, error } = useFetchPopUpDataQuery();
-
-    // noinspection UnnecessaryLocalVariableJS
-    const errorX: any = error;
-    const errorMessage = errorX?.data?.message;
+    const fetchPopUpDataQuery = useFetchCustomerPopUpData();
 
     return (
         <>
-            {isLoading ? (
+            {fetchPopUpDataQuery.isLoading ? (
                 <Loading />
-            ) : errorMessage ? (
-                <ErrorText>{errorMessage}</ErrorText>
+            ) : fetchPopUpDataQuery.isError ? (
+                <ErrorText>{fetchPopUpDataQuery.error as string}</ErrorText>
             ) : (
                 <NavigatorCard
                     steps={customersSetupSteps}
-                    step={currentStepLabel}
-                    setStep={setCurrentStepLabel}
+                    step={activeStep}
+                    setStep={setActiveStep}
                 >
                     {component}
                 </NavigatorCard>

@@ -68,6 +68,6 @@ class ApiSingleton {
 }
 
 const baseUrl = "http://localhost:8000/api/v1";
-const httpClient = ApiSingleton.getInstance(baseUrl);
+const http = ApiSingleton.getInstance(baseUrl);
 
-export default httpClient;
+export default http;

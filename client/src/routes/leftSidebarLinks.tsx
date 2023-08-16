@@ -39,12 +39,12 @@ const leftSidebarLinks = [
         name: "Customers",
         submenu: [
             {
-                path: "/app/customers/list",
+                path: "/app/customers.ts/list",
                 icon: <QueueListIcon className={submenuIconClasses} />,
                 name: "Customers List",
             },
             {
-                path: "/app/customers/setup",
+                path: "/app/customers.ts/setup",
                 icon: <CogIcon className={submenuIconClasses} />,
                 name: "Customers Setup",
             },

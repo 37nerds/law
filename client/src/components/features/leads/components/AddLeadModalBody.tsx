@@ -2,8 +2,8 @@ import { useAppDispatch } from "@app/hooks";
 import InputText, { TUpdateFormValue } from "@components/inputs/old/InputText";
 import ErrorText from "@components/typographys/ErrorText";
 import { useState } from "react";
-import { showNotification } from "@states/app/headerSlice";
 import { TLeadObj, addNewLead } from "../leadSlice";
+import notify from "@helpers/notify";
 
 const INITIAL_LEAD_OBJ = {
     first_name: "",
@@ -17,7 +17,6 @@ type Props = {
 
 function AddLeadModalBody({ closeModal }: Props) {
     const dispatch = useAppDispatch();
-    const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [leadObj, setLeadObj] = useState(INITIAL_LEAD_OBJ);
 
@@ -35,9 +34,7 @@ function AddLeadModalBody({ closeModal }: Props) {
                 avatar: "https://reqres.in/img/faces/1-image.jpg",
             };
             dispatch(addNewLead({ newLeadObj }));
-            dispatch(
-                showNotification({ message: "New Lead Added!", status: 1 })
-            );
+            notify("success", "New Lead Added!");
             closeModal();
         }
     };

@@ -1,14 +1,8 @@
-import { useAppDispatch } from "@app/hooks";
 import Charts from "@components/features/charts/index";
-import { setPageTitle } from "@states/app/headerSlice";
-import { useEffect } from "react";
+import useSetPageTitle from "@hooks/useSetPageTitle";
 
 function InternalPage() {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(setPageTitle({ title: "Charts" }));
-    }, []);
+    useSetPageTitle("Charts");
 
     return <Charts />;
 }

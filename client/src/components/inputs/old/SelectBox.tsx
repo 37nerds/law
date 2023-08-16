@@ -1,6 +1,6 @@
 import InformationCircleIcon from "@heroicons/react/24/outline/InformationCircleIcon";
 import { useState } from "react";
-import { TOption } from "@utils/types";
+import { TOption } from "@kinds/general";
 
 export type TUpdateFormValue = (_: {
     updateType: string | undefined;

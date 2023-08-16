@@ -1,42 +1,32 @@
-import { useAppDispatch } from "@app/hooks";
-import { setClientSetupField } from "@states/customers/customerSlice";
-import {
-    selectClientSetup,
-    selectPopUpData,
-} from "@states/customers/customerSelector";
-import { TBottomButton, TOption } from "@utils/types";
+import { useMutation, useQueryClient } from "react-query";
+
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
-import { useCreateClientMutation } from "@states/customers/customerApi";
-
-const options: TOption[] = [
-    { name: "Foo", value: "foo" },
-    { name: "Bar", value: "bar" },
-];
+import useCustomerSetupStore from "@states/useCustomerSetupStore";
+import { TBottomButton, TOption } from "@kinds/general";
+import { billToOptions, gendersOptions } from "@config/general";
+import { saveClient } from "@services/customersService";
+import { FETCH_POPUP_DATA_QUERY_CACHE } from "@config/customers";
 
 const S4Client = () => {
-    const dispatch = useAppDispatch();
+    const { popUpData, client, setClientField } = useCustomerSetupStore();
 
-    const unitsOptions: TOption[] = selectPopUpData()?.units?.map(
-        (goc: any) => ({
-            name: goc.name,
-            value: goc.id,
-        })
-    );
+    const unitsOptions: TOption[] = popUpData.units?.map((goc: any) => ({
+        name: goc.name,
+        value: goc.id,
+    }));
 
-    const addressesOptions: TOption[] = selectPopUpData()?.units?.map(
-        (goc: any) => ({
-            name: goc.address,
-            value: goc.address,
-        })
-    );
+    const addressesOptions: TOption[] = popUpData.units?.map((goc: any) => ({
+        name: goc.address,
+        value: goc.address,
+    }));
 
     const fields = [
         {
             box: "double",
             first: {
                 type: "string",
-                label: "Name of the Unit",
+                label: "Name of the Client",
                 field: "name",
                 required: true,
             },
@@ -82,7 +72,7 @@ const S4Client = () => {
                 type: "select",
                 label: "Gender",
                 field: "gender",
-                options: options,
+                options: gendersOptions,
             },
             second: {
                 type: "string",
@@ -117,7 +107,7 @@ const S4Client = () => {
                 type: "string",
                 label: "Nationality",
                 field: "nationality",
-                options: options,
+                options: billToOptions,
             },
         },
         {
@@ -143,7 +133,7 @@ const S4Client = () => {
                 field: "tin_no",
             },
             second: {
-                type: "string",
+                type: "date",
                 label: "Date of joining",
                 field: "date_of_joining",
             },
@@ -151,12 +141,12 @@ const S4Client = () => {
         {
             box: "double",
             first: {
-                type: "string",
+                type: "date",
                 label: "Current WP validity date",
                 field: "current_wp_validity_date",
             },
             second: {
-                type: "string",
+                type: "date",
                 label: "Visa expire date",
                 field: "visa_expire_date",
             },
@@ -186,7 +176,7 @@ const S4Client = () => {
                 type: "select",
                 label: "Bill to",
                 field: "bill_to",
-                options: options,
+                options: billToOptions,
             },
         },
         {
@@ -197,41 +187,40 @@ const S4Client = () => {
         },
     ];
 
-    const [save, { isLoading, error }] = useCreateClientMutation();
-    // noinspection UnnecessaryLocalVariableJS
-    const errorX: any = error;
+    const handleDispatch = (field: any, value: any) => {
+        setClientField(field, value);
+    };
 
-    const errors = errorX?.data?.errors;
-    const clientSetup = selectClientSetup();
+    const queryClient = useQueryClient();
+
+    const saveClientMutation = useMutation(saveClient, {
+        onSuccess: () => {
+            return queryClient.invalidateQueries(FETCH_POPUP_DATA_QUERY_CACHE);
+        },
+    });
 
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
         {
-            type: "Save & New",
-            handler: () => save(clientSetup),
+            type: "Save",
+            handler: () => {
+                saveClientMutation.mutate(client);
+            },
         },
-        { type: "Save & Close" },
-        { type: "Edit" },
-        { type: "Export" },
-        { type: "Inactive" },
     ];
-
-    const handleDispatch = (field: string, value: string) => {
-        dispatch(setClientSetupField({ field, value }));
-    };
 
     return (
         <RenderStep
             bottomButtons={bottomButtons}
             title="Client Setup"
-            loading={isLoading}
+            loading={saveClientMutation.isLoading}
         >
             <div className="flex flex-col gap-6">
                 <RenderFields
                     fields={fields}
-                    values={clientSetup}
+                    values={client}
                     handler={handleDispatch}
-                    errors={errors}
+                    errors={saveClientMutation.error}
                 />
             </div>
         </RenderStep>

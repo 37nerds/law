@@ -1,34 +1,30 @@
-import { useAppDispatch } from "@app/hooks";
-import { setCompanySetupField } from "@states/customers/customerSlice";
-import {
-    selectCompanySetup,
-    selectPopUpData,
-} from "@states/customers/customerSelector";
-import { TBottomButton, TOption } from "@utils/types";
+import { useMutation, useQueryClient } from "react-query";
+import { useEffect } from "react";
+
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
-import useCreateRequest from "@hooks/http/useCreateRequest";
-import { useCreateCompanyMutation } from "@states/customers/customerApi";
-
-const options: TOption[] = [
-    { name: "Foo", value: "foo" },
-    { name: "Bar", value: "bar" },
-];
+import useCustomerSetupStore from "@states/useCustomerSetupStore";
+import { legalFromOptions } from "@config/general";
+import { TBottomButton, TOption } from "@kinds/general";
+import { TCompany, TCompanyKey } from "@kinds/customers";
+import { saveCompany } from "@services/customersService";
 
 const S2Company = () => {
-    const dispatch = useAppDispatch();
+    const { popUpData, company, setCompanyField, setActiveStep, setUnitField } =
+        useCustomerSetupStore();
 
     const groupOfCompaniesOptions: TOption[] =
-        selectPopUpData()?.group_of_companies?.map((goc: any) => ({
+        popUpData?.group_of_companies?.map((goc: any) => ({
             name: goc.name,
             value: goc.id,
         }));
 
-    const addressesOptions: TOption[] =
-        selectPopUpData()?.group_of_companies?.map((goc: any) => ({
+    const addressesOptions: TOption[] = popUpData?.group_of_companies?.map(
+        (goc: any) => ({
             name: goc.address,
             value: goc.address,
-        }));
+        })
+    );
 
     const fields = [
         {
@@ -153,7 +149,7 @@ const S2Company = () => {
                 type: "select",
                 label: "Legal form",
                 field: "legal_form",
-                options: options,
+                options: legalFromOptions,
             },
         },
         {
@@ -177,41 +173,49 @@ const S2Company = () => {
         },
     ];
 
-    const [save, { isLoading, error }] = useCreateCompanyMutation();
-    // noinspection UnnecessaryLocalVariableJS
-    const errorX: any = error;
-    const errors = errorX?.data?.errors;
+    const handleDispatch = (field: TCompanyKey, value: any) => {
+        setCompanyField(field, value);
+    };
 
-    const companySetup = selectCompanySetup();
+    const queryClient = useQueryClient();
+
+    const saveCompanyMutation = useMutation(saveCompany, {
+        onSuccess: () => {
+            return queryClient.invalidateQueries("fetchPopUpData");
+        },
+    });
 
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
         {
-            type: "Save & New",
-            handler: () => save(companySetup),
+            type: "Save & Next",
+            handler: () => {
+                saveCompanyMutation.mutate(company);
+            },
         },
-        { type: "Save & Close" },
-        { type: "Edit" },
-        { type: "Export" },
-        { type: "Inactive" },
     ];
 
-    const handleDispatch = (field: string, value: string) => {
-        dispatch(setCompanySetupField({ field, value }));
-    };
+    useEffect(() => {
+        if (saveCompanyMutation.isSuccess) {
+            setActiveStep("Unit");
+            const company: TCompany = saveCompanyMutation.data;
+            setUnitField("company_id", company?.id);
+            setUnitField("address", company.address);
+        }
+    }, [saveCompanyMutation]);
 
     return (
         <RenderStep
             bottomButtons={bottomButtons}
             title="Company Setup"
-            loading={isLoading}
+            loading={saveCompanyMutation.isLoading}
         >
             <div className="flex flex-col gap-6">
                 <RenderFields
                     fields={fields}
-                    values={companySetup}
+                    values={company}
                     handler={handleDispatch}
-                    errors={errors}
+                    errors={saveCompanyMutation.error}
                 />
             </div>
         </RenderStep>

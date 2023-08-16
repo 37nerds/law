@@ -1,14 +1,8 @@
-import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "@states/app/headerSlice";
 import Dashboard from "@components/features/dashboard/index";
-import { useEffect } from "react";
+import useSetPageTitle from "@hooks/useSetPageTitle";
 
 function InternalPage() {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(setPageTitle({ title: "Dashboard" }));
-    }, []);
+    useSetPageTitle("Dashboard");
 
     return <Dashboard />;
 }

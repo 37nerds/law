@@ -17,11 +17,8 @@ import {
     useUpdateUnitMutation,
 } from "@states/customers/customerApi";
 import { selectUnit } from "@states/customers/customerSelector";
-import {
-    setUnitDataField,
-    TPopUpCompany,
-    TPopUpUnit,
-} from "@states/customers/customerSlice";
+import { setUnitDataField } from "@states/customers/customerSlice";
+import { TPopUpCompany, TPopUpUnit } from "@kinds/customers";
 
 /**
  * Show individual unit data by ID and user can edit the data as well

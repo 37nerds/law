@@ -1,12 +1,11 @@
-import { useAppDispatch } from "@app/hooks";
-import { setPageTitle } from "@states/app/headerSlice";
 import { useEffect } from "react";
+import useAppStore from "@states/useAppStore";
 
 const useSetPageTitle = (title: string) => {
-    const dispatch = useAppDispatch();
+    const { setPageTitle } = useAppStore();
 
     useEffect(() => {
-        dispatch(setPageTitle({ title }));
+        setPageTitle(title);
     }, []);
 };
 

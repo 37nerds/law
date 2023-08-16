@@ -1,13 +1,9 @@
 import NotificationBody from "./NotificationBody";
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
-import { useAppDispatch } from "@app/hooks";
-import { clearNotifications, closeRightDrawer } from "@states/app/appSlice";
+import useNotificationStore from "@states/useNotificationStore";
 
 const Notification = () => {
-    const dispatch = useAppDispatch();
-    const close = () => {
-        dispatch(closeRightDrawer());
-    };
+    const { closeNotification, clearNotifications } = useNotificationStore();
 
     return (
         <div className="relative flex h-full flex-col bg-base-100/95 pb-5">
@@ -16,7 +12,7 @@ const Notification = () => {
                 <div>
                     <button
                         className="btn-outline btn-sm btn-circle btn float-left"
-                        onClick={() => close()}
+                        onClick={closeNotification}
                     >
                         <XMarkIcon className="h-5 w-5" />
                     </button>
@@ -27,7 +23,7 @@ const Notification = () => {
                 <div>
                     <button
                         className="btn-ghost btn"
-                        onClick={() => dispatch(clearNotifications())}
+                        onClick={clearNotifications}
                     >
                         Clear
                     </button>

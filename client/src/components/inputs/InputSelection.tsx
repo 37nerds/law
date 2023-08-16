@@ -4,7 +4,8 @@ import SelectInput from "@components/inputs/fields/SelectInput";
 import SelectEditableInput from "@components/inputs/fields/SelectEditableInput";
 import NumberInput from "@components/inputs/fields/NumberInput";
 import LadderSelectInput from "@components/inputs/fields/LadderSelectInput";
-import { TLadderOption, TOption } from "@config/general";
+import DateInput from "@components/inputs/fields/DateInput";
+import { TLadderOption, TOption } from "@kinds/general";
 
 const InputSelection = ({
     type,
@@ -29,7 +30,7 @@ const InputSelection = ({
                 type={type as any}
                 value={values[field]}
                 setValue={value => setValue(field, value)}
-                errorMessage={errors[field]}
+                errorMessage={errors && errors[field]}
             />
         ),
         email: (
@@ -37,21 +38,21 @@ const InputSelection = ({
                 type={type as any}
                 value={values[field]}
                 setValue={value => setValue(field, value)}
-                errorMessage={errors[field]}
+                errorMessage={errors && errors[field]}
             />
         ),
         text: (
             <TextInput
                 value={values[field]}
                 setValue={value => setValue(field, value)}
-                errorMessage={errors[field]}
+                errorMessage={errors && errors[field]}
             />
         ),
         number: (
             <NumberInput
                 value={values[field]}
                 setValue={value => setValue(field, value)}
-                errorMessage={errors[field]}
+                errorMessage={errors && errors[field]}
             />
         ),
         select: (
@@ -60,7 +61,7 @@ const InputSelection = ({
                 setValue={value => setValue(field, value)}
                 options={options || []}
                 placeholder="Select"
-                errorMessage={errors[field]}
+                errorMessage={errors && errors[field]}
             />
         ),
         editableSelect: (
@@ -69,7 +70,7 @@ const InputSelection = ({
                 setValue={value => setValue(field, value)}
                 options={options || []}
                 placeholder="Select"
-                errorMessage={errors[field]}
+                errorMessage={errors && errors[field]}
                 type={type}
             />
         ),
@@ -79,7 +80,7 @@ const InputSelection = ({
                 setValue={value => setValue(field, value)}
                 options={ladderOptions || []}
                 placeholder="Select"
-                errorMessage={errors[field]}
+                errorMessage={errors && errors[field]}
             />
         ),
         editableLadderSelect: (
@@ -89,8 +90,15 @@ const InputSelection = ({
                 options={options || []}
                 ladderOptions={ladderOptions || []}
                 placeholder="Select"
-                errorMessage={errors[field]}
+                errorMessage={errors && errors[field]}
                 type={type}
+            />
+        ),
+        date: (
+            <DateInput
+                value={values[field]}
+                setValue={value => setValue(field, value)}
+                errorMessage={errors && errors[field]}
             />
         ),
     };

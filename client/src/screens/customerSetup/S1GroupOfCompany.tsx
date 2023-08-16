@@ -1,17 +1,16 @@
-import { useAppDispatch } from "@app/hooks";
-import { setGroupOfCompanySetupField } from "@states/customers/customerSlice";
-import { selectGroupOfCompanySetup } from "@states/customers/customerSelector";
-import { TBottomButton, TOption } from "@utils/types";
+import { useEffect, useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
-import { useCreateGroupOfCompanyMutation } from "@states/customers/customerApi";
+import useCustomerSetupStore from "@states/useCustomerSetupStore";
+import notify from "@helpers/notify";
+import { saveGroupOfCompany } from "@services/customersService";
+import { legalFromOptions } from "@config/general";
+import { TGroupOfCompany } from "@kinds/customers";
+import { TBottomButton } from "@kinds/general";
 
-const legalFromOptions: TOption[] = [
-    { name: "Foo", value: "foo" },
-    { name: "Bar", value: "bar" },
-];
-
-const fields: any = [
+const fields = [
     {
         box: "single",
         type: "string",
@@ -120,45 +119,73 @@ const fields2 = [
 ];
 
 const S1GroupOfCompany = () => {
-    const dispatch = useAppDispatch();
-    const [save, { isLoading, error }] = useCreateGroupOfCompanyMutation();
-    // noinspection UnnecessaryLocalVariableJS
-    const errorX: any = error;
-    const errors = errorX?.data?.errors;
+    const {
+        groupOfCompany,
+        setGroupOfCompanyField,
+        setActiveStep,
+        setCompanyField,
+    } = useCustomerSetupStore();
 
-    const groupOfCompanySetup = selectGroupOfCompanySetup();
+    const handleDispatch = (field: string, value: string) => {
+        setGroupOfCompanyField(field as any, value);
+    };
+
+    const queryClient = useQueryClient();
+
+    const saveGroupOfCompanyMutation = useMutation(saveGroupOfCompany, {
+        onSuccess: () => {
+            return queryClient.invalidateQueries("fetchPopUpData");
+        },
+    });
+
+    const [isAfterHitSave, setIsAfterHitSave] = useState(false);
 
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
         {
-            type: "Save",
-            handler: () => save(groupOfCompanySetup),
+            type: "Save & Next",
+            handler: () => {
+                saveGroupOfCompanyMutation.mutate(groupOfCompany);
+                setIsAfterHitSave(true);
+            },
         },
-        { type: "Save & Next" },
     ];
 
-    const handleDispatch = (field: string, value: string) => {
-        dispatch(setGroupOfCompanySetupField({ field, value }));
-    };
+    const error = saveGroupOfCompanyMutation.error as any;
+
+    useEffect(() => {
+        if (saveGroupOfCompanyMutation.isError && isAfterHitSave) {
+            notify("error", error?.message);
+            setIsAfterHitSave(false);
+        }
+
+        if (saveGroupOfCompanyMutation.isSuccess) {
+            setActiveStep("Company");
+            const groupOfCompany: TGroupOfCompany =
+                saveGroupOfCompanyMutation.data;
+            setCompanyField("group_of_company_id", groupOfCompany?.id);
+            setCompanyField("address", groupOfCompany.address);
+        }
+    }, [saveGroupOfCompanyMutation]);
 
     return (
         <RenderStep
             bottomButtons={bottomButtons}
             title="Group of Company Setup"
-            loading={isLoading}
+            loading={saveGroupOfCompanyMutation.isLoading}
         >
             <div className="flex flex-col gap-6">
                 <RenderFields
                     fields={fields}
-                    values={groupOfCompanySetup}
+                    values={groupOfCompany}
                     handler={handleDispatch}
-                    errors={errors}
+                    errors={error?.errors}
                 />
                 <RenderFields
                     fields={fields2}
-                    values={groupOfCompanySetup}
+                    values={groupOfCompany}
                     handler={handleDispatch}
-                    errors={errors}
+                    errors={error?.errors}
                 />
             </div>
         </RenderStep>

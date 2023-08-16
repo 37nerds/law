@@ -1,15 +1,9 @@
-import { useAppDispatch } from "@app/hooks";
-import { useEffect } from "react";
-import { setPageTitle } from "@states/app/headerSlice";
 import DocComponentsContent from "./components/DocComponentsContent";
 import DocComponentsNav from "./components/DocComponentsNav";
+import useSetPageTitle from "@hooks/useSetPageTitle";
 
 function DocComponents() {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(setPageTitle({ title: "Documentation" }));
-    }, []);
+    useSetPageTitle("Documentation");
 
     return (
         <>

@@ -1,5 +1,5 @@
 class Log {
-    static print(data: any): void {
+    static print(...data: any[]): void {
         console.log(data);
     }
 

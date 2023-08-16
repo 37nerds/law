@@ -10,11 +10,11 @@ const StringInput = ({
     disabled = false,
 }: {
     value: string;
-    setValue: (_: string) => void;
+    setValue: (value: string) => void;
     placeholder?: string;
     errorMessage?: string;
     required?: boolean;
-    type?: "text" | "email";
+    type?: "text" | "email" | "password";
     disabled?: boolean;
 }) => {
     return (

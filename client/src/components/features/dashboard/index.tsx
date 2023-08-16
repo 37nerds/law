@@ -1,9 +1,7 @@
-import { useAppDispatch } from "@app/hooks";
 import CircleStackIcon from "@heroicons/react/24/outline/CircleStackIcon";
 import CreditCardIcon from "@heroicons/react/24/outline/CreditCardIcon";
 import UserGroupIcon from "@heroicons/react/24/outline/UserGroupIcon";
 import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
-import { showNotification } from "@states/app/headerSlice";
 import AmountStats from "./components/AmountStats";
 import BarChart from "./components/BarChart";
 import DashboardStats from "./components/DashboardStats";
@@ -12,6 +10,7 @@ import DoughnutChart from "./components/DoughnutChart";
 import LineChart from "./components/LineChart";
 import PageStats from "./components/PageStats";
 import UserChannels from "./components/UserChannels";
+import notify from "@helpers/notify";
 
 const statsData = [
     {
@@ -41,16 +40,9 @@ const statsData = [
 ];
 
 const Dashboard = () => {
-    const dispatch = useAppDispatch();
-
     const updateDashboardPeriod = (newRange: string) => {
         // Dashboard range changed, write code to refresh your values
-        dispatch(
-            showNotification({
-                message: `Period updated to ${newRange}`,
-                status: 1,
-            })
-        );
+        notify("success", `Period updated to ${newRange}`);
     };
     return (
         <>

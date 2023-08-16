@@ -1,9 +1,6 @@
-import { useAppDispatch } from "@app/hooks";
-import { showNotification } from "@states/app/headerSlice";
+import notify from "@helpers/notify";
 
 function FeaturesContent() {
-    const dispatch = useAppDispatch();
-
     return (
         <>
             <article className="prose">
@@ -13,20 +10,20 @@ function FeaturesContent() {
                 <h2 id="feature1">Authentication</h2>
                 <p>
                     JWT based Authentication logic is present in{" "}
-                    <span className="badge badge-ghost mb-0 mt-0">
+                    <span className="badge-ghost badge mb-0 mt-0">
                         /app/auth.js
                     </span>
                     . In the file you can see we are adding bearer token in
                     header for every request. Every routes under{" "}
-                    <span className="badge badge-ghost mb-0 mt-0">
+                    <span className="badge-ghost badge mb-0 mt-0">
                         /routes/
                     </span>{" "}
                     folder will need authentication. For public routes like
                     login, register you will have to add routes in{" "}
-                    <span className="badge badge-ghost mb-0 mt-0">App.js</span>{" "}
+                    <span className="badge-ghost badge mb-0 mt-0">App.js</span>{" "}
                     file and also include the path in PUBLIC_ROUTES variable
                     under{" "}
-                    <span className="badge badge-ghost mb-0 mt-0">
+                    <span className="badge-ghost badge mb-0 mt-0">
                         /app/auth.js
                     </span>{" "}
                     file so that auto redirect to login page is not triggered.
@@ -38,12 +35,12 @@ function FeaturesContent() {
                     This is main internal navigation (for pages that will come
                     after login only), all sidebar menu items with their icons
                     are present in{" "}
-                    <span className="badge badge-ghost mb-0 mt-0">
+                    <span className="badge-ghost badge mb-0 mt-0">
                         /routes/sidebar.js
                     </span>{" "}
                     file, while path and page components mapping are
                     respectively present in{" "}
-                    <span className="badge badge-ghost mb-0 mt-0">
+                    <span className="badge-ghost badge mb-0 mt-0">
                         /routes/index.js
                     </span>{" "}
                     file.
@@ -54,28 +51,28 @@ function FeaturesContent() {
                 <p>
                     All <span className="font-semibold">public routes</span> are
                     present in{" "}
-                    <span className="badge badge-ghost mb-0 mt-0">App.js</span>{" "}
+                    <span className="badge-ghost badge mb-0 mt-0">App.js</span>{" "}
                     file. Steps to add new public page -
                 </p>
 
                 <ul className="mt-0">
                     <li>
                         Create Page inside{" "}
-                        <span className="badge badge-ghost mb-0 mt-0">
+                        <span className="badge-ghost badge mb-0 mt-0">
                             /pages
                         </span>{" "}
                         folder
                     </li>
                     <li>
                         Go to{" "}
-                        <span className="badge badge-ghost mb-0 mt-0">
+                        <span className="badge-ghost badge mb-0 mt-0">
                             App.js
                         </span>{" "}
                         and import the component and add its path
                     </li>
                     <li>
                         Add your new route path in{" "}
-                        <span className="badge badge-ghost mb-0 mt-0">
+                        <span className="badge-ghost badge mb-0 mt-0">
                             /app/auth.js
                         </span>{" "}
                         file under PUBLIC_ROUTES variable, this will allow the
@@ -86,7 +83,7 @@ function FeaturesContent() {
                 <p className="mt-4">
                     All <span className="font-semibold">protected routes</span>{" "}
                     are present in{" "}
-                    <span className="badge badge-ghost mb-0 mt-0">
+                    <span className="badge-ghost badge mb-0 mt-0">
                         /routes/sidebar.js
                     </span>{" "}
                     file
@@ -95,21 +92,21 @@ function FeaturesContent() {
                 <ul className="mt-0">
                     <li>
                         Create your page inside{" "}
-                        <span className="badge badge-ghost mb-0 mt-0">
+                        <span className="badge-ghost badge mb-0 mt-0">
                             /pages/protected
                         </span>{" "}
                         folder
                     </li>
                     <li>
                         Add your new routes in{" "}
-                        <span className="badge badge-ghost mb-0 mt-0">
+                        <span className="badge-ghost badge mb-0 mt-0">
                             /routes/sidebar.js
                         </span>
                         , this will show your new page in sidebar
                     </li>
                     <li>
                         Import your new routes component and map its path in{" "}
-                        <span className="badge badge-ghost mb-0 mt-0">
+                        <span className="badge-ghost badge mb-0 mt-0">
                             /routes/index.js
                         </span>
                     </li>
@@ -130,19 +127,19 @@ function FeaturesContent() {
                         </li>
                         <li>
                             Create new variable in{" "}
-                            <span className="badge badge-ghost mb-0 mt-0">
+                            <span className="badge-ghost badge mb-0 mt-0">
                                 /utils/globalConstantUtils.js
                             </span>{" "}
                             file under RIGHT_DRAWER_TYPES variable
                         </li>
                         <li>
                             Now include the file mapped with the new variable in{" "}
-                            <span className="badge badge-ghost mb-0 mt-0">
+                            <span className="badge-ghost badge mb-0 mt-0">
                                 /containers/RightSidebar.js
                             </span>{" "}
                             file using switch. <br />
                             For ex- If you new component name is{" "}
-                            <span className="badge badge-ghost mb-0 mt-0">
+                            <span className="badge-ghost badge mb-0 mt-0">
                                 TestRightSideBar.js
                             </span>{" "}
                             and variable name is TEST_RIGHT_SIDEBAR, then add
@@ -180,7 +177,7 @@ function FeaturesContent() {
                     By default we have added light and dark theme and Daisy UI
                     comes with a number of themes, which you can use with no
                     extra effort, you just have to include it in{" "}
-                    <span className="badge badge-ghost mb-0 mt-0">
+                    <span className="badge-ghost badge mb-0 mt-0">
                         tailwind.config.js
                     </span>{" "}
                     file, you can add themes like cupcake, corporate, reto
@@ -195,7 +192,7 @@ function FeaturesContent() {
                 <h2 id="feature6">Modal</h2>
                 <div>
                     With global modal functionality you dont have to create
-                    seperate modal for each page. We are using redux to show and
+                    separate modal for each page. We are using redux to show and
                     hide and it is a single component and can be called from any
                     file with dispatch method. Code for showing modal is present
                     in modalSlice and layout container component. To show modal
@@ -209,19 +206,19 @@ function FeaturesContent() {
                         </li>
                         <li>
                             Create new variable in{" "}
-                            <span className="badge badge-ghost mb-0 mt-0">
+                            <span className="badge-ghost badge mb-0 mt-0">
                                 /utils/globalConstantUtils.js
                             </span>{" "}
                             file under MODAL_BODY_TYPES variable
                         </li>
                         <li>
                             Now include the file mapped with the new variable in{" "}
-                            <span className="badge badge-ghost mb-0 mt-0">
+                            <span className="badge-ghost badge mb-0 mt-0">
                                 /containers/ModalLayout.js
                             </span>{" "}
                             file using switch. <br />
                             For ex- If you new component name is{" "}
-                            <span className="badge badge-ghost mb-0 mt-0">
+                            <span className="badge-ghost badge mb-0 mt-0">
                                 TestModal.js
                             </span>{" "}
                             and variable name is TEST_MODAL, then add following
@@ -257,7 +254,7 @@ function FeaturesContent() {
                 <h2 id="feature7">Notification</h2>
                 <p>
                     Many times we have to show notification to user be it on
-                    successfull form submission or any api success. And
+                    successful form submission or any api success. And
                     requirement can come to show notification from any page, so
                     global notification handling is needed.
                 </p>
@@ -265,7 +262,7 @@ function FeaturesContent() {
                 <p className="mt-4">
                     Code for showing notification is present in headerSlice and
                     layout container component. To show notification just call{" "}
-                    <span className="badge badge-ghost">
+                    <span className="badge-ghost badge">
                         showNotification()
                     </span>{" "}
                     function of headerSlice using dispatch. To show success
@@ -288,12 +285,7 @@ function FeaturesContent() {
                 <button
                     className="btn-success btn"
                     onClick={() =>
-                        dispatch(
-                            showNotification({
-                                message: "Your message has been sent!",
-                                status: 1,
-                            })
-                        )
+                        notify("success", "Your message has been sent!")
                     }
                 >
                     Success
@@ -301,14 +293,7 @@ function FeaturesContent() {
 
                 <button
                     className="btn-error btn ml-4"
-                    onClick={() =>
-                        dispatch(
-                            showNotification({
-                                message: "Something went wrong!",
-                                status: 0,
-                            })
-                        )
-                    }
+                    onClick={() => notify("error", "Something went wrong!")}
                 >
                     Error
                 </button>

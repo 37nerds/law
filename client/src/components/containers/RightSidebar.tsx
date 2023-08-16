@@ -1,21 +1,14 @@
-import { useAppDispatch, useAppSelector } from "@app/hooks";
 import Notification from "@components/notifications/Notification";
-import { closeRightDrawer } from "@states/app/appSlice";
-import { selectApp } from "@states/app/appSelectors";
+import useNotificationStore from "@states/useNotificationStore";
 
-function RightSidebar() {
-    const { isRightDrawerOpen } = selectApp();
-    const dispatch = useAppDispatch();
-
-    const close = () => {
-        dispatch(closeRightDrawer());
-    };
+const RightSidebar = () => {
+    const { isNotificationOpen, closeNotification } = useNotificationStore();
 
     return (
         <div
             className={
                 "fixed inset-0 z-[100] transform overflow-hidden bg-gray-900 bg-opacity-25 ease-in-out " +
-                (isRightDrawerOpen
+                (isNotificationOpen
                     ? " translate-x-0 opacity-100 transition-opacity duration-500  "
                     : " translate-x-full opacity-0 transition-all delay-500  ")
             }
@@ -23,7 +16,7 @@ function RightSidebar() {
             <section
                 className={
                     "delay-400 bg-layouts-100  absolute right-0 h-full w-80 transform shadow-xl transition-all duration-500 ease-in-out md:w-96  " +
-                    (isRightDrawerOpen
+                    (isNotificationOpen
                         ? " translate-x-0 "
                         : " translate-x-full ")
                 }
@@ -32,10 +25,10 @@ function RightSidebar() {
             </section>
             <section
                 className=" h-full w-screen cursor-pointer"
-                onClick={() => close()}
+                onClick={closeNotification}
             ></section>
         </div>
     );
-}
+};
 
 export default RightSidebar;

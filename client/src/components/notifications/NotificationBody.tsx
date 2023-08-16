@@ -1,8 +1,7 @@
-import { selectNotifications } from "@states/app/appSelectors";
-import { NOTIFICATION_TYPE } from "@states/app/appSlice";
+import useNotificationStore from "@states/useNotificationStore";
 
 const NotificationBody = () => {
-    const notifications = selectNotifications();
+    const { notifications } = useNotificationStore();
 
     return (
         <>
@@ -10,9 +9,9 @@ const NotificationBody = () => {
                 <div
                     key={index}
                     className={`bg-layouts-200 card rounded-box mt-3 grid p-3 ${
-                        notification.type === NOTIFICATION_TYPE.ERROR
+                        notification.type === "error"
                             ? "bg-error text-white"
-                            : notification.type === NOTIFICATION_TYPE.SUCCESS
+                            : notification.type === "success"
                             ? "bg-success text-white"
                             : "bg-base-200"
                     }`}

@@ -22,11 +22,11 @@ const protectedRoutes = [
         component: Dashboard, // view rendered
     },
     {
-        path: "/customers/setup",
+        path: "/customers.ts/setup",
         component: CustomerSetup,
     },
     {
-        path: "/customers/list",
+        path: "/customers.ts/list",
         component: CustomerList,
     },
     {

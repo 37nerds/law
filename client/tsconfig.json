@@ -28,7 +28,11 @@
             "@routes/*": ["src/routes/*"],
             "@states/*": ["src/states/*"],
             "@steps/*": ["src/steps/*"],
-            "@config/*": ["src/config/*"]
+            "@config/*": ["src/config/*"],
+            "@services/*": ["src/services/*"],
+            "@kinds/*": ["src/kinds/*"],
+            "@helpers/*": ["src/helpers/*"],
+            "@screens/*": ["src/screens/*"]
         }
     },
     "include": ["src"],

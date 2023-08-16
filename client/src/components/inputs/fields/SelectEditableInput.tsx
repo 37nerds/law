@@ -3,8 +3,7 @@ import { useState } from "react";
 import SelectInput from "@components/inputs/fields/SelectInput";
 import StringInput from "@components/inputs/fields/StringInput";
 import LadderSelectInput from "@components/inputs/fields/LadderSelectInput";
-
-import { TLadderOption, TOption } from "@config/general";
+import { TLadderOption, TOption } from "@kinds/general";
 
 /**
  * Select input field with editable capability.

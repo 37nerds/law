@@ -10,7 +10,7 @@ const NavigatorCard = ({
 }: {
     children: ReactNode;
     step: string;
-    setStep: Dispatch<SetStateAction<string>>;
+    setStep: Dispatch<SetStateAction<any>>;
     steps: TNavigatorStep[];
 }) => {
     return (

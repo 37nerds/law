@@ -4,12 +4,13 @@ import { Route, Routes } from "react-router-dom";
 import protectedRoutes from "@routes/protectedRoutes";
 import Header from "./Header";
 import SuspenseContent from "./SuspenseContent";
+import useAppStore from "@states/useAppStore";
 
 const Page404 = lazy(() => import("@pages/protected/404"));
 
 function PageContent() {
     const mainContentRef = useRef<HTMLDivElement>(null);
-    const { pageTitle } = useAppSelector(state => state.header);
+    const { pageTitle } = useAppStore();
 
     // Scroll back to top on new page load
     useEffect(() => {
