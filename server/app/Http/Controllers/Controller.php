@@ -20,4 +20,9 @@ class Controller extends BaseController
     {
         return $this->json(["message" => $message, "data" => $data], $status);
     }
+
+    public function success2(int $status, $data = []): JsonResponse
+    {
+        return $this->json($data, $status);
+    }
 }

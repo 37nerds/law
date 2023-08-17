@@ -1,40 +1,70 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ErrorText from "@components/typographys/ErrorText";
 import LandingIntro from "@components/LandingIntro";
 import StringInput from "@components/inputs/fields/StringInput";
+import { useMutation } from "react-query";
+import { registerUser } from "@external/auth";
 
 const Register = () => {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-    const [registerData, setRegisterData] = useState({
-        name: "",
-        password: "",
-        email: "",
-    });
+    const [username, setUsername] = useState("shihab");
+    const [name, setName] = useState("Shihab Mahamud");
+    const [email, setEmail] = useState("shihabxx@gmail.com");
+    const [password, setPassword] = useState("12345");
+    const [confirmPassword, setConfirmPassword] = useState("12345");
 
-    const submitForm = () => {
-        setErrorMessage("");
+    const registerMutation = useMutation({ mutationFn: registerUser });
 
-        if (registerData.name.trim() === "")
-            return setErrorMessage("Name is required! (use any value)");
-        if (registerData.email.trim() === "")
-            return setErrorMessage("Email Id is required! (use any value)");
-        if (registerData.password.trim() === "")
-            return setErrorMessage("Password is required! (use any value)");
-
+    const handleSubmit = () => {
         setLoading(true);
-        // Call API to check user credentials and save token in localstorage
-        localStorage.setItem("token", "DumyTokenHere");
-        setLoading(false);
-        window.location.href = "/app/welcome";
+        setErrorMessage("");
+
+        const _name = name.trim();
+        const _username = username.trim();
+        const _email = email.trim();
+        const _password = password.trim();
+        const _confirmPassword = confirmPassword.trim();
+
+        if (_username === "")
+            return setErrorMessage("Name is required! (use any value)");
+        if (_email === "")
+            return setErrorMessage("Email Id is required! (use any value)");
+        if (_password === "")
+            return setErrorMessage("Password is required! (use any value)");
+        if (_password !== _confirmPassword)
+            return setErrorMessage(
+                "Password and Confirm password not matching"
+            );
+
+        registerMutation.mutate({
+            name: _name,
+            username: _username,
+            email: _email,
+            password: _password,
+        });
     };
 
-    const updateRegisterData = (key: string, value: string) => {
-        setErrorMessage("");
-        setRegisterData({ ...registerData, [key ?? ""]: value });
-    };
+    useEffect(() => {
+        if (registerMutation.isSuccess) {
+            console.log(registerMutation.data);
+
+            // // Call API to check user credentials and save token in localstorage
+            // localStorage.setItem("token", "DumyTokenHere");
+            // window.location.href = "/app/welcome";
+        }
+        if (registerMutation.isError) {
+            const errorPayload = registerMutation.error as any;
+            setErrorMessage(errorPayload?.message);
+        }
+        if (registerMutation.isLoading) {
+            setLoading(true);
+        } else {
+            setLoading(false);
+        }
+    }, [registerMutation]);
 
     return (
         <div className="flex min-h-screen items-center bg-base-200">
@@ -50,36 +80,45 @@ const Register = () => {
                         <form
                             onSubmit={e => {
                                 e.preventDefault();
-                                submitForm();
+                                handleSubmit();
                             }}
                         >
                             <div className="mb-4 flex flex-col gap-4">
                                 <StringInput
-                                    value={registerData.name}
-                                    setValue={value =>
-                                        updateRegisterData("name", value)
-                                    }
+                                    label="Username"
+                                    value={username}
+                                    setValue={setUsername}
                                     required={true}
                                 />
                                 <StringInput
+                                    label="Name"
+                                    value={name}
+                                    setValue={setName}
+                                />
+                                <StringInput
+                                    label="Email Address"
                                     type="email"
-                                    value={registerData.email}
-                                    setValue={value =>
-                                        updateRegisterData("email", value)
-                                    }
+                                    value={email}
+                                    setValue={setEmail}
                                     required={true}
                                 />
                                 <StringInput
+                                    label="Password"
                                     type="password"
-                                    value={registerData.password}
-                                    setValue={value =>
-                                        updateRegisterData("password", value)
-                                    }
+                                    value={password}
+                                    setValue={setPassword}
+                                    required={true}
+                                />
+                                <StringInput
+                                    label="Password Again"
+                                    type="password"
+                                    value={confirmPassword}
+                                    setValue={setConfirmPassword}
                                     required={true}
                                 />
                             </div>
 
-                            <ErrorText styleClass="mt-8">
+                            <ErrorText className="mt-8">
                                 {errorMessage}
                             </ErrorText>
                             <button

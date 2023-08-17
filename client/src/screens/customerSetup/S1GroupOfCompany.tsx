@@ -5,7 +5,7 @@ import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
 import useCustomerSetupStore from "@states/useCustomerSetupStore";
 import notify from "@helpers/notify";
-import { saveGroupOfCompany } from "@services/customersService";
+import { saveGroupOfCompany } from "@external/customers";
 import { legalFromOptions } from "@config/general";
 import { TGroupOfCompany } from "@kinds/customers";
 import { TBottomButton } from "@kinds/general";

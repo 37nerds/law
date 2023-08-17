@@ -6,7 +6,7 @@ import useCustomerSetupStore from "@states/useCustomerSetupStore";
 import { TBottomButton, TOption } from "@kinds/general";
 import { legalFromOptions } from "@config/general";
 import { useMutation, useQueryClient } from "react-query";
-import { saveUnit } from "@services/customersService";
+import { saveUnit } from "@external/customers";
 import { FETCH_POPUP_DATA_QUERY_CACHE } from "@config/customers";
 import { TUnit } from "@kinds/customers";
 

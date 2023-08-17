@@ -58,6 +58,10 @@ class ClientController extends Controller
 
     public function destroy(Client $client)
     {
+        if (!auth()->user()->tokenCan("admin")) {
+            abort(403, "Unauthorized");
+        }
+
         $client->delete();
         return $this->json([], 204);
     }

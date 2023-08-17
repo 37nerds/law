@@ -1,3 +1,5 @@
+import Log from "@helpers/Log";
+
 export type Response = {
     payload: any;
     code: number;
@@ -29,6 +31,7 @@ class ApiSingleton {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
+                "User-Agent": "Insomnia/2023.5.3",
             },
         };
 
@@ -37,7 +40,7 @@ class ApiSingleton {
         }
 
         let code: number;
-        let payload: any;
+        let payload: any = {};
 
         try {
             const response = await fetch(url, requestOptions);
@@ -45,7 +48,7 @@ class ApiSingleton {
             code = response.status;
         } catch (e: any) {
             code = 500;
-            payload.message = e.message;
+            payload.message = e?.message;
         }
         return { payload, code };
     }

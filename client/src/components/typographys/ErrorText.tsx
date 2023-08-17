@@ -2,12 +2,12 @@ import { ReactNode } from "react";
 
 const ErrorText = ({
     children,
-    styleClass,
+    className,
 }: {
     children: ReactNode;
-    styleClass?: string;
+    className?: string;
 }) => {
-    return <p className={`text-center text-error ${styleClass}`}>{children}</p>;
+    return <p className={`text-center text-error ${className}`}>{children}</p>;
 };
 
 export default ErrorText;

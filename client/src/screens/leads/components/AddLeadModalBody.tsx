@@ -73,7 +73,7 @@ function AddLeadModalBody({ closeModal }: Props) {
                 updateFormValue={updateFormValue}
             />
 
-            <ErrorText styleClass="mt-16">{errorMessage}</ErrorText>
+            <ErrorText className="mt-16">{errorMessage}</ErrorText>
             <div className="modal-action">
                 <button className="btn-ghost btn" onClick={() => closeModal()}>
                     Cancel

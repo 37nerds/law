@@ -8,6 +8,7 @@ const StringInput = ({
     required = false,
     type = "text",
     disabled = false,
+    label = "",
 }: {
     value: string;
     setValue: (value: string) => void;
@@ -16,9 +17,10 @@ const StringInput = ({
     required?: boolean;
     type?: "text" | "email" | "password";
     disabled?: boolean;
+    label?: string;
 }) => {
     return (
-        <InputFieldLayout errorMessage={errorMessage}>
+        <InputFieldLayout errorMessage={errorMessage} label={label}>
             <input
                 value={value || ""}
                 type={type}

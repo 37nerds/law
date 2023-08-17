@@ -5,7 +5,7 @@ import RenderStep from "@components/renderers/RenderStep";
 import useCustomerSetupStore from "@states/useCustomerSetupStore";
 import { TBottomButton, TOption } from "@kinds/general";
 import { billToOptions, gendersOptions } from "@config/general";
-import { saveClient } from "@services/customersService";
+import { saveClient } from "@external/customers";
 import { FETCH_POPUP_DATA_QUERY_CACHE } from "@config/customers";
 
 const S4Client = () => {

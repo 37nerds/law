@@ -1,5 +1,5 @@
-const InputError = ({ message }: { message?: string }) => {
-    return message ? (
+const InputError = ({ message }: { message: string }) => {
+    return (
         <div className="alert alert-error shadow-lg">
             <div>
                 <svg
@@ -18,8 +18,6 @@ const InputError = ({ message }: { message?: string }) => {
                 <span>{message}</span>
             </div>
         </div>
-    ) : (
-        <></>
     );
 };
 

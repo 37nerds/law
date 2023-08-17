@@ -32,7 +32,8 @@
             "@services/*": ["src/services/*"],
             "@kinds/*": ["src/kinds/*"],
             "@helpers/*": ["src/helpers/*"],
-            "@screens/*": ["src/screens/*"]
+            "@screens/*": ["src/screens/*"],
+            "@external/*": ["src/external/*"]
         }
     },
     "include": ["src"],

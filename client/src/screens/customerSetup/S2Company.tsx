@@ -7,7 +7,7 @@ import useCustomerSetupStore from "@states/useCustomerSetupStore";
 import { legalFromOptions } from "@config/general";
 import { TBottomButton, TOption } from "@kinds/general";
 import { TCompany, TCompanyKey } from "@kinds/customers";
-import { saveCompany } from "@services/customersService";
+import { saveCompany } from "@external/customers";
 
 const S2Company = () => {
     const { popUpData, company, setCompanyField, setActiveStep, setUnitField } =

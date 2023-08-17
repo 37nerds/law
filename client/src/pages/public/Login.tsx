@@ -80,7 +80,7 @@ function Login() {
                                 </Link>
                             </div>
 
-                            <ErrorText styleClass="mt-8">
+                            <ErrorText className="mt-8">
                                 {errorMessage}
                             </ErrorText>
                             <button

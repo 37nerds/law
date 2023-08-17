@@ -90,7 +90,7 @@ function ForgotPassword() {
                                         />
                                     </div>
 
-                                    <ErrorText styleClass="mt-12">
+                                    <ErrorText className="mt-12">
                                         {errorMessage}
                                     </ErrorText>
                                     <button

@@ -55,7 +55,7 @@ function DocComponentsContent() {
                         <li>
                             <span className="font-bold">ErrorText</span> - Used
                             for showing error messages
-                            <ErrorText styleClass="mt-2">
+                            <ErrorText className="mt-2">
                                 Error Text Example
                             </ErrorText>
                         </li>
