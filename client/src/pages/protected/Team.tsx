@@ -1,4 +1,4 @@
-import Team from "@components/features/settings/team";
+import Team from "@screens/settings/team";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 
 function InternalPage() {

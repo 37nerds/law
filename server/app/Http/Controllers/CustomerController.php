@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Customers;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\GroupOfCompany;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;

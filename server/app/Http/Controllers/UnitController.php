@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Customers;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
 use App\Http\Resources\ClientResource;

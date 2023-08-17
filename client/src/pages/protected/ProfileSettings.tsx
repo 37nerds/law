@@ -1,4 +1,4 @@
-import ProfileSettings from "@components/features/settings/profilesettings";
+import ProfileSettings from "@screens/settings/profilesettings";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 
 function InternalPage() {

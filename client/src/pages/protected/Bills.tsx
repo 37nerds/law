@@ -1,4 +1,4 @@
-import Billing from "@components/features/settings/billing";
+import Billing from "@screens/settings/billing";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 
 const InternalPage = () => {

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Customers;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGroupOfCompanyRequest;
 use App\Http\Requests\UpdateGroupOfCompanyRequest;
 use App\Http\Resources\CompanyResource;

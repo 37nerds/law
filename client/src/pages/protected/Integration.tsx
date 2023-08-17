@@ -1,4 +1,4 @@
-import Integration from "@components/features/integration";
+import Integration from "src/screens/integration";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 
 function InternalPage() {

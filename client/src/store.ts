@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import modalSlice from "@states/app/modalSlice";
-import leadsSlice from "@components/features/leads/leadSlice";
+import leadsSlice from "@screens/leads/leadSlice";
 import customerSlice from "@states/customers/customerSlice";
 import apiSlice from "@states/app/apiSlice";
 

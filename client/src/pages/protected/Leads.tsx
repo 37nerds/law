@@ -1,4 +1,4 @@
-import Leads from "@components/features/leads/index";
+import Leads from "@screens/leads/index";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 
 function InternalPage() {
