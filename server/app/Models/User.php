@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Base\ModelTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Traits\ModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,6 +11,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @property string $role
+ * @method static create(string[] $array)
+ * @method static find(int $id)
  */
 class User extends Authenticatable implements MustVerifyEmail
 {

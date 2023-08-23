@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\ModelTrait;
+use App\Base\ModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

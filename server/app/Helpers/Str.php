@@ -2,13 +2,13 @@
 
 namespace App\Helpers;
 
-use Illuminate\Support\Str;
+use Illuminate\Support\Str as LaraStr;
 
-class StringHelper
+class Str
 {
     public static function toSlug(string $title): string
     {
-        return Str::slug($title);
+        return LaraStr::slug($title);
     }
     public static function toCapitalized(string $string): string
     {

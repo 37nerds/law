@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use Illuminate\Support\Carbon;
 
-class DateHelper
+class Date
 {
     public static function countDaysToNow($date): int
     {

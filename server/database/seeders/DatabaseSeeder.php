@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Base\SeederTrait;
 use App\Models\Client;
 use App\Models\Company;
 use App\Models\GroupOfCompany;
 use App\Models\Unit;
 use App\Models\User;
-use App\Traits\SeederTrait;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
