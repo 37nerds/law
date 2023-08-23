@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Base\Controller;
 use App\Http\Requests\StoreGroupOfCompanyRequest;
 use App\Http\Requests\UpdateGroupOfCompanyRequest;
 use App\Http\Resources\CompanyResource;

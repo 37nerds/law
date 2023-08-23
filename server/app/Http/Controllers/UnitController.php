@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Base\Controller;
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
 use App\Http\Resources\ClientResource;

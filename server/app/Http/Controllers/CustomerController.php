@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Base\Controller;
 use App\Models\GroupOfCompany;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
