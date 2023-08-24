@@ -1,5 +1,4 @@
 import http from "@helpers/http";
-import notify from "@helpers/notify";
 
 export const registerUser = async (registerData: {
     username: string;
@@ -7,11 +6,17 @@ export const registerUser = async (registerData: {
     email: string;
     password: string;
 }) => {
+    await http.get("/csrf-cookie");
+
+    console.log("Here");
+
     const response = await http.post("/auth/register", registerData);
 
-    if (response.code !== 201) {
-        throw response.payload;
+    const payload = await response.json();
+
+    if (response.status !== 201) {
+        throw payload;
     }
 
-    return response.payload;
+    return payload;
 };

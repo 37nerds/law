@@ -1,76 +1,41 @@
-import Log from "@helpers/Log";
+import { TJsonS } from "@kinds/general";
 
-export type Response = {
-    payload: any;
-    code: number;
+const base = "http://api.develop.sm/api/v1";
+
+const getCookie = (name: string): string => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+        return parts?.pop()?.split(";")?.shift() || "";
+    }
+    return "";
 };
 
-class ApiSingleton {
-    private static instance: ApiSingleton;
-    private readonly baseUrl: string;
+const request = (path: string, headers: HeadersInit = {}, options: RequestInit = {}, csrf = true) => {
+    const defaultHeaders: HeadersInit = { "Content-Type": "application/json", Accept: "application/json" };
+    if (csrf) defaultHeaders["X-XSRF-TOKEN"] = decodeURIComponent(getCookie("XSRF-TOKEN"));
 
-    private constructor(baseUrl: string) {
-        this.baseUrl = baseUrl;
-    }
+    const defaultOptions: RequestInit = { headers: { ...defaultHeaders, ...headers }, credentials: "include" };
 
-    static getInstance(baseUrl: string): ApiSingleton {
-        if (!ApiSingleton.instance) {
-            ApiSingleton.instance = new ApiSingleton(baseUrl);
-        }
-        return ApiSingleton.instance;
-    }
+    return fetch(base + path, { ...defaultOptions, ...options });
+};
 
-    private async makeRequest(
-        method: string,
-        endpoint: string,
-        requestPayload?: any
-    ): Promise<Response> {
-        const url = `${this.baseUrl}${endpoint}`;
-        const requestOptions: RequestInit = {
-            method,
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "User-Agent": "Insomnia/2023.5.3",
-            },
-        };
+const get = (path: string, headers: HeadersInit = {}, options: RequestInit = {}, csrf = true) => {
+    return request(path, headers, { ...options, method: "GET" }, csrf);
+};
 
-        if (requestPayload) {
-            requestOptions.body = JSON.stringify(requestPayload);
-        }
+const post = (path: string, body: TJsonS, headers: HeadersInit = {}, options: RequestInit = {}, csrf = true) => {
+    return request(path, headers, { ...options, method: "POST", body: JSON.stringify(body) }, csrf);
+};
 
-        let code: number;
-        let payload: any = {};
+const patch = (path: string, body: TJsonS, headers: HeadersInit = {}, options: RequestInit = {}, csrf = true) => {
+    return request(path, headers, { ...options, method: "PATCH", body: JSON.stringify(body) }, csrf);
+};
 
-        try {
-            const response = await fetch(url, requestOptions);
-            payload = await response.json();
-            code = response.status;
-        } catch (e: any) {
-            code = 500;
-            payload.message = e?.message;
-        }
-        return { payload, code };
-    }
+const _delete = (path: string, headers: HeadersInit = {}, options: RequestInit = {}, csrf: boolean = true) => {
+    return request(path, headers, { ...options, method: "DELETE" }, csrf);
+};
 
-    async get(endpoint: string) {
-        return this.makeRequest("GET", endpoint);
-    }
-
-    async post(endpoint: string, data: any) {
-        return this.makeRequest("POST", endpoint, data);
-    }
-
-    async patch(endpoint: string, data: any) {
-        return this.makeRequest("PATCH", endpoint, data);
-    }
-
-    async delete(endpoint: string) {
-        return this.makeRequest("DELETE", endpoint);
-    }
-}
-
-const baseUrl = "http://localhost:8000/api/v1";
-const http = ApiSingleton.getInstance(baseUrl);
+const http = { request, get, post, patch, delete: _delete };
 
 export default http;
