@@ -7,7 +7,7 @@ import { selectLoggedUserAvatar } from "@states/authStore";
 const ProfileDropDown = () => {
     const logout = async () => {
         await hitLogout();
-        window.location.href = "/";
+        window.location.href = "/login";
     };
 
     const avatar = selectLoggedUserAvatar();
