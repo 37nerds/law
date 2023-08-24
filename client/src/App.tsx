@@ -1,9 +1,10 @@
-import {lazy, useEffect} from "react";
-import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
-import {themeChange} from "theme-change";
-import http from "@helpers/http";
+import { lazy, useEffect, useState } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { themeChange } from "theme-change";
 
-// Importing pages
+import Loading from "@components/Loading";
+import { loggedUser } from "@external/auth";
+
 const Layout = lazy(() => import("@components/containers/Layout"));
 const Login = lazy(() => import("@pages/public/Login"));
 const ForgotPassword = lazy(() => import("@pages/public/ForgotPassword"));
@@ -16,14 +17,24 @@ function App() {
         themeChange(false);
     }, []);
 
-    const token = false;
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
         (async () => {
-            const response2 = await http.get("/auth/logged-user");
-            console.log(await response2.json());
+            setIsLoading(true);
+            try {
+                await loggedUser();
+            } catch (e: any) {
+                setErrorMessage(e?.message);
+            }
+            setIsLoading(false);
         })();
     }, []);
+
+    if (isLoading) {
+        return <Loading />;
+    }
 
     return (
         <BrowserRouter>
@@ -36,7 +47,7 @@ function App() {
                 {/* Place new routes over this */}
                 <Route path="/app/*" element={<Layout />} />
 
-                <Route path="*" element={<Navigate to={token ? "/app/welcome" : "/login"} replace />} />
+                <Route path="*" element={<Navigate to={errorMessage !== "" ? "/app/welcome" : "/login"} replace />} />
             </Routes>
         </BrowserRouter>
     );

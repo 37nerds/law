@@ -15,7 +15,7 @@ const StringInput = ({
     placeholder?: string;
     errorMessage?: string;
     required?: boolean;
-    type?: "text" | "email" | "password";
+    type?: "text" | "email";
     disabled?: boolean;
     label?: string;
 }) => {

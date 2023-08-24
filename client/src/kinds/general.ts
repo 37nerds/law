@@ -29,3 +29,12 @@ export type TJsonS =
     | {
           [key: string]: TJsonS;
       };
+
+export type TError = {
+    message: string;
+};
+
+export type TResponse = {
+    status: number;
+    payload: TJsonS;
+};

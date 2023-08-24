@@ -6,13 +6,9 @@ import RightSidebar from "./RightSidebar";
 const Layout = () => {
     return (
         <>
-            {/* Left drawer - containing page content and side bar (always open) */}
+            {/* Left drawer - containing page content and sidebar (always open) */}
             <div className="drawer-mobile drawer">
-                <input
-                    id="left-sidebar-drawer"
-                    type="checkbox"
-                    className="drawer-toggle"
-                />
+                <input id="left-sidebar-drawer" type="checkbox" className="drawer-toggle" />
                 <PageContent />
                 <LeftSidebar />
             </div>

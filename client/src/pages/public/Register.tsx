@@ -5,16 +5,17 @@ import LandingIntro from "@components/LandingIntro";
 import StringInput from "@components/inputs/fields/StringInput";
 import { useMutation } from "react-query";
 import { registerUser } from "@external/auth";
+import PasswordInput from "@components/inputs/fields/PasswordInput";
 
 const Register = () => {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-    const [username, setUsername] = useState("shihab");
-    const [name, setName] = useState("Shihab Mahamud");
-    const [email, setEmail] = useState("shihabxx@gmail.com");
-    const [password, setPassword] = useState("12345678");
-    const [confirmPassword, setConfirmPassword] = useState("12345678");
+    const [username, setUsername] = useState("");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const registerMutation = useMutation({ mutationFn: registerUser });
 
@@ -22,28 +23,33 @@ const Register = () => {
         setLoading(true);
         setErrorMessage("");
 
-        const _name = name.trim();
-        const _username = username.trim();
-        const _email = email.trim();
-        const _password = password.trim();
-        const _confirmPassword = confirmPassword.trim();
+        const trimmedName = name.trim();
+        const trimmedUsername = username.trim();
+        const trimmedEmail = email.trim();
+        const trimmedPassword = password.trim();
+        const trimmedConfirmPassword = confirmPassword.trim();
 
-        if (_username === "") return setErrorMessage("Name is required! (use any value)");
-        if (_email === "") return setErrorMessage("Email Id is required! (use any value)");
-        if (_password === "") return setErrorMessage("Password is required! (use any value)");
-        if (_password !== _confirmPassword) return setErrorMessage("Password and Confirm password not matching");
-
-        registerMutation.mutate({
-            name: _name,
-            username: _username,
-            email: _email,
-            password: _password,
-        });
+        if (!trimmedUsername) {
+            setErrorMessage("Username is required!");
+        } else if (!trimmedEmail) {
+            setErrorMessage("Email is required!");
+        } else if (!trimmedPassword) {
+            setErrorMessage("Password is required!");
+        } else if (trimmedPassword !== trimmedConfirmPassword) {
+            setErrorMessage("Password and Confirm Password do not match.");
+        } else {
+            registerMutation.mutate({
+                name: trimmedName,
+                username: trimmedUsername,
+                email: trimmedEmail,
+                password: trimmedPassword,
+            });
+        }
     };
 
     useEffect(() => {
         if (registerMutation.isSuccess) {
-            // window.location.href = "/app/welcome";
+            window.location.href = "/app/welcome";
         }
         if (registerMutation.isError) {
             const errorPayload = registerMutation.error as any;
@@ -81,16 +87,14 @@ const Register = () => {
                                     setValue={setEmail}
                                     required={true}
                                 />
-                                <StringInput
+                                <PasswordInput
                                     label="Password"
-                                    type="password"
                                     value={password}
                                     setValue={setPassword}
                                     required={true}
                                 />
-                                <StringInput
+                                <PasswordInput
                                     label="Password Again"
-                                    type="password"
                                     value={confirmPassword}
                                     setValue={setConfirmPassword}
                                     required={true}
