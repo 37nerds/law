@@ -1,8 +1,7 @@
-import checkAuth from "@app/auth";
-import initializeApp from "@app/init";
-import { lazy, useEffect } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { themeChange } from "theme-change";
+import {lazy, useEffect} from "react";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import {themeChange} from "theme-change";
+import http from "@helpers/http";
 
 // Importing pages
 const Layout = lazy(() => import("@components/containers/Layout"));
@@ -11,16 +10,19 @@ const ForgotPassword = lazy(() => import("@pages/public/ForgotPassword"));
 const Register = lazy(() => import("@pages/public/Register"));
 const Documentation = lazy(() => import("@pages/public/Documentation"));
 
-// Initializing different libraries
-initializeApp();
-
-// Check for login and initialize axios
-const token = checkAuth();
-
 function App() {
     useEffect(() => {
         // 👆 daisy UI themes initialization
         themeChange(false);
+    }, []);
+
+    const token = false;
+
+    useEffect(() => {
+        (async () => {
+            const response2 = await http.get("/auth/logged-user");
+            console.log(await response2.json());
+        })();
     }, []);
 
     return (
@@ -34,15 +36,7 @@ function App() {
                 {/* Place new routes over this */}
                 <Route path="/app/*" element={<Layout />} />
 
-                <Route
-                    path="*"
-                    element={
-                        <Navigate
-                            to={token ? "/app/welcome" : "/login"}
-                            replace
-                        />
-                    }
-                />
+                <Route path="*" element={<Navigate to={token ? "/app/welcome" : "/login"} replace />} />
             </Routes>
         </BrowserRouter>
     );

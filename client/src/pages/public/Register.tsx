@@ -13,8 +13,8 @@ const Register = () => {
     const [username, setUsername] = useState("shihab");
     const [name, setName] = useState("Shihab Mahamud");
     const [email, setEmail] = useState("shihabxx@gmail.com");
-    const [password, setPassword] = useState("12345");
-    const [confirmPassword, setConfirmPassword] = useState("12345");
+    const [password, setPassword] = useState("12345678");
+    const [confirmPassword, setConfirmPassword] = useState("12345678");
 
     const registerMutation = useMutation({ mutationFn: registerUser });
 
@@ -28,16 +28,10 @@ const Register = () => {
         const _password = password.trim();
         const _confirmPassword = confirmPassword.trim();
 
-        if (_username === "")
-            return setErrorMessage("Name is required! (use any value)");
-        if (_email === "")
-            return setErrorMessage("Email Id is required! (use any value)");
-        if (_password === "")
-            return setErrorMessage("Password is required! (use any value)");
-        if (_password !== _confirmPassword)
-            return setErrorMessage(
-                "Password and Confirm password not matching"
-            );
+        if (_username === "") return setErrorMessage("Name is required! (use any value)");
+        if (_email === "") return setErrorMessage("Email Id is required! (use any value)");
+        if (_password === "") return setErrorMessage("Password is required! (use any value)");
+        if (_password !== _confirmPassword) return setErrorMessage("Password and Confirm password not matching");
 
         registerMutation.mutate({
             name: _name,
@@ -49,10 +43,6 @@ const Register = () => {
 
     useEffect(() => {
         if (registerMutation.isSuccess) {
-            console.log(registerMutation.data);
-
-            // // Call API to check user credentials and save token in localstorage
-            // localStorage.setItem("token", "DumyTokenHere");
             // window.location.href = "/app/welcome";
         }
         if (registerMutation.isError) {
@@ -74,9 +64,7 @@ const Register = () => {
                         <LandingIntro />
                     </div>
                     <div className="px-10 py-24">
-                        <h2 className="mb-2 text-center text-2xl font-semibold">
-                            Register
-                        </h2>
+                        <h2 className="mb-2 text-center text-2xl font-semibold">Register</h2>
                         <form
                             onSubmit={e => {
                                 e.preventDefault();
@@ -84,17 +72,8 @@ const Register = () => {
                             }}
                         >
                             <div className="mb-4 flex flex-col gap-4">
-                                <StringInput
-                                    label="Username"
-                                    value={username}
-                                    setValue={setUsername}
-                                    required={true}
-                                />
-                                <StringInput
-                                    label="Name"
-                                    value={name}
-                                    setValue={setName}
-                                />
+                                <StringInput label="Username" value={username} setValue={setUsername} required={true} />
+                                <StringInput label="Name" value={name} setValue={setName} />
                                 <StringInput
                                     label="Email Address"
                                     type="email"
@@ -118,15 +97,10 @@ const Register = () => {
                                 />
                             </div>
 
-                            <ErrorText className="mt-8">
-                                {errorMessage}
-                            </ErrorText>
+                            <ErrorText className="mt-8">{errorMessage}</ErrorText>
                             <button
                                 type="submit"
-                                className={
-                                    "btn-primary btn mt-2 w-full" +
-                                    (loading ? " loading" : "")
-                                }
+                                className={"btn-primary btn mt-2 w-full" + (loading ? " loading" : "")}
                             >
                                 Register
                             </button>

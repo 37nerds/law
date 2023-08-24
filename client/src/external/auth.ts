@@ -6,11 +6,12 @@ export const registerUser = async (registerData: {
     email: string;
     password: string;
 }) => {
-    await http.get("/csrf-cookie");
+    await http.get("/csrf-cookie", {}, {}, false);
 
-    console.log("Here");
-
-    const response = await http.post("/auth/register", registerData);
+    const response = await http.post("/auth/register", {
+        ...registerData,
+        password_confirmation: registerData.password,
+    });
 
     const payload = await response.json();
 
@@ -20,3 +21,5 @@ export const registerUser = async (registerData: {
 
     return payload;
 };
+
+export const loggedUser = async () => {};
