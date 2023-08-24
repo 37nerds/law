@@ -13,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $role
  * @method static create(string[] $array)
  * @method static find(int $id)
+ * @method static where(string $string, mixed $email)
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -26,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         "name",
         "email",
+        "username",
         "password",
         "role"
     ];

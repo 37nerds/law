@@ -12,6 +12,7 @@ class UserRepository implements Repository
         return User::create([
             "name" => $properties["name"],
             "email" => $properties["email"],
+            "username" => $properties["username"],
             "password" => $properties["password"],
             "role" => $properties["role"] ?? "user"
         ]);
@@ -22,6 +23,7 @@ class UserRepository implements Repository
         $user = User::find($id);
 
         $user->name ??= $properties["name"];
+        $user->username ??= $properties["username"];
         $user->email ??= $properties["email"];
         $user->password ??= $properties["password"];
         $user->role ??= $properties["role"];

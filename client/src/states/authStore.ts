@@ -24,6 +24,16 @@ const useAuthStore = create<TState & TAction>()(
 
 export default useAuthStore;
 
+export const selectLoggedUser = () => {
+    return useAuthStore.getState().loggedUser;
+};
+
+export const selectLoggedUserAvatar = () => {
+    const loggedUser = selectLoggedUser();
+    if (!loggedUser) return null;
+    return loggedUser.avatar;
+};
+
 export const isUserLoggedIn = () => {
     return !!useAuthStore.getState().loggedUser;
 };

@@ -6,11 +6,6 @@ export const MODAL_BODY_TYPES = {
     DEFAULT: "",
 };
 
-export const RIGHT_DRAWER_TYPES = {
-    NOTIFICATION: "NOTIFICATION",
-    DEFAULT: "",
-};
-
 export const gendersOptions: TOption[] = [
     { name: "Male", value: "male" },
     { name: "Female", value: "female" },

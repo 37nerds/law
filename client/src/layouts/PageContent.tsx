@@ -2,10 +2,10 @@ import { ReactNode, useEffect, useRef } from "react";
 
 import Header from "./header/Header";
 
-import useAppStore from "@states/appStore";
+import useGeneralStore from "@states/generalStore";
 
 const PageContent = ({ children }: { children: ReactNode }) => {
-    const { pageTitle } = useAppStore();
+    const { pageTitle } = useGeneralStore();
 
     const mainContentRef = useRef<HTMLDivElement>(null);
 

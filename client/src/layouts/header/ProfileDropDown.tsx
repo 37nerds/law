@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
+import UserIcon from "@heroicons/react/24/outline/UserIcon";
+
 import { hitLogout } from "@external/auth";
+import { selectLoggedUserAvatar } from "@states/authStore";
 
 const ProfileDropDown = () => {
     const logout = async () => {
@@ -7,11 +10,13 @@ const ProfileDropDown = () => {
         window.location.href = "/";
     };
 
+    const avatar = selectLoggedUserAvatar();
+
     return (
         <div className="dropdown-end dropdown ml-4">
             <label tabIndex={0} className="btn-ghost btn-circle avatar btn">
                 <div className="w-10 rounded-full">
-                    <img src="https://avatars.githubusercontent.com/u/67628903?v=4" alt="profile" />
+                    {avatar ? <img src={avatar} alt="profile" /> : <UserIcon className="bg-base-200 p-1" />}
                 </div>
             </label>
             <ul

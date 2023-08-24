@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 
-import useAppStore from "@states/appStore";
+import useGeneralStore from "@states/generalStore";
 
 const useSetPageTitle = (title: string) => {
-    const { setPageTitle } = useAppStore();
+    const { setPageTitle } = useGeneralStore();
 
     useEffect(() => {
         setPageTitle(title);

@@ -41,11 +41,7 @@ export type TResponse = {
     payload: TJsonS;
 };
 
-type TRoute = {
+export type TRoute = {
     path: string;
     component: LazyExoticComponent<() => JSX.Element>;
 };
-
-export type TGuestRoute = TRoute;
-export type TPublicRoute = TRoute;
-export type TProtectedRoute = TRoute;

@@ -10,7 +10,7 @@ type TAction = {
     setPageTitle: (title: string) => void;
 };
 
-const useAppStore = create<TState & TAction>()(
+const useGeneralStore = create<TState & TAction>()(
     immer(
         devtools(set => ({
             pageTitle: "Home",
@@ -23,9 +23,9 @@ const useAppStore = create<TState & TAction>()(
     )
 );
 
-export default useAppStore;
+export default useGeneralStore;
 
 export const selectPageTitle = () => {
-    const { pageTitle } = useAppStore();
+    const { pageTitle } = useGeneralStore();
     return pageTitle;
 };

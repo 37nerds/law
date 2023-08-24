@@ -2,11 +2,8 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { getLoggedUser } from "@external/auth";
+import { guestRoutes, protectedRoutes, publicRoutes } from "@config/routes";
 import Log from "@helpers/Log";
-
-import publicRoutes from "@routes/public";
-import guestRoutes from "@routes/guest";
-import protectedRoutes from "@routes/protected";
 
 import Loading from "@components/pure/Loading";
 import GuestRoute from "@components/auth/GuestRoute";
@@ -38,8 +35,9 @@ const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                {guestRoutes.map(({ path, component: Component }) => (
+                {guestRoutes.map(({ path, component: Component }, index) => (
                     <Route
+                        key={index}
                         path={path}
                         element={
                             <GuestRoute>
@@ -49,8 +47,9 @@ const App = () => {
                     />
                 ))}
 
-                {publicRoutes.map(({ path, component: Component }) => (
+                {publicRoutes.map(({ path, component: Component }, index) => (
                     <Route
+                        key={index}
                         path={path}
                         element={
                             <GuestRoute>
@@ -60,8 +59,9 @@ const App = () => {
                     />
                 ))}
 
-                {protectedRoutes.map(({ path, component: Component }) => (
+                {protectedRoutes.map(({ path, component: Component }, index) => (
                     <Route
+                        key={index}
                         path={`/app${path}`}
                         element={
                             <ProtectedRoute>
