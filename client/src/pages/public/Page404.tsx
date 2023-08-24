@@ -1,11 +1,12 @@
 import FaceFrownIcon from "@heroicons/react/24/solid/FaceFrownIcon";
+
 import useSetPageTitle from "@hooks/useSetPageTitle";
 
-const InternalPage = () => {
+const Page404 = () => {
     useSetPageTitle("404");
 
     return (
-        <div className="hero h-4/5 bg-base-200">
+        <div className="hero bg-base-200">
             <div className="hero-content text-center text-accent">
                 <div className="max-w-md">
                     <FaceFrownIcon className="inline-block h-48 w-48" />
@@ -16,4 +17,4 @@ const InternalPage = () => {
     );
 };
 
-export default InternalPage;
+export default Page404;

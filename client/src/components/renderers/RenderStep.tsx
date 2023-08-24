@@ -1,5 +1,5 @@
 import CustomerSetupStepLayout from "@components/layouts/CustomerSetupStepLayout";
-import Loading from "@components/Loading";
+import Loading from "@components/pure/Loading";
 import { ReactNode } from "react";
 import { TBottomButton } from "@kinds/general";
 

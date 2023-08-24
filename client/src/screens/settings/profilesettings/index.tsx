@@ -8,7 +8,7 @@ import notify from "@helpers/notify";
 const ProfileSettings = () => {
     // Call API to update profile settings changes
     const updateProfile = () => {
-        notify("success", "Profile Updated");
+        notify("success", "profile Updated");
     };
 
     const updateFormValue = ({ updateType, value }: any) => {
@@ -17,28 +17,16 @@ const ProfileSettings = () => {
 
     return (
         <>
-            <TitleCard title="Profile Settings" topMargin="mt-2">
+            <TitleCard title="ProfileDropDown Settings" topMargin="mt-2">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <InputText
-                        labelTitle="Name"
-                        defaultValue="Alex"
-                        updateFormValue={updateFormValue}
-                    />
+                    <InputText labelTitle="Name" defaultValue="Alex" updateFormValue={updateFormValue} />
                     <InputText
                         labelTitle="Email Id"
                         defaultValue="alex@dashwind.com"
                         updateFormValue={updateFormValue}
                     />
-                    <InputText
-                        labelTitle="Title"
-                        defaultValue="UI/UX Designer"
-                        updateFormValue={updateFormValue}
-                    />
-                    <InputText
-                        labelTitle="Place"
-                        defaultValue="California"
-                        updateFormValue={updateFormValue}
-                    />
+                    <InputText labelTitle="Title" defaultValue="UI/UX Designer" updateFormValue={updateFormValue} />
+                    <InputText labelTitle="Place" defaultValue="California" updateFormValue={updateFormValue} />
                     <TextAreaInput
                         labelTitle="About"
                         defaultValue="Doing what I love, part time traveler"
@@ -48,16 +36,8 @@ const ProfileSettings = () => {
                 <div className="divider"></div>
 
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <InputText
-                        labelTitle="Language"
-                        defaultValue="English"
-                        updateFormValue={updateFormValue}
-                    />
-                    <InputText
-                        labelTitle="Timezone"
-                        defaultValue="IST"
-                        updateFormValue={updateFormValue}
-                    />
+                    <InputText labelTitle="Language" defaultValue="English" updateFormValue={updateFormValue} />
+                    <InputText labelTitle="Timezone" defaultValue="IST" updateFormValue={updateFormValue} />
                     <ToggleInput
                         updateType="syncData"
                         labelTitle="Sync Data"
@@ -67,10 +47,7 @@ const ProfileSettings = () => {
                 </div>
 
                 <div className="mt-16">
-                    <button
-                        className="btn-primary btn float-right"
-                        onClick={() => updateProfile()}
-                    >
+                    <button className="btn-primary btn float-right" onClick={() => updateProfile()}>
                         Update
                     </button>
                 </div>

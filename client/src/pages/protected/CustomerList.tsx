@@ -1,5 +1,5 @@
 import { useFetchCustomerListQuery } from "@states/customers/customerApi";
-import Loading from "@components/Loading";
+import Loading from "@components/pure/Loading";
 import ErrorText from "@components/typographys/ErrorText";
 import TitleCard from "@components/cards/TitleCard";
 import useSetPageTitle from "@hooks/useSetPageTitle";

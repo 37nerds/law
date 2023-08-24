@@ -4,16 +4,17 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 
 import store from "./store";
-import SuspenseContent from "@components/containers/SuspenseContent";
-import App from "./App";
 import "./index.css";
+
+import Loading from "@components/pure/Loading";
+import App from "./App";
 
 const root = createRoot(document.getElementById("root") as HTMLElement);
 const queryClient = new QueryClient();
 
 root.render(
     <QueryClientProvider client={queryClient}>
-        <Suspense fallback={<SuspenseContent />}>
+        <Suspense fallback={<Loading />}>
             <Provider store={store}>
                 <App />
             </Provider>

@@ -1,30 +1,29 @@
-import { lazy, useEffect, useState } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { themeChange } from "theme-change";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Loading from "@components/Loading";
-import { loggedUser } from "@external/auth";
+import { getLoggedUser } from "@external/auth";
+import Log from "@helpers/Log";
 
-const Layout = lazy(() => import("@components/containers/Layout"));
-const Login = lazy(() => import("@pages/public/Login"));
-const ForgotPassword = lazy(() => import("@pages/public/ForgotPassword"));
-const Register = lazy(() => import("@pages/public/Register"));
-const Documentation = lazy(() => import("@pages/public/Documentation"));
+import publicRoutes from "@routes/public";
+import guestRoutes from "@routes/guest";
+import protectedRoutes from "@routes/protected";
 
-function App() {
-    useEffect(() => {
-        // 👆 daisy UI themes initialization
-        themeChange(false);
-    }, []);
+import Loading from "@components/pure/Loading";
+import GuestRoute from "@components/auth/GuestRoute";
+import ProtectedRoute from "@components/auth/ProtectedRoute";
+import Page404 from "@pages/public/Page404";
 
+const App = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+
+    Log.info(errorMessage);
 
     useEffect(() => {
         (async () => {
             setIsLoading(true);
             try {
-                await loggedUser();
+                await getLoggedUser();
             } catch (e: any) {
                 setErrorMessage(e?.message);
             }
@@ -39,18 +38,50 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/documentation" element={<Documentation />} />
+                {guestRoutes.map(({ path, component: Component }) => (
+                    <Route
+                        path={path}
+                        element={
+                            <GuestRoute>
+                                <Component />
+                            </GuestRoute>
+                        }
+                    />
+                ))}
 
-                {/* Place new routes over this */}
-                <Route path="/app/*" element={<Layout />} />
+                {publicRoutes.map(({ path, component: Component }) => (
+                    <Route
+                        path={path}
+                        element={
+                            <GuestRoute>
+                                <Component />
+                            </GuestRoute>
+                        }
+                    />
+                ))}
 
-                <Route path="*" element={<Navigate to={errorMessage !== "" ? "/app/welcome" : "/login"} replace />} />
+                {protectedRoutes.map(({ path, component: Component }) => (
+                    <Route
+                        path={`/app${path}`}
+                        element={
+                            <ProtectedRoute>
+                                <Component />
+                            </ProtectedRoute>
+                        }
+                    />
+                ))}
+
+                <Route
+                    path="*"
+                    element={
+                        <ProtectedRoute>
+                            <Page404 />
+                        </ProtectedRoute>
+                    }
+                />
             </Routes>
         </BrowserRouter>
     );
-}
+};
 
 export default App;

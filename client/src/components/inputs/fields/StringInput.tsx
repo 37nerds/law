@@ -20,7 +20,7 @@ const StringInput = ({
     label?: string;
 }) => {
     return (
-        <InputFieldLayout errorMessage={errorMessage} label={label}>
+        <InputFieldLayout errorMessage={errorMessage} label={`${label} ${required ? "*" : ""}`}>
             <input
                 value={value || ""}
                 type={type}

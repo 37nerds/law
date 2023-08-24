@@ -24,3 +24,8 @@ const useAppStore = create<TState & TAction>()(
 );
 
 export default useAppStore;
+
+export const selectPageTitle = () => {
+    const { pageTitle } = useAppStore();
+    return pageTitle;
+};

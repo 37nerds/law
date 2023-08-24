@@ -1,7 +1,8 @@
 import http from "@helpers/http";
-import useAuthStore from "@states/useAuthStore";
+import useAuthStore from "@states/authStore";
+import { isEmail } from "@helpers/unkown";
 
-export const registerUser = async (registerData: {
+export const hitRegister = async (registerData: {
     username: string;
     name: string;
     email: string;
@@ -31,10 +32,31 @@ export type TLoggedUser = {
     updated_at: string;
 };
 
-export const loggedUser = async (): Promise<TLoggedUser> => {
+export const getLoggedUser = async (): Promise<TLoggedUser> => {
     const payload: TLoggedUser = (await http.get("/auth/logged-user", 200)) as any;
     useAuthStore.setState(state => {
         state.loggedUser = payload;
     });
     return payload;
+};
+
+export const hitLogin = async (payload: { emailOrUsername: string; password: string }) => {
+    const isItEmail = isEmail(payload.emailOrUsername);
+
+    const username = isItEmail ? null : payload.emailOrUsername;
+    const email = isItEmail ? payload.emailOrUsername : null;
+
+    return await http.post(
+        "/auth/login",
+        {
+            username,
+            email,
+            password: payload.password,
+        },
+        200
+    );
+};
+
+export const hitLogout = async () => {
+    return await http.post("/auth/logout", {}, 204);
 };

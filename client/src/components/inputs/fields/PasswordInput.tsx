@@ -22,7 +22,7 @@ const StringInput = ({
     const [type, setType] = useState("password");
 
     return (
-        <InputFieldLayout errorMessage={errorMessage} label={label}>
+        <InputFieldLayout errorMessage={errorMessage} label={`${label} ${required ? "*" : "x"}`}>
             <div className="flex gap-2">
                 <input
                     value={value || ""}

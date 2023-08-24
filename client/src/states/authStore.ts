@@ -23,3 +23,7 @@ const useAuthStore = create<TState & TAction>()(
 );
 
 export default useAuthStore;
+
+export const isUserLoggedIn = () => {
+    return !!useAuthStore.getState().loggedUser;
+};

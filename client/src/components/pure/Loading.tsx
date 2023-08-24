@@ -1,6 +1,6 @@
-const SuspenseContent = () => {
+const Loading = () => {
     return (
-        <div className="flex h-screen w-screen items-center justify-center bg-base-100 text-gray-300 dark:text-gray-200">
+        <div className="flex h-[500px] w-full items-center justify-center bg-base-100 text-gray-300 dark:text-gray-200">
             <div role="status">
                 <svg
                     aria-hidden="true"
@@ -24,4 +24,4 @@ const SuspenseContent = () => {
     );
 };
 
-export default SuspenseContent;
+export default Loading;

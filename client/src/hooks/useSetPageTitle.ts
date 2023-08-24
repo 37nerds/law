@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import useAppStore from "@states/useAppStore";
+
+import useAppStore from "@states/appStore";
 
 const useSetPageTitle = (title: string) => {
     const { setPageTitle } = useAppStore();

@@ -1,4 +1,4 @@
-import Notification from "@components/notifications/Notification";
+import Notification from "./notification/Notification";
 import useNotificationStore from "@states/useNotificationStore";
 
 const RightSidebar = () => {
@@ -16,17 +16,12 @@ const RightSidebar = () => {
             <section
                 className={
                     "delay-400 bg-layouts-100  absolute right-0 h-full w-80 transform shadow-xl transition-all duration-500 ease-in-out md:w-96  " +
-                    (isNotificationOpen
-                        ? " translate-x-0 "
-                        : " translate-x-full ")
+                    (isNotificationOpen ? " translate-x-0 " : " translate-x-full ")
                 }
             >
                 <Notification />
             </section>
-            <section
-                className=" h-full w-screen cursor-pointer"
-                onClick={closeNotification}
-            ></section>
+            <section className=" h-full w-screen cursor-pointer" onClick={closeNotification}></section>
         </div>
     );
 };

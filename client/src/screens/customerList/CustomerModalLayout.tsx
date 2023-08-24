@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import Loading from "@components/Loading";
+import Loading from "@components/pure/Loading";
 import ErrorText from "@components/typographys/ErrorText";
 
 const CustomerModalLayout = ({
@@ -26,19 +26,11 @@ const CustomerModalLayout = ({
                 <h2 className="text-3xl font-bold">{title}</h2>
                 <div className="flex gap-3">
                     {isEdit && (
-                        <button
-                            className={`btn-success btn`}
-                            onClick={onUpdate}
-                        >
+                        <button className={`btn-success btn`} onClick={onUpdate}>
                             Update
                         </button>
                     )}
-                    <button
-                        className={`btn ${
-                            isEdit ? "btn-error" : "btn-success"
-                        }`}
-                        onClick={onEditToggle}
-                    >
+                    <button className={`btn ${isEdit ? "btn-error" : "btn-success"}`} onClick={onEditToggle}>
                         {isEdit ? "Close Edit" : "Edit"}
                     </button>
                 </div>

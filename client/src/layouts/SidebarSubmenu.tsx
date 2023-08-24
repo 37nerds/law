@@ -1,5 +1,5 @@
 import ChevronDownIcon from "@heroicons/react/24/outline/ChevronDownIcon";
-import { TSubmenu } from "@routes/leftSidebarLinks";
+import { TSubmenu } from "./leftSidebarLinks";
 import { ReactNode, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 

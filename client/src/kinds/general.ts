@@ -1,3 +1,5 @@
+import { LazyExoticComponent } from "react";
+
 export type TOption = {
     name: string;
     value: string;
@@ -38,3 +40,12 @@ export type TResponse = {
     status: number;
     payload: TJsonS;
 };
+
+type TRoute = {
+    path: string;
+    component: LazyExoticComponent<() => JSX.Element>;
+};
+
+export type TGuestRoute = TRoute;
+export type TPublicRoute = TRoute;
+export type TProtectedRoute = TRoute;

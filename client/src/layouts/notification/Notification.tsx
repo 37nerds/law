@@ -10,21 +10,13 @@ const Notification = () => {
             {/* Header */}
             <div className="navbar flex justify-between pl-4 pr-4  shadow-md ">
                 <div>
-                    <button
-                        className="btn-outline btn-sm btn-circle btn float-left"
-                        onClick={closeNotification}
-                    >
+                    <button className="btn-outline btn-sm btn-circle btn float-left" onClick={closeNotification}>
                         <XMarkIcon className="h-5 w-5" />
                     </button>
-                    <span className="ml-2 text-xl font-bold">
-                        Notifications
-                    </span>
+                    <span className="ml-2 text-xl font-bold">Notifications</span>
                 </div>
                 <div>
-                    <button
-                        className="btn-ghost btn"
-                        onClick={clearNotifications}
-                    >
+                    <button className="btn-ghost btn" onClick={clearNotifications}>
                         Clear
                     </button>
                 </div>

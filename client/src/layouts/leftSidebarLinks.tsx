@@ -73,9 +73,7 @@ const leftSidebarLinks = [
         submenu: [
             {
                 path: "/login",
-                icon: (
-                    <ArrowRightOnRectangleIcon className={submenuIconClasses} />
-                ),
+                icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
                 name: "Login",
             },
             {
@@ -95,9 +93,7 @@ const leftSidebarLinks = [
             },
             {
                 path: "/app/404",
-                icon: (
-                    <ExclamationTriangleIcon className={submenuIconClasses} />
-                ),
+                icon: <ExclamationTriangleIcon className={submenuIconClasses} />,
                 name: "404",
             },
         ],
@@ -110,7 +106,7 @@ const leftSidebarLinks = [
             {
                 path: "/app/settings-profile", //url
                 icon: <UserIcon className={submenuIconClasses} />, // icon component
-                name: "Profile", // name that appear in Sidebar
+                name: "profile", // name that appear in Sidebar
             },
             {
                 path: "/app/settings-billing",

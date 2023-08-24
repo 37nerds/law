@@ -1,8 +1,10 @@
 import { lazy } from "react";
 
+import type { TProtectedRoute } from "@kinds/general";
+
 const Dashboard = lazy(() => import("@pages/protected/Dashboard"));
 const Welcome = lazy(() => import("@pages/protected/Welcome"));
-const Page404 = lazy(() => import("@pages/protected/404"));
+const Page404 = lazy(() => import("@pages/public/Page404"));
 const Blank = lazy(() => import("@pages/protected/Blank"));
 const Charts = lazy(() => import("@pages/protected/Charts"));
 const Leads = lazy(() => import("@pages/protected/Leads"));
@@ -16,10 +18,14 @@ const DocComponents = lazy(() => import("@pages/public/DocComponents"));
 const CustomerSetup = lazy(() => import("@pages/protected/CustomerSetup"));
 const CustomerList = lazy(() => import("@pages/protected/CustomerList"));
 
-const protectedRoutes = [
+const protectedRoutes: TProtectedRoute[] = [
     {
-        path: "/dashboard", // the url
-        component: Dashboard, // view rendered
+        path: "/welcome",
+        component: Welcome,
+    },
+    {
+        path: "/dashboard",
+        component: Dashboard,
     },
     {
         path: "/customers.ts/setup",
@@ -29,10 +35,7 @@ const protectedRoutes = [
         path: "/customers.ts/list",
         component: CustomerList,
     },
-    {
-        path: "/welcome", // the url
-        component: Welcome, // view rendered
-    },
+
     {
         path: "/leads",
         component: Leads,
