@@ -45,7 +45,7 @@ const get = async (
     headers: HeadersInit = {},
     options: RequestInit = {},
     csrf = true
-): Promise<TJsonS> => {
+): Promise<any> => {
     return request(path, happyStatus, headers, { ...options, method: "GET" }, csrf);
 };
 
@@ -56,7 +56,7 @@ const post = async (
     headers: HeadersInit = {},
     options: RequestInit = {},
     csrf = true
-): Promise<TJsonS> => {
+): Promise<any> => {
     return await request(path, happyStatus, headers, { ...options, method: "POST", body: JSON.stringify(body) }, csrf);
 };
 
@@ -67,7 +67,7 @@ const patch = (
     headers: HeadersInit = {},
     options: RequestInit = {},
     csrf = true
-) => {
+): Promise<any> => {
     return request(path, happyStatus, headers, { ...options, method: "PATCH", body: JSON.stringify(body) }, csrf);
 };
 
@@ -77,7 +77,7 @@ const _delete = (
     headers: HeadersInit = {},
     options: RequestInit = {},
     csrf: boolean = true
-) => {
+): Promise<any> => {
     return request(path, happyStatus, headers, { ...options, method: "DELETE" }, csrf);
 };
 

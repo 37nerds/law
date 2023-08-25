@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { openModal } from "@states/app/modalSlice";
 import { deleteLead, getLeadsContent } from "./leadSlice";
 import { MODAL_BODY_TYPES } from "@config/general";
-import notify from "@helpers/notify";
+import notify from "@helpers/unkown";
 
 const TopSideButtons = () => {
     const dispatch = useAppDispatch();
@@ -22,10 +22,7 @@ const TopSideButtons = () => {
 
     return (
         <div className="float-right inline-block">
-            <button
-                className="btn-primary btn-sm btn px-6 normal-case"
-                onClick={() => openAddNewLeadModal()}
-            >
+            <button className="btn-primary btn-sm btn px-6 normal-case" onClick={() => openAddNewLeadModal()}>
                 Add New
             </button>
         </div>
@@ -42,12 +39,9 @@ function Leads() {
 
     const getDummyStatus = (index: number) => {
         if (index % 5 === 0) return <div className="badge">Not Interested</div>;
-        else if (index % 5 === 1)
-            return <div className="badge-primary badge">In Progress</div>;
-        else if (index % 5 === 2)
-            return <div className="badge-secondary badge">Sold</div>;
-        else if (index % 5 === 3)
-            return <div className="badge-accent badge">Need Followup</div>;
+        else if (index % 5 === 1) return <div className="badge-primary badge">In Progress</div>;
+        else if (index % 5 === 2) return <div className="badge-secondary badge">Sold</div>;
+        else if (index % 5 === 3) return <div className="badge-accent badge">Need Followup</div>;
         else return <div className="badge-ghost badge">Open</div>;
     };
 
@@ -58,11 +52,7 @@ function Leads() {
 
     return (
         <>
-            <TitleCard
-                title="Current Leads"
-                topMargin="mt-2"
-                TopSideButtons={<TopSideButtons />}
-            >
+            <TitleCard title="Current Leads" topMargin="mt-2" TopSideButtons={<TopSideButtons />}>
                 {/* Leads List in table format loaded from slice after api call */}
                 <div className="w-full overflow-x-auto">
                     <table className="table w-full">
@@ -85,19 +75,12 @@ function Leads() {
                                                 <div className="flex items-center space-x-3">
                                                     <div className="avatar">
                                                         <div className="mask mask-squircle h-12 w-12">
-                                                            <img
-                                                                src={l.avatar}
-                                                                alt="Avatar"
-                                                            />
+                                                            <img src={l.avatar} alt="Avatar" />
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <div className="font-bold">
-                                                            {l.first_name}
-                                                        </div>
-                                                        <div className="text-sm opacity-50">
-                                                            {l.last_name}
-                                                        </div>
+                                                        <div className="font-bold">{l.first_name}</div>
+                                                        <div className="text-sm opacity-50">{l.last_name}</div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -112,9 +95,7 @@ function Leads() {
                                             <td>
                                                 <button
                                                     className="btn-ghost btn-square btn"
-                                                    onClick={() =>
-                                                        deleteCurrentLead(k)
-                                                    }
+                                                    onClick={() => deleteCurrentLead(k)}
                                                 >
                                                     <TrashIcon className="w-5" />
                                                 </button>

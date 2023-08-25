@@ -50,11 +50,11 @@ export const protectedRoutes: TRoute[] = [
         component: Dashboard,
     },
     {
-        path: "/customers.ts/setup",
+        path: "/keys.ts/setup",
         component: CustomerSetup,
     },
     {
-        path: "/customers.ts/list",
+        path: "/keys.ts/list",
         component: CustomerList,
     },
 

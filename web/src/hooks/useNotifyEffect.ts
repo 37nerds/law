@@ -1,13 +1,8 @@
 import { useEffect } from "react";
 
-import notify from "@helpers/notify";
+import notify from "@helpers/unkown";
 
-const useNotifyEffect = (
-    error: any,
-    errorPrefix: string,
-    isSuccess: boolean = false,
-    successMessage: string = ""
-) => {
+const useNotifyEffect = (error: any, errorPrefix: string, isSuccess: boolean = false, successMessage: string = "") => {
     useEffect(() => {
         if (error) {
             const { data } = (error as any) || {};

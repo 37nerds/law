@@ -1,4 +1,4 @@
-class Log {
+class log {
     static print(...data: any[]): void {
         console.log(data);
     }
@@ -16,4 +16,4 @@ class Log {
     }
 }
 
-export default Log;
+export default log;

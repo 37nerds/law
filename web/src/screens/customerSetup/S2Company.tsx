@@ -1,30 +1,28 @@
-import { useMutation, useQueryClient } from "react-query";
 import { useEffect } from "react";
+
+import useCustomerSetupStore from "@states/customerSetupStore";
 
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
-import useCustomerSetupStore from "@states/useCustomerSetupStore";
+
 import { legalFromOptions } from "@config/general";
 import { TBottomButton, TOption } from "@kinds/general";
 import { TCompany, TCompanyKey } from "@kinds/customers";
-import { saveCompany } from "@external/customers";
+import { useSaveCompanyMutation } from "@external/customers";
+import notify from "@helpers/unkown";
 
 const S2Company = () => {
-    const { popUpData, company, setCompanyField, setActiveStep, setUnitField } =
-        useCustomerSetupStore();
+    const { popUpData, company, setCompanyField, setActiveStep, setUnitField } = useCustomerSetupStore();
 
-    const groupOfCompaniesOptions: TOption[] =
-        popUpData?.group_of_companies?.map((goc: any) => ({
-            name: goc.name,
-            value: goc.id,
-        }));
+    const groupOfCompaniesOptions: TOption[] = popUpData?.group_of_companies?.map((goc: any) => ({
+        name: goc.name,
+        value: goc.id,
+    }));
 
-    const addressesOptions: TOption[] = popUpData?.group_of_companies?.map(
-        (goc: any) => ({
-            name: goc.address,
-            value: goc.address,
-        })
-    );
+    const addressesOptions: TOption[] = popUpData?.group_of_companies?.map((goc: any) => ({
+        name: goc.address,
+        value: goc.address,
+    }));
 
     const fields = [
         {
@@ -177,13 +175,7 @@ const S2Company = () => {
         setCompanyField(field, value);
     };
 
-    const queryClient = useQueryClient();
-
-    const saveCompanyMutation = useMutation(saveCompany, {
-        onSuccess: () => {
-            return queryClient.invalidateQueries("fetchPopUpData");
-        },
-    });
+    const saveCompanyMutation = useSaveCompanyMutation();
 
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
@@ -202,14 +194,13 @@ const S2Company = () => {
             setUnitField("company_id", company?.id);
             setUnitField("address", company.address);
         }
+        if (saveCompanyMutation.isError) {
+            notify("error", saveCompanyMutation.error.message);
+        }
     }, [saveCompanyMutation]);
 
     return (
-        <RenderStep
-            bottomButtons={bottomButtons}
-            title="Company Setup"
-            loading={saveCompanyMutation.isLoading}
-        >
+        <RenderStep bottomButtons={bottomButtons} title="Company Setup" loading={saveCompanyMutation.isLoading}>
             <div className="flex flex-col gap-6">
                 <RenderFields
                     fields={fields}

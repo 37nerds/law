@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { guestRoutes, protectedRoutes, publicRoutes } from "@config/routes";
-import Log from "@helpers/Log";
+import log from "@helpers/log";
 
 import Loading from "@components/pure/Loading";
 import GuestRoute from "@components/auth/GuestRoute";
 import ProtectedRoute from "@components/auth/ProtectedRoute";
-import Page404 from "@pages/public/Page404";
+import Page404 from "@pages/protected/Page404";
 import { getLoggedUser } from "@external/auth";
 
 const App = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-    Log.info(errorMessage);
+    log.info(errorMessage);
 
     useEffect(() => {
         (async () => {

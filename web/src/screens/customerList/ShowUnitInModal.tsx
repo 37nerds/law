@@ -8,17 +8,13 @@ import SelectEditableInput from "@components/inputs/fields/SelectEditableInput";
 import CustomerModalLayout from "./CustomerModalLayout";
 
 import useNotifyEffect from "@hooks/useNotifyEffect";
-import useFetchPopUpDataMid from "@hooks/useFetchPopUpDataMid";
 
 import { useAppDispatch } from "@app/hooks";
-
-import {
-    useFetchUnitQuery,
-    useUpdateUnitMutation,
-} from "@states/customers/customerApi";
+import { useFetchUnitQuery, useUpdateUnitMutation } from "@states/customers/customerApi";
 import { selectUnit } from "@states/customers/customerSelector";
 import { setUnitDataField } from "@states/customers/customerSlice";
-import { TPopUpCompany, TPopUpUnit } from "@kinds/customers";
+import { TPopUpUnit } from "@kinds/customers";
+import { useFetchPopUpDataQuery } from "@external/customers";
 
 /**
  * Show individual unit data by ID and user can edit the data as well
@@ -33,19 +29,14 @@ const ShowUnitInModal = ({ id }: { id: number }) => {
     let errorX: any = error;
 
     const { data } = selectUnit();
-    const { companies, units } = useFetchPopUpDataMid();
+    const { companies, units } = useFetchPopUpDataQuery().data || {};
 
     const setValue = (key: string, value: any) => {
         dispatch(setUnitDataField({ key, value }));
     };
 
     const [updateUnit, { error: errorZ, isSuccess }] = useUpdateUnitMutation();
-    useNotifyEffect(
-        errorZ,
-        "In updating unit",
-        isSuccess,
-        "Unit updated successful"
-    );
+    useNotifyEffect(errorZ, "In updating unit", isSuccess, "Unit updated successful");
 
     useEffect(() => {
         if (isSuccess) {
@@ -76,12 +67,12 @@ const ShowUnitInModal = ({ id }: { id: number }) => {
                     element2={
                         <LadderSelectInput
                             value={data["company_id"]}
-                            options={companies?.map(
-                                (company: TPopUpCompany) => ({
+                            options={
+                                companies?.map((company: any) => ({
                                     value: company.id,
                                     name: company.name,
-                                })
-                            )}
+                                })) || []
+                            }
                             setValue={value => setValue("company_id", value)}
                             disabled={!isEdit}
                         />

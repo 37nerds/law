@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+
+import useCustomerSetupStore from "@states/customerSetupStore";
 
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
-import useCustomerSetupStore from "@states/useCustomerSetupStore";
-import notify from "@helpers/notify";
-import { saveGroupOfCompany } from "@external/customers";
+
 import { legalFromOptions } from "@config/general";
 import { TGroupOfCompany } from "@kinds/customers";
 import { TBottomButton } from "@kinds/general";
+import { useSaveGroupOfCompanyMutation } from "@external/customers";
+import notify from "@helpers/unkown";
 
 const fields = [
     {
@@ -119,24 +120,13 @@ const fields2 = [
 ];
 
 const S1GroupOfCompany = () => {
-    const {
-        groupOfCompany,
-        setGroupOfCompanyField,
-        setActiveStep,
-        setCompanyField,
-    } = useCustomerSetupStore();
+    const { groupOfCompany, setGroupOfCompanyField, setActiveStep, setCompanyField } = useCustomerSetupStore();
 
     const handleDispatch = (field: string, value: string) => {
         setGroupOfCompanyField(field as any, value);
     };
 
-    const queryClient = useQueryClient();
-
-    const saveGroupOfCompanyMutation = useMutation(saveGroupOfCompany, {
-        onSuccess: () => {
-            return queryClient.invalidateQueries("fetchPopUpData");
-        },
-    });
+    const saveGroupOfCompanyMutation = useSaveGroupOfCompanyMutation();
 
     const [isAfterHitSave, setIsAfterHitSave] = useState(false);
 
@@ -151,20 +141,19 @@ const S1GroupOfCompany = () => {
         },
     ];
 
-    const error = saveGroupOfCompanyMutation.error as any;
-
     useEffect(() => {
         if (saveGroupOfCompanyMutation.isError && isAfterHitSave) {
-            notify("error", error?.message);
+            notify("error", saveGroupOfCompanyMutation.error?.message);
             setIsAfterHitSave(false);
         }
-
         if (saveGroupOfCompanyMutation.isSuccess) {
             setActiveStep("Company");
-            const groupOfCompany: TGroupOfCompany =
-                saveGroupOfCompanyMutation.data;
+            const groupOfCompany: TGroupOfCompany = saveGroupOfCompanyMutation.data;
             setCompanyField("group_of_company_id", groupOfCompany?.id);
             setCompanyField("address", groupOfCompany.address);
+        }
+        if (saveGroupOfCompanyMutation.isError) {
+            notify("error", saveGroupOfCompanyMutation.error.message);
         }
     }, [saveGroupOfCompanyMutation]);
 
@@ -179,13 +168,13 @@ const S1GroupOfCompany = () => {
                     fields={fields}
                     values={groupOfCompany}
                     handler={handleDispatch}
-                    errors={error?.errors}
+                    errors={saveGroupOfCompanyMutation.error?.errors}
                 />
                 <RenderFields
                     fields={fields2}
                     values={groupOfCompany}
                     handler={handleDispatch}
-                    errors={error?.errors}
+                    errors={saveGroupOfCompanyMutation.error?.errors}
                 />
             </div>
         </RenderStep>

@@ -2,31 +2,27 @@ import { useEffect } from "react";
 
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
-import useCustomerSetupStore from "@states/useCustomerSetupStore";
+
+import useCustomerSetupStore from "@states/customerSetupStore";
+
 import { TBottomButton, TOption } from "@kinds/general";
 import { legalFromOptions } from "@config/general";
-import { useMutation, useQueryClient } from "react-query";
-import { saveUnit } from "@external/customers";
-import { FETCH_POPUP_DATA_QUERY_CACHE } from "@config/customers";
+import { useSaveUnitMutation } from "@external/customers";
 import { TUnit } from "@kinds/customers";
+import notify from "@helpers/unkown";
 
 const S3Unit = () => {
-    const { popUpData, unit, setUnitField, setActiveStep, setClientField } =
-        useCustomerSetupStore();
+    const { popUpData, unit, setUnitField, setActiveStep, setClientField } = useCustomerSetupStore();
 
-    const companiesOptions: TOption[] = popUpData.companies?.map(
-        (goc: any) => ({
-            name: goc.name,
-            value: goc.id,
-        })
-    );
+    const companiesOptions: TOption[] = popUpData.companies?.map((goc: any) => ({
+        name: goc.name,
+        value: goc.id,
+    }));
 
-    const addressesOptions: TOption[] = popUpData.companies?.map(
-        (goc: any) => ({
-            name: goc.address,
-            value: goc.address,
-        })
-    );
+    const addressesOptions: TOption[] = popUpData.companies?.map((goc: any) => ({
+        name: goc.address,
+        value: goc.address,
+    }));
 
     const fields = [
         {
@@ -166,13 +162,7 @@ const S3Unit = () => {
         setUnitField(field, value);
     };
 
-    const queryClient = useQueryClient();
-
-    const saveUnitMutation = useMutation(saveUnit, {
-        onSuccess: () => {
-            return queryClient.invalidateQueries(FETCH_POPUP_DATA_QUERY_CACHE);
-        },
-    });
+    const saveUnitMutation = useSaveUnitMutation();
 
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
@@ -191,21 +181,15 @@ const S3Unit = () => {
             setClientField("unit_id", unit?.id);
             setClientField("address", unit.address);
         }
+        if (saveUnitMutation.isError) {
+            notify("error", saveUnitMutation.error.message);
+        }
     }, [saveUnitMutation]);
 
     return (
-        <RenderStep
-            bottomButtons={bottomButtons}
-            title="Unit Setup"
-            loading={saveUnitMutation.isLoading}
-        >
+        <RenderStep bottomButtons={bottomButtons} title="Unit Setup" loading={saveUnitMutation.isLoading}>
             <div className="flex flex-col gap-6">
-                <RenderFields
-                    fields={fields}
-                    values={unit}
-                    handler={handleDispatch}
-                    errors={saveUnitMutation.error}
-                />
+                <RenderFields fields={fields} values={unit} handler={handleDispatch} errors={saveUnitMutation.error} />
             </div>
         </RenderStep>
     );

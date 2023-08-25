@@ -3,8 +3,10 @@ import { customersSetupSteps, getStepComponentByLabel } from "@screens/customerS
 import NavigatorCard from "@components/cards/NavigatorCard";
 import Loading from "@components/pure/Loading";
 import ErrorText from "@components/typographys/ErrorText";
-import useCustomerSetupStore from "@states/useCustomerSetupStore";
-import useFetchCustomerPopUpData from "@hooks/useFetchCustomerPopUpData";
+import useCustomerSetupStore from "@states/customerSetupStore";
+import { useEffect } from "react";
+import { useFetchPopUpDataQuery } from "@external/customers";
+import notify from "@helpers/unkown";
 
 const CustomerSetup = () => {
     useSetPageTitle("Customer Setup");
@@ -13,14 +15,20 @@ const CustomerSetup = () => {
 
     const component = getStepComponentByLabel(activeStep);
 
-    const fetchPopUpDataQuery = useFetchCustomerPopUpData();
+    const fetchPopUpDataQuery = useFetchPopUpDataQuery();
+
+    useEffect(() => {
+        if (fetchPopUpDataQuery.isError) {
+            notify("error", fetchPopUpDataQuery.error.message);
+        }
+    }, [fetchPopUpDataQuery]);
 
     return (
         <>
             {fetchPopUpDataQuery.isLoading ? (
                 <Loading />
             ) : fetchPopUpDataQuery.isError ? (
-                <ErrorText>{fetchPopUpDataQuery.error as string}</ErrorText>
+                <ErrorText>{fetchPopUpDataQuery.error.message}</ErrorText>
             ) : (
                 <NavigatorCard steps={customersSetupSteps} step={activeStep} setStep={setActiveStep}>
                     {component}

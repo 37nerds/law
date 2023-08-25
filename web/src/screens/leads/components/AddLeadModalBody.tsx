@@ -3,7 +3,7 @@ import InputText, { TUpdateFormValue } from "@components/inputs/old/InputText";
 import ErrorText from "@components/typographys/ErrorText";
 import { useState } from "react";
 import { TLeadObj, addNewLead } from "../leadSlice";
-import notify from "@helpers/notify";
+import notify from "@helpers/unkown";
 
 const INITIAL_LEAD_OBJ = {
     first_name: "",

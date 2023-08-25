@@ -2,8 +2,8 @@ import TitleCard from "@components/cards/TitleCard";
 import InputText from "@components/inputs/old/InputText";
 import TextAreaInput from "@components/inputs/old/TextAreaInput";
 import ToggleInput from "@components/inputs/old/ToggleInput";
-import Log from "@helpers/Log";
-import notify from "@helpers/notify";
+import log from "@helpers/log";
+import notify from "@helpers/unkown";
 
 const ProfileSettings = () => {
     // Call API to update profile settings changes
@@ -12,7 +12,7 @@ const ProfileSettings = () => {
     };
 
     const updateFormValue = ({ updateType, value }: any) => {
-        Log.print(updateType, value);
+        log.print(updateType, value);
     };
 
     return (

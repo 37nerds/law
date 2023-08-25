@@ -7,19 +7,16 @@ import StringInput from "@components/inputs/fields/StringInput";
 import SingleInputBox from "@components/inputs/wrappers/SingleInputBox";
 import DoubleInputBox from "@components/inputs/wrappers/DoubleInputBox";
 import LadderSelectInput from "@components/inputs/fields/LadderSelectInput";
+import CustomerModalLayout from "./CustomerModalLayout";
 
 import useNotifyEffect from "@hooks/useNotifyEffect";
 import { useAppDispatch } from "@app/hooks";
 import { gendersOptions } from "@config/general";
 
-import {
-    useFetchClientQuery,
-    useUpdateClientMutation,
-} from "@states/customers/customerApi";
+import { useFetchClientQuery, useUpdateClientMutation } from "@states/customers/customerApi";
 import { selectClient } from "@states/customers/customerSelector";
 import { setClientDataField } from "@states/customers/customerSlice";
-import CustomerModalLayout from "./CustomerModalLayout";
-import useFetchPopUpDataMid from "@hooks/useFetchPopUpDataMid";
+import { useFetchPopUpDataQuery } from "@external/customers";
 
 /**
  * Show individual client data by ID and user can edit the data as well
@@ -34,7 +31,7 @@ const ShowClientInModal = ({ id }: { id: number }) => {
     let errorX: any = error;
 
     const { data } = selectClient();
-    const { units } = useFetchPopUpDataMid();
+    const { units } = useFetchPopUpDataQuery().data || {};
 
     const dispatch = useAppDispatch();
 
@@ -42,15 +39,9 @@ const ShowClientInModal = ({ id }: { id: number }) => {
         dispatch(setClientDataField({ key, value }));
     };
 
-    const [updateClient, { error: errorZ, isSuccess }] =
-        useUpdateClientMutation({});
+    const [updateClient, { error: errorZ, isSuccess }] = useUpdateClientMutation({});
 
-    useNotifyEffect(
-        errorZ,
-        "In updating client",
-        isSuccess,
-        "Client update successful"
-    );
+    useNotifyEffect(errorZ, "In updating client", isSuccess, "Client update successful");
 
     useEffect(() => {
         if (isSuccess) {
@@ -81,10 +72,12 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     element2={
                         <LadderSelectInput
                             value={data["unit_id"]}
-                            options={units?.map((unit: any) => ({
-                                value: unit.id,
-                                name: unit.name,
-                            }))}
+                            options={
+                                units?.map((unit: any) => ({
+                                    value: unit.id,
+                                    name: unit.name,
+                                })) || []
+                            }
                             setValue={value => setValue("unit_id", value)}
                             disabled={!isEdit}
                         />
@@ -114,9 +107,7 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                         <DateInput
                             value={data["passport_issue_date"]}
                             disabled={!isEdit}
-                            setValue={value =>
-                                setValue("passport_issue_date", value)
-                            }
+                            setValue={value => setValue("passport_issue_date", value)}
                         />
                     }
                     label2="Passport valid date"
@@ -124,9 +115,7 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                         <DateInput
                             value={data["passport_valid_date"]}
                             disabled={!isEdit}
-                            setValue={value =>
-                                setValue("passport_valid_date", value)
-                            }
+                            setValue={value => setValue("passport_valid_date", value)}
                         />
                     }
                 />
@@ -218,9 +207,7 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                         <DateInput
                             value={data["date_of_joining"]}
                             disabled={!isEdit}
-                            setValue={value =>
-                                setValue("date_of_joining", value)
-                            }
+                            setValue={value => setValue("date_of_joining", value)}
                         />
                     }
                 />
@@ -230,9 +217,7 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                         <DateInput
                             value={data["current_wp_validity_date"]}
                             disabled={!isEdit}
-                            setValue={value =>
-                                setValue("current_wp_validity_date", value)
-                            }
+                            setValue={value => setValue("current_wp_validity_date", value)}
                         />
                     }
                     label2="Visa expire date"
@@ -240,9 +225,7 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                         <DateInput
                             value={data["visa_expire_date"]}
                             disabled={!isEdit}
-                            setValue={value =>
-                                setValue("visa_expire_date", value)
-                            }
+                            setValue={value => setValue("visa_expire_date", value)}
                         />
                     }
                 />
@@ -252,9 +235,7 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                         <StringInput
                             value={data["max_entry_limit"]}
                             disabled={!isEdit}
-                            setValue={value =>
-                                setValue("max_entry_limit", value)
-                            }
+                            setValue={value => setValue("max_entry_limit", value)}
                         />
                     }
                     label2="Entry terms"
@@ -272,10 +253,12 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                         <SelectInput
                             value={data["address"]}
                             disabled={!isEdit}
-                            options={units?.map((unit: any) => ({
-                                name: unit.address,
-                                value: unit.address,
-                            }))}
+                            options={
+                                units?.map((unit: any) => ({
+                                    name: unit.address,
+                                    value: unit.address,
+                                })) || []
+                            }
                             setValue={value => setValue("address", value)}
                         />
                     }

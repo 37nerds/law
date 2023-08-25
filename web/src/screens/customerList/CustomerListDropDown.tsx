@@ -3,7 +3,7 @@ import confirmDelete from "@components/confirmDelete";
 
 import { useDeleteClientMutation } from "@states/customers/customerApi";
 import useNotifyEffect from "@hooks/useNotifyEffect";
-import Log from "@helpers/Log";
+import log from "@helpers/log";
 
 const CustomerListDropDown = ({ clientId }: { clientId: number }) => {
     const [deleteClient, { isSuccess, error }] = useDeleteClientMutation();
@@ -25,7 +25,7 @@ const CustomerListDropDown = ({ clientId }: { clientId: number }) => {
                         </button>
                     ),
                     handler: () => {
-                        Log.print("Hello");
+                        log.print("Hello");
                     },
                 },
                 {

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { devtools } from "zustand/middleware";
-import { TNotification } from "@kinds/notification";
+import { TNotification } from "@kinds/general";
 
 type TState = {
     notifications: TNotification[];

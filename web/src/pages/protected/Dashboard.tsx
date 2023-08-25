@@ -10,8 +10,8 @@ import DoughnutChart from "@screens/dashboard/DoughnutChart";
 import LineChart from "@screens/dashboard/LineChart";
 import PageStats from "@screens/dashboard/PageStats";
 import UserChannels from "@screens/dashboard/UserChannels";
-import notify from "@helpers/notify";
 import useSetPageTitle from "@hooks/useSetPageTitle";
+import notify from "@helpers/unkown";
 
 const statsData = [
     {

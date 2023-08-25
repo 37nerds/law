@@ -34,6 +34,7 @@ export type TJsonS =
 
 export type TError = {
     message: string;
+    errors?: any;
 };
 
 export type TResponse = {
@@ -44,4 +45,11 @@ export type TResponse = {
 export type TRoute = {
     path: string;
     component: LazyExoticComponent<() => JSX.Element>;
+};
+
+export type TNotificationType = "success" | "error";
+
+export type TNotification = {
+    message: string;
+    type: TNotificationType;
 };

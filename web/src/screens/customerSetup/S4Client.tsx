@@ -1,12 +1,14 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useEffect } from "react";
 
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
-import useCustomerSetupStore from "@states/useCustomerSetupStore";
+
+import useCustomerSetupStore from "@states/customerSetupStore";
+
 import { TBottomButton, TOption } from "@kinds/general";
 import { billToOptions, gendersOptions } from "@config/general";
-import { saveClient } from "@external/customers";
-import { FETCH_POPUP_DATA_QUERY_CACHE } from "@config/customers";
+import { useSaveClientMutation } from "@external/customers";
+import notify from "@helpers/unkown";
 
 const S4Client = () => {
     const { popUpData, client, setClientField } = useCustomerSetupStore();
@@ -191,13 +193,16 @@ const S4Client = () => {
         setClientField(field, value);
     };
 
-    const queryClient = useQueryClient();
+    const saveClientMutation = useSaveClientMutation();
 
-    const saveClientMutation = useMutation(saveClient, {
-        onSuccess: () => {
-            return queryClient.invalidateQueries(FETCH_POPUP_DATA_QUERY_CACHE);
-        },
-    });
+    useEffect(() => {
+        if (saveClientMutation.isError) {
+            notify("error", saveClientMutation.error.message);
+        }
+        if (saveClientMutation.isSuccess) {
+            notify("success", `You successfully created new Client: ${saveClientMutation.data.name}`);
+        }
+    }, [saveClientMutation]);
 
     const bottomButtons: TBottomButton[] = [
         { type: "Previous" },
@@ -210,11 +215,7 @@ const S4Client = () => {
     ];
 
     return (
-        <RenderStep
-            bottomButtons={bottomButtons}
-            title="Client Setup"
-            loading={saveClientMutation.isLoading}
-        >
+        <RenderStep bottomButtons={bottomButtons} title="Client Setup" loading={saveClientMutation.isLoading}>
             <div className="flex flex-col gap-6">
                 <RenderFields
                     fields={fields}
