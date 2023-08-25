@@ -41,7 +41,7 @@ export const useSaveGroupOfCompanyMutation = () => {
         mutationFn: async (groupOfCompany: TGroupOfCompany) => {
             return (await http.post("/customers/group-of-companies", groupOfCompany, 201)) as TGroupOfCompany;
         },
-        mutationKey: CUSTOMERS__GROUP_OF_COMPANIES__POST,
+        mutationKey: [CUSTOMERS__GROUP_OF_COMPANIES__POST],
         onSuccess: () => {
             return queryClient.invalidateQueries("fetchPopUpData");
         },
@@ -55,7 +55,7 @@ export const useSaveCompanyMutation = () => {
         mutationFn: async (company: TCompany) => {
             return (await http.post("/customers/companies", company, 201)) as TCompany;
         },
-        mutationKey: CUSTOMERS__COMPANIES__POST,
+        mutationKey: [CUSTOMERS__COMPANIES__POST],
         onSuccess: () => {
             return queryClient.invalidateQueries("fetchPopUpData");
         },
@@ -69,7 +69,7 @@ export const useSaveUnitMutation = () => {
         mutationFn: async (unit: TUnit) => {
             return (await http.post("/customers/units", unit, 201)) as TUnit;
         },
-        mutationKey: CUSTOMERS__UNITS__POST,
+        mutationKey: [CUSTOMERS__UNITS__POST],
         onSuccess: () => {
             return queryClient.invalidateQueries(CUSTOMERS__POP_UP_DATA__GET);
         },
@@ -83,7 +83,7 @@ export const useSaveClientMutation = () => {
         mutationFn: async (client: TClient) => {
             return (await http.post("/customers/clients", client, 201)) as TClient;
         },
-        mutationKey: CUSTOMERS__CLIENTS__POST,
+        mutationKey: [CUSTOMERS__CLIENTS__POST],
         onSuccess: () => {
             return queryClient.invalidateQueries(CUSTOMERS__POP_UP_DATA__GET);
         },

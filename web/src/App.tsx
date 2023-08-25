@@ -1,33 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { guestRoutes, protectedRoutes, publicRoutes } from "@config/routes";
-import log from "@helpers/log";
 
 import Loading from "@components/pure/Loading";
 import GuestRoute from "@components/auth/GuestRoute";
 import ProtectedRoute from "@components/auth/ProtectedRoute";
 import Page404 from "@pages/protected/Page404";
-import { getLoggedUser } from "@external/auth";
+
+import { guestRoutes, protectedRoutes, publicRoutes } from "@config/routes";
+import { useFetchLoggedUserQuery } from "@external/auth";
+import { getPathname, redirect } from "@helpers/browser";
 
 const App = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
-
-    log.info(errorMessage);
+    const loggerUserQuery = useFetchLoggedUserQuery();
 
     useEffect(() => {
-        (async () => {
-            setIsLoading(true);
-            try {
-                await getLoggedUser();
-            } catch (e: any) {
-                setErrorMessage(e?.message);
-            }
-            setIsLoading(false);
-        })();
-    }, []);
+        if (loggerUserQuery.isError && getPathname() !== "/login") {
+            redirect("/login");
+        }
+    }, [loggerUserQuery.isError]);
 
-    if (isLoading) {
+    if (loggerUserQuery.isLoading) {
         return <Loading />;
     }
 

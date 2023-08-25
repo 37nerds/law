@@ -1,6 +1,10 @@
 import http from "@helpers/http";
 import useAuthStore from "@states/authStore";
+
 import { isEmail } from "@helpers/unkown";
+import { useQuery } from "react-query";
+import { TError } from "@kinds/general";
+import { AUTH__LOGGED_USER_GET } from "@config/keys";
 
 export const hitRegister = async (registerData: {
     username: string;
@@ -33,12 +37,18 @@ export type TLoggedUser = {
     updated_at: string;
 };
 
-export const getLoggedUser = async (): Promise<TLoggedUser> => {
-    const payload: TLoggedUser = (await http.get("/auth/logged-user", 200)) as any;
-    useAuthStore.setState(state => {
-        state.loggedUser = payload;
+export const useFetchLoggedUserQuery = () => {
+    return useQuery<TLoggedUser, TError>({
+        queryFn: async (): Promise<TLoggedUser> => {
+            const payload: TLoggedUser = (await http.get("/auth/logged-user", 200)) as any;
+            useAuthStore.setState(state => {
+                state.loggedUser = payload;
+            });
+            return payload;
+        },
+        queryKey: [AUTH__LOGGED_USER_GET],
+        enabled: false,
     });
-    return payload;
 };
 
 export const hitLogin = async (payload: { emailOrUsername: string; password: string }) => {
