@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
-import TextInput from "@components/inputs/fields/TextInput";
-import DateInput from "@components/inputs/fields/DateInput";
-import SelectInput from "@components/inputs/fields/SelectInput";
-import StringInput from "@components/inputs/fields/StringInput";
-import SingleInputBox from "@components/inputs/wrappers/SingleInputBox";
-import DoubleInputBox from "@components/inputs/wrappers/DoubleInputBox";
-import LadderSelectInput from "@components/inputs/fields/LadderSelectInput";
+import TextInput from "@components/inputs/TextInput";
+import DateInput from "@components/inputs/DateInput";
+import SelectInput from "@components/inputs/SelectInput";
+import StringInput from "@components/inputs/StringInput";
+import SingleInputBox from "@components/inputs/internal/wrappers/SingleInputBox";
+import DoubleInputBox from "@components/inputs/internal/wrappers/DoubleInputBox";
+import LadderSelectInput from "@components/inputs/LadderSelectInput";
 import CustomerModalLayout from "./CustomerModalLayout";
 
 import useNotifyEffect from "@hooks/useNotifyEffect";
-import { useAppDispatch } from "@app/hooks";
-import { gendersOptions } from "@config/general";
+import {useAppDispatch} from "@app/hooks";
+import {gendersOptions} from "@config/general";
 
-import { useFetchClientQuery, useUpdateClientMutation } from "@states/customers/customerApi";
-import { selectClient } from "@states/customers/customerSelector";
-import { setClientDataField } from "@states/customers/customerSlice";
-import { useFetchPopUpDataQuery } from "@external/customers";
+import {useFetchClientQuery, useUpdateClientMutation} from "@states/customers/customerApi";
+import {selectClient} from "@states/customers/customerSelector";
+import {setClientDataField} from "@states/customers/customerSlice";
+import {useFetchPopUpDataQuery} from "@external/customers";
 
 /**
  * Show individual client data by ID and user can edit the data as well

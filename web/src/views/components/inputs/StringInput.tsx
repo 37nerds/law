@@ -1,29 +1,27 @@
-import InputFieldLayout from "@layouts/InputFieldLayout";
-import { useState } from "react";
-import DynamicEye from "../../icons/DynamicEye";
+import InputLayout from "./internal/InputLayout";
 
 const StringInput = ({
     value,
     setValue,
+    type = "text",
     placeholder = "",
-    errorMessage = "",
     required = false,
     disabled = false,
-    label = "",
+    label = null,
+    errorMessage = null,
 }: {
     value: string;
     setValue: (value: string) => void;
+    type?: "text" | "email";
     placeholder?: string;
-    errorMessage?: string;
     required?: boolean;
     disabled?: boolean;
-    label?: string;
+    label?: string | null;
+    errorMessage?: string | null;
 }) => {
-    const [type, setType] = useState("password");
-
     return (
-        <InputFieldLayout errorMessage={errorMessage} label={`${label} ${required ? "*" : "x"}`}>
-            <div className="flex gap-2">
+        <InputLayout
+            input={
                 <input
                     value={value || ""}
                     type={type}
@@ -33,12 +31,11 @@ const StringInput = ({
                     required={required}
                     disabled={disabled}
                 />
-                <DynamicEye
-                    isEyeOpen={type === "text"}
-                    onClick={() => setType(type === "text" ? "password" : "text")}
-                />
-            </div>
-        </InputFieldLayout>
+            }
+            label={label}
+            required={required}
+            errorMessage={errorMessage}
+        />
     );
 };
 

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import Sidebar from "./Sidebar/Sidebar";
-import ModalLayout from "@components/containers/ModalLayout";
+import ModalLayout from "@components/ModalLayout";
 import Content from "./Content/Content";
 import Notification from "./Notification/Notification";
 

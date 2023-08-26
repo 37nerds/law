@@ -1,6 +1,8 @@
-import { ReactNode } from "react";
+import {ReactNode} from "react";
 
-import Subtitle from "../typographys/Subtitle";
+import Subtitle from "../pure/Subtitle";
+
+// will be removed
 
 const TitleCard = ({
     title,
@@ -16,7 +18,7 @@ const TitleCard = ({
     return (
         <div className={"card w-full bg-base-100 p-6 shadow-xl " + (topMargin || "mt-6")}>
             {/* Title for Card */}
-            <Subtitle styleClass={TopSideButtons ? "inline-block" : ""}>
+            <Subtitle className={TopSideButtons ? "inline-block" : ""}>
                 {title}
 
                 {/* Top side button, show only if present */}

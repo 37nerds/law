@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
-import BottomButtons from "../BottomButtons";
-import Title from "../typographys/Title";
+import BottomButtons from "./BottomButtons";
+import Title from "./pure/Title";
 
 const CustomerSetupStepLayout = ({
     children,

@@ -1,10 +1,10 @@
-import StringInput from "./fields/StringInput";
-import TextInput from "./fields/TextInput";
-import SelectInput from "./fields/SelectInput";
-import SelectEditableInput from "./fields/SelectEditableInput";
-import NumberInput from "./fields/NumberInput";
-import LadderSelectInput from "./fields/LadderSelectInput";
-import DateInput from "./fields/DateInput";
+import StringInput from "@components/inputs/StringInput";
+import TextInput from "@components/inputs/TextInput";
+import SelectInput from "@components/inputs/SelectInput";
+import SelectEditableInput from "@components/inputs/SelectEditableInput";
+import NumberInput from "@components/inputs/NumberInput";
+import LadderSelectInput from "@components/inputs/LadderSelectInput";
+import DateInput from "@components/inputs/DateInput";
 import { TLadderOption, TOption } from "@kinds/general";
 
 const InputSelection = ({

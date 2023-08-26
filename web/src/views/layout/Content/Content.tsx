@@ -20,7 +20,7 @@ const Content = ({ children }: { children: ReactNode }) => {
     return (
         <div className="drawer-content flex flex-col " style={{ zIndex: 50 }}>
             <Header />
-            <main className="flex-1 overflow-y-auto bg-base-200 px-4 pt-4" ref={mainContentRef}>
+            <main className="flex-1 overflow-y-auto bg-base-200 p-3" ref={mainContentRef}>
                 {children}
                 <div className="h-16"></div>
             </main>

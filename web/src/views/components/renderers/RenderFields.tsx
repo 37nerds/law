@@ -1,4 +1,4 @@
-import BoxSelection from "../inputs/BoxSelection";
+import BoxSelection from "@components/inputs/internal/BoxSelection";
 
 const RenderFields = ({
     fields,

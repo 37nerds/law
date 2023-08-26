@@ -1,19 +1,19 @@
-class log {
-    static print(...data: any[]): void {
-        console.log(data);
-    }
+const log = {
+    print: (...data: any[]) => {
+        console.log(...data);
+    },
 
-    static info(data: any): void {
+    info: (...data: any[]) => {
         console.info(data);
-    }
+    },
 
-    static warn(data: any): void {
+    warn: (...data: any[]) => {
         console.warn(data);
-    }
+    },
 
-    static error(data: any): void {
+    error: (...data: any[]) => {
         console.error(data);
-    }
-}
+    },
+};
 
 export default log;

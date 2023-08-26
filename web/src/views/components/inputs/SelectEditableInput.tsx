@@ -1,9 +1,9 @@
-import { useState } from "react";
+import {useState} from "react";
+import {TLadderOption, TOption} from "@kinds/general";
 
 import SelectInput from "./SelectInput";
 import StringInput from "./StringInput";
 import LadderSelectInput from "./LadderSelectInput";
-import { TLadderOption, TOption } from "@kinds/general";
 
 /**
  * Select input field with editable capability.
@@ -16,18 +16,23 @@ const SelectEditableInput = ({
     setValue,
     options = [],
     ladderOptions = [],
-    errorMessage = "",
     type = "text",
+    placeholder = "",
+    required = false,
     disabled = false,
+    label = null,
+    errorMessage = null,
 }: {
     value: string;
-    setValue: (_: string) => void;
+    setValue: (value: string) => void;
     options?: TOption[];
     ladderOptions?: TLadderOption[];
-    placeholder?: string;
-    errorMessage?: string;
     type?: string;
+    placeholder?: string;
+    required?: boolean;
     disabled?: boolean;
+    label?: string | null;
+    errorMessage?: string | null;
 }) => {
     const [isEdit, setIsEdit] = useState(false);
 
@@ -35,24 +40,34 @@ const SelectEditableInput = ({
         <div className="flex gap-2">
             <div className="w-full">
                 {isEdit ? (
-                    <StringInput value={value} setValue={setValue} errorMessage={errorMessage} disabled={disabled} />
+                    <StringInput
+                        value={value}
+                        setValue={setValue}
+                        errorMessage={errorMessage}
+                        disabled={disabled}
+                        required={required}
+                    />
                 ) : type === "editableLadderSelect" ? (
                     <LadderSelectInput
                         value={value}
                         setValue={setValue}
                         options={ladderOptions || []}
-                        placeholder="Select"
-                        errorMessage={errorMessage}
+                        placeholder={placeholder}
+                        required={required}
                         disabled={disabled}
+                        label={label}
+                        errorMessage={errorMessage}
                     />
                 ) : (
                     <SelectInput
                         value={value}
                         setValue={setValue}
                         options={options || []}
-                        placeholder="Select"
-                        errorMessage={errorMessage}
+                        placeholder={placeholder}
+                        required={required}
                         disabled={disabled}
+                        label={label}
+                        errorMessage={errorMessage}
                     />
                 )}
             </div>

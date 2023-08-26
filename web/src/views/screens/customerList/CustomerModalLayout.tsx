@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 import Loading from "@components/pure/Loading";
-import ErrorText from "@components/typographys/ErrorText";
+import ErrorText from "@components/pure/ErrorText";
 
 const CustomerModalLayout = ({
     title,

@@ -59,9 +59,9 @@ const sidebarLinks: TSidebarLink[] = [
         name: "Settings",
         submenus: [
             {
-                path: "/app/settings/profile",
+                path: "/app/profile",
                 icon: UserIcon,
-                name: "Profile Settings",
+                name: "Profile",
             },
             {
                 path: "/app/settings-billing",

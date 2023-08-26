@@ -3,11 +3,11 @@ import { useMutation } from "react-query";
 
 import { hitLogin } from "@external/auth";
 
-import ErrorText from "@components/typographys/ErrorText";
+import ErrorText from "@components/pure/ErrorText";
 import LandingIntro from "@components/LandingIntro";
 import Link from "@components/pure/Link";
-import StringInput from "@components/inputs/fields/StringInput";
-import PasswordInput from "@components/inputs/fields/PasswordInput";
+import StringInput from "@components/inputs/StringInput";
+import PasswordInput from "@components/inputs/PasswordInput";
 import { redirectAfterLoginRoute } from "@config/auth";
 
 const Wrapper = ({ children }: { children: ReactNode }) => {

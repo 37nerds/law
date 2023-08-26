@@ -31,7 +31,7 @@ const Leads = lazy(() => import("@pages/protected/Leads"));
 const Integration = lazy(() => import("@pages/protected/Integration"));
 const Team = lazy(() => import("@pages/protected/Team"));
 const Bills = lazy(() => import("@pages/protected/Bills"));
-const ProfileSettings = lazy(() => import("@pages/protected/ProfileSettings"));
+const ProfileSettings = lazy(() => import("@pages/protected/Profile"));
 const CustomerSetup = lazy(() => import("@pages/protected/CustomerSetup"));
 const CustomerList = lazy(() => import("@pages/protected/CustomerList"));
 
@@ -67,7 +67,7 @@ export const protectedRoutes: TRoute[] = [
         component: Team,
     },
     {
-        path: "/settings/profile",
+        path: "/profile",
         component: ProfileSettings,
     },
     {

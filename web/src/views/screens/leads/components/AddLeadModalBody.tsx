@@ -1,8 +1,8 @@
 import { useAppDispatch } from "@app/hooks";
-import InputText, { TUpdateFormValue } from "@components/inputs/old/InputText";
-import ErrorText from "@components/typographys/ErrorText";
+import InputText, { TUpdateFormValue } from "@components/inputs/internal/old/InputText";
+import ErrorText from "@components/pure/ErrorText";
 import { useState } from "react";
-import { TLeadObj, addNewLead } from "../leadSlice";
+import { addNewLead, TLeadObj } from "../leadSlice";
 import notify from "@helpers/unkown";
 
 const INITIAL_LEAD_OBJ = {

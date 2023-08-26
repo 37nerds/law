@@ -1,3 +1,7 @@
+/**
+ * @TODO update needed
+ */
+
 import { useState } from "react";
 
 export type TUpdateFormValue = (_: { updateType: string; value: boolean }) => void;
@@ -23,7 +27,7 @@ const ToggleInput = ({ labelTitle, labelStyle, containerStyle, defaultValue, upd
         <div className={`form-control w-full ${containerStyle}`}>
             <label className="label cursor-pointer">
                 <span className={"text-layouts-Content label-text " + labelStyle}>{labelTitle}</span>
-                <input type="checkbox" className="toggle" checked={value} onChange={e => updateToggleValue()} />
+                <input type="checkbox" className="toggle" checked={value} onChange={() => updateToggleValue()} />
             </label>
         </div>
     );

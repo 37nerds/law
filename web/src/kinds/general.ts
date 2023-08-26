@@ -62,3 +62,8 @@ export type TSidebarLink = {
     icon: TIcon;
     submenus?: TSidebarLink[];
 };
+
+export type TProfileDropdownLink = {
+    title: string;
+    link: string;
+};

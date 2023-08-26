@@ -1,5 +1,5 @@
-import InputText, { TUpdateFormValue } from "@components/inputs/old/InputText";
-import ErrorText from "@components/typographys/ErrorText";
+import InputText, { TUpdateFormValue } from "@components/inputs/internal/old/InputText";
+import ErrorText from "@components/pure/ErrorText";
 import CheckCircleIcon from "@heroicons/react/24/solid/CheckCircleIcon";
 import { useState } from "react";
 import { Link } from "react-router-dom";
