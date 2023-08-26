@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { guestRoutes, protectedRoutes, publicRoutes } from "@config/routes";
+import { useFetchLoggedUserQuery } from "@external/auth";
+import { getPathname, redirect } from "@helpers/browser";
 
 import Loading from "@components/pure/Loading";
 import GuestRoute from "@components/auth/GuestRoute";
 import ProtectedRoute from "@components/auth/ProtectedRoute";
 import Page404 from "@pages/protected/Page404";
-
-import { guestRoutes, protectedRoutes, publicRoutes } from "@config/routes";
-import { useFetchLoggedUserQuery } from "@external/auth";
-import { getPathname, redirect } from "@helpers/browser";
 
 const App = () => {
     const loggerUserQuery = useFetchLoggedUserQuery();

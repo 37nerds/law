@@ -67,7 +67,7 @@ export const protectedRoutes: TRoute[] = [
         component: Team,
     },
     {
-        path: "/settings-profile",
+        path: "/settings/profile",
         component: ProfileSettings,
     },
     {

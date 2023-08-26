@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { devtools } from "zustand/middleware";
-import { TLoggedUser } from "@external/auth";
+import { TLoggedUser } from "@kinds/users";
 
 type TState = {
     loggedUser: TLoggedUser | null;
@@ -16,7 +16,9 @@ const useAuthStore = create<TState & TAction>()(
         devtools(set => ({
             loggedUser: null,
             setLoggedUser: loggedUser => {
-                set(state => state.loggedUser);
+                set(state => {
+                    state.loggedUser = loggedUser;
+                });
             },
         }))
     )

@@ -1,4 +1,4 @@
-import { LazyExoticComponent } from "react";
+import type { ForwardRefExoticComponent, LazyExoticComponent, PropsWithoutRef, SVGProps } from "react";
 
 export type TOption = {
     name: string;
@@ -52,4 +52,13 @@ export type TNotificationType = "success" | "error";
 export type TNotification = {
     message: string;
     type: TNotificationType;
+};
+
+export type TIcon = ForwardRefExoticComponent<PropsWithoutRef<SVGProps<SVGSVGElement>>>;
+
+export type TSidebarLink = {
+    name: string;
+    path: string;
+    icon: TIcon;
+    submenus?: TSidebarLink[];
 };

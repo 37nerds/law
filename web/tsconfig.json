@@ -2,7 +2,11 @@
     "compilerOptions": {
         "target": "ESNext",
         "useDefineForClassFields": true,
-        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext"
+        ],
         "allowJs": false,
         "skipLibCheck": true,
         "esModuleInterop": false,
@@ -17,25 +21,47 @@
         "jsx": "react-jsx",
         "baseUrl": ".",
         "paths": {
-            "@components/*": ["src/components/*"],
-            "@pages/*": ["src/pages/*"],
-            "@contexts/*": ["src/contexts/*"],
-            "@hooks/*": ["src/hooks/*"],
-            "@features/*": ["src/features/*"],
-            "@utils/*": ["src/utils/*"],
-            "@app/*": ["src/app/*"],
-            "@containers/*": ["src/containers/*"],
-            "@routes/*": ["src/routes/*"],
-            "@states/*": ["src/states/*"],
-            "@steps/*": ["src/steps/*"],
-            "@config/*": ["src/config/*"],
-            "@services/*": ["src/services/*"],
-            "@kinds/*": ["src/kinds/*"],
-            "@helpers/*": ["src/helpers/*"],
-            "@screens/*": ["src/screens/*"],
-            "@external/*": ["src/external/*"]
+            "@app/*": [
+                "src/app/*"
+            ],
+            "@config/*": [
+                "src/config/*"
+            ],
+            "@external/*": [
+                "src/external/*"
+            ],
+            "@helpers/*": [
+                "src/helpers/*"
+            ],
+            "@hooks/*": [
+                "src/hooks/*"
+            ],
+            "@kinds/*": [
+                "src/kinds/*"
+            ],
+            "@states/*": [
+                "src/states/*"
+            ],
+            "@components/*": [
+                "src/views/components/*"
+            ],
+            "@layout/*": [
+                "src/views/layout/*"
+            ],
+            "@pages/*": [
+                "src/views/pages/*"
+            ],
+            "@screens/*": [
+                "src/views/screens/*"
+            ]
         }
     },
-    "include": ["src"],
-    "references": [{ "path": "./tsconfig.node.json" }]
+    "include": [
+        "src"
+    ],
+    "references": [
+        {
+            "path": "./tsconfig.node.json"
+        }
+    ]
 }
