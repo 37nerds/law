@@ -1,4 +1,4 @@
-import TemplatePointers from "@components/TemplatePointers";
+import TemplatePointers from "@components/intro/TemplatePointers";
 import { Link } from "react-router-dom";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 

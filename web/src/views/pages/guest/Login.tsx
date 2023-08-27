@@ -1,14 +1,12 @@
 import { ReactNode, useEffect, useState } from "react";
-import { useMutation } from "react-query";
-
-import { hitLogin } from "@external/auth";
+import { useLoginMutation } from "@external/auth";
+import { redirectAfterLoginRoute } from "@config/auth";
 
 import ErrorText from "@components/pure/ErrorText";
-import LandingIntro from "@components/LandingIntro";
+import LandingIntro from "@components/intro/LandingIntro";
 import Link from "@components/pure/Link";
 import StringInput from "@components/inputs/StringInput";
 import PasswordInput from "@components/inputs/PasswordInput";
-import { redirectAfterLoginRoute } from "@config/auth";
 
 const Wrapper = ({ children }: { children: ReactNode }) => {
     return (
@@ -38,7 +36,7 @@ const Login = () => {
     const [emailOrUsernameErrorMessage, setEmailOrUsernameErrorMessage] = useState("");
     const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
 
-    const loginMutation = useMutation({ mutationFn: hitLogin });
+    const loginMutation = useLoginMutation();
 
     const submitForm = () => {
         setLoading(true);
@@ -92,7 +90,7 @@ const Login = () => {
                 <div className="mb-4 flex flex-col gap-4">
                     <StringInput
                         label="Email Address Or Username"
-                        type="text"
+                        type="email"
                         value={emailOrUsername}
                         setValue={value => {
                             setEmailOrUsername(value);
@@ -120,7 +118,7 @@ const Login = () => {
                 </button>
 
                 <div className="mt-4 text-center">
-                    Don't have an account yet? <Link href="/guest/Register">Register</Link>
+                    Don't have an account yet? <Link href="/register">Register</Link>
                 </div>
             </form>
         </Wrapper>

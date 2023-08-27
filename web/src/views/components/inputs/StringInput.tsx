@@ -30,6 +30,7 @@ const StringInput = ({
                     className="input-bordered input w-full"
                     required={required}
                     disabled={disabled}
+                    autoComplete={type === "email" ? "email" : "on"}
                 />
             }
             label={label}

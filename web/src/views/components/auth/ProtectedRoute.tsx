@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 import { isUserLoggedIn } from "@states/authStore";
 import { guestRoutes } from "@config/routes";
-import { getPathname } from "@helpers/browser";
+import { getPathname } from "@helpers/location";
 
 const Layout = lazy(() => import("@layout/Layout"));
 

@@ -1,14 +1,12 @@
 import { ReactNode, useEffect, useState } from "react";
-import { useMutation } from "react-query";
-
-import { hitRegister } from "@external/auth";
+import { useRegisterMutation } from "@external/auth";
+import { redirectAfterLoginRoute } from "@config/auth";
 
 import ErrorText from "@components/pure/ErrorText";
-import LandingIntro from "@components/LandingIntro";
+import LandingIntro from "@components/intro/LandingIntro";
 import StringInput from "@components/inputs/StringInput";
 import PasswordInput from "@components/inputs/PasswordInput";
 import Link from "@components/pure/Link";
-import { redirectAfterLoginRoute } from "@config/auth";
 
 const getUsernameFromEmail = (email: string) => {
     return email.split("@")[0];
@@ -53,7 +51,7 @@ const Register = () => {
     const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
     const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] = useState("");
 
-    const registerMutation = useMutation({ mutationFn: hitRegister });
+    const registerMutation = useRegisterMutation();
 
     const handleSubmit = () => {
         setLoading(true);
@@ -169,7 +167,7 @@ const Register = () => {
                 </button>
 
                 <div className="mt-4 text-center">
-                    Already have an account? <Link href="/guest/Login">Login</Link>
+                    Already have an account? <Link href="/login">Login</Link>
                 </div>
             </form>
         </Wrapper>

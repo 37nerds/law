@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import type { TIcon, TSidebarLink } from "@kinds/general";
-
-import ChevronDownIcon from "@heroicons/react/24/outline/ChevronDownIcon";
+import DynamicChevronIcon from "@components/icons/DynamicChevronIcon";
 
 const Submenu = ({ submenus, name, icon: Icon }: { name: string; icon: TIcon; submenus: TSidebarLink[] }) => {
     const location = useLocation();
@@ -26,12 +25,7 @@ const Submenu = ({ submenus, name, icon: Icon }: { name: string; icon: TIcon; su
                     <Icon className="h-6 w-6" />
                     {name}
                 </div>
-                <ChevronDownIcon
-                    className={
-                        "delay-400 float-right mt-1 h-5 w-5 transition-all duration-500  " +
-                        (isExpanded ? "rotate-180" : "")
-                    }
-                />
+                <DynamicChevronIcon className="mt-1 h-5 w-5" isExpanded={isExpanded} />
             </div>
 
             {/** Submenu list */}

@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import DynamicChevronIcon from "@components/icons/DynamicChevronIcon";
+import useChangeTheme from "@hooks/useChangeTheme";
 
 const ThemeIcon = () => (
     <svg
@@ -18,18 +20,6 @@ const ThemeIcon = () => (
     </svg>
 );
 
-const DownIcon = () => (
-    <svg
-        width="12px"
-        height="12px"
-        className="ml-1 hidden h-3 w-3 fill-current opacity-60 sm:inline-block"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 2048 2048"
-    >
-        <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z" />
-    </svg>
-);
-
 const MarkIcon = ({ visible = false }: { visible?: boolean }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -44,6 +34,7 @@ const MarkIcon = ({ visible = false }: { visible?: boolean }) => (
 );
 
 const themes = [
+    "system",
     "light",
     "dracula",
     "dark",
@@ -76,55 +67,63 @@ const themes = [
 ];
 
 const ThemeDropDown = () => {
-    const [theme, setTheme] = useState(
-        localStorage.getItem("theme") ?? "dracula"
-    );
+    const { theme, setTheme } = useChangeTheme();
+    const [isExpanded, setIsExpanded] = useState(false);
 
-    useEffect(() => {
-        document.getElementById("root")?.setAttribute("data-theme", theme);
-        localStorage.setItem("theme", theme);
-    }, [theme]);
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div title="Change Theme" className="dropdown-end dropdown ">
-            <div tabIndex={0} className="btn-ghost btn gap-1 normal-case">
+        <div title="Change Theme" className="dropdown-end dropdown">
+            <div
+                tabIndex={0}
+                className="btn-ghost btn gap-1 normal-case"
+                onClick={() => {
+                    setIsExpanded(!isExpanded);
+                    setIsOpen(!isOpen);
+                }}
+            >
                 <ThemeIcon />
                 <span className="c hidden capitalize md:inline">{theme}</span>
-                <DownIcon />
+                <DynamicChevronIcon className="h-5 w-5" isExpanded={isExpanded} />
             </div>
-            <div className="dropdown-content rounded-t-box rounded-b-box top-px mt-16 h-[70vh] max-h-96 w-52 overflow-y-auto bg-base-200 text-base-content shadow-2xl">
-                <div className="grid grid-cols-1 gap-3 p-3" tabIndex={0}>
-                    {themes.map(($theme, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setTheme($theme)}
-                            className="overflow-hidden rounded-lg text-left capitalize outline-base-content"
-                            data-set-theme={$theme}
-                            data-act-class="[&_svg]:visible"
-                        >
-                            <div
-                                data-theme={$theme}
-                                className="w-full cursor-pointer bg-base-100 font-sans text-base-content"
-                            >
-                                <div className="grid grid-cols-5 grid-rows-3">
-                                    <div className="col-span-5 row-span-3 row-start-1 flex items-center gap-2 px-4 py-3">
-                                        <MarkIcon visible={$theme === theme} />
-                                        <div className="flex-grow text-sm font-bold">
-                                            {$theme}
-                                        </div>
-                                        <div className="flex h-full flex-shrink-0 flex-wrap gap-1">
-                                            <div className="w-2 rounded bg-primary" />
-                                            <div className="w-2 rounded bg-secondary" />
-                                            <div className="w-2 rounded bg-accent" />
-                                            <div className="w-2 rounded bg-neutral" />
+            {isOpen && (
+                <div className="dropdown-content rounded-t-box rounded-b-box top-px mt-16 h-[70vh] max-h-96 w-52 overflow-y-auto bg-base-200 text-base-content shadow-2xl">
+                    <div className="grid grid-cols-1 gap-3 p-3" tabIndex={0}>
+                        {themes.map((_theme, index) => {
+                            return (
+                                <button
+                                    key={index}
+                                    onClick={() => {
+                                        setTheme(_theme);
+                                        setIsOpen(false);
+                                    }}
+                                    className="overflow-hidden rounded-lg text-left capitalize outline-base-content"
+                                    data-set-theme={_theme}
+                                    data-act-class="[&_svg]:visible"
+                                >
+                                    <div
+                                        data-theme={_theme}
+                                        className="w-full cursor-pointer bg-base-100 font-sans text-base-content"
+                                    >
+                                        <div className="grid grid-cols-5 grid-rows-3">
+                                            <div className="col-span-5 row-span-3 row-start-1 flex items-center gap-2 px-4 py-3">
+                                                <MarkIcon visible={_theme === theme} />
+                                                <div className="flex-grow text-sm font-bold">{_theme}</div>
+                                                <div className="flex h-full flex-shrink-0 flex-wrap gap-1">
+                                                    <div className="w-2 rounded bg-primary" />
+                                                    <div className="w-2 rounded bg-secondary" />
+                                                    <div className="w-2 rounded bg-accent" />
+                                                    <div className="w-2 rounded bg-neutral" />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </button>
-                    ))}
+                                </button>
+                            );
+                        })}
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

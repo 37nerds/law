@@ -1,11 +1,10 @@
 import { useEffect } from "react";
+import type { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit } from "@kinds/customers";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { TError } from "@kinds/general";
 
 import http from "@helpers/http";
 import useCustomerSetupStore from "@states/customerSetupStore";
-
-import { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit } from "@kinds/customers";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { TError } from "@kinds/general";
 
 import {
     CUSTOMERS__CLIENTS__POST,

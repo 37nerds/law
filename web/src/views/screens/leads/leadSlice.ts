@@ -1,5 +1,5 @@
+import http from "@helpers/http";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 
 export type TLeadObj = {
     id: number;
@@ -10,7 +10,7 @@ export type TLeadObj = {
 };
 
 export const getLeadsContent = createAsyncThunk("/leads/Content", async () => {
-    const response = await axios.get("/api/users?page=2", {});
+    const response = await http.get("/api/users?page=2", 200);
     return response.data.data as TLeadObj[];
 });
 

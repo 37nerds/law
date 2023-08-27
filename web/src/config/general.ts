@@ -21,3 +21,5 @@ export const billToOptions: TOption[] = [
     { name: "Foo", value: "foo" },
     { name: "Bar", value: "bar" },
 ];
+
+export const DEFAULT_THEME = "system";

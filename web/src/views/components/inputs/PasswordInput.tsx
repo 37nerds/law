@@ -9,6 +9,7 @@ const PasswordInput = ({
     placeholder = "",
     required = false,
     disabled = false,
+    newPassword = false,
     label = null,
     errorMessage = null,
 }: {
@@ -17,6 +18,7 @@ const PasswordInput = ({
     placeholder?: string;
     required?: boolean;
     disabled?: boolean;
+    newPassword?: boolean;
     label?: string | null;
     errorMessage?: string | null;
 }) => {
@@ -34,6 +36,7 @@ const PasswordInput = ({
                         className="input-bordered input w-full"
                         required={required}
                         disabled={disabled}
+                        autoComplete={newPassword ? "new-password" : "current-password"}
                     />
                     <DynamicEye
                         isEyeOpen={type === "text"}

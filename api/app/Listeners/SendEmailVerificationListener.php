@@ -3,12 +3,10 @@
 namespace App\Listeners;
 
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification as InternalSendEmailVerificationNotification;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendEmailVerificationNotification
-    extends InternalSendEmailVerificationNotification
-    implements ShouldQueue
+class SendEmailVerificationListener extends SendEmailVerificationNotification implements ShouldQueue
 {
     /**
      * Create the event listener.
