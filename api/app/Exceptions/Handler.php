@@ -3,9 +3,15 @@
 namespace App\Exceptions;
 
 use App\Helpers\CookieHelper;
+use http\Env\Request;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 use Throwable;
+
 
 class Handler extends ExceptionHandler
 {
@@ -20,14 +26,21 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+    public function report(Throwable $e): void
+    {
+        if (!Auth::check()) {
+            CookieHelper::removeAllCookieButNotCSRFAndSession();
+        }
+
+        parent::report($e);
+    }
+
     /**
      * Register the exception handling callbacks for the application.
      */
     public function register(): void
     {
-        if (!Auth::check()) {
-            CookieHelper::removeAllCookieButNotCSRFAndSession();
-        }
+
 
         $this->reportable(function (Throwable $e) {
 
