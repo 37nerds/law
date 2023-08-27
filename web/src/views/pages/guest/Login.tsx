@@ -7,6 +7,7 @@ import Link from "@components/pure/Link";
 import StringInput from "@components/inputs/StringInput";
 import PasswordInput from "@components/inputs/PasswordInput";
 import LoginWrapper from "@screens/login/LoginWrapper";
+import { redirect } from "@helpers/location";
 
 const Login = () => {
     const [loading, setLoading] = useState(false);
@@ -44,7 +45,7 @@ const Login = () => {
 
     useEffect(() => {
         if (loginMutation.isSuccess) {
-            window.location.href = redirect_after_login;
+            redirect(redirect_after_login);
         }
         if (loginMutation.isError) {
             const errorPayload = loginMutation.error as any;
