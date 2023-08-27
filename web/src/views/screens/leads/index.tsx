@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { openModal } from "@states/app/modalSlice";
 import { deleteLead, getLeadsContent } from "./leadSlice";
 import { MODAL_BODY_TYPES } from "@config/general";
-import notify from "@helpers/unkown";
+import { notify } from "@helpers/unkown";
 
 const TopSideButtons = () => {
     const dispatch = useAppDispatch();

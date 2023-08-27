@@ -22,4 +22,4 @@ export const billToOptions: TOption[] = [
     { name: "Bar", value: "bar" },
 ];
 
-export const DEFAULT_THEME = "system";
+export const default_theme = "system";

@@ -9,7 +9,7 @@ import { legalFromOptions } from "@config/general";
 import { TBottomButton, TOption } from "@kinds/general";
 import { TCompany, TCompanyKey } from "@kinds/customers";
 import { useSaveCompanyMutation } from "@external/customers";
-import notify from "@helpers/unkown";
+import { notify } from "@helpers/unkown";
 
 const S2Company = () => {
     const { popUpData, company, setCompanyField, setActiveStep, setUnitField } = useCustomerSetupStore();
@@ -195,7 +195,7 @@ const S2Company = () => {
             setUnitField("address", company.address);
         }
         if (saveCompanyMutation.isError) {
-            notify("error", saveCompanyMutation.error.message);
+            notify("error", saveCompanyMutation.error?.message);
         }
     }, [saveCompanyMutation]);
 

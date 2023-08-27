@@ -10,7 +10,7 @@ function InternalPage() {
             <div className="hero-content">
                 <div className="max-w-md">
                     <TemplatePointers />
-                    <Link to="/app/dashboard">
+                    <Link to="/_/dashboard">
                         <button className="btn-outline btn bg-base-100">Get Started</button>
                     </Link>
                 </div>

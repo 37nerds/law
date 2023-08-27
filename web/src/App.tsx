@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { guestRoutes, protectedRoutes, publicRoutes } from "@config/routes";
+import { guest_routes, protected_routes, public_routes } from "@config/routes";
 import { useLoggedUserFetch } from "@external/auth";
-import { getPathname, redirect } from "@helpers/location";
+import { get_pathname, is_guest_route, is_public_route, is_valid_route, redirect } from "@helpers/location";
 
 import Loading from "@components/pure/Loading";
 import GuestRoute from "@components/auth/GuestRoute";
@@ -11,12 +11,15 @@ import Page404 from "@pages/protected/Page404";
 
 const App = () => {
     const loggerUserQuery = useLoggedUserFetch();
-    const pathname = getPathname();
-    const isGuestRoute = !!guestRoutes.find(route => pathname !== route.path);
+    const pathname = get_pathname();
+
+    if (!is_valid_route(pathname)) {
+        return redirect("/login");
+    }
 
     useEffect(() => {
-        if (loggerUserQuery.isError && !isGuestRoute) {
-            redirect("/login");
+        if (loggerUserQuery.isError && !is_guest_route(pathname) && is_public_route(pathname)) {
+            return redirect("/login");
         }
     }, [loggerUserQuery.isError]);
 
@@ -27,7 +30,7 @@ const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                {guestRoutes.map(({ path, component: Component }, index) => (
+                {guest_routes.map(({ path, component: Component }, index) => (
                     <Route
                         key={index}
                         path={path}
@@ -39,7 +42,7 @@ const App = () => {
                     />
                 ))}
 
-                {publicRoutes.map(({ path, component: Component }, index) => (
+                {public_routes.map(({ path, component: Component }, index) => (
                     <Route
                         key={index}
                         path={path}
@@ -51,10 +54,10 @@ const App = () => {
                     />
                 ))}
 
-                {protectedRoutes.map(({ path, component: Component }, index) => (
+                {protected_routes.map(({ path, component: Component }, index) => (
                     <Route
                         key={index}
-                        path={`/app${path}`}
+                        path={`/_${path}`}
                         element={
                             <ProtectedRoute>
                                 <Component />

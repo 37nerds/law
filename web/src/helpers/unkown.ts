@@ -1,17 +1,24 @@
+import type { TNotificationType } from "@kinds/general";
+
 import useNotificationStore from "@states/useNotificationStore";
 
-import { TNotificationType } from "@kinds/general";
-
-export const isEmail = (text: string): boolean => {
+export const is_email = (text: string): boolean => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(text);
 };
 
-const notify = (type: TNotificationType, message: string) => {
+export const notify = (type: TNotificationType, message: string = "") => {
     useNotificationStore.setState(state => {
         state.notifications.push({ type, message });
         state.lastNotification = { type, message };
     });
 };
 
-export default notify;
+export const get_username_from_email = (email: string) => {
+    return email.split("@")[0];
+};
+
+export const get_name_from_email = (email: string) => {
+    const name = get_username_from_email(email);
+    return name[0].toUpperCase() + name.slice(1);
+};

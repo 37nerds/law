@@ -2,11 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\CookieHelper;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Log;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -27,8 +25,12 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
+        if (!Auth::check()) {
+            CookieHelper::removeAllCookieButNotCSRFAndSession();
+        }
+
         $this->reportable(function (Throwable $e) {
-            //
+
         });
     }
 }

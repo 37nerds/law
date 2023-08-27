@@ -6,3 +6,5 @@ export const CUSTOMERS__CLIENTS__POST = "post.customers.clients";
 
 export const AUTH__LOGIN__POST = "post.auth.login";
 export const AUTH__REGISTER__POST = "post.auth.register";
+export const AUTH__FORGET_PASSWORD__POST = "post.auth.forget-password";
+export const AUTH__RESET_PASSWORD__POST = "post.auth.reset-password";

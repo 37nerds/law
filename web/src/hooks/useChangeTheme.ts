@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { DEFAULT_THEME } from "@config/general";
+import { default_theme } from "@config/general";
 
 import storage from "@helpers/storage";
 
 const THEME_STORAGE_KEY = "theme";
 
 const useChangeTheme = () => {
-    const [theme, setTheme] = useState(storage.local.get(THEME_STORAGE_KEY, DEFAULT_THEME));
+    const [theme, setTheme] = useState(storage.local.get(THEME_STORAGE_KEY, default_theme));
 
     useEffect(() => {
         document.getElementById("root")?.setAttribute("data-theme", theme);

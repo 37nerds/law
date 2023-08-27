@@ -9,7 +9,7 @@ import { legalFromOptions } from "@config/general";
 import { TGroupOfCompany } from "@kinds/customers";
 import { TBottomButton } from "@kinds/general";
 import { useSaveGroupOfCompanyMutation } from "@external/customers";
-import notify from "@helpers/unkown";
+import { notify } from "@helpers/unkown";
 
 const fields = [
     {
@@ -153,7 +153,7 @@ const S1GroupOfCompany = () => {
             setCompanyField("address", groupOfCompany.address);
         }
         if (saveGroupOfCompanyMutation.isError) {
-            notify("error", saveGroupOfCompanyMutation.error.message);
+            notify("error", saveGroupOfCompanyMutation.error?.message);
         }
     }, [saveGroupOfCompanyMutation]);
 

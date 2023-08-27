@@ -1,30 +1,12 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLoginMutation } from "@external/auth";
-import { redirectAfterLoginRoute } from "@config/auth";
+import { redirect_after_login } from "@config/auth";
 
 import ErrorText from "@components/pure/ErrorText";
-import LandingIntro from "@components/intro/LandingIntro";
 import Link from "@components/pure/Link";
 import StringInput from "@components/inputs/StringInput";
 import PasswordInput from "@components/inputs/PasswordInput";
-
-const Wrapper = ({ children }: { children: ReactNode }) => {
-    return (
-        <div className="flex min-h-screen items-center bg-base-200">
-            <div className="card mx-auto w-full max-w-5xl  shadow-xl">
-                <div className="grid  grid-cols-1 rounded-xl  bg-base-100 md:grid-cols-2">
-                    <div className="">
-                        <LandingIntro />
-                    </div>
-                    <div className="px-10 py-24">
-                        <h2 className="mb-2 text-center text-2xl font-semibold">Login</h2>
-                        {children}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
+import LoginWrapper from "@screens/login/LoginWrapper";
 
 const Login = () => {
     const [loading, setLoading] = useState(false);
@@ -62,7 +44,7 @@ const Login = () => {
 
     useEffect(() => {
         if (loginMutation.isSuccess) {
-            window.location.href = redirectAfterLoginRoute;
+            window.location.href = redirect_after_login;
         }
         if (loginMutation.isError) {
             const errorPayload = loginMutation.error as any;
@@ -80,7 +62,7 @@ const Login = () => {
     }, [loginMutation]);
 
     return (
-        <Wrapper>
+        <LoginWrapper>
             <form
                 onSubmit={e => {
                     e.preventDefault();
@@ -121,7 +103,7 @@ const Login = () => {
                     Don't have an account yet? <Link href="/register">Register</Link>
                 </div>
             </form>
-        </Wrapper>
+        </LoginWrapper>
     );
 };
 

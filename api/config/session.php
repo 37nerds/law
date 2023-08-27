@@ -115,20 +115,9 @@ return [
 
     'lottery' => [2, 100],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Session Cookie Name
-    |--------------------------------------------------------------------------
-    |
-    | Here you may change the name of the cookie used to identify a session
-    | instance by ID. The name specified here will get used every time a
-    | new session cookie is created by the framework for every driver.
-    |
-    */
-
     'cookie' => env(
         'SESSION_COOKIE',
-        Str::slug(env('APP_NAME', 'laravel'), '_') . '_session'
+        Str::slug("l12erp", '_') . '_session'
     ),
 
     /*
@@ -169,17 +158,6 @@ return [
     */
 
     'secure' => env('SESSION_SECURE_COOKIE'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | HTTP Access Only
-    |--------------------------------------------------------------------------
-    |
-    | Setting this value to true will prevent JavaScript from accessing the
-    | value of the cookie and the cookie will only be accessible through
-    | the HTTP protocol. You are free to modify this option if needed.
-    |
-    */
 
     'http_only' => true,
 

@@ -8,9 +8,9 @@ const Sidebar = () => {
             <label htmlFor="left-sidebar-drawer" className="drawer-overlay"></label>
             <ul className="menu w-80 bg-base-100 pt-2 text-base-content">
                 <li className="mb-2 text-xl font-semibold">
-                    <Link to={"/app/welcome"}>
-                        <img className="mask mask-squircle w-10" src="/logo192.png" alt="DashWind Logo" />
-                        DashWind
+                    <Link to={"/_/welcome"}>
+                        <img className="mask mask-squircle w-10" src="/logo192.png" alt="L12Erp Logo" />
+                        L12Erp
                     </Link>{" "}
                 </li>
                 <SidebarLinks />

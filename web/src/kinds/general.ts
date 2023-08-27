@@ -33,8 +33,8 @@ export type TJsonS =
       };
 
 export type TError = {
-    message: string;
-    errors?: any;
+    message?: string;
+    errors?: Record<string, string[]>;
 };
 
 export type TResponse = {

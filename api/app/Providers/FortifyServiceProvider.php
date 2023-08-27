@@ -6,6 +6,7 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Helpers\CookieHelper;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -14,7 +15,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
@@ -33,9 +33,7 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
             public function toResponse($request): Application|Redirector|JsonResponse|RedirectResponse
             {
-                foreach (Cookie::get() as $key => $item) {
-                    Cookie::queue(Cookie::forget($key));
-                }
+                CookieHelper::removeAllCookie();
                 return $request->wantsJson()
                     ? (new JsonResponse('', 204))
                     : redirect('/');

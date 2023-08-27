@@ -1,46 +1,11 @@
-import { ReactNode, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useForgotPasswordMutation } from "@external/auth";
 
 import ErrorText from "@components/pure/ErrorText";
-import CheckCircleIcon from "@heroicons/react/24/solid/CheckCircleIcon";
-import LandingIntro from "@components/intro/LandingIntro";
 import StringInput from "@components/inputs/StringInput";
-
-const Wrapper = ({ children }: { children: ReactNode }) => {
-    return (
-        <div className="flex min-h-screen items-center bg-base-200">
-            <div className="card mx-auto w-full max-w-5xl  shadow-xl">
-                <div className="grid  grid-cols-1 rounded-xl  bg-base-100 md:grid-cols-2">
-                    <div className="">
-                        <LandingIntro />
-                    </div>
-                    <div className="px-10 py-24">
-                        <h2 className="mb-2 text-center text-2xl font-semibold">Forgot Password</h2>
-
-                        {children}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const LinkSentView = () => {
-    return (
-        <>
-            <div className="mt-8 text-center">
-                <CheckCircleIcon className="inline-block w-32 text-success" />
-            </div>
-            <p className="my-4 text-center text-xl font-bold">Link Sent</p>
-            <p className="mb-8 mt-4 text-center font-semibold">Check your email to reset password</p>
-            <div className="mt-4 text-center">
-                <Link to="/login">
-                    <button className="btn-primary btn-block btn ">Login</button>
-                </Link>
-            </div>
-        </>
-    );
-};
+import ForgotPasswordWrapper from "@screens/forgotPassword/ForgotPasswordWrapper";
+import LinkSentView from "@screens/forgotPassword/LinkSentView";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
@@ -51,6 +16,8 @@ const ForgotPassword = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [linkSent, setLinkSent] = useState(false);
 
+    const forgotPasswordMutation = useForgotPasswordMutation();
+
     const handleSubmit = () => {
         setErrorMessage("");
 
@@ -59,14 +26,33 @@ const ForgotPassword = () => {
         }
 
         setLoading(true);
-        // Call API to send password reset link
-
-        setLoading(false);
-        setLinkSent(true);
+        forgotPasswordMutation.mutate(email);
     };
 
+    useEffect(() => {
+        if (forgotPasswordMutation.isLoading) {
+            setLoading(true);
+        } else {
+            setLoading(false);
+        }
+
+        if (forgotPasswordMutation.isError) {
+            setErrorMessage(forgotPasswordMutation.error?.message || "");
+            setEmailErrorMessage(forgotPasswordMutation.error?.errors?.email[0] || "");
+
+            setLoading(false);
+            setLinkSent(false);
+        }
+
+        if (forgotPasswordMutation.isSuccess) {
+            console.log(forgotPasswordMutation.data);
+            setLoading(false);
+            setLinkSent(true);
+        }
+    }, [forgotPasswordMutation]);
+
     return (
-        <Wrapper>
+        <ForgotPasswordWrapper>
             <>
                 {linkSent ? (
                     <LinkSentView />
@@ -112,7 +98,7 @@ const ForgotPassword = () => {
                     </>
                 )}
             </>
-        </Wrapper>
+        </ForgotPasswordWrapper>
     );
 };
 

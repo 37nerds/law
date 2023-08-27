@@ -5,10 +5,10 @@ import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import PencilIcon from "@heroicons/react/24/outline/PencilIcon";
 
 const ProfilePicture = () => {
-    const loggedUser: TLoggedUser | null = selectLoggedUser();
+    const logged_user: TLoggedUser | null = selectLoggedUser();
 
-    const avatar: string | null = loggedUser?.avatar || null;
-    const name: string = loggedUser?.name || "";
+    const avatar: string | null = logged_user?.avatar || null;
+    const name: string = logged_user?.name || "";
 
     return (
         <div className="flex flex-col gap-3">

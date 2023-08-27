@@ -1,6 +1,4 @@
-/**
- * Config file for setting the left Sidebar links with title, icon
- */
+import { TSidebarLink } from "@kinds/general";
 
 import BoltIcon from "@heroicons/react/24/outline/BoltIcon";
 import ChartBarIcon from "@heroicons/react/24/outline/ChartBarIcon";
@@ -13,11 +11,12 @@ import WalletIcon from "@heroicons/react/24/outline/WalletIcon";
 import QueueListIcon from "@heroicons/react/24/outline/QueueListIcon";
 import CogIcon from "@heroicons/react/24/outline/CogIcon";
 
-import { TSidebarLink } from "@kinds/general";
-
-const sidebarLinks: TSidebarLink[] = [
+/**
+ * Configuration for setting the left Sidebar links with title, icon
+ */
+export const sidebar_links: TSidebarLink[] = [
     {
-        path: "/app/dashboard",
+        path: "/_/dashboard",
         icon: Squares2X2Icon,
         name: "Dashboard",
     },
@@ -27,29 +26,29 @@ const sidebarLinks: TSidebarLink[] = [
         name: "Customers",
         submenus: [
             {
-                path: "/app/keys.ts/list",
+                path: "/_/keys.ts/list",
                 icon: QueueListIcon,
                 name: "Customers List",
             },
             {
-                path: "/app/keys.ts/setup",
+                path: "/_/keys.ts/setup",
                 icon: CogIcon,
                 name: "Customers Setup",
             },
         ],
     },
     {
-        path: "/app/leads",
+        path: "/_/leads",
         icon: InboxArrowDownIcon,
         name: "Leads",
     },
     {
-        path: "/app/charts",
+        path: "/_/charts",
         icon: ChartBarIcon,
         name: "Charts",
     },
     {
-        path: "/app/integration",
+        path: "/_/integration",
         icon: BoltIcon,
         name: "Integration",
     },
@@ -59,22 +58,20 @@ const sidebarLinks: TSidebarLink[] = [
         name: "Settings",
         submenus: [
             {
-                path: "/app/profile",
+                path: "/_/profile",
                 icon: UserIcon,
                 name: "Profile",
             },
             {
-                path: "/app/settings-billing",
+                path: "/_/settings-billing",
                 icon: WalletIcon,
                 name: "Billing",
             },
             {
-                path: "/app/settings-team",
+                path: "/_/settings-team",
                 icon: UsersIcon,
                 name: "Team Members",
             },
         ],
     },
 ];
-
-export default sidebarLinks;

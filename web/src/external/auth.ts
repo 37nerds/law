@@ -1,8 +1,15 @@
-import { isEmail } from "@helpers/unkown";
+import {
+    AUTH__FORGET_PASSWORD__POST,
+    AUTH__LOGIN__POST,
+    AUTH__REGISTER__POST,
+    AUTH__RESET_PASSWORD__POST,
+} from "@config/keys";
+
+import type { TLoggedUser } from "@kinds/users";
+import type { TError } from "@kinds/general";
+import { is_email } from "@helpers/unkown";
 import { useEffect, useState } from "react";
-import { TLoggedUser } from "@kinds/users";
 import { useMutation } from "react-query";
-import { AUTH__LOGIN__POST, AUTH__REGISTER__POST } from "@config/keys";
 
 import http from "@helpers/http";
 import useAuthStore from "@states/authStore";
@@ -10,8 +17,7 @@ import useAuthStore from "@states/authStore";
 export const useRegisterMutation = () =>
     useMutation({
         mutationFn: async (registerData: { username: string; name: string; email: string; password: string }) => {
-            await http.get("/csrf-cookie", 204, {}, {}, false);
-            return await http.post(
+            return await http.csrf_post(
                 "/auth/register",
                 {
                     ...registerData,
@@ -26,13 +32,12 @@ export const useRegisterMutation = () =>
 export const useLoginMutation = () =>
     useMutation({
         mutationFn: async (payload: { emailOrUsername: string; password: string }) => {
-            const isItEmail = isEmail(payload.emailOrUsername);
+            const isItEmail = is_email(payload.emailOrUsername);
 
             const username = isItEmail ? null : payload.emailOrUsername;
             const email = isItEmail ? payload.emailOrUsername : null;
 
-            await http.get("/csrf-cookie", 204, {}, {}, false);
-            return await http.post(
+            return await http.csrf_post(
                 "/auth/login",
                 {
                     username,
@@ -75,3 +80,20 @@ export const useLoggedUserFetch = () => {
 
     return { isLoading, isError };
 };
+
+export const useForgotPasswordMutation = () =>
+    useMutation<any, TError, any>({
+        mutationFn: async (email: string) => await http.csrf_post("/auth/forgot-password", { email }, 200),
+        mutationKey: [AUTH__FORGET_PASSWORD__POST],
+    });
+
+export const useResetPasswordMutation = () =>
+    useMutation<any, TError, any>({
+        mutationFn: async (payload: {
+            token: string;
+            email: string;
+            password: string;
+            password_confirmation: string;
+        }) => await http.post("/auth/reset-password", payload, 200),
+        mutationKey: [AUTH__RESET_PASSWORD__POST],
+    });

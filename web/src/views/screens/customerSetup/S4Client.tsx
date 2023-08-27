@@ -8,7 +8,7 @@ import useCustomerSetupStore from "@states/customerSetupStore";
 import { TBottomButton, TOption } from "@kinds/general";
 import { billToOptions, gendersOptions } from "@config/general";
 import { useSaveClientMutation } from "@external/customers";
-import notify from "@helpers/unkown";
+import { notify } from "@helpers/unkown";
 
 const S4Client = () => {
     const { popUpData, client, setClientField } = useCustomerSetupStore();
@@ -197,7 +197,7 @@ const S4Client = () => {
 
     useEffect(() => {
         if (saveClientMutation.isError) {
-            notify("error", saveClientMutation.error.message);
+            notify("error", saveClientMutation.error?.message);
         }
         if (saveClientMutation.isSuccess) {
             notify("success", `You successfully created new Client: ${saveClientMutation.data.name}`);

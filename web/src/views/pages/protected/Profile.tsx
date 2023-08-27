@@ -1,5 +1,5 @@
 import log from "@helpers/log";
-import notify from "@helpers/unkown";
+import { notify } from "@helpers/unkown";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import Card from "@components/cards/Card";
 import StringInput from "@components/inputs/StringInput";

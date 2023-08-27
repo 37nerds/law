@@ -1,11 +1,3 @@
-import { useEffect } from "react";
-import type { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit } from "@kinds/customers";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { TError } from "@kinds/general";
-
-import http from "@helpers/http";
-import useCustomerSetupStore from "@states/customerSetupStore";
-
 import {
     CUSTOMERS__CLIENTS__POST,
     CUSTOMERS__COMPANIES__POST,
@@ -13,6 +5,14 @@ import {
     CUSTOMERS__POP_UP_DATA__GET,
     CUSTOMERS__UNITS__POST,
 } from "@config/keys";
+
+import { useEffect } from "react";
+import type { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit } from "@kinds/customers";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { TError } from "@kinds/general";
+
+import http from "@helpers/http";
+import useCustomerSetupStore from "@states/customerSetupStore";
 
 export const useFetchPopUpDataQuery = () => {
     const fetchPopUpDataQuery = useQuery<TPopOfData, TError>({

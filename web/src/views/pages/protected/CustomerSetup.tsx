@@ -6,7 +6,7 @@ import ErrorText from "@components/pure/ErrorText";
 import useCustomerSetupStore from "@states/customerSetupStore";
 import { useEffect } from "react";
 import { useFetchPopUpDataQuery } from "@external/customers";
-import notify from "@helpers/unkown";
+import { notify } from "@helpers/unkown";
 
 const CustomerSetup = () => {
     useSetPageTitle("Customer Setup");
@@ -19,7 +19,7 @@ const CustomerSetup = () => {
 
     useEffect(() => {
         if (fetchPopUpDataQuery.isError) {
-            notify("error", fetchPopUpDataQuery.error.message);
+            notify("error", fetchPopUpDataQuery.error?.message);
         }
     }, [fetchPopUpDataQuery]);
 
@@ -28,7 +28,7 @@ const CustomerSetup = () => {
             {fetchPopUpDataQuery.isLoading ? (
                 <Loading />
             ) : fetchPopUpDataQuery.isError ? (
-                <ErrorText>{fetchPopUpDataQuery.error.message}</ErrorText>
+                <ErrorText>{fetchPopUpDataQuery.error?.message}</ErrorText>
             ) : (
                 <NavigatorCard steps={customersSetupSteps} step={activeStep} setStep={setActiveStep}>
                     {component}

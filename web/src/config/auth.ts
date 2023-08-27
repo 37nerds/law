@@ -1,4 +1,4 @@
 /**
  * Route to redirect after login
  */
-export const redirectAfterLoginRoute = "/app/welcome";
+export const redirect_after_login = "/_/welcome";

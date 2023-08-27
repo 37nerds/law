@@ -12,7 +12,9 @@ return [
 
     'debug' => (bool)env('APP_DEBUG', false),
 
-    'url' => env('APP_URL', 'http://api.develop.sm'),
+    'url' => env('APP_URL'),
+
+    "web_url" => env("WEB_URL"),
 
     'asset_url' => env('ASSET_URL'),
 
@@ -24,7 +26,7 @@ return [
 
     'faker_locale' => 'en_US',
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', "base64:S8l8200QqnM96mqCVsaVRz1Pw3MLAlJdX8PJK2tiBSI="),
 
     'cipher' => 'AES-256-CBC',
 

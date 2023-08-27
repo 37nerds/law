@@ -9,7 +9,7 @@ import { TBottomButton, TOption } from "@kinds/general";
 import { legalFromOptions } from "@config/general";
 import { useSaveUnitMutation } from "@external/customers";
 import { TUnit } from "@kinds/customers";
-import notify from "@helpers/unkown";
+import { notify } from "@helpers/unkown";
 
 const S3Unit = () => {
     const { popUpData, unit, setUnitField, setActiveStep, setClientField } = useCustomerSetupStore();
@@ -182,7 +182,7 @@ const S3Unit = () => {
             setClientField("address", unit.address);
         }
         if (saveUnitMutation.isError) {
-            notify("error", saveUnitMutation.error.message);
+            notify("error", saveUnitMutation.error?.message);
         }
     }, [saveUnitMutation]);
 

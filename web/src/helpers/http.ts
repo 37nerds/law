@@ -1,7 +1,7 @@
-import { TJsonS, TResponse } from "@kinds/general";
-import { SERVER_BASE_URL } from "@helpers/env";
+import type { TJsonS, TResponse } from "@kinds/general";
+import { server_base_url } from "@helpers/env";
 
-const getCookie = (name: string): string => {
+const get_cookie = (name: string): string => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) {
@@ -10,7 +10,7 @@ const getCookie = (name: string): string => {
     return "";
 };
 
-const rowRequest = async (uri: string, options: RequestInit): Promise<TResponse> => {
+const row_request = async (uri: string, options: RequestInit): Promise<TResponse> => {
     try {
         const response = await fetch(uri, options);
         return { status: response.status, payload: response.status !== 204 ? await response.json() : {} };
@@ -28,11 +28,11 @@ const request = async (
     csrf = true
 ) => {
     const defaultHeaders: HeadersInit = { "Content-Type": "application/json", Accept: "application/json" };
-    if (csrf) defaultHeaders["X-XSRF-TOKEN"] = decodeURIComponent(getCookie("XSRF-TOKEN"));
+    if (csrf) defaultHeaders["X-XSRF-TOKEN"] = decodeURIComponent(get_cookie("XSRF-TOKEN"));
 
     const defaultOptions: RequestInit = { headers: { ...defaultHeaders, ...headers }, credentials: "include" };
 
-    const { status, payload } = await rowRequest(SERVER_BASE_URL + path, { ...defaultOptions, ...options });
+    const { status, payload } = await row_request(server_base_url + path, { ...defaultOptions, ...options });
     if (status !== happyStatus) {
         throw payload;
     }
@@ -57,7 +57,19 @@ const post = async (
     options: RequestInit = {},
     csrf = true
 ): Promise<any> => {
-    return await request(path, happyStatus, headers, { ...options, method: "POST", body: JSON.stringify(body) }, csrf);
+    return request(path, happyStatus, headers, { ...options, method: "POST", body: JSON.stringify(body) }, csrf);
+};
+
+const csrf_post = async (
+    path: string,
+    body: TJsonS,
+    happyStatus: number,
+    headers: HeadersInit = {},
+    options: RequestInit = {},
+    csrf = true
+): Promise<any> => {
+    await http.get("/csrf-cookie", 204, {}, {}, false);
+    return http.post(path, body, happyStatus, headers, options, csrf);
 };
 
 const patch = (
@@ -81,6 +93,6 @@ const _delete = (
     return request(path, happyStatus, headers, { ...options, method: "DELETE" }, csrf);
 };
 
-const http = { request, get, post, patch, delete: _delete };
+const http = { request, get, post, csrf_post, patch, delete: _delete };
 
 export default http;

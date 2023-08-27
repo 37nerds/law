@@ -1,39 +1,13 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRegisterMutation } from "@external/auth";
-import { redirectAfterLoginRoute } from "@config/auth";
+import { redirect_after_login } from "@config/auth";
+import { get_name_from_email, get_username_from_email } from "@helpers/unkown";
 
 import ErrorText from "@components/pure/ErrorText";
-import LandingIntro from "@components/intro/LandingIntro";
 import StringInput from "@components/inputs/StringInput";
 import PasswordInput from "@components/inputs/PasswordInput";
 import Link from "@components/pure/Link";
-
-const getUsernameFromEmail = (email: string) => {
-    return email.split("@")[0];
-};
-
-const getNameFromEmail = (email: string) => {
-    const name = getUsernameFromEmail(email);
-    return name[0].toUpperCase() + name.slice(1);
-};
-
-const Wrapper = ({ children }: { children: ReactNode }) => {
-    return (
-        <div className="flex min-h-screen items-center bg-base-200">
-            <div className="card mx-auto w-full max-w-5xl  shadow-xl">
-                <div className="grid  grid-cols-1 rounded-xl  bg-base-100 md:grid-cols-2">
-                    <div className="">
-                        <LandingIntro />
-                    </div>
-                    <div className="px-10 py-24">
-                        <h2 className="mb-2 text-center text-2xl font-semibold">Register</h2>
-                        {children}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
+import RegisterWrapper from "@screens/register/RegisterWrapper";
 
 const Register = () => {
     const [loading, setLoading] = useState(false);
@@ -88,7 +62,7 @@ const Register = () => {
 
     useEffect(() => {
         if (registerMutation.isSuccess) {
-            window.location.href = redirectAfterLoginRoute;
+            window.location.href = redirect_after_login;
         }
         if (registerMutation.isError) {
             const errorPayload = registerMutation.error as any;
@@ -111,7 +85,7 @@ const Register = () => {
     }, [registerMutation]);
 
     return (
-        <Wrapper>
+        <RegisterWrapper>
             <form
                 onSubmit={e => {
                     e.preventDefault();
@@ -125,8 +99,8 @@ const Register = () => {
                         value={email}
                         setValue={value => {
                             setEmail(value);
-                            setUsername(getUsernameFromEmail(value));
-                            setName(getNameFromEmail(value));
+                            setUsername(get_username_from_email(value));
+                            setName(get_name_from_email(value));
                         }}
                         required={true}
                         errorMessage={emailErrorMessage}
@@ -170,7 +144,7 @@ const Register = () => {
                     Already have an account? <Link href="/login">Login</Link>
                 </div>
             </form>
-        </Wrapper>
+        </RegisterWrapper>
     );
 };
 

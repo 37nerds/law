@@ -1,12 +1,12 @@
 import { TProfileDropdownLink } from "@kinds/general";
 
-export const profileDropdownLinks: TProfileDropdownLink[] = [
+export const profile_dropdown_links: TProfileDropdownLink[] = [
     {
         title: "Profile",
-        link: "/app/profile",
+        link: "/_/profile",
     },
     {
         title: "Bill History",
-        link: "/app/settings-billing",
+        link: "/_/settings-billing",
     },
 ];

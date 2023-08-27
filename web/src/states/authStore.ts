@@ -4,38 +4,38 @@ import { devtools } from "zustand/middleware";
 import { TLoggedUser } from "@kinds/users";
 
 type TState = {
-    loggedUser: TLoggedUser | null;
+    logged_user: TLoggedUser | null;
 };
 
 type TAction = {
-    setLoggedUser: (loggedUser: TLoggedUser) => void;
+    setLoggedUser: (logged_user: TLoggedUser) => void;
 };
 
 const useAuthStore = create<TState & TAction>()(
     immer(
         devtools(set => ({
-            loggedUser: null,
-            setLoggedUser: loggedUser => {
+            logged_user: null,
+            setLoggedUser: logged_user => {
                 set(state => {
-                    state.loggedUser = loggedUser;
+                    state.logged_user = logged_user;
                 });
             },
         }))
     )
 );
 
+export const selectLoggedUser = (): TLoggedUser | null => {
+    return useAuthStore.getState().logged_user;
+};
+
+export const selectLoggedUserAvatar = (): string | null => {
+    const logged_user = selectLoggedUser();
+    if (!logged_user) return null;
+    return logged_user.avatar;
+};
+
+export const isUserLoggedIn = (): boolean => {
+    return !!selectLoggedUser();
+};
+
 export default useAuthStore;
-
-export const selectLoggedUser = () => {
-    return useAuthStore.getState().loggedUser;
-};
-
-export const selectLoggedUserAvatar = () => {
-    const loggedUser = selectLoggedUser();
-    if (!loggedUser) return null;
-    return loggedUser.avatar;
-};
-
-export const isUserLoggedIn = () => {
-    return !!useAuthStore.getState().loggedUser;
-};
