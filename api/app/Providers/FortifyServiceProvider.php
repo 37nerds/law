@@ -6,7 +6,7 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
-use App\Events\TryingLoginRoute;
+use App\Events\TryingLogin;
 use App\Helpers\CookieHelper;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
@@ -70,7 +70,7 @@ class FortifyServiceProvider extends ServiceProvider
                 ->first();
 
             if ($user && Hash::check($request->password, $user->password)) {
-                event(new TryingLoginRoute($user));
+                event(new TryingLogin($user));
                 return $user;
             }
             return null;

@@ -2,25 +2,21 @@
 
 namespace App\Listeners;
 
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use App\Events\TryingLogin;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendEmailVerification extends SendEmailVerificationNotification implements ShouldQueue
+class SendEmailVerification implements ShouldQueue
 {
-    /**
-     * Create the event listener.
-     */
     public function __construct()
     {
-        //
     }
 
-    /**
-     * Handle the event.
-     *
-     */
-    public function handle($event): void
+    public function handle(Registered|TryingLogin $event): void
     {
-        parent::handle($event);
+        if ($event->user instanceof MustVerifyEmail && !$event->user->hasVerifiedEmail()) {
+            $event->user->sendEmailVerificationNotification();
+        }
     }
 }

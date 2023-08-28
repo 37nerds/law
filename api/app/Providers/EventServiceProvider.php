@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\TryingLoginRoute;
+use App\Events\TryingLogin;
 use App\Listeners\SendEmailVerification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -19,7 +19,7 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerification::class,
         ],
-        TryingLoginRoute::class => [
+        TryingLogin::class => [
             SendEmailVerification::class,
         ]
     ];
