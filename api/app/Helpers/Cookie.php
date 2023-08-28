@@ -10,7 +10,7 @@ class Cookie
     {
         foreach (CookieFacade::get() as $key => $item) {
             if ($key !== "XSRF-TOKEN" && $key !== config("session.cookie")) {
-                CookieFacade::queue(Cookie::forget($key));
+                CookieFacade::queue(CookieFacade::forget($key));
             }
         }
     }
@@ -18,7 +18,7 @@ class Cookie
     public static function removeAllCookie(): void
     {
         foreach (CookieFacade::get() as $key => $item) {
-            CookieFacade::queue(Cookie::forget($key));
+            CookieFacade::queue(CookieFacade::forget($key));
         }
     }
 }

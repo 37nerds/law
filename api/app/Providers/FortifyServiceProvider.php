@@ -6,6 +6,7 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\DTO\Device;
 use App\Events\TryingLogin;
 use App\Helpers\Cookie;
 use App\Http\Requests\LoginRequest;
@@ -70,7 +71,7 @@ class FortifyServiceProvider extends ServiceProvider
                 ->first();
 
             if ($user && Hash::check($request->password, $user->password)) {
-                event(new TryingLogin($user));
+                event(new TryingLogin($user, new Device($request)));
                 return $user;
             }
             return null;

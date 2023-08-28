@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\TryingLogin;
 use App\Listeners\SendEmailVerification;
+use App\Listeners\SendLoginAlertEmail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -21,6 +22,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         TryingLogin::class => [
             SendEmailVerification::class,
+            SendLoginAlertEmail::class,
         ]
     ];
 
