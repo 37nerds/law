@@ -37,6 +37,7 @@ return [
 
     'providers' => ServiceProvider::defaultProviders()->merge([
         App\Providers\FortifyServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
 
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,

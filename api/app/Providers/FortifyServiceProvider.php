@@ -71,7 +71,7 @@ class FortifyServiceProvider extends ServiceProvider
                 ->first();
 
             if ($user && Hash::check($request->password, $user->password)) {
-                event(new TryingLogin($user, new Device($request)));
+                event(new TryingLogin($user, new Device($request->ip())));
                 return $user;
             }
             return null;
