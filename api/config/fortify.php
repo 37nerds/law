@@ -1,6 +1,5 @@
 <?php
 
-use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
 
 return [
@@ -50,7 +49,7 @@ return [
 
     'email' => 'email',
 
-    'home' => RouteServiceProvider::HOME,
+    'home' => config("app.web_url"),
 
     'prefix' => 'api/v1/auth',
 
@@ -91,7 +90,7 @@ return [
         Features::registration(),
         Features::resetPasswords(),
         Features::emailVerification(),
-        Features::updateProfileInformation(),
+//        Features::updateProfileInformation(),
 //        Features::updatePasswords(),
 //        Features::twoFactorAuthentication([
 //            'confirm' => true,

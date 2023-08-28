@@ -7,7 +7,7 @@ use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Events\TryingLogin;
-use App\Helpers\CookieHelper;
+use App\Helpers\Cookie;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -34,7 +34,7 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
             public function toResponse($request): Application|Redirector|JsonResponse|RedirectResponse
             {
-                CookieHelper::removeAllCookie();
+                Cookie::removeAllCookie();
                 return $request->wantsJson()
                     ? (new JsonResponse('', 204))
                     : redirect('/');

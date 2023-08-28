@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Helpers\CookieHelper;
+use App\Helpers\Cookie;
 use http\Env\Request;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
@@ -29,7 +29,7 @@ class Handler extends ExceptionHandler
     public function report(Throwable $e): void
     {
         if (!Auth::check()) {
-            CookieHelper::removeAllCookieButNotCSRFAndSession();
+            Cookie::removeAllCookieButNotCSRFAndSession();
         }
 
         parent::report($e);
