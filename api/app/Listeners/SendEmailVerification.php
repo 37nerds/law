@@ -2,11 +2,10 @@
 
 namespace App\Listeners;
 
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendEmailVerificationListener extends SendEmailVerificationNotification implements ShouldQueue
+class SendEmailVerification extends SendEmailVerificationNotification implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -20,7 +19,7 @@ class SendEmailVerificationListener extends SendEmailVerificationNotification im
      * Handle the event.
      *
      */
-    public function handle(Registered $event): void
+    public function handle($event): void
     {
         parent::handle($event);
     }

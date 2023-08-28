@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use App\Listeners\SendEmailVerificationListener;
+use App\Events\TryingLoginRoute;
+use App\Listeners\SendEmailVerification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -15,8 +17,11 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         Registered::class => [
-            SendEmailVerificationListener::class,
+            SendEmailVerification::class,
         ],
+        TryingLoginRoute::class => [
+            SendEmailVerification::class,
+        ]
     ];
 
     /**

@@ -42,6 +42,7 @@
         "dev:server": [
             "brew services run mysql",
             "brew services run nginx;",
+            "brew services run redis",
             "php artisan serve"
         ],
         "dev:queue": [

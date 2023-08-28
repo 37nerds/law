@@ -6,6 +6,7 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Events\TryingLoginRoute;
 use App\Helpers\CookieHelper;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
@@ -68,8 +69,8 @@ class FortifyServiceProvider extends ServiceProvider
                 ->orWhere('username', $request->username)
                 ->first();
 
-            if ($user &&
-                Hash::check($request->password, $user->password)) {
+            if ($user && Hash::check($request->password, $user->password)) {
+                event(new TryingLoginRoute($user));
                 return $user;
             }
             return null;
