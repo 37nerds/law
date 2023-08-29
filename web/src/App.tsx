@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { guest_routes, protected_routes, public_routes } from "@config/routes";
 import { useLoggedUserFetch } from "@external/auth";
@@ -8,18 +7,21 @@ import Loading from "@components/pure/Loading";
 import GuestRoute from "@components/auth/GuestRoute";
 import ProtectedRoute from "@components/auth/ProtectedRoute";
 import Page404 from "@pages/protected/Page404";
+import { useEffect } from "react";
 
 const App = () => {
     const loggerUserQuery = useLoggedUserFetch();
     const pathname = get_pathname();
 
     if (!is_valid_route(pathname)) {
-        return redirect("/login");
+        redirect("/login");
+        return <></>;
     }
 
     useEffect(() => {
-        if (loggerUserQuery.isError && !is_guest_route(pathname) && is_public_route(pathname)) {
-            return redirect("/login");
+        if (loggerUserQuery.isError && !is_guest_route(pathname) && !is_public_route(pathname)) {
+            redirect("/login");
+            return;
         }
     }, [loggerUserQuery.isError]);
 

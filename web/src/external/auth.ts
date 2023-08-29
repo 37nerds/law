@@ -3,6 +3,7 @@ import {
     AUTH__LOGIN__POST,
     AUTH__REGISTER__POST,
     AUTH__RESET_PASSWORD__POST,
+    AUTH__UPLOAD_PROFILE_PICTURE__POST,
 } from "@config/keys";
 
 import type { TLoggedUser } from "@kinds/users";
@@ -97,3 +98,28 @@ export const useResetPasswordMutation = () =>
         }) => await http.post("/auth/reset-password", payload, 200),
         mutationKey: [AUTH__RESET_PASSWORD__POST],
     });
+
+export const useUploadProfilePictureMutation = () => {
+    return useMutation<any, TError, any>({
+        mutationFn: async (image: Blob) => {
+            if (image) {
+                const formData = new FormData();
+                formData.append("image", image);
+
+                try {
+                    const response = await http.form_post("/auth/upload-profile-picture", formData, 200);
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log("Image uploaded successfully:", data.message);
+                    } else {
+                        console.error("Error uploading image:", response.statusText);
+                    }
+                } catch (error) {
+                    console.error("Error uploading image:", error);
+                }
+            }
+        },
+        mutationKey: [AUTH__UPLOAD_PROFILE_PICTURE__POST],
+    });
+};

@@ -25,12 +25,23 @@ const request = async (
     happyStatus: number,
     headers: HeadersInit = {},
     options: RequestInit = {},
-    csrf = true
+    csrf = true,
+    {
+        contentType = "application/json",
+        accept = "application/json",
+        credentials = "include",
+    }: {
+        contentType?: string;
+        accept?: string;
+        credentials?: RequestCredentials;
+    } = {}
 ) => {
-    const defaultHeaders: HeadersInit = { "Content-Type": "application/json", Accept: "application/json" };
+    console.log(contentType, accept, credentials);
+
+    const defaultHeaders: HeadersInit = { "Content-Type": contentType, Accept: accept };
     if (csrf) defaultHeaders["X-XSRF-TOKEN"] = decodeURIComponent(get_cookie("XSRF-TOKEN"));
 
-    const defaultOptions: RequestInit = { headers: { ...defaultHeaders, ...headers }, credentials: "include" };
+    const defaultOptions: RequestInit = { headers: { ...defaultHeaders, ...headers }, credentials: credentials };
 
     const { status, payload } = await row_request(server_base_url + path, { ...defaultOptions, ...options });
     if (status !== happyStatus) {
@@ -58,6 +69,19 @@ const post = async (
     csrf = true
 ): Promise<any> => {
     return request(path, happyStatus, headers, { ...options, method: "POST", body: JSON.stringify(body) }, csrf);
+};
+
+const form_post = async (
+    path: string,
+    body: FormData,
+    happyStatus: number,
+    headers: HeadersInit = {},
+    options: RequestInit = {},
+    csrf = true
+): Promise<any> => {
+    return request(path, happyStatus, headers, { ...options, method: "POST", body: body }, csrf, {
+        contentType: "multipart/form-data",
+    });
 };
 
 const csrf_post = async (
@@ -93,6 +117,6 @@ const _delete = (
     return request(path, happyStatus, headers, { ...options, method: "DELETE" }, csrf);
 };
 
-const http = { request, get, post, csrf_post, patch, delete: _delete };
+const http = { request, get, post, csrf_post, form_post, patch, delete: _delete };
 
 export default http;

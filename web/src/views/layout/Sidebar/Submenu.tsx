@@ -1,6 +1,7 @@
+import type { TIcon, TSidebarLink } from "@kinds/general";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import type { TIcon, TSidebarLink } from "@kinds/general";
+
 import DynamicChevronIcon from "@components/icons/DynamicChevronIcon";
 
 const Submenu = ({ submenus, name, icon: Icon }: { name: string; icon: TIcon; submenus: TSidebarLink[] }) => {
@@ -18,7 +19,7 @@ const Submenu = ({ submenus, name, icon: Icon }: { name: string; icon: TIcon; su
     }, []);
 
     return (
-        <div className="flex-col pb-0 pt-0">
+        <div className="flex flex-col gap-0 pb-0 pt-0 mb-0">
             {/** Route Header */}
             <div className="flex w-full justify-between pb-3 pt-3" onClick={() => setIsExpanded(!isExpanded)}>
                 <div className="flex gap-3">

@@ -1,18 +1,35 @@
-import { selectLoggedUser } from "@states/authStore";
 import type { TLoggedUser } from "@kinds/users";
+import { selectLoggedUser } from "@states/authStore";
+import { useState } from "react";
 
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import PencilIcon from "@heroicons/react/24/outline/PencilIcon";
+import UploadButton from "@components/image/ImageUploadButton";
+import ImageCropper from "@components/image/ImageCropper";
+import { useUploadProfilePictureMutation } from "@external/auth";
 
 const ProfilePicture = () => {
-    const logged_user: TLoggedUser | null = selectLoggedUser();
+    const [imageSrc, setImageSrc] = useState<string>("");
+    const [dialogOpen, setDialogOpen] = useState(false);
 
-    const avatar: string | null = logged_user?.avatar || null;
-    const name: string = logged_user?.name || "";
+    const loggedUser: TLoggedUser | null = selectLoggedUser();
+
+    const avatar: string | null = loggedUser?.avatar || null;
+    const name: string = loggedUser?.name || "";
+
+    const uploadProfile = useUploadProfilePictureMutation();
 
     return (
         <div className="flex flex-col gap-3">
             <div>Profile picture</div>
+            <ImageCropper
+                dialogOpen={dialogOpen}
+                imageSrc={imageSrc}
+                setDialogOpen={setDialogOpen}
+                onDone={imageBlog => {
+                    uploadProfile.mutate(imageBlog);
+                }}
+            />
             <div className="relative">
                 <div className="avatar">
                     <div className="w-52 rounded-full">
@@ -20,7 +37,7 @@ const ProfilePicture = () => {
                     </div>
                 </div>
                 <div className="absolute bottom-5">
-                    <div className="dropdown dropdown-bottom">
+                    <div className="dropdown-bottom dropdown">
                         <label
                             tabIndex={0}
                             className="flex w-[70px] flex-row items-center justify-center gap-1 rounded border-2 border-base-300 bg-base-200 px-2 py-1"
@@ -33,7 +50,16 @@ const ProfilePicture = () => {
                             className="dropdown-content menu rounded-box mt-3 w-44 bg-base-300 p-2 shadow "
                         >
                             <li>
-                                <a>Upload a photo...</a>
+                                <a>
+                                    <UploadButton
+                                        onChange={image => {
+                                            setImageSrc(image);
+                                            setDialogOpen(true);
+                                        }}
+                                    >
+                                        Upload a photo...
+                                    </UploadButton>
+                                </a>
                             </li>
                         </ul>
                     </div>

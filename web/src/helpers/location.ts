@@ -17,7 +17,7 @@ export const is_guest_route = (pathname: string): boolean => {
 };
 
 export const is_protected_route = (pathname: string): boolean => {
-    return !!protected_routes.find(route => route.path === pathname);
+    return !!protected_routes.find(route => `/_${route.path}` === pathname);
 };
 
 export const is_valid_route = (pathname: string): boolean => {
