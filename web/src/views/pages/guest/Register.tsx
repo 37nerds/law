@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRegisterMutation } from "@external/auth";
 import { redirect_after_login } from "@config/auth";
-import { generateNameFromEmail, generateUsernameFromEmail } from "@helpers/unkown";
+import { convertUsernameLogic, generateNameFromEmail, generateUsernameFromEmail } from "@helpers/unkown";
 
 import ErrorText from "@components/pure/ErrorText";
 import StringInput from "@components/inputs/StringInput";
@@ -103,7 +103,7 @@ const Register = () => {
                     <StringInput
                         label="Username"
                         value={username}
-                        setValue={value => setUsername(value[0] !== "@" ? `@${value}` : value)}
+                        setValue={value => setUsername(convertUsernameLogic(value))}
                         required={true}
                         errorMessage={usernameErrorMessage}
                     />

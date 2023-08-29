@@ -4,20 +4,26 @@ import { devtools } from "zustand/middleware";
 import { TLoggedUser } from "@kinds/users";
 
 type TState = {
-    logged_user: TLoggedUser | null;
+    loggedUser: TLoggedUser | null;
 };
 
 type TAction = {
     setLoggedUser: (logged_user: TLoggedUser) => void;
+    setLoggedUserField: (field: keyof TLoggedUser, value: any) => void;
 };
 
 const useAuthStore = create<TState & TAction>()(
     immer(
         devtools(set => ({
-            logged_user: null,
+            loggedUser: null,
             setLoggedUser: logged_user => {
                 set(state => {
-                    state.logged_user = logged_user;
+                    state.loggedUser = logged_user;
+                });
+            },
+            setLoggedUserField: (field, value) => {
+                set(state => {
+                    if (state.loggedUser) state.loggedUser[field] = value as never;
                 });
             },
         }))
@@ -25,13 +31,13 @@ const useAuthStore = create<TState & TAction>()(
 );
 
 export const selectLoggedUser = (): TLoggedUser | null => {
-    return useAuthStore.getState().logged_user;
+    return useAuthStore.getState().loggedUser;
 };
 
 export const selectLoggedUserAvatar = (): string | null => {
-    const logged_user = selectLoggedUser();
-    if (!logged_user) return null;
-    return logged_user.avatar;
+    const loggedUser = selectLoggedUser();
+    if (!loggedUser) return null;
+    return loggedUser.avatar;
 };
 
 export const isUserLoggedIn = (): boolean => {

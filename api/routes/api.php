@@ -16,19 +16,22 @@ Route::prefix("/v1")
         Route::prefix("/auth")
             ->group(function () {
 
-                Route::post("/register", [AuthController::class, "register"])
-                    ->name("auth.register")
-                    ->withoutMiddleware("auth:sanctum");
-
-                Route::get("/logged-user", [AuthController::class, "loggedUser"])
-                    ->name("auth.get-logged-user");
-
                 Route::get('/rest-password/{token}', [AuthController::class, "resetPasswordRedirect"])
                     ->name('password.reset')
                     ->withoutMiddleware("auth:sanctum");
 
-                Route::post("/upload-profile-picture", [AuthController::class, "uploadProfilePicture"])
+                Route::post("/register", [AuthController::class, "register"])
+                    ->name("auth.register")
+                    ->withoutMiddleware("auth:sanctum");
+
+                Route::post("/upload-avatar", [AuthController::class, "uploadAvatar"])
                     ->name("auth.upload-profile-picture");
+
+                Route::get("/", [AuthController::class, "show"])
+                    ->name("auth.show-logged-user");
+
+                Route::patch("/", [AuthController::class, "update"])
+                    ->name("auth.update-user");
 
             });
 

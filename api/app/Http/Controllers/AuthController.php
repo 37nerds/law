@@ -20,7 +20,7 @@ class AuthController extends Controller
 {
     use PasswordValidationRules;
 
-    public function loggedUser(Request $request)
+    public function show(Request $request)
     {
         return $request->user();
     }
@@ -31,7 +31,7 @@ class AuthController extends Controller
         return Redirect::to(config("app.web_url") . "/rest-password?token=$token&email=$email");
     }
 
-    public function uploadProfilePicture(Request $request): JsonResponse
+    public function uploadAvatar(Request $request): JsonResponse
     {
         $request->validate([
             'profile-picture' => ["required", "image"],
@@ -74,5 +74,33 @@ class AuthController extends Controller
         Auth::login($user, $request->boolean("remember"));
 
         return $this->success2(201);
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function update(Request $request): JsonResponse
+    {
+        $payload = $request->all();
+
+        $rules = [
+            'name' => ['string', 'max:255'],
+            "username" => ["string", "max:255"],
+        ];
+
+        if (Auth::user()->email !== $payload["email"]) {
+            $rules["email"] = [
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class, "email"),
+            ];
+        }
+
+        $validated = Validator::make($payload, $rules)->validate();
+
+        $user = UserRepository::update(Auth::user()->id, $validated);
+
+        return $this->success2(200, $user);
     }
 }

@@ -41,3 +41,7 @@ export const isLink = (value: string): boolean => {
 export const getProfileUrlFromAvatarKey = (avatar: string): string => {
     return isLink(avatar) ? avatar : `${assert_storage_url}/storage/profile/picture/${avatar}`;
 };
+
+export const convertUsernameLogic = (text: string) => {
+    return text[0] !== "@" ? `@${text}` : text;
+};

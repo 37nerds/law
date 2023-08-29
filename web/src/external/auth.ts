@@ -3,6 +3,7 @@ import {
     AUTH__LOGIN__POST,
     AUTH__REGISTER__POST,
     AUTH__RESET_PASSWORD__POST,
+    AUTH__UPDATE_USER__PATCH,
     AUTH__UPLOAD_PROFILE_PICTURE__POST,
 } from "@config/keys";
 
@@ -82,7 +83,7 @@ export const useLoggedUserFetch = () => {
             setIsLoading(true);
             setIsError(false);
             try {
-                const payload: TLoggedUser = await http.get("/auth/logged-user", 200);
+                const payload: TLoggedUser = await http.get("/auth", 200);
                 setLoggedUser(payload);
                 setIsSuccess(true);
             } catch (e: any) {
@@ -124,9 +125,32 @@ export const useUploadProfilePictureMutation = () => {
         mutationFn: async imageFile => {
             const formData = new FormData();
             formData.append("profile-picture", imageFile);
-            return await http.form_post("/auth/upload-profile-picture", formData, 200);
+            return await http.form_post("/auth/upload-avatar", formData, 200);
         },
         mutationKey: [AUTH__UPLOAD_PROFILE_PICTURE__POST],
+    });
+
+    useEffect(() => {
+        if (mutation.isError) {
+            notify("error", mutation.error?.message);
+        }
+
+        if (mutation.isSuccess) {
+            setLoggedUser(mutation?.data);
+        }
+    }, [mutation.isError, mutation.isSuccess]);
+
+    return mutation;
+};
+
+export const useUpdateUserMutation = () => {
+    const { setLoggedUser } = useAuthStore();
+
+    const mutation = useMutation<TLoggedUser, TError, { email: string; username: string; name: string }>({
+        mutationFn: async payload => {
+            return await http.patch("/auth", payload, 200);
+        },
+        mutationKey: [AUTH__UPDATE_USER__PATCH],
     });
 
     useEffect(() => {
