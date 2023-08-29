@@ -32,19 +32,28 @@ export const useRegisterMutation = () => {
 };
 
 export const useLoginMutation = () => {
-    return useMutation<TLoggedUser, TError, { emailOrUsername: string; password: string }>({
-        mutationFn: async payload => {
-            const isItEmail = is_email(payload.emailOrUsername);
+    return useMutation<
+        TLoggedUser,
+        TError,
+        {
+            emailOrUsername: string;
+            password: string;
+            remember: boolean;
+        }
+    >({
+        mutationFn: async ({ remember, emailOrUsername, password }) => {
+            const isItEmail = is_email(emailOrUsername);
 
-            const username = isItEmail ? null : payload.emailOrUsername;
-            const email = isItEmail ? payload.emailOrUsername : null;
+            const username = isItEmail ? null : emailOrUsername;
+            const email = isItEmail ? emailOrUsername : null;
 
             return await http.csrf_post(
-                "/auth/login",
+                "/auth/f/login",
                 {
                     username,
                     email,
-                    password: payload.password,
+                    password,
+                    remember,
                 },
                 200
             );
@@ -55,7 +64,7 @@ export const useLoginMutation = () => {
 
 export const useLogoutHit = () => {
     const hitLogout = async () => {
-        return await http.post("/auth/logout", {}, 204);
+        return await http.post("/auth/f/logout", {}, 204);
     };
 
     return { hitLogout };
@@ -88,7 +97,7 @@ export const useLoggedUserFetch = () => {
 
 export const useForgotPasswordMutation = () => {
     return useMutation<{ message: string }, TError, string>({
-        mutationFn: async email => await http.csrf_post("/auth/forgot-password", { email }, 200),
+        mutationFn: async email => await http.csrf_post("/auth/f/forgot-password", { email }, 200),
         mutationKey: [AUTH__FORGET_PASSWORD__POST],
     });
 };
@@ -104,7 +113,7 @@ export const useResetPasswordMutation = () =>
             password_confirmation: string;
         }
     >({
-        mutationFn: async payload => await http.post("/auth/reset-password", payload, 200),
+        mutationFn: async payload => await http.post("/auth/f/reset-password", payload, 200),
         mutationKey: [AUTH__RESET_PASSWORD__POST],
     });
 

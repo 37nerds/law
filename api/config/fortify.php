@@ -51,7 +51,7 @@ return [
 
     'home' => config("app.web_url"),
 
-    'prefix' => 'api/v1/auth',
+    'prefix' => 'api/v1/auth/f',
 
     'domain' => null,
 

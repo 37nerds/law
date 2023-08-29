@@ -16,6 +16,10 @@ Route::prefix("/v1")
         Route::prefix("/auth")
             ->group(function () {
 
+                Route::post("/register", [AuthController::class, "register"])
+                    ->name("auth.register")
+                    ->withoutMiddleware("auth:sanctum");
+
                 Route::get("/logged-user", [AuthController::class, "loggedUser"])
                     ->name("auth.get-logged-user");
 
@@ -25,6 +29,7 @@ Route::prefix("/v1")
 
                 Route::post("/upload-profile-picture", [AuthController::class, "uploadProfilePicture"])
                     ->name("auth.upload-profile-picture");
+
             });
 
         Route::prefix("/customers")

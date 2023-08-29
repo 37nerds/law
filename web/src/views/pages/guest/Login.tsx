@@ -21,7 +21,7 @@ const Login = () => {
 
     const loginMutation = useLoginMutation();
 
-    const submitForm = () => {
+    const handleSubmit = () => {
         setLoading(true);
         setErrorMessage("");
 
@@ -39,6 +39,7 @@ const Login = () => {
             loginMutation.mutate({
                 emailOrUsername: trimmedEmailOrUsername,
                 password: trimmedPassword,
+                remember: true,
             });
         }
     };
@@ -67,7 +68,7 @@ const Login = () => {
             <form
                 onSubmit={e => {
                     e.preventDefault();
-                    submitForm();
+                    handleSubmit();
                 }}
             >
                 <div className="mb-4 flex flex-col gap-4">
