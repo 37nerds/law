@@ -24,8 +24,7 @@ Route::prefix("/v1")
                     ->withoutMiddleware("auth:sanctum");
 
                 Route::post("/upload-profile-picture", [AuthController::class, "uploadProfilePicture"])
-                    ->name("auth.upload-profile-picture")
-                    ->withoutMiddleware("auth:sanctum");
+                    ->name("auth.upload-profile-picture");
             });
 
         Route::prefix("/customers")

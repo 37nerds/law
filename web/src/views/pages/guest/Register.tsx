@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRegisterMutation } from "@external/auth";
 import { redirect_after_login } from "@config/auth";
-import { get_name_from_email, get_username_from_email } from "@helpers/unkown";
+import { generateNameFromEmail, generateUsernameFromEmail } from "@helpers/unkown";
 
 import ErrorText from "@components/pure/ErrorText";
 import StringInput from "@components/inputs/StringInput";
@@ -13,7 +13,7 @@ const Register = () => {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState("@");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -65,17 +65,12 @@ const Register = () => {
             window.location.href = redirect_after_login;
         }
         if (registerMutation.isError) {
-            const errorPayload = registerMutation.error as any;
-
-            setErrorMessage(errorPayload?.message);
-
-            const errors = errorPayload?.errors;
-
-            setUsernameErrorMessage(errors["username"]);
-            setNameErrorMessage(errors["name"]);
-            setEmailErrorMessage(errors["email"]);
-            setPasswordErrorMessage(errors["password"]);
-            setConfirmPasswordErrorMessage(errors["password"]);
+            setErrorMessage(registerMutation.error?.message || "");
+            setUsernameErrorMessage(registerMutation.error?.errors?.username?.join("\n") || "");
+            setNameErrorMessage(registerMutation.error?.errors?.name?.join("\n") || "");
+            setEmailErrorMessage(registerMutation.error?.errors?.email?.join("\n") || "");
+            setPasswordErrorMessage(registerMutation.error?.errors?.password?.join("\n") || "");
+            setConfirmPasswordErrorMessage(registerMutation.error?.errors?.password?.join("\n") || "");
         }
         if (registerMutation.isLoading) {
             setLoading(true);
@@ -99,8 +94,8 @@ const Register = () => {
                         value={email}
                         setValue={value => {
                             setEmail(value);
-                            setUsername(get_username_from_email(value));
-                            setName(get_name_from_email(value));
+                            setUsername(generateUsernameFromEmail(value));
+                            setName(generateNameFromEmail(value));
                         }}
                         required={true}
                         errorMessage={emailErrorMessage}
@@ -108,7 +103,7 @@ const Register = () => {
                     <StringInput
                         label="Username"
                         value={username}
-                        setValue={setUsername}
+                        setValue={value => setUsername(value[0] !== "@" ? `@${value}` : value)}
                         required={true}
                         errorMessage={usernameErrorMessage}
                     />

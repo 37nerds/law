@@ -7,6 +7,7 @@ import PencilIcon from "@heroicons/react/24/outline/PencilIcon";
 import UploadButton from "@components/image/ImageUploadButton";
 import ImageCropper from "@components/image/ImageCropper";
 import { useUploadProfilePictureMutation } from "@external/auth";
+import { getProfileUrlFromAvatarKey } from "@helpers/unkown";
 
 const ProfilePicture = () => {
     const [imageSrc, setImageSrc] = useState<string>("");
@@ -17,7 +18,7 @@ const ProfilePicture = () => {
     const avatar: string | null = loggedUser?.avatar || null;
     const name: string = loggedUser?.name || "";
 
-    const uploadProfile = useUploadProfilePictureMutation();
+    const uploadProfileMutation = useUploadProfilePictureMutation();
 
     return (
         <div className="flex flex-col gap-3">
@@ -27,23 +28,34 @@ const ProfilePicture = () => {
                 imageSrc={imageSrc}
                 setDialogOpen={setDialogOpen}
                 onDone={image => {
-                    uploadProfile.mutate(image);
+                    uploadProfileMutation.mutate(image);
                 }}
             />
             <div className="relative">
                 <div className="avatar">
                     <div className="w-52 rounded-full">
-                        {avatar ? <img src={avatar} alt={name} /> : <UserIcon className="w-52 bg-base-200 p-5" />}
+                        {avatar ? (
+                            <img src={getProfileUrlFromAvatarKey(avatar)} alt={name} />
+                        ) : (
+                            <UserIcon className="w-52 bg-base-200 p-5" />
+                        )}
                     </div>
                 </div>
                 <div className="absolute bottom-5">
                     <div className="dropdown-bottom dropdown">
                         <label
                             tabIndex={0}
-                            className="flex w-[70px] flex-row items-center justify-center gap-1 rounded border-2 border-base-300 bg-base-200 px-2 py-1"
+                            className={`flex w-[70px] cursor-pointer flex-col justify-between rounded border-2 border-base-300 bg-base-200 `}
                         >
-                            <PencilIcon className="h-5 w-5" />
-                            <button>Edit</button>
+                            <div className="flex flex-row items-center justify-center gap-1 px-2 py-1">
+                                <PencilIcon className="h-5 w-5" />
+                                <button>Edit</button>
+                            </div>
+                            {uploadProfileMutation.isLoading ? (
+                                <progress className="progress progress-secondary"></progress>
+                            ) : (
+                                <></>
+                            )}
                         </label>
                         <ul
                             tabIndex={0}

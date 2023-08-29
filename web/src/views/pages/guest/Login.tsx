@@ -73,7 +73,7 @@ const Login = () => {
                 <div className="mb-4 flex flex-col gap-4">
                     <StringInput
                         label="Email Address Or Username"
-                        type="email"
+                        type="text"
                         value={emailOrUsername}
                         setValue={value => {
                             setEmailOrUsername(value);

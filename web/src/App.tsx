@@ -1,35 +1,45 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { guest_routes, protected_routes, public_routes } from "@config/routes";
 import { useLoggedUserFetch } from "@external/auth";
-import { get_pathname, is_guest_route, is_public_route, is_valid_route, redirect } from "@helpers/location";
+import { getPathname, isGuestRoute, isPublicRoute, isValidRoute, redirect } from "@helpers/location";
 
 import Loading from "@components/pure/Loading";
 import GuestRoute from "@components/auth/GuestRoute";
 import ProtectedRoute from "@components/auth/ProtectedRoute";
 import Page404 from "@pages/protected/Page404";
-import { useEffect } from "react";
 
 const App = () => {
-    const loggerUserQuery = useLoggedUserFetch();
-    const pathname = get_pathname();
+    const pathname = getPathname();
 
-    if (!is_valid_route(pathname)) {
+    if (!isValidRoute(pathname)) {
         redirect("/login");
         return <></>;
     }
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    const loggerUserFetch = useLoggedUserFetch();
+
     useEffect(() => {
-        if (loggerUserQuery.isError && !is_guest_route(pathname) && !is_public_route(pathname)) {
+        if (loggerUserFetch.isError) {
+            setIsLoading(false);
+        }
+        if (loggerUserFetch.isError && !isGuestRoute(pathname) && !isPublicRoute(pathname)) {
             redirect("/login");
             return;
         }
-    }, [loggerUserQuery.isError]);
+    }, [loggerUserFetch.isError]);
 
-    if (loggerUserQuery.isLoading) {
-        return <Loading />;
-    }
+    useEffect(() => {
+        if (loggerUserFetch.isSuccess) {
+            setIsLoading(false);
+        }
+    }, [loggerUserFetch.isSuccess]);
 
-    return (
+    return isLoading ? (
+        <Loading />
+    ) : (
         <BrowserRouter>
             <Routes>
                 {guest_routes.map(({ path, component: Component }, index) => (

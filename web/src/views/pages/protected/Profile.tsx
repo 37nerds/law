@@ -1,5 +1,5 @@
-import log from "@helpers/log";
 import { notify } from "@helpers/unkown";
+
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import Card from "@components/cards/Card";
 import StringInput from "@components/inputs/StringInput";
@@ -10,7 +10,7 @@ const Profile = () => {
     useSetPageTitle("Profile");
 
     const handleChange = (field: string, value: any) => {
-        log.print(field, value);
+        // log.print(field, value);
     };
 
     const handleUpdate = () => {

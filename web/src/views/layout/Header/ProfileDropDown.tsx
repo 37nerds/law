@@ -4,15 +4,20 @@ import { profile_dropdown_links } from "@config/header";
 
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import LogoutButton from "@layout/Header/LogoutButton";
+import { getProfileUrlFromAvatarKey } from "@helpers/unkown";
 
 const ProfileDropDown = () => {
     const avatar = selectLoggedUserAvatar();
 
     return (
-        <div className="dropdown-end dropdown ml-4">
+        <div className="dropdown dropdown-end ml-4">
             <label tabIndex={0} className="btn-ghost btn-circle avatar btn">
                 <div className="w-10 rounded-full">
-                    {avatar ? <img src={avatar} alt="profile" /> : <UserIcon className="bg-base-200 p-1" />}
+                    {avatar ? (
+                        <img src={getProfileUrlFromAvatarKey(avatar)} alt="profile" />
+                    ) : (
+                        <UserIcon className="bg-base-200 p-1" />
+                    )}
                 </div>
             </label>
             <ul

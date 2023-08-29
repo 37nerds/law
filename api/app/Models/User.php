@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Base\ModelTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,13 +14,15 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $role
  * @property string $email
  * @property string $name
+ * @property string $username
+ * @property string $id
  * @method static create(string[] $array)
  * @method static find(int $id)
  * @method static where(string $string, mixed $email)
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, ModelTrait;
+    use HasApiTokens, HasFactory, Notifiable, ModelTrait, HasUuids;
 
     /**
      * The attributes that are mass assignable.

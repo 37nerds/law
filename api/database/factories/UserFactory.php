@@ -20,9 +20,9 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            "username" => fake()->unique()->userName(),
+            "username" => "@" . fake()->unique()->userName(),
             'email' => fake()->unique()->safeEmail(),
-            "avatar" => "https://avatars.githubusercontent.com/u/67628903?v=4",
+            "avatar" => "https://advanced-cropper.github.io/react-advanced-cropper/img/images/pexels-photo-3761018.jpeg",
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

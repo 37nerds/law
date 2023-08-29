@@ -18,22 +18,23 @@ class UserRepository implements Repository
         ]);
     }
 
-    public static function update(int $id, array $properties): User
+    public static function update(string $id, array $properties): User
     {
         $user = User::find($id);
 
-        $user->name ??= $properties["name"];
-        $user->username ??= $properties["username"];
-        $user->email ??= $properties["email"];
-        $user->password ??= $properties["password"];
-        $user->role ??= $properties["role"];
+        $user->name = $properties["name"] ?? $user->name;
+        $user->username = $properties["username"] ?? $user->username;
+        $user->email = $properties["email"] ?? $user->email;
+        $user->password = $properties["password"] ?? $user->password;
+        $user->role = $properties["role"] ?? $user->role;
+        $user->avatar = $properties["avatar"] ?? $user->avatar;
 
         $user->save();
 
         return $user;
     }
 
-    public static function delete(int $id): User
+    public static function delete(string $id): User
     {
         $user = User::find(1);
 

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useResetPasswordMutation } from "@external/auth";
-import { redirect } from "@helpers/location";
 
 import ErrorText from "@components/pure/ErrorText";
 import Link from "@components/pure/Link";
 import PasswordInput from "@components/inputs/PasswordInput";
 import ResetPasswordWrapper from "@screens/resetPassword/ResetPasswordWrapper";
 import useQueryParams from "@hooks/useQueryParams";
+import { redirect } from "@helpers/location";
 
 const ResetPassword = () => {
     const params = useQueryParams();

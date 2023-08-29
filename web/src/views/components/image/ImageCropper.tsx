@@ -43,12 +43,12 @@ const ImageCropper = ({
                                 onClick={() => {
                                     setDialogOpen(false);
                                 }}
-                                className="bg-co-400 cursor-pointer rounded px-4 py-2 text-white"
+                                className="cursor-pointer rounded bg-neutral px-4 py-2 text-white"
                             >
                                 Close
                             </div>
                             <div
-                                className="bg-co-300 cursor-pointer rounded px-4 py-2 text-white"
+                                className="cursor-pointer rounded bg-neutral px-4 py-2 text-white"
                                 onClick={() => {
                                     const canvas = cropperRef.current?.getCanvas();
                                     if (canvas) {

@@ -1,6 +1,7 @@
 import type { TNotificationType } from "@kinds/general";
 
 import useNotificationStore from "@states/useNotificationStore";
+import { assert_storage_url } from "@helpers/env";
 
 export const is_email = (text: string): boolean => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -14,11 +15,29 @@ export const notify = (type: TNotificationType, message: string = "") => {
     });
 };
 
-export const get_username_from_email = (email: string) => {
-    return email.split("@")[0];
+export const generateUsernameFromEmail = (email: string) => {
+    return "@" + (email.split("@")[0]?.toLowerCase() || "");
 };
 
-export const get_name_from_email = (email: string) => {
-    const name = get_username_from_email(email);
-    return name[0].toUpperCase() + name.slice(1);
+export const generateNameFromEmail = (email: string) => {
+    const name = generateUsernameFromEmail(email);
+
+    if (name.length == 1) {
+        return "";
+    }
+
+    if (name.length == 2) {
+        return name[1].toUpperCase();
+    }
+
+    return name[1].toUpperCase() + name.slice(2);
+};
+
+export const isLink = (value: string): boolean => {
+    const linkPattern = /^(http|https):\/\/[^\s/$.?#].[^\s]*$/i;
+    return linkPattern.test(value);
+};
+
+export const getProfileUrlFromAvatarKey = (avatar: string): string => {
+    return isLink(avatar) ? avatar : `${assert_storage_url}/storage/profile/picture/${avatar}`;
 };
