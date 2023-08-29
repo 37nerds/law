@@ -2,7 +2,6 @@
 
 namespace App\DTO;
 
-use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 
 class Device

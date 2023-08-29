@@ -23,6 +23,9 @@ Route::prefix("/v1")
                     ->name('password.reset')
                     ->withoutMiddleware("auth:sanctum");
 
+                Route::post("/upload-profile-picture", [AuthController::class, "uploadProfilePicture"])
+                    ->name("auth.upload-profile-picture")
+                    ->withoutMiddleware("auth:sanctum");
             });
 
         Route::prefix("/customers")

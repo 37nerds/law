@@ -10,6 +10,5 @@ You received this letter because someone logged into your account from:
 
 If this was you, ignore this message. Otherwise, change your account's password.
 
-Thanks,<br>
-{{ config('app.name') }}
+Thanks, {{ config('app.name') }}
 </x-mail::message>
