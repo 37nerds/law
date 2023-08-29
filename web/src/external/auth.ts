@@ -101,10 +101,10 @@ export const useResetPasswordMutation = () =>
 
 export const useUploadProfilePictureMutation = () => {
     return useMutation<any, TError, any>({
-        mutationFn: async (image: Blob) => {
+        mutationFn: async (image: File) => {
             if (image) {
                 const formData = new FormData();
-                formData.append("image", image);
+                formData.append("profile-picture", image);
 
                 try {
                     const response = await http.form_post("/auth/upload-profile-picture", formData, 200);

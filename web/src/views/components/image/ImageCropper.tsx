@@ -13,7 +13,7 @@ const ImageCropper = ({
     imageSrc: string;
     dialogOpen: boolean;
     setDialogOpen: (value: boolean) => void;
-    onDone: (imageBlob: Blob) => void;
+    onDone: (imageFile: File) => void;
 }) => {
     const cropperRef = useRef<CropperRef>(null);
 
@@ -54,7 +54,7 @@ const ImageCropper = ({
                                     if (canvas) {
                                         canvas.toBlob(blob => {
                                             if (blob) {
-                                                onDone(blob);
+                                                onDone(new File([blob], "pic.jpg"));
                                                 setDialogOpen(false);
                                             }
                                         }, "image/jpeg");

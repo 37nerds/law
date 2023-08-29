@@ -1,6 +1,8 @@
 import type { TJsonS, TResponse } from "@kinds/general";
 import { server_base_url } from "@helpers/env";
 
+import log from "@helpers/Log";
+
 const get_cookie = (name: string): string => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -15,108 +17,85 @@ const row_request = async (uri: string, options: RequestInit): Promise<TResponse
         const response = await fetch(uri, options);
         return { status: response.status, payload: response.status !== 204 ? await response.json() : {} };
     } catch (e: any) {
-        console.log(e);
+        log.error(e);
         return { status: 400, payload: { message: e?.message, type: "Unknown (In Client)" } };
     }
 };
 
-const request = async (
+const lara_request = async (
+    method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE",
     path: string,
-    happyStatus: number,
-    headers: HeadersInit = {},
-    options: RequestInit = {},
-    csrf = true,
+    body: any,
+    happy: number,
     {
-        contentType = "application/json",
-        accept = "application/json",
+        csrf = true,
         credentials = "include",
+        accept = "application/json",
+        contentType = "application/json",
     }: {
-        contentType?: string;
-        accept?: string;
+        csrf?: boolean;
         credentials?: RequestCredentials;
+        accept?: string | "x/none";
+        contentType?: string | "x/none";
     } = {}
-) => {
-    console.log(contentType, accept, credentials);
+): Promise<TJsonS> => {
+    const headers: HeadersInit = {};
 
-    const defaultHeaders: HeadersInit = { "Content-Type": contentType, Accept: accept };
-    if (csrf) defaultHeaders["X-XSRF-TOKEN"] = decodeURIComponent(get_cookie("XSRF-TOKEN"));
-
-    const defaultOptions: RequestInit = { headers: { ...defaultHeaders, ...headers }, credentials: credentials };
-
-    const { status, payload } = await row_request(server_base_url + path, { ...defaultOptions, ...options });
-    if (status !== happyStatus) {
-        throw payload;
+    if (csrf) {
+        headers["X-XSRF-TOKEN"] = decodeURIComponent(get_cookie("XSRF-TOKEN"));
     }
-    return payload;
+
+    if (accept !== "x/none") {
+        headers["Accept"] = accept;
+    }
+
+    if (contentType !== "x/none") {
+        headers["Content-Type"] = contentType;
+    }
+
+    const response = await row_request(server_base_url + path, {
+        method: method,
+        body: body,
+        headers: headers,
+        credentials: credentials,
+    });
+
+    if (response.status !== happy) {
+        throw response.payload;
+    }
+
+    return response.payload;
 };
 
-const get = async (
-    path: string,
-    happyStatus: number,
-    headers: HeadersInit = {},
-    options: RequestInit = {},
-    csrf = true
-): Promise<any> => {
-    return request(path, happyStatus, headers, { ...options, method: "GET" }, csrf);
+const get = async (path: string, happyStatus: number, csrf = true): Promise<any> => {
+    return lara_request("GET", path, null, happyStatus, { csrf });
 };
 
-const post = async (
-    path: string,
-    body: TJsonS,
-    happyStatus: number,
-    headers: HeadersInit = {},
-    options: RequestInit = {},
-    csrf = true
-): Promise<any> => {
-    return request(path, happyStatus, headers, { ...options, method: "POST", body: JSON.stringify(body) }, csrf);
+const post = async (path: string, body: TJsonS, happyStatus: number, csrf = true): Promise<any> => {
+    return lara_request("POST", path, JSON.stringify(body), happyStatus, { csrf });
 };
 
-const form_post = async (
-    path: string,
-    body: FormData,
-    happyStatus: number,
-    headers: HeadersInit = {},
-    options: RequestInit = {},
-    csrf = true
-): Promise<any> => {
-    return request(path, happyStatus, headers, { ...options, method: "POST", body: body }, csrf, {
-        contentType: "multipart/form-data",
+const form_post = async (path: string, body: FormData, happyStatus: number, csrf = true): Promise<any> => {
+    console.log("FC");
+    return await lara_request("POST", path, body, happyStatus, {
+        contentType: "x/none",
+        csrf,
     });
 };
 
-const csrf_post = async (
-    path: string,
-    body: TJsonS,
-    happyStatus: number,
-    headers: HeadersInit = {},
-    options: RequestInit = {},
-    csrf = true
-): Promise<any> => {
-    await http.get("/csrf-cookie", 204, {}, {}, false);
-    return http.post(path, body, happyStatus, headers, options, csrf);
+const csrf_post = async (path: string, body: TJsonS, happyStatus: number, csrf = true): Promise<any> => {
+    await http.get("/csrf-cookie", 204, false);
+    return http.post(path, body, happyStatus, csrf);
 };
 
-const patch = (
-    path: string,
-    body: TJsonS,
-    happyStatus: number,
-    headers: HeadersInit = {},
-    options: RequestInit = {},
-    csrf = true
-): Promise<any> => {
-    return request(path, happyStatus, headers, { ...options, method: "PATCH", body: JSON.stringify(body) }, csrf);
+const patch = (path: string, body: TJsonS, happyStatus: number, csrf = true): Promise<any> => {
+    return lara_request("PATCH", path, JSON.stringify(body), happyStatus, { csrf });
 };
 
-const _delete = (
-    path: string,
-    happyStatus: number,
-    headers: HeadersInit = {},
-    options: RequestInit = {},
-    csrf: boolean = true
-): Promise<any> => {
-    return request(path, happyStatus, headers, { ...options, method: "DELETE" }, csrf);
+const _delete = (path: string, happyStatus: number, csrf: boolean = true): Promise<any> => {
+    return lara_request("DELETE", path, null, happyStatus, { csrf });
 };
 
-const http = { request, get, post, csrf_post, form_post, patch, delete: _delete };
+const http = { lara_request, get, post, csrf_post, form_post, patch, delete: _delete };
 
 export default http;

@@ -26,8 +26,8 @@ const ProfilePicture = () => {
                 dialogOpen={dialogOpen}
                 imageSrc={imageSrc}
                 setDialogOpen={setDialogOpen}
-                onDone={imageBlog => {
-                    uploadProfile.mutate(imageBlog);
+                onDone={image => {
+                    uploadProfile.mutate(image);
                 }}
             />
             <div className="relative">
