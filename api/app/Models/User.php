@@ -16,6 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $name
  * @property string $username
  * @property string $id
+ * @property string $password
  * @method static create(string[] $array)
  * @method static find(int $id)
  * @method static where(string $string, mixed $email)

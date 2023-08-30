@@ -1,13 +1,14 @@
 import type { TLoggedUser } from "@kinds/users";
 import { selectLoggedUser } from "@states/authStore";
 import { useState } from "react";
+import { useUploadProfilePictureMutation } from "@external/auth";
+import { getProfileUrlFromAvatarKey } from "@helpers/unkown";
 
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import PencilIcon from "@heroicons/react/24/outline/PencilIcon";
 import UploadButton from "@components/image/ImageUploadButton";
 import ImageCropper from "@components/image/ImageCropper";
-import { useUploadProfilePictureMutation } from "@external/auth";
-import { getProfileUrlFromAvatarKey } from "@helpers/unkown";
+import SubTitle from "@components/pure/SubTitle";
 
 const ProfilePicture = () => {
     const [imageSrc, setImageSrc] = useState<string>("");
@@ -22,7 +23,7 @@ const ProfilePicture = () => {
 
     return (
         <div className="flex flex-col gap-3">
-            <div>Profile picture</div>
+            <SubTitle>Profile picture</SubTitle>
             <ImageCropper
                 dialogOpen={dialogOpen}
                 imageSrc={imageSrc}
@@ -33,11 +34,11 @@ const ProfilePicture = () => {
             />
             <div className="relative">
                 <div className="avatar">
-                    <div className="w-52 rounded-full">
+                    <div className="w-72 rounded-full">
                         {avatar ? (
                             <img src={getProfileUrlFromAvatarKey(avatar)} alt={name} />
                         ) : (
-                            <UserIcon className="w-52 bg-base-200 p-5" />
+                            <UserIcon className="bg-base-200 p-8" />
                         )}
                     </div>
                 </div>

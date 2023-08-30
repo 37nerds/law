@@ -1,6 +1,7 @@
 import {
     AUTH__FORGET_PASSWORD__POST,
     AUTH__LOGIN__POST,
+    AUTH__PASSWORD__PATCH,
     AUTH__REGISTER__POST,
     AUTH__RESET_PASSWORD__POST,
     AUTH__UPDATE_USER__PATCH,
@@ -160,6 +161,27 @@ export const useUpdateUserMutation = () => {
 
         if (mutation.isSuccess) {
             setLoggedUser(mutation?.data);
+        }
+    }, [mutation.isError, mutation.isSuccess]);
+
+    return mutation;
+};
+
+export const useUpdatePasswordMutation = () => {
+    const mutation = useMutation<TLoggedUser, TError, { current_password: string; new_password: string }>({
+        mutationFn: async payload => {
+            return await http.patch("/auth/password", payload, 200);
+        },
+        mutationKey: [AUTH__PASSWORD__PATCH],
+    });
+
+    useEffect(() => {
+        if (mutation.isError) {
+            notify("error", mutation.error?.message);
+        }
+
+        if (mutation.isSuccess) {
+            notify("success", "Password update successfully");
         }
     }, [mutation.isError, mutation.isSuccess]);
 

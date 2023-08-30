@@ -7,14 +7,17 @@ use App\Helpers\X;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Traits\PasswordValidationRules;
+use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
+use Laravel\Fortify\Rules\Password;
 
 class AuthController extends Controller
 {
@@ -100,6 +103,35 @@ class AuthController extends Controller
         $validated = Validator::make($payload, $rules)->validate();
 
         $user = UserRepository::update(Auth::user()->id, $validated);
+
+        return $this->success2(200, $user);
+    }
+
+    /**
+     * @throws ValidationException
+     * @throws Exception
+     */
+    public function updatePassword(Request $request): JsonResponse
+    {
+        $input = Validator::make($request->all(), [
+            'current_password' => ['required', 'string', new Password],
+            'new_password' => ['required', 'string', new Password],
+        ])->validate();
+
+        $flag = Hash::check($input["current_password"], Auth::user()->password);
+
+        if (!$flag) {
+            return $this->success2(400, [
+                "message" => "Current Password is incorrect",
+                "errors" => [
+                    "current_password" => [
+                        "Current Password is incorrect"
+                    ]
+                ]
+            ]);
+        }
+
+        $user = UserRepository::update(Auth::user()->id, ["password" => $input["new_password"]]);
 
         return $this->success2(200, $user);
     }

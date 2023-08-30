@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import Subtitle from "../pure/Subtitle";
+import SubTitle from "../pure/SubTitle";
 
 const Card = ({
     title,
@@ -17,10 +17,10 @@ const Card = ({
         <div className={`card w-full bg-base-100 p-6 shadow-xl ${className}`}>
             {(title || buttons) && (
                 <>
-                    <Subtitle className={buttons ? "inline-block" : ""}>
+                    <SubTitle className={buttons ? "inline-block" : ""}>
                         {title && title}
                         {buttons && <div className="float-right inline-block">{buttons}</div>}
-                    </Subtitle>
+                    </SubTitle>
                     <div className="divider mt-2"></div>
                 </>
             )}

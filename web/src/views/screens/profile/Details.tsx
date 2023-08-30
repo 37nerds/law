@@ -3,15 +3,25 @@ import { useUpdateUserMutation } from "@external/auth";
 
 import StringInput from "@components/inputs/StringInput";
 import useAuthStore from "@states/authStore";
+import SubTitle from "@components/pure/SubTitle";
+import Form from "@components/pure/Form";
 
 const Details = () => {
     const { loggedUser, setLoggedUserField } = useAuthStore();
 
     const updateUserMutation = useUpdateUserMutation();
 
+    const handleSubmit = () => {
+        updateUserMutation.mutate({
+            name: loggedUser?.name || "",
+            email: loggedUser?.email || "",
+            username: loggedUser?.username || "",
+        });
+    };
+
     return (
-        <>
-            <div>Details</div>
+        <Form className="flex flex-col gap-2" onSubmit={handleSubmit} loading={updateUserMutation.isLoading}>
+            <SubTitle divider={true}>Details</SubTitle>
             <StringInput
                 label="Name"
                 value={loggedUser?.name || ""}
@@ -27,21 +37,7 @@ const Details = () => {
                 value={loggedUser?.username || ""}
                 setValue={value => setLoggedUserField("username", convertUsernameLogic(value))}
             />
-            <div className="">
-                <button
-                    className={`btn ${updateUserMutation.isLoading ? "loading" : ""}`}
-                    onClick={() =>
-                        updateUserMutation.mutate({
-                            name: loggedUser?.name || "",
-                            email: loggedUser?.email || "",
-                            username: loggedUser?.username || "",
-                        })
-                    }
-                >
-                    Update
-                </button>
-            </div>
-        </>
+        </Form>
     );
 };
 

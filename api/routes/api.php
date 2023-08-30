@@ -27,6 +27,9 @@ Route::prefix("/v1")
                 Route::post("/upload-avatar", [AuthController::class, "uploadAvatar"])
                     ->name("auth.upload-profile-picture");
 
+                Route::patch("/password", [AuthController::class, "updatePassword"])
+                    ->name("auth.update-password");
+
                 Route::get("/", [AuthController::class, "show"])
                     ->name("auth.show-logged-user");
 
