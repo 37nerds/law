@@ -3,15 +3,6 @@ import { setClientField, setUnitField } from "@states/customers/customerSlice";
 
 const customerApi = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        fetchCustomerList: builder.query({
-            query: ({ page = 1 }) =>
-                `/customers/clients?per_page=6&page=${page}`,
-            // onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
-            //     const { data } = await queryFulfilled;
-            //     dispatch(setPopUpData(data?.data));
-            // },
-            providesTags: ["fetchCustomersList"],
-        }),
         deleteClient: builder.mutation({
             query: id => ({
                 url: `/customers/clients/${id}`,
@@ -59,7 +50,6 @@ const customerApi = apiSlice.injectEndpoints({
 });
 
 export const {
-    useFetchCustomerListQuery,
     useDeleteClientMutation,
     useFetchClientQuery,
     useUpdateClientMutation,

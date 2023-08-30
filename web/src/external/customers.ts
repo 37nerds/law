@@ -1,4 +1,5 @@
 import {
+    CUSTOMERS__CLIENTS__GET,
     CUSTOMERS__CLIENTS__POST,
     CUSTOMERS__COMPANIES__POST,
     CUSTOMERS__GROUP_OF_COMPANIES__POST,
@@ -6,10 +7,10 @@ import {
     CUSTOMERS__UNITS__POST,
 } from "@config/keys";
 
-import { useEffect } from "react";
 import type { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit } from "@kinds/customers";
+import type { TError } from "@kinds/general";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { TError } from "@kinds/general";
 
 import http from "@helpers/http";
 import useCustomerSetupStore from "@states/customerSetupStore";
@@ -87,4 +88,18 @@ export const useSaveClientMutation = () => {
             return queryClient.invalidateQueries(CUSTOMERS__POP_UP_DATA__GET);
         },
     });
+};
+
+export const useCustomerListQuery = () => {
+    const [page, setPage] = useState(0);
+
+    const fetchCustomers = async (page = 1) => {
+        return await http.get(`/customers/clients?per_page=6&page=${page}`, 200);
+    };
+
+    const query = useQuery<any, TError>([CUSTOMERS__CLIENTS__GET, page], () => fetchCustomers(page), {
+        keepPreviousData: true,
+    });
+
+    return { query, page, setPage };
 };

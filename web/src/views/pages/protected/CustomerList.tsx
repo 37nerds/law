@@ -1,41 +1,32 @@
-import { useFetchCustomerListQuery } from "@states/customers/customerApi";
+import { useCustomerListQuery } from "@external/customers";
+
 import Loading from "@components/pure/Loading";
 import ErrorText from "@components/pure/ErrorText";
 import TitleCard from "@components/cards/TitleCard";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import Paginator from "@components/Paginator";
-import { useState } from "react";
 import CustomerTable from "@screens/customerList/CustomerTable";
 
 const CustomerList = () => {
     useSetPageTitle("Customer List");
 
-    const [currentPage, setCurrentPage] = useState(1);
-
-    const { isLoading, error, data } = useFetchCustomerListQuery({
-        page: currentPage,
-    });
-    // noinspection UnnecessaryLocalVariableJS
-    const errorX: any = error;
-    const errorMessage = errorX?.data?.message;
+    const { query, page, setPage } = useCustomerListQuery();
 
     return (
         <>
-            {isLoading ? (
+            {query.isLoading ? (
                 <Loading />
-            ) : errorMessage ? (
-                <ErrorText>{errorMessage}</ErrorText>
+            ) : query.isError ? (
+                <ErrorText>{query.error?.message || ""}</ErrorText>
             ) : (
                 <>
                     <TitleCard title="List all Customers" topMargin="mt-2">
                         <div className="flex w-full flex-col gap-12">
-                            <CustomerTable data={data.data} />
+                            <CustomerTable data={query.data?.data} />
                             <Paginator
-                                currentPage={currentPage}
-                                totalPages={data.last_page}
-                                onSetCurrentPage={newPage => {
-                                    setCurrentPage(newPage);
-                                }}
+                                currentPage={page}
+                                totalPages={query.data?.last_page}
+                                onSetCurrentPage={setPage}
                             />
                         </div>
                     </TitleCard>
