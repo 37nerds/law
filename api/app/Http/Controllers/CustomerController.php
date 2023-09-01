@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Base\Controller;
+use App\Base\Response;
 use App\Models\GroupOfCompany;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
@@ -55,7 +56,7 @@ class CustomerController extends Controller
             "address" => $unitX->unit_address
         ]);
 
-        return $this->success([
+        return Response::happy(200, [
             "group_of_companies" => $gocList,
             "companies" => $companies,
             "units" => $unitsX,

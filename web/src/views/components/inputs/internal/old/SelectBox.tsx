@@ -2,10 +2,7 @@ import InformationCircleIcon from "@heroicons/react/24/outline/InformationCircle
 import { useState } from "react";
 import { TOption } from "@kinds/general";
 
-export type TUpdateFormValue = (_: {
-    updateType: string | undefined;
-    value: string;
-}) => void;
+export type TUpdateFormValue = (_: { updateType: string | undefined; value: string }) => void;
 
 type Props = {
     labelTitle: string;
@@ -44,21 +41,14 @@ const SelectBox = ({
                 <div className="label-text">
                     {labelTitle}
                     {labelDescription && (
-                        <div
-                            className="tooltip tooltip-right"
-                            data-tip={labelDescription}
-                        >
+                        <div className="tooltip tooltip-right" data-tip={labelDescription}>
                             <InformationCircleIcon className="h-4 w-4" />
                         </div>
                     )}
                 </div>
             </label>
 
-            <select
-                className="select-bordered select w-full"
-                value={value}
-                onChange={e => updateValue(e.target.value)}
-            >
+            <select className="select-bordered select w-full" value={value} onChange={e => updateValue(e.target.value)}>
                 <option disabled value="PLACEHOLDER">
                     {placeholder}
                 </option>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { default_theme } from "@config/general";
 
-import storage from "@helpers/storage";
+import storage from "../facades/storage";
 
 const THEME_STORAGE_KEY = "theme";
 

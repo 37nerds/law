@@ -31,9 +31,5 @@ export const customersSetupSteps: TNavigatorStep[] = [
 
 export const getStepComponentByLabel = (label: string): ReactNode => {
     const customersSetupStep = customersSetupSteps.find(c => c.label == label);
-    return (
-        customersSetupStep
-            ? customersSetupStep.component
-            : () => customersSetupSteps[0].component
-    ) as ReactNode;
+    return (customersSetupStep ? customersSetupStep.component : () => customersSetupSteps[0].component) as ReactNode;
 };

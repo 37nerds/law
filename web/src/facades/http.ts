@@ -1,7 +1,7 @@
 import type { TJsonS, TResponse } from "@kinds/general";
-import { server_base_url } from "@helpers/env";
+import { server_base_url } from "@config/env";
 
-import log from "@helpers/Log";
+import log from "@helpers/log";
 
 const get_cookie = (name: string): string => {
     const value = `; ${document.cookie}`;

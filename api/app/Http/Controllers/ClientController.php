@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Base\Controller;
+use App\Base\Response;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Http\Resources\ClientResource;
@@ -26,7 +27,7 @@ class ClientController extends Controller
             "group_of_company_id" => $x["unit"]["company"]["group_of_company"]["id"],
             "group_of_company_name" => $x["unit"]["company"]["group_of_company"]["name"],
         ]);
-        return $this->json($paginates);
+        return Response::happy(200, $paginates);
     }
 
     /**
@@ -37,33 +38,33 @@ class ClientController extends Controller
         $validated = $request->validated();
 
         $item = Client::create($validated);
-        return $this->success(new ClientResource($item), "", 201);
+        return Response::happy(201, new ClientResource($item));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Client $client)
+    public function show(Client $client): JsonResponse
     {
-        return $this->success(new ClientResource($client));
+        return Response::happy(200, new ClientResource($client));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateClientRequest $request, Client $client)
+    public function update(UpdateClientRequest $request, Client $client): JsonResponse
     {
         $client->update($request->all());
-        return $this->success(new ClientResource($client));
+        return Response::happy(200, new ClientResource($client));
     }
 
-    public function destroy(Client $client)
+    public function destroy(Client $client): JsonResponse
     {
         if (!auth()->user()->tokenCan("admin")) {
             abort(403, "Unauthorized");
         }
 
         $client->delete();
-        return $this->json([], 204);
+        return Response::happy(204);
     }
 }

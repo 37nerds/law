@@ -2,11 +2,7 @@
     "compilerOptions": {
         "target": "ESNext",
         "useDefineForClassFields": true,
-        "lib": [
-            "DOM",
-            "DOM.Iterable",
-            "ESNext"
-        ],
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
         "allowJs": false,
         "skipLibCheck": true,
         "esModuleInterop": false,
@@ -21,44 +17,20 @@
         "jsx": "react-jsx",
         "baseUrl": ".",
         "paths": {
-            "@app/*": [
-                "src/app/*"
-            ],
-            "@config/*": [
-                "src/config/*"
-            ],
-            "@external/*": [
-                "src/external/*"
-            ],
-            "@helpers/*": [
-                "src/helpers/*"
-            ],
-            "@hooks/*": [
-                "src/hooks/*"
-            ],
-            "@kinds/*": [
-                "src/kinds/*"
-            ],
-            "@states/*": [
-                "src/states/*"
-            ],
-            "@components/*": [
-                "src/views/components/*"
-            ],
-            "@layout/*": [
-                "src/views/layout/*"
-            ],
-            "@pages/*": [
-                "src/views/pages/*"
-            ],
-            "@screens/*": [
-                "src/views/screens/*"
-            ]
+            "@app/*": ["src/app/*"],
+            "@config/*": ["src/config/*"],
+            "@external/*": ["src/external/*"],
+            "@helpers/*": ["src/helpers/*"],
+            "@hooks/*": ["src/hooks/*"],
+            "@kinds/*": ["src/kinds/*"],
+            "@states/*": ["src/states/*"],
+            "@components/*": ["src/views/components/*"],
+            "@layout/*": ["src/views/layout/*"],
+            "@pages/*": ["src/views/pages/*"],
+            "@screens/*": ["src/views/screens/*"]
         }
     },
-    "include": [
-        "src"
-    ],
+    "include": ["src"],
     "references": [
         {
             "path": "./tsconfig.node.json"

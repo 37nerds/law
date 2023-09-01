@@ -1,16 +1,26 @@
 import { useCustomerListQuery } from "@external/customers";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 import Loading from "@components/pure/Loading";
 import ErrorText from "@components/pure/ErrorText";
-import TitleCard from "@components/cards/TitleCard";
 import useSetPageTitle from "@hooks/useSetPageTitle";
-import Paginator from "@components/Paginator";
+import Paginator from "@components/pure/Paginator";
 import CustomerTable from "@screens/customerList/CustomerTable";
+import Card from "@components/cards/Card";
 
 const CustomerList = () => {
     useSetPageTitle("Customer List");
 
+    const navigate = useNavigate();
+
+    const { page: paramPage } = useParams();
+
     const { query, page, setPage } = useCustomerListQuery();
+
+    useEffect(() => {
+        setPage(Number(paramPage) || 1);
+    }, [paramPage]);
 
     return (
         <>
@@ -20,16 +30,21 @@ const CustomerList = () => {
                 <ErrorText>{query.error?.message || ""}</ErrorText>
             ) : (
                 <>
-                    <TitleCard title="List all Customers" topMargin="mt-2">
-                        <div className="flex w-full flex-col gap-12">
-                            <CustomerTable data={query.data?.data} />
-                            <Paginator
-                                currentPage={page}
-                                totalPages={query.data?.last_page}
-                                onSetCurrentPage={setPage}
-                            />
-                        </div>
-                    </TitleCard>
+                    <Card
+                        title="List all Customers"
+                        content={
+                            <div className="flex w-full flex-col gap-12">
+                                <CustomerTable data={query.data?.data} />
+                                <Paginator
+                                    currentPage={page}
+                                    totalPages={query.data?.last_page}
+                                    onSetCurrentPage={page => {
+                                        navigate(`/_/customers/${page}`);
+                                    }}
+                                />
+                            </div>
+                        }
+                    />
                 </>
             )}
         </>

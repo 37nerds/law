@@ -1,20 +1,16 @@
 import { useState } from "react";
-
-import ModalOpener from "@components/dropdowns/ModalOpener";
-
-import CustomerModal, { TCustomerModalOpenFor } from "./CustomerModal";
+import type { TCustomerModalOpenFor } from "./CustomerModal";
+import CustomerModal from "./CustomerModal";
+import ModalOpener from "@components/modals/ModalOpener";
 import CustomerListDropDown from "./CustomerListDropDown";
 
-/**
- * Show all keys.ts in a paginated table
- */
 const CustomerTable = ({ data }: { data: any }) => {
     const [modalOpenFor, setModalOpenFor] = useState<TCustomerModalOpenFor | null>(null);
 
     return (
         <>
             <CustomerModal modalOpenFor={modalOpenFor} />
-            <table className="table-compact table w-full text-xs">
+            <table className="table-compact table w-full rounded text-xs">
                 <thead>
                     <tr>
                         <th>Client Name</th>

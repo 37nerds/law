@@ -1,8 +1,4 @@
-export type TCustomerSetupSteps =
-    | "Group of Company"
-    | "Company"
-    | "Unit"
-    | "Client";
+export type TCustomerSetupSteps = "Group of Company" | "Company" | "Unit" | "Client";
 
 export type TGroupOfCompany = {
     id?: number;

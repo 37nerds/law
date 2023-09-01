@@ -1,9 +1,11 @@
 import type { TNotificationType } from "@kinds/general";
+import { assert_storage_url } from "@config/env";
+import { useParams } from "react-router-dom";
 
 import useNotificationStore from "@states/useNotificationStore";
-import { assert_storage_url } from "@helpers/env";
+import sh from "../facades/sh";
 
-export const is_email = (text: string): boolean => {
+export const isEmail = (text: string): boolean => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(text);
 };
@@ -44,4 +46,16 @@ export const getProfileUrlFromAvatarKey = (avatar: string): string => {
 
 export const convertUsernameLogic = (text: string) => {
     return text[0] !== "@" ? `@${text}` : text;
+};
+
+export const usePrepareUrlForSidebarLink = () => {
+    const params = useParams();
+    return (path: string, defaults?: Record<string, any>) => {
+        if (!defaults) return path;
+        const parts = path.split(":").map(part => {
+            let x = sh(part).lastCharacter().toString() == "/" ? sh(part).removeLastCharacter().toString() : part;
+            return params[x] ? params[x] || "" : defaults[x] ? defaults[x] : x;
+        });
+        return parts.join("/");
+    };
 };

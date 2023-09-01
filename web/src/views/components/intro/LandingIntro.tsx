@@ -15,11 +15,7 @@ function LandingIntro() {
                     </h1>
 
                     <div className="mt-12 text-center">
-                        <img
-                            src="/intro.png"
-                            alt="Dashwind Admin Template"
-                            className="inline-block w-48"
-                        ></img>
+                        <img src="/intro.png" alt="Dashwind Admin Template" className="inline-block w-48"></img>
                     </div>
 
                     {/* Importing pointers component */}

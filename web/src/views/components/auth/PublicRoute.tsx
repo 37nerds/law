@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import { ReactNode } from "react";
 
 /**
  * Logged user or non logged user any one can visit this route

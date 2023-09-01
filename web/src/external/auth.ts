@@ -10,11 +10,11 @@ import {
 
 import type { TLoggedUser } from "@kinds/users";
 import type { TError } from "@kinds/general";
-import { is_email, notify } from "@helpers/unkown";
+import { isEmail, notify } from "@helpers/unkown";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 
-import http from "@helpers/http";
+import http from "../facades/http";
 import useAuthStore from "@states/authStore";
 
 export const useRegisterMutation = () => {
@@ -44,7 +44,7 @@ export const useLoginMutation = () => {
         }
     >({
         mutationFn: async ({ remember, emailOrUsername, password }) => {
-            const isItEmail = is_email(emailOrUsername);
+            const isItEmail = isEmail(emailOrUsername);
 
             const username = isItEmail ? null : emailOrUsername;
             const email = isItEmail ? emailOrUsername : null;

@@ -1,5 +1,5 @@
-import {useState} from "react";
-import {TLadderOption, TOption} from "@kinds/general";
+import { useState } from "react";
+import { TLadderOption, TOption } from "@kinds/general";
 
 import SelectInput from "./SelectInput";
 import StringInput from "./StringInput";

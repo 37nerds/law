@@ -73,7 +73,7 @@ const ThemeDropDown = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div title="Change Theme" className="dropdown-end dropdown">
+        <div title="Change Theme" className="dropdown dropdown-end">
             <div
                 tabIndex={0}
                 className="btn-ghost btn gap-1 normal-case"

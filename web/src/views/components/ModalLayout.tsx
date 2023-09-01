@@ -1,15 +1,12 @@
-import { useAppDispatch, useAppSelector } from "@app/hooks";
-import { closeModal } from "@states/app/modalSlice";
 import { MODAL_BODY_TYPES } from "@config/general";
-import AddLeadModalBody from "@screens/leads/components/AddLeadModalBody";
 
 function ModalLayout() {
-    const { isOpen, bodyType, size, title } = useAppSelector(state => state.modal);
-    const dispatch = useAppDispatch();
+    const close = () => {};
 
-    const close = () => {
-        dispatch(closeModal());
-    };
+    const isOpen = false;
+    const size = "lg";
+    const title = "none";
+    const bodyType = "";
 
     return (
         <>
@@ -26,7 +23,7 @@ function ModalLayout() {
                     {/* Loading modal body according to different modal type */}
                     {
                         {
-                            [MODAL_BODY_TYPES.LEAD_ADD_NEW]: <AddLeadModalBody closeModal={close} />,
+                            // [MODAL_BODY_TYPES.LEAD_ADD_NEW]: <AddLeadModalBody closeModal={close} />,
                             [MODAL_BODY_TYPES.DEFAULT]: <div></div>,
                         }[bodyType]
                     }

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import DynamicChevronIcon from "@components/icons/DynamicChevronIcon";
+import { getPathname } from "@helpers/location";
+import { usePrepareUrlForSidebarLink } from "@helpers/unkown";
 
 const Submenu = ({ submenus, name, icon: Icon }: { name: string; icon: TIcon; submenus: TSidebarLink[] }) => {
     const location = useLocation();
@@ -18,8 +20,10 @@ const Submenu = ({ submenus, name, icon: Icon }: { name: string; icon: TIcon; su
             setIsExpanded(true);
     }, []);
 
+    const prepareUrlForSidebarLink = usePrepareUrlForSidebarLink();
+
     return (
-        <div className="flex flex-col gap-0 pb-0 pt-0 mb-0">
+        <div className="mb-0 flex flex-col gap-0 pb-0 pt-0">
             {/** Route Header */}
             <div className="flex w-full justify-between pb-3 pt-3" onClick={() => setIsExpanded(!isExpanded)}>
                 <div className="flex gap-3">
@@ -32,23 +36,31 @@ const Submenu = ({ submenus, name, icon: Icon }: { name: string; icon: TIcon; su
             {/** Submenu list */}
             <div className={` w-full ` + (isExpanded ? "" : "hidden")}>
                 <ul className={`menu menu-compact`}>
-                    {submenus.map(({ icon: Icon2, path: path2, name: name2, submenus: submenus2 }, index) => (
-                        <li key={index}>
-                            {submenus2 ? (
-                                <Submenu icon={Icon2} name={name2} submenus={submenus2} />
-                            ) : (
-                                <Link to={path2}>
-                                    <Icon2 className="h-5 w-5" /> {name2}
-                                    {location.pathname == path2 ? (
-                                        <span
-                                            className="absolute inset-y-0 left-0 mb-1 mt-1 w-1 rounded-br-md rounded-tr-md bg-primary "
-                                            aria-hidden="true"
-                                        ></span>
-                                    ) : null}
-                                </Link>
-                            )}
-                        </li>
-                    ))}
+                    {submenus.map(
+                        (
+                            { icon: Icon2, path: path2, name: name2, submenus: submenus2, defaults: defaults2 },
+                            index
+                        ) => {
+                            const fPath = prepareUrlForSidebarLink(path2, defaults2);
+                            return (
+                                <li key={index}>
+                                    {submenus2 ? (
+                                        <Submenu icon={Icon2} name={name2} submenus={submenus2} />
+                                    ) : (
+                                        <Link to={fPath}>
+                                            <Icon2 className="h-5 w-5" /> {name2}
+                                            {getPathname() == fPath ? (
+                                                <span
+                                                    className="absolute inset-y-0 left-0 mb-1 mt-1 w-1 rounded-br-md rounded-tr-md bg-primary "
+                                                    aria-hidden="true"
+                                                ></span>
+                                            ) : null}
+                                        </Link>
+                                    )}
+                                </li>
+                            );
+                        }
+                    )}
                 </ul>
             </div>
         </div>

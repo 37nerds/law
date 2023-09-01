@@ -38,16 +38,12 @@ export const protected_routes: TRoute[] = [
         component: lazy(() => import("@pages/protected/Dashboard")),
     },
     {
-        path: "/keys.ts/setup",
+        path: "/customers/setup",
         component: lazy(() => import("@pages/protected/CustomerSetup")),
     },
     {
-        path: "/keys.ts/list",
+        path: "/customers/:page",
         component: lazy(() => import("@pages/protected/CustomerList")),
-    },
-    {
-        path: "/leads",
-        component: lazy(() => import("@pages/protected/Leads")),
     },
     {
         path: "/settings-team",

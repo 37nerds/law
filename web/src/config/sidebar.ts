@@ -26,21 +26,19 @@ export const sidebar_links: TSidebarLink[] = [
         name: "Customers",
         submenus: [
             {
-                path: "/_/keys.ts/list",
+                path: "/_/customers/:page",
                 icon: QueueListIcon,
                 name: "Customers List",
+                defaults: {
+                    page: 1,
+                },
             },
             {
-                path: "/_/keys.ts/setup",
+                path: "/_/customers/setup",
                 icon: CogIcon,
                 name: "Customers Setup",
             },
         ],
-    },
-    {
-        path: "/_/leads",
-        icon: InboxArrowDownIcon,
-        name: "Leads",
     },
     {
         path: "/_/charts",

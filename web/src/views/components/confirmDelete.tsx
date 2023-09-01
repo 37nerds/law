@@ -52,23 +52,11 @@ const DeleteConfirmmer = ({
     );
 };
 
-const confirmDelete = ({
-    onDelete,
-    onCancel,
-}: {
-    onDelete: () => void;
-    onCancel: () => void;
-}) => {
+const confirmDelete = ({ onDelete, onCancel }: { onDelete: () => void; onCancel: () => void }) => {
     confirmAlert({
         overlayClassName: "bg-red-500",
         customUI: ({ onClose }) => {
-            return (
-                <DeleteConfirmmer
-                    onClose={onClose}
-                    onDelete={onDelete}
-                    onCancel={onCancel}
-                />
-            );
+            return <DeleteConfirmmer onClose={onClose} onDelete={onDelete} onCancel={onCancel} />;
         },
     });
 };

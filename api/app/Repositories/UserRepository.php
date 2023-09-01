@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Base\Repository;
+use App\Contracts\Repository;
 use App\Models\User;
 
 class UserRepository implements Repository

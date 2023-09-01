@@ -1,4 +1,6 @@
 import {
+    CUSTOMERS__CLIENT__GET,
+    CUSTOMERS__CLIENT__PATCH,
     CUSTOMERS__CLIENTS__GET,
     CUSTOMERS__CLIENTS__POST,
     CUSTOMERS__COMPANIES__POST,
@@ -11,9 +13,11 @@ import type { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit } from "@kin
 import type { TError } from "@kinds/general";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { notify } from "@helpers/unkown";
 
-import http from "@helpers/http";
+import http from "../facades/http";
 import useCustomerSetupStore from "@states/customerSetupStore";
+import useCustomerListStore from "@states/customerListStore";
 
 export const useFetchPopUpDataQuery = () => {
     const fetchPopUpDataQuery = useQuery<TPopOfData, TError>({
@@ -85,7 +89,7 @@ export const useSaveClientMutation = () => {
         },
         mutationKey: [CUSTOMERS__CLIENTS__POST],
         onSuccess: () => {
-            return queryClient.invalidateQueries(CUSTOMERS__POP_UP_DATA__GET);
+            return queryClient.invalidateQueries([CUSTOMERS__POP_UP_DATA__GET, CUSTOMERS__CLIENTS__GET]);
         },
     });
 };
@@ -102,4 +106,55 @@ export const useCustomerListQuery = () => {
     });
 
     return { query, page, setPage };
+};
+
+export const useClientQuery = (id: number) => {
+    const { setClient } = useCustomerListStore();
+
+    const query = useQuery<TClient, TError>({
+        queryFn: async () => {
+            return await http.get(`/customers/clients/${id}`, 200);
+        },
+        queryKey: [CUSTOMERS__CLIENT__GET, id],
+    });
+
+    useEffect(() => {
+        if (query.isError) {
+            notify("error", query.error?.message);
+        }
+
+        if (query.isSuccess) {
+            setClient(query.data);
+        }
+    }, [query.isError, query.isSuccess]);
+
+    return query;
+};
+
+export const useUpdateClientMutation = () => {
+    const queryClient = useQueryClient();
+    const { setClient } = useCustomerListStore();
+
+    const query = useMutation<TClient, TError, TClient>({
+        mutationFn: async (client: TClient) => {
+            return (await http.patch(`/customers/clients/${client.id}`, client, 200)) as TClient;
+        },
+        mutationKey: [CUSTOMERS__CLIENT__PATCH],
+        onSuccess: () => {
+            queryClient.invalidateQueries(CUSTOMERS__CLIENTS__GET).then(() => {});
+            queryClient.invalidateQueries(CUSTOMERS__POP_UP_DATA__GET).then(() => {});
+        },
+    });
+
+    useEffect(() => {
+        if (query.isError) {
+            notify("error", query.error?.message);
+        }
+
+        if (query.isSuccess) {
+            setClient(query.data);
+        }
+    }, [query.isError, query.isSuccess]);
+
+    return query;
 };

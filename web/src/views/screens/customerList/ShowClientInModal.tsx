@@ -1,4 +1,6 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import { gendersOptions } from "@config/general";
+import { useClientQuery, useFetchPopUpDataQuery, useUpdateClientMutation } from "@external/customers";
 
 import TextInput from "@components/inputs/TextInput";
 import DateInput from "@components/inputs/DateInput";
@@ -8,15 +10,7 @@ import SingleInputBox from "@components/inputs/internal/wrappers/SingleInputBox"
 import DoubleInputBox from "@components/inputs/internal/wrappers/DoubleInputBox";
 import LadderSelectInput from "@components/inputs/LadderSelectInput";
 import CustomerModalLayout from "./CustomerModalLayout";
-
-import useNotifyEffect from "@hooks/useNotifyEffect";
-import {useAppDispatch} from "@app/hooks";
-import {gendersOptions} from "@config/general";
-
-import {useFetchClientQuery, useUpdateClientMutation} from "@states/customers/customerApi";
-import {selectClient} from "@states/customers/customerSelector";
-import {setClientDataField} from "@states/customers/customerSlice";
-import {useFetchPopUpDataQuery} from "@external/customers";
+import useCustomerListStore from "@states/customerListStore";
 
 /**
  * Show individual client data by ID and user can edit the data as well
@@ -24,61 +18,48 @@ import {useFetchPopUpDataQuery} from "@external/customers";
 const ShowClientInModal = ({ id }: { id: number }) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
-    const { error, isLoading } = useFetchClientQuery(id);
+    const clientQuery = useClientQuery(id);
+    const updateClientMutation = useUpdateClientMutation();
 
-    useNotifyEffect(error, "In fetching client data");
-
-    let errorX: any = error;
-
-    const { data } = selectClient();
+    const { client, setClientField } = useCustomerListStore();
     const { units } = useFetchPopUpDataQuery().data || {};
 
-    const dispatch = useAppDispatch();
-
-    const setValue = (key: string, value: any) => {
-        dispatch(setClientDataField({ key, value }));
-    };
-
-    const [updateClient, { error: errorZ, isSuccess }] = useUpdateClientMutation({});
-
-    useNotifyEffect(errorZ, "In updating client", isSuccess, "Client update successful");
-
     useEffect(() => {
-        if (isSuccess) {
+        if (updateClientMutation.isSuccess) {
             setIsEdit(false);
         }
-    }, [isSuccess]);
+    }, [updateClientMutation.isSuccess]);
 
     return (
         <CustomerModalLayout
             title="Client Details"
-            errorMessage={errorX && errorX.data && errorX.data.message}
+            errorMessage={updateClientMutation.error?.message || ""}
             isEdit={isEdit}
-            onUpdate={() => updateClient({ client: data, id })}
+            onUpdate={() => updateClientMutation.mutate(client)}
             onEditToggle={() => setIsEdit(!isEdit)}
-            isLoading={isLoading}
+            isLoading={clientQuery.isLoading}
         >
             <>
                 <DoubleInputBox
                     label1="Name of Client"
                     element1={
                         <StringInput
-                            value={data["name"]}
+                            value={client["name"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("name", value)}
+                            setValue={value => setClientField("name", value)}
                         />
                     }
                     label2="Unit"
                     element2={
                         <LadderSelectInput
-                            value={data["unit_id"]}
+                            value={client["unit_id"]}
                             options={
                                 units?.map((unit: any) => ({
                                     value: unit.id,
                                     name: unit.name,
                                 })) || []
                             }
-                            setValue={value => setValue("unit_id", value)}
+                            setValue={value => setClientField("unit_id", value)}
                             disabled={!isEdit}
                         />
                     }
@@ -87,17 +68,17 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     label1="Client ID"
                     element1={
                         <StringInput
-                            value={data["client_id"]}
+                            value={client["client_id"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("client_id", value)}
+                            setValue={value => setClientField("client_id", value)}
                         />
                     }
                     label2="Passport no"
                     element2={
                         <StringInput
-                            value={data["passport_no"]}
+                            value={client["passport_no"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("passport_no", value)}
+                            setValue={value => setClientField("passport_no", value)}
                         />
                     }
                 />
@@ -105,17 +86,17 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     label1="Passport issue date"
                     element1={
                         <DateInput
-                            value={data["passport_issue_date"]}
+                            value={client["passport_issue_date"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("passport_issue_date", value)}
+                            setValue={value => setClientField("passport_issue_date", value)}
                         />
                     }
                     label2="Passport valid date"
                     element2={
                         <DateInput
-                            value={data["passport_valid_date"]}
+                            value={client["passport_valid_date"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("passport_valid_date", value)}
+                            setValue={value => setClientField("passport_valid_date", value)}
                         />
                     }
                 />
@@ -123,18 +104,18 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     label1="Gender"
                     element1={
                         <SelectInput
-                            value={data["gender"]}
+                            value={client["gender"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("gender", value)}
+                            setValue={value => setClientField("gender", value)}
                             options={gendersOptions}
                         />
                     }
                     label2="Position hold"
                     element2={
                         <StringInput
-                            value={data["position_hold"]}
+                            value={client["position_hold"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("position_hold", value)}
+                            setValue={value => setClientField("position_hold", value)}
                         />
                     }
                 />
@@ -142,18 +123,18 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     label1="Mobile"
                     element1={
                         <StringInput
-                            value={data["mobile"]}
+                            value={client["mobile"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("mobile", value)}
+                            setValue={value => setClientField("mobile", value)}
                         />
                     }
                     label2="Email"
                     element2={
                         <StringInput
                             type="email"
-                            value={data["email"]}
+                            value={client["email"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("email", value)}
+                            setValue={value => setClientField("email", value)}
                         />
                     }
                 />
@@ -161,17 +142,17 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     label1="Date of birth"
                     element1={
                         <DateInput
-                            value={data["date_of_birth"]}
+                            value={client["date_of_birth"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("date_of_birth", value)}
+                            setValue={value => setClientField("date_of_birth", value)}
                         />
                     }
                     label2="Nationality"
                     element2={
                         <StringInput
-                            value={data["nationality"]}
+                            value={client["nationality"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("nationality", value)}
+                            setValue={value => setClientField("nationality", value)}
                         />
                     }
                 />
@@ -179,17 +160,17 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     label1="Father's name"
                     element1={
                         <StringInput
-                            value={data["father_name"]}
+                            value={client["father_name"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("father_name", value)}
+                            setValue={value => setClientField("father_name", value)}
                         />
                     }
                     label2="Mother's name"
                     element2={
                         <StringInput
-                            value={data["mother_name"]}
+                            value={client["mother_name"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("mother_name", value)}
+                            setValue={value => setClientField("mother_name", value)}
                         />
                     }
                 />
@@ -197,17 +178,17 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     label1="TIN No"
                     element1={
                         <StringInput
-                            value={data["tin_no"]}
+                            value={client["tin_no"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("tin_no", value)}
+                            setValue={value => setClientField("tin_no", value)}
                         />
                     }
                     label2="Date of joining"
                     element2={
                         <DateInput
-                            value={data["date_of_joining"]}
+                            value={client["date_of_joining"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("date_of_joining", value)}
+                            setValue={value => setClientField("date_of_joining", value)}
                         />
                     }
                 />
@@ -215,17 +196,17 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     label1="Current WP validity date"
                     element1={
                         <DateInput
-                            value={data["current_wp_validity_date"]}
+                            value={client["current_wp_validity_date"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("current_wp_validity_date", value)}
+                            setValue={value => setClientField("current_wp_validity_date", value)}
                         />
                     }
                     label2="Visa expire date"
                     element2={
                         <DateInput
-                            value={data["visa_expire_date"]}
+                            value={client["visa_expire_date"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("visa_expire_date", value)}
+                            setValue={value => setClientField("visa_expire_date", value)}
                         />
                     }
                 />
@@ -233,17 +214,17 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     label1="Max entry limit"
                     element1={
                         <StringInput
-                            value={data["max_entry_limit"]}
+                            value={client["max_entry_limit"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("max_entry_limit", value)}
+                            setValue={value => setClientField("max_entry_limit", value)}
                         />
                     }
                     label2="Entry terms"
                     element2={
                         <StringInput
-                            value={data["entry_terms"]}
+                            value={client["entry_terms"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("entry_terms", value)}
+                            setValue={value => setClientField("entry_terms", value)}
                         />
                     }
                 />
@@ -251,7 +232,7 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     label1="Address"
                     element1={
                         <SelectInput
-                            value={data["address"]}
+                            value={client["address"]}
                             disabled={!isEdit}
                             options={
                                 units?.map((unit: any) => ({
@@ -259,15 +240,15 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                                     value: unit.address,
                                 })) || []
                             }
-                            setValue={value => setValue("address", value)}
+                            setValue={value => setClientField("address", value)}
                         />
                     }
                     label2="Bill to"
                     element2={
                         <StringInput
-                            value={data["bill_to"]}
+                            value={client["bill_to"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("bill_to", value)}
+                            setValue={value => setClientField("bill_to", value)}
                         />
                     }
                 />
@@ -275,9 +256,9 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     label="Notes"
                     element={
                         <TextInput
-                            value={data["notes"]}
+                            value={client["notes"]}
                             disabled={!isEdit}
-                            setValue={value => setValue("notes", value)}
+                            setValue={value => setClientField("notes", value)}
                         />
                     }
                 />

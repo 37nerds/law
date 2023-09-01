@@ -14,7 +14,7 @@ const Card = ({
     className?: string;
 }) => {
     return (
-        <div className={`card w-full bg-base-100 p-6 shadow-xl ${className}`}>
+        <div className={`card w-full rounded bg-base-100 p-6 shadow-xl ${className}`}>
             {(title || buttons) && (
                 <>
                     <SubTitle className={buttons ? "inline-block" : ""}>

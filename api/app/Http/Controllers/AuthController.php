@@ -48,7 +48,7 @@ class AuthController extends Controller
             "avatar" => $name
         ]);
 
-        return $this->success2(200, $user);
+        return Response::success(200, $user);
     }
 
     /**
@@ -76,7 +76,7 @@ class AuthController extends Controller
 
         Auth::login($user, $request->boolean("remember"));
 
-        return $this->success2(201);
+        return Response::success(201);
     }
 
     /**
@@ -104,7 +104,7 @@ class AuthController extends Controller
 
         $user = UserRepository::update(Auth::user()->id, $validated);
 
-        return $this->success2(200, $user);
+        return Response::success(200, $user);
     }
 
     /**
@@ -121,7 +121,7 @@ class AuthController extends Controller
         $flag = Hash::check($input["current_password"], Auth::user()->password);
 
         if (!$flag) {
-            return $this->success2(400, [
+            return Response::success(400, [
                 "message" => "Current Password is incorrect",
                 "errors" => [
                     "current_password" => [
@@ -133,6 +133,6 @@ class AuthController extends Controller
 
         $user = UserRepository::update(Auth::user()->id, ["password" => $input["new_password"]]);
 
-        return $this->success2(200, $user);
+        return Response::success(200, $user);
     }
 }

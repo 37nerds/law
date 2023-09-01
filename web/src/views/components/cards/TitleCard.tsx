@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import { ReactNode } from "react";
 
 import SubTitle from "../pure/SubTitle";
 

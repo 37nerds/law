@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { guest_routes, protected_routes, public_routes } from "@config/routes";
 import { useLoggedUserFetch } from "@external/auth";
-import { getPathname, isGuestRoute, isPublicRoute, isValidRoute, redirect } from "@helpers/location";
+import { getPathname, isGuestRoute, isPublicRoute, redirect } from "@helpers/location";
 
 import Loading from "@components/pure/Loading";
 import GuestRoute from "@components/auth/GuestRoute";
@@ -12,10 +12,10 @@ import Page404 from "@pages/protected/Page404";
 const App = () => {
     const pathname = getPathname();
 
-    if (!isValidRoute(pathname)) {
-        redirect("/login");
-        return <></>;
-    }
+    // if (!isValidRoute(pathname)) {
+    //     redirect("/login");
+    //     return <></>;
+    // }
 
     const [isLoading, setIsLoading] = useState(true);
 

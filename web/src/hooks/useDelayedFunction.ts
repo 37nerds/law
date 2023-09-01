@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 
-const useDelayedFunction = (
-    time: number,
-    callback: Function,
-    dependencies: unknown[]
-) => {
+const useDelayedFunction = (time: number, callback: Function, dependencies: unknown[]) => {
     useEffect(() => {
         const timeoutId = setTimeout(callback, time);
 

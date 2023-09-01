@@ -1,0 +1,83 @@
+import { create } from "zustand";
+import { immer } from "zustand/middleware/immer";
+import { devtools } from "zustand/middleware";
+
+import { TClient, TClientKey, TUnit } from "@kinds/customers";
+
+type TState = {
+    client: TClient;
+    unit: TUnit;
+};
+
+type TAction = {
+    setClient: (client: TClient) => void;
+    setClientField: (key: TClientKey, value: any) => void;
+};
+
+const useCustomerListStore = create<TState & TAction>()(
+    immer(
+        devtools(set => ({
+            client: {
+                name: "",
+                unit_id: "",
+                client_id: "",
+                unit_name: "",
+                passport_no: "",
+                passport_issue_date: "",
+                passport_valid_date: "",
+                gender: "",
+                position_hold: "",
+                mobile: "",
+                email: "",
+                date_of_birth: "",
+                nationality: "",
+                father_name: "",
+                mother_name: "",
+                tin_no: "",
+                date_of_joining: "",
+                current_wp_validity_date: "",
+                visa_expire_date: "",
+                max_entry_limit: "",
+                entry_terms: "",
+                address: "",
+                bill_to: "",
+                notes: "",
+            },
+
+            unit: {
+                name: "",
+                company_id: "",
+                address: "",
+                telephone: "",
+                mobile: "",
+                email: "",
+                website: "",
+                trade_license_no: "",
+                tin: "",
+                bin: "",
+                bida_reg_no: "",
+                incorporation_no: "",
+                membership_no: "",
+                member_of_the_association: "",
+                business_field: "",
+                legal_form: "",
+                contact_person: "",
+                contact_person_mobile: "",
+                contact_person_email: "",
+            },
+
+            setClient: client => {
+                set(state => {
+                    state.client = client;
+                });
+            },
+            setClientField: (key, value) => {
+                set(state => {
+                    state.client[key] = value as never;
+                });
+            },
+        }))
+    )
+);
+
+export default useCustomerListStore;

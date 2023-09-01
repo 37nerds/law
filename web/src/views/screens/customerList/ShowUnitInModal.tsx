@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 import StringInput from "@components/inputs/StringInput";
 import SingleInputBox from "@components/inputs/internal/wrappers/SingleInputBox";
@@ -6,15 +6,14 @@ import DoubleInputBox from "@components/inputs/internal/wrappers/DoubleInputBox"
 import LadderSelectInput from "@components/inputs/LadderSelectInput";
 import SelectEditableInput from "@components/inputs/SelectEditableInput";
 import CustomerModalLayout from "./CustomerModalLayout";
-
 import useNotifyEffect from "@hooks/useNotifyEffect";
 
-import {useAppDispatch} from "@app/hooks";
-import {useFetchUnitQuery, useUpdateUnitMutation} from "@states/customers/customerApi";
-import {selectUnit} from "@states/customers/customerSelector";
-import {setUnitDataField} from "@states/customers/customerSlice";
-import {TPopUpUnit} from "@kinds/customers";
-import {useFetchPopUpDataQuery} from "@external/customers";
+import { useAppDispatch } from "@app/hooks";
+import { useFetchUnitQuery, useUpdateUnitMutation } from "@states/customers/customerApi";
+import { selectUnit } from "@states/customers/customerSelector";
+import { setUnitDataField } from "@states/customers/customerSlice";
+import { TPopUpUnit } from "@kinds/customers";
+import { useFetchPopUpDataQuery } from "@external/customers";
 
 /**
  * Show individual unit data by ID and user can edit the data as well
