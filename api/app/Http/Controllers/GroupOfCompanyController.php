@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Base\Controller;
+use App\Base\Response;
 use App\Http\Requests\StoreGroupOfCompanyRequest;
 use App\Http\Requests\UpdateGroupOfCompanyRequest;
 use App\Http\Resources\CompanyResource;
@@ -19,7 +20,7 @@ class GroupOfCompanyController extends Controller
     public function index(Request $request): JsonResponse
     {
         $perPage = $request->query("per_page", 10);
-        return $this->json(CompanyResource::collection(GroupOfCompany::query()->paginate($perPage)));
+        return Response::happy(200, CompanyResource::collection(GroupOfCompany::query()->paginate($perPage)));
     }
 
     /**
@@ -30,7 +31,7 @@ class GroupOfCompanyController extends Controller
         $validated = $request->validated();
 
         $item = GroupOfCompany::create($validated);
-        return $this->success(new GroupOfCompanyResource($item), "", 201);
+        return Response::happy(201, new GroupOfCompanyResource($item));
     }
 
     /**
@@ -38,7 +39,7 @@ class GroupOfCompanyController extends Controller
      */
     public function show(GroupOfCompany $groupOfCompany): JsonResponse
     {
-        return $this->json(["data" => $groupOfCompany]);
+        return Response::happy(200, ["data" => $groupOfCompany]);
     }
 
     /**
@@ -49,7 +50,7 @@ class GroupOfCompanyController extends Controller
         $validated = $request->validated();
 
         $groupOfCompany->update($validated);
-        return $this->json($groupOfCompany);
+        return Response::happy(200, $groupOfCompany);
     }
 
     /**
@@ -58,6 +59,6 @@ class GroupOfCompanyController extends Controller
     public function destroy(GroupOfCompany $groupOfCompany): JsonResponse
     {
         $groupOfCompany->delete();
-        return $this->json([], 204);
+        return Response::happy(204);
     }
 }

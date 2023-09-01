@@ -10,6 +10,7 @@ use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -60,7 +61,7 @@ class ClientController extends Controller
 
     public function destroy(Client $client): JsonResponse
     {
-        if (!auth()->user()->tokenCan("admin")) {
+        if (!Auth::user()->tokenCan("admin")) {
             abort(403, "Unauthorized");
         }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Base\Controller;
+use App\Base\Response;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Http\Resources\CompanyResource;
@@ -18,7 +19,7 @@ class CompanyController extends Controller
     public function index(Request $request): JsonResponse
     {
         $perPage = $request->query("per_page", 10);
-        return $this->json(CompanyResource::collection(Company::query()->paginate($perPage)));
+        return Response::happy(200, CompanyResource::collection(Company::query()->paginate($perPage)));
     }
 
     /**
@@ -27,9 +28,8 @@ class CompanyController extends Controller
     public function store(StoreCompanyRequest $request): JsonResponse
     {
         $validated = $request->validated();
-
         $item = Company::create($validated);
-        return $this->success(new CompanyResource($item), "", 201);
+        return Response::happy(201, new CompanyResource($item));
     }
 
     /**

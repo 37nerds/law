@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Base\Controller;
+use App\Base\Response;
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
 use App\Http\Resources\ClientResource;
@@ -12,47 +13,31 @@ use Illuminate\Http\JsonResponse;
 
 class UnitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreUnitRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
         $item = Unit::create($validated);
-        return $this->success(new UnitResource($item), "", 201);
+        return Response::happy(201, new UnitResource($item));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Unit $unit)
+    public function show(Unit $unit): JsonResponse
     {
-        return $this->success(new UnitResource($unit));
+        return Response::happy(200, new UnitResource($unit));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateUnitRequest $request, Unit $unit)
+    public function update(UpdateUnitRequest $request, Unit $unit): JsonResponse
     {
         $unit->update($request->all());
-        return $this->success(new ClientResource($unit));
+        return Response::happy(200, new ClientResource($unit));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Unit $unit)
     {
-        //
+        
     }
 }

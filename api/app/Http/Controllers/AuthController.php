@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Base\Controller;
+use App\Base\Response;
 use App\Helpers\X;
 use App\Models\User;
 use App\Repositories\UserRepository;
@@ -48,7 +49,7 @@ class AuthController extends Controller
             "avatar" => $name
         ]);
 
-        return Response::success(200, $user);
+        return Response::happy(200, $user);
     }
 
     /**
@@ -76,7 +77,7 @@ class AuthController extends Controller
 
         Auth::login($user, $request->boolean("remember"));
 
-        return Response::success(201);
+        return Response::happy(201);
     }
 
     /**
@@ -104,7 +105,7 @@ class AuthController extends Controller
 
         $user = UserRepository::update(Auth::user()->id, $validated);
 
-        return Response::success(200, $user);
+        return Response::happy(200, $user);
     }
 
     /**
@@ -121,7 +122,7 @@ class AuthController extends Controller
         $flag = Hash::check($input["current_password"], Auth::user()->password);
 
         if (!$flag) {
-            return Response::success(400, [
+            return Response::happy(400, [
                 "message" => "Current Password is incorrect",
                 "errors" => [
                     "current_password" => [
@@ -133,6 +134,6 @@ class AuthController extends Controller
 
         $user = UserRepository::update(Auth::user()->id, ["password" => $input["new_password"]]);
 
-        return Response::success(200, $user);
+        return Response::happy(200, $user);
     }
 }
