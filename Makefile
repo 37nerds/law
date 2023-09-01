@@ -8,4 +8,4 @@ dev-queue:
 	php api/artisan queue:work --queue=high,default
 
 dev-web:
-	cd web; yarn dev;
+	cd web; pnpm dev;

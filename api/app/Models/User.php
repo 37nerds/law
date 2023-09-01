@@ -10,17 +10,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-/**
- * @property string $role
- * @property string $email
- * @property string $name
- * @property string $username
- * @property string $id
- * @property string $password
- * @method static create(string[] $array)
- * @method static find(int $id)
- * @method static where(string $string, mixed $email)
- */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, ModelTrait, HasUuids;

@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('group_of_companies', function (Blueprint $table) {
-            $table->id();
+            $table->uuid("id")->primary();
             $table->string("name");
             $table->text("address");
             $table->string("telephone")->nullable();

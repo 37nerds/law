@@ -3,20 +3,14 @@
 namespace App\Models;
 
 use App\Base\ModelTrait;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/**
- * @method static create(mixed $validated)
- * @method static select(string $string, string $string1 = "", string $string2 = "")
- * @property mixed $address
- * @property mixed $name
- * @property mixed $id
- */
 class Company extends Model
 {
-    use HasFactory, ModelTrait;
+    use HasFactory, ModelTrait, HasUuids;
 
     protected $fillable = [
         'name',

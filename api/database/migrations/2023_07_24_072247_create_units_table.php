@@ -12,10 +12,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('units', function (Blueprint $table) {
-            $table->id();
+            $table->uuid("id")->primary();
             $table->string('name');
             $table->foreignIdFor(Company::class, "company_id");
-            /** @noinspection DuplicatedCode */
             $table->text('address');
             $table->string('telephone')->nullable();
             $table->string('mobile');

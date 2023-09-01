@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Helpers\Dump;
+use App\Models\Company;
 use App\Models\Unit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +21,7 @@ class UnitFactory extends Factory
     {
         return [
             'name' => fake()->company(),
-            'company_id' => fake()->randomNumber(1, 10),
+            'company_id' => Dump::randomIdFromModel(Company::class),
             'address' => fake()->address(),
             'telephone' => fake()->optional()->phoneNumber(),
             'mobile' => fake()->phoneNumber(),

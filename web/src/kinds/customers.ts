@@ -1,7 +1,7 @@
 export type TCustomerSetupSteps = "Group of Company" | "Company" | "Unit" | "Client";
 
 export type TGroupOfCompany = {
-    id?: number;
+    id?: string;
     name: string;
     address: string;
     telephone: string;
@@ -22,7 +22,7 @@ export type TGroupOfCompany = {
 export type TGroupOfCompanyKey = keyof TGroupOfCompany;
 
 export type TCompany = {
-    id?: number;
+    id?: string;
     name: string;
     group_of_company_id: string;
     address: string;
@@ -49,19 +49,19 @@ export type TCompany = {
 export type TCompanyKey = keyof TCompany;
 
 export type TPopUPGroupOfCompany = {
-    id: number;
+    id: string;
     name: string;
     address: string;
 };
 
 export type TPopUpCompany = {
-    id: number;
+    id: string;
     name: string[];
     address: string;
 };
 
 export type TPopUpUnit = {
-    id: number;
+    id: string;
     name: string[];
     address: string;
 };
@@ -73,7 +73,7 @@ export type TPopOfData = {
 };
 
 export type TUnit = {
-    id?: number;
+    id?: string;
     name: string;
     company_id: string;
     address: string;
@@ -98,7 +98,7 @@ export type TUnit = {
 export type TUnitKey = keyof TUnit;
 
 export type TClient = {
-    id?: number;
+    id?: string;
     name: string;
     unit_id: string;
     client_id: string;

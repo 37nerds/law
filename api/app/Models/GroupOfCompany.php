@@ -3,19 +3,13 @@
 namespace App\Models;
 
 use App\Base\ModelTrait;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * @method static create(mixed $validated)
- * @method static select(string $string, string $string1 = "", string $string2 = "")
- * @property mixed $id
- * @property mixed $name
- * @property mixed $address
- */
 class GroupOfCompany extends Model
 {
-    use HasFactory, ModelTrait;
+    use HasFactory, ModelTrait, HasUuids;
 
     protected $fillable = [
         'name',

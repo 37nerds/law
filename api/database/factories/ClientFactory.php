@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Helpers\Dump;
 use App\Models\Client;
+use App\Models\Unit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +21,7 @@ class ClientFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'unit_id' => fake()->randomNumber(1, 10),
+            'unit_id' => Dump::randomIdFromModel(Unit::class),
             'client_id' => fake()->optional()->uuid(),
             'passport_no' => fake()->randomNumber(),
             'passport_issue_date' => fake()->optional()->date(),

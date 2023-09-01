@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Helpers\Dump;
 use App\Models\Company;
+use App\Models\GroupOfCompany;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +21,7 @@ class CompanyFactory extends Factory
     {
         return [
             'name' => fake()->company(),
-            'group_of_company_id' => fake()->randomNumber(1, 10),
+            'group_of_company_id' => Dump::randomIdFromModel(GroupOfCompany::class),
             'address' => fake()->address(),
             'telephone' => fake()->optional()->phoneNumber(),
             'mobile' => fake()->phoneNumber(),
