@@ -1,7 +1,7 @@
 import Loading from "../pure/Loading";
 import { ReactNode } from "react";
 import { TBottomButton } from "@kinds/general";
-import CustomerSetupStepLayout from "@components/CustomerSetupStepLayout";
+import CustomerSetupStepLayout from "@components/layouts/CustomerSetupStepLayout";
 
 const RenderStep = ({
     children,

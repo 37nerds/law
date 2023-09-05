@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { TNavigatorStep } from "@screens/customerSetup";
 
-import StepNavigator from "../StepNavigator";
+import StepNavigator from "./StepNavigator";
 
 const NavigatorCard = ({
     children,

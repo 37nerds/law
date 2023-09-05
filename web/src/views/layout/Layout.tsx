@@ -1,9 +1,8 @@
 import { ReactNode } from "react";
 
-import Sidebar from "./Sidebar/Sidebar";
-import ModalLayout from "@components/ModalLayout";
-import Content from "./Content/Content";
-import Notification from "./Notification/Notification";
+import Content from "@layout/Content/Content";
+import Sidebar from "@layout/Sidebar/Sidebar";
+import Notification from "@layout/Notification/Notification";
 
 const Layout = ({ children }: { children: ReactNode }) => {
     return (
@@ -17,9 +16,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
             {/* Right drawer - containing secondary Content like NotificationBody list etc. */}
             <Notification />
-
-            {/* Modal layout container */}
-            <ModalLayout />
         </>
     );
 };

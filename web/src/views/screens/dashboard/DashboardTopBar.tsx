@@ -3,7 +3,7 @@ import ArrowPathIcon from "@heroicons/react/24/outline/ArrowPathIcon";
 import EllipsisVerticalIcon from "@heroicons/react/24/outline/EllipsisVerticalIcon";
 import EnvelopeIcon from "@heroicons/react/24/outline/EnvelopeIcon";
 import ShareIcon from "@heroicons/react/24/outline/ShareIcon";
-import SelectBox, { TUpdateFormValue } from "@components/inputs/internal/old/SelectBox";
+import SelectBox, { TUpdateFormValue } from "@components/inputs/old/SelectBox";
 
 const periodOptions = [
     { name: "Today", value: "TODAY" },

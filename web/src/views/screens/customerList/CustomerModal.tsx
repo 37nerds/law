@@ -1,7 +1,6 @@
 import Modal from "@components/modals/Modal";
-
-import ShowClientInModal from "./ShowClientInModal";
-import ShowUnitInModal from "./ShowUnitInModal";
+import ShowClientInModal from "@screens/customerList/ShowClientInModal";
+import ShowUnitInModal from "@screens/customerList/ShowUnitInModal";
 
 export type TCustomerModalOpenFor = {
     id: number;
@@ -16,8 +15,7 @@ const CustomerModal = ({ modalOpenFor }: { modalOpenFor: TCustomerModalOpenFor |
                     {modalOpenFor.type === "client" ? (
                         <ShowClientInModal id={modalOpenFor.id} />
                     ) : modalOpenFor.type === "unit" ? (
-                        // <ShowUnitInModal id={modalOpenFor.id} />
-                        <></>
+                        <ShowUnitInModal id={modalOpenFor.id} />
                     ) : (
                         <></>
                     )}

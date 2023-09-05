@@ -6,6 +6,8 @@ import {
     CUSTOMERS__COMPANIES__POST,
     CUSTOMERS__GROUP_OF_COMPANIES__POST,
     CUSTOMERS__POP_UP_DATA__GET,
+    CUSTOMERS__UNIT__GET,
+    CUSTOMERS__UNIT__PATCH,
     CUSTOMERS__UNITS__POST,
 } from "@config/keys";
 
@@ -153,6 +155,57 @@ export const useUpdateClientMutation = () => {
 
         if (query.isSuccess) {
             setClient(query.data);
+        }
+    }, [query.isError, query.isSuccess]);
+
+    return query;
+};
+
+export const useUnitQuery = (id: number) => {
+    const { setUnit } = useCustomerListStore();
+
+    const query = useQuery<TUnit, TError>({
+        queryFn: async () => {
+            return await http.get(`/customers/units/${id}`, 200);
+        },
+        queryKey: [CUSTOMERS__UNIT__GET, id],
+    });
+
+    useEffect(() => {
+        if (query.isError) {
+            notify("error", query.error?.message);
+        }
+
+        if (query.isSuccess) {
+            setUnit(query.data);
+        }
+    }, [query.isError, query.isSuccess]);
+
+    return query;
+};
+
+export const useUpdateUnitMutation = () => {
+    const queryClient = useQueryClient();
+    const { setUnit } = useCustomerListStore();
+
+    const query = useMutation<TUnit, TError, TUnit>({
+        mutationFn: async unit => {
+            return await http.patch(`/customers/units/${unit.id}`, unit, 200);
+        },
+        mutationKey: [CUSTOMERS__UNIT__PATCH],
+        onSuccess: () => {
+            queryClient.invalidateQueries(CUSTOMERS__CLIENTS__GET).then(() => {});
+            queryClient.invalidateQueries(CUSTOMERS__POP_UP_DATA__GET).then(() => {});
+        },
+    });
+
+    useEffect(() => {
+        if (query.isError) {
+            notify("error", query.error?.message);
+        }
+
+        if (query.isSuccess) {
+            setUnit(query.data);
         }
     }, [query.isError, query.isSuccess]);
 

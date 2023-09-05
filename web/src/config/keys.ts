@@ -6,6 +6,8 @@ export const CUSTOMERS__CLIENTS__POST = "post.customers.clients";
 export const CUSTOMERS__CLIENTS__GET = "get.customers.clients_xxx";
 export const CUSTOMERS__CLIENT__GET = "get.customer.client";
 export const CUSTOMERS__CLIENT__PATCH = "patch.customer.client";
+export const CUSTOMERS__UNIT__GET = "get.customer.unit";
+export const CUSTOMERS__UNIT__PATCH = "patch.customer.unit";
 
 export const AUTH__LOGIN__POST = "post.auth.login";
 export const AUTH__REGISTER__POST = "post.auth.register";

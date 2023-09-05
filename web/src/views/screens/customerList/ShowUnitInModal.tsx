@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TPopUpUnit } from "@kinds/customers";
-import { useFetchPopUpDataQuery } from "@external/customers";
+import { useFetchPopUpDataQuery, useUnitQuery, useUpdateUnitMutation } from "@external/customers";
 
 import StringInput from "@components/inputs/StringInput";
-import SingleInputBox from "@components/inputs/internal/SingleInputBox";
-import DoubleInputBox from "@components/inputs/internal/DoubleInputBox";
+import SingleInputBox from "@components/layouts/SingleInputBox";
+import DoubleInputBox from "@components/layouts/DoubleInputBox";
 import LadderSelectInput from "@components/inputs/LadderSelectInput";
 import SelectEditableInput from "@components/inputs/SelectEditableInput";
 import CustomerModalLayout from "./CustomerModalLayout";
@@ -16,17 +16,26 @@ import useCustomerListStore from "@states/customerListStore";
 const ShowUnitInModal = ({ id }: { id: number }) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
+    const unitQuery = useUnitQuery(id);
+    const updateUnitMutation = useUpdateUnitMutation();
+
     const { unit, setUnitField } = useCustomerListStore();
     const { companies, units } = useFetchPopUpDataQuery().data || {};
+
+    useEffect(() => {
+        if (updateUnitMutation.isSuccess) {
+            setIsEdit(false);
+        }
+    }, [updateUnitMutation.isSuccess]);
 
     return (
         <CustomerModalLayout
             title="Unit Details"
-            errorMessage=""
+            errorMessage={updateUnitMutation.error?.message || ""}
             isEdit={isEdit}
-            onUpdate={() => {}}
+            onUpdate={() => updateUnitMutation.mutate(unit)}
             onEditToggle={() => setIsEdit(!isEdit)}
-            isLoading={false}
+            isLoading={unitQuery.isLoading}
         >
             <>
                 <DoubleInputBox

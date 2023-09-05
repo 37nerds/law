@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
-import InputError from "./InputError";
-import InputLabel from "./InputLabel";
+import InputLabel from "@components/pure/InputLabel";
+import InputError from "@components/pure/InputError";
 
 const InputLayout = ({
     input,

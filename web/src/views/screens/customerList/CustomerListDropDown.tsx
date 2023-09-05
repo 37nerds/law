@@ -1,7 +1,5 @@
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
-import confirmDelete from "@components/confirmDelete";
-
-import useNotifyEffect from "@hooks/useNotifyEffect";
+import confirmDelete from "@components/pure/confirmDelete";
 import log from "@helpers/log";
 
 const CustomerListDropDown = ({ clientId }: { clientId: number }) => {

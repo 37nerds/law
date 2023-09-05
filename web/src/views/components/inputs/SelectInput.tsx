@@ -1,7 +1,7 @@
 import { TOption } from "@kinds/general";
 
-import InputLayout from "@components/inputs/internal/InputLayout";
-import Select from "@components/inputs/internal/Select";
+import InputLayout from "@components/layouts/InputLayout";
+import Select from "@components/inputs/Select";
 
 const SelectInput = ({
     value,

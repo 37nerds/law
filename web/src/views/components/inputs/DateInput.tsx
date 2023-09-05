@@ -1,5 +1,5 @@
-import Input from "@components/inputs/internal/Input";
-import InputLayout from "@components/inputs/internal/InputLayout";
+import Input from "@components/inputs/Input";
+import InputLayout from "@components/layouts/InputLayout";
 
 /**
  * Select date with native html api

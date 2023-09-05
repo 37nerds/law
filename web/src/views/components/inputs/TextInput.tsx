@@ -1,4 +1,4 @@
-import InputLayout from "./internal/InputLayout";
+import InputLayout from "../layouts/InputLayout";
 
 const TextInput = ({
     value,
