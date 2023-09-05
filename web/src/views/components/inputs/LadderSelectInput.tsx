@@ -47,7 +47,7 @@ const LadderSelectInput = ({
                     {!disabled && isOpen && (
                         <ul
                             tabIndex={0}
-                            className="dropdown-content menu rounded-box flex h-96 w-full flex-col flex-nowrap gap-2 overflow-auto bg-base-100 p-2 shadow"
+                            className="menu dropdown-content rounded-box flex h-96 w-full flex-col flex-nowrap gap-2 overflow-auto bg-base-100 p-2 shadow"
                             style={{
                                 visibility: "visible",
                             }}

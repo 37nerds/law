@@ -60,7 +60,7 @@ const ProfilePicture = () => {
                         </label>
                         <ul
                             tabIndex={0}
-                            className="dropdown-content menu rounded-box mt-3 w-44 bg-base-300 p-2 shadow "
+                            className="menu dropdown-content rounded-box mt-3 w-44 bg-base-300 p-2 shadow "
                         >
                             <li>
                                 <a>

@@ -35,7 +35,7 @@ const Submenu = ({ submenus, name, icon: Icon }: { name: string; icon: TIcon; su
 
             {/** Submenu list */}
             <div className={` w-full ` + (isExpanded ? "" : "hidden")}>
-                <ul className={`menu menu-compact`}>
+                <ul className={`menu-compact menu`}>
                     {submenus.map(
                         (
                             { icon: Icon2, path: path2, name: name2, submenus: submenus2, defaults: defaults2 },

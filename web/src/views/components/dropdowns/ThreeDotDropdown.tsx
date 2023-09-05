@@ -21,7 +21,7 @@ const ThreeDotDropdown = ({ options }: { options: TDropDownOption[] }) => {
             {open && (
                 <ul
                     tabIndex={0}
-                    className="dropdown-content menu rounded-box bg-base-300 p-2 shadow"
+                    className="menu dropdown-content rounded-box bg-base-300 p-2 shadow"
                     style={{ zIndex: 2000 }}
                 >
                     {options.map((option, index) => (

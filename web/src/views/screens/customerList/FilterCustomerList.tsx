@@ -9,12 +9,12 @@ const FilterCustomerList = () => {
             <div className="join">
                 <div>
                     <div>
-                        <input className="join-item input input-bordered" placeholder="Search" />
+                        <input className="input join-item input-bordered" placeholder="Search" />
                     </div>
                 </div>
 
                 <div className="indicator">
-                    <button className="join-item btn">Search</button>
+                    <button className="btn join-item">Search</button>
                 </div>
             </div>
             <div className="join">

@@ -22,7 +22,7 @@ const ProfileDropDown = () => {
             </label>
             <ul
                 tabIndex={0}
-                className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
+                className="menu-compact menu dropdown-content rounded-box mt-3 w-52 bg-base-100 p-2 shadow"
             >
                 {profile_dropdown_links.map(({ link, title }, index) => (
                     <li key={index}>
