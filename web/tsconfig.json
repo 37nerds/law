@@ -27,7 +27,8 @@
             "@components/*": ["src/views/components/*"],
             "@layout/*": ["src/views/layout/*"],
             "@pages/*": ["src/views/pages/*"],
-            "@screens/*": ["src/views/screens/*"]
+            "@screens/*": ["src/views/screens/*"],
+            "@facades/*": ["src/facades/*"]
         }
     },
     "include": ["src"],

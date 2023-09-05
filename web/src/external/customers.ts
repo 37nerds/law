@@ -9,15 +9,15 @@ import {
     CUSTOMERS__UNITS__POST,
 } from "@config/keys";
 
-import type { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit } from "@kinds/customers";
-import type { TError } from "@kinds/general";
+import { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit } from "@kinds/customers";
+import { TError } from "@kinds/general";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { notify } from "@helpers/unknown";
 
-import http from "../facades/http";
 import useCustomerSetupStore from "@states/customerSetupStore";
 import useCustomerListStore from "@states/customerListStore";
+import http from "@facades/http";
 
 export const useFetchPopUpDataQuery = () => {
     const fetchPopUpDataQuery = useQuery<TPopOfData, TError>({

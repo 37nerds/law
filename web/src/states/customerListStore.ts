@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { devtools } from "zustand/middleware";
-
-import { TClient, TClientKey, TUnit } from "@kinds/customers";
+import { TClient, TClientKey, TUnit, TUnitKey } from "@kinds/customers";
 
 type TState = {
     client: TClient;
@@ -12,6 +11,8 @@ type TState = {
 type TAction = {
     setClient: (client: TClient) => void;
     setClientField: (key: TClientKey, value: any) => void;
+    setUnit: (unit: TUnit) => void;
+    setUnitField: (key: TUnitKey, value: any) => void;
 };
 
 const useCustomerListStore = create<TState & TAction>()(
@@ -71,9 +72,22 @@ const useCustomerListStore = create<TState & TAction>()(
                     state.client = client;
                 });
             },
+
             setClientField: (key, value) => {
                 set(state => {
                     state.client[key] = value as never;
+                });
+            },
+
+            setUnit: unit => {
+                set(state => {
+                    state.unit = unit;
+                });
+            },
+
+            setUnitField: (key, value) => {
+                set(state => {
+                    state.unit[key] = value as never;
                 });
             },
         }))
