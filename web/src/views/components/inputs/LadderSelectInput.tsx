@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { TLadderOption } from "@kinds/general";
 
-import InputLayout from "./internal/InputLayout";
+import InputLayout from "@components/inputs/internal/InputLayout";
+import Input from "@components/inputs/internal/Input";
 
 const LadderSelectInput = ({
     value,
@@ -33,7 +34,7 @@ const LadderSelectInput = ({
             input={
                 <div className="dropdown w-full ">
                     {disabled ? (
-                        <input value={currentName || ""} disabled={true} className="input-bordered input w-full" />
+                        <Input value={currentName || ""} disabled={true} />
                     ) : (
                         <label
                             tabIndex={0}

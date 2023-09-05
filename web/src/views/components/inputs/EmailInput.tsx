@@ -1,12 +1,9 @@
-import { TOption } from "@kinds/general";
-
+import Input from "@components/inputs/internal/Input";
 import InputLayout from "@components/inputs/internal/InputLayout";
-import Select from "@components/inputs/internal/Select";
 
-const SelectInput = ({
+const EmailInput = ({
     value,
     setValue,
-    options,
     placeholder = "",
     required = false,
     disabled = false,
@@ -15,8 +12,7 @@ const SelectInput = ({
     id = "",
 }: {
     value: string;
-    setValue: (_: string) => void;
-    options: TOption[];
+    setValue: (value: string) => void;
     placeholder?: string;
     required?: boolean;
     disabled?: boolean;
@@ -27,14 +23,15 @@ const SelectInput = ({
     return (
         <InputLayout
             input={
-                <Select
-                    placeholder={placeholder}
+                <Input
                     value={value || ""}
+                    type="email"
+                    placeholder={placeholder}
                     setValue={setValue}
-                    disabled={disabled}
                     required={required}
-                    options={options}
+                    disabled={disabled}
                     id={id}
+                    autoComplete="email"
                 />
             }
             label={label}
@@ -44,4 +41,4 @@ const SelectInput = ({
     );
 };
 
-export default SelectInput;
+export default EmailInput;

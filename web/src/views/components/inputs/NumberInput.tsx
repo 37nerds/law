@@ -1,6 +1,6 @@
 import { NumericFormat } from "react-number-format";
 
-import InputLayout from "./internal/InputLayout";
+import InputLayout from "@components/inputs/internal/InputLayout";
 
 const NumberInput = ({
     value,

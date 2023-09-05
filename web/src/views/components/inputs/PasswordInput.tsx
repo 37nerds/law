@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-import InputLayout from "./internal/InputLayout";
-import DynamicEye from "../icons/DynamicEye";
+import Input from "@components/inputs/internal/Input";
+import InputLayout from "@components/inputs/internal/InputLayout";
+import DynamicEye from "@components/icons/DynamicEye";
 
 const PasswordInput = ({
     value,
@@ -12,6 +13,7 @@ const PasswordInput = ({
     newPassword = false,
     label = null,
     errorMessage = null,
+    id = "",
 }: {
     value: string;
     setValue: (value: string) => void;
@@ -21,22 +23,23 @@ const PasswordInput = ({
     newPassword?: boolean;
     label?: string | null;
     errorMessage?: string | null;
+    id?: string;
 }) => {
-    const [type, setType] = useState("password");
+    const [type, setType] = useState<"password" | "text">("password");
 
     return (
         <InputLayout
             input={
                 <div className="flex gap-2">
-                    <input
+                    <Input
                         value={value || ""}
                         type={type}
                         placeholder={placeholder}
-                        onChange={e => setValue && setValue(e.target.value)}
-                        className="input-bordered input w-full"
+                        setValue={setValue}
                         required={required}
                         disabled={disabled}
                         autoComplete={newPassword ? "new-password" : "current-password"}
+                        id={id}
                     />
                     <DynamicEye
                         isEyeOpen={type === "text"}

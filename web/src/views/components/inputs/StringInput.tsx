@@ -1,36 +1,37 @@
-import InputLayout from "./internal/InputLayout";
+import InputLayout from "@components/inputs/internal/InputLayout";
+import Input from "@components/inputs/internal/Input";
 
 const StringInput = ({
     value,
     setValue,
-    type = "text",
     placeholder = "",
     required = false,
     disabled = false,
     label = null,
     errorMessage = null,
+    id = "",
 }: {
     value: string;
     setValue: (value: string) => void;
-    type?: "text" | "email";
     placeholder?: string;
     required?: boolean;
     disabled?: boolean;
     label?: string | null;
     errorMessage?: string | null;
+    id?: string;
 }) => {
     return (
         <InputLayout
             input={
-                <input
+                <Input
                     value={value || ""}
-                    type={type}
+                    type="text"
                     placeholder={placeholder}
-                    onChange={e => setValue && setValue(e.target.value)}
-                    className="input-bordered input w-full"
+                    setValue={setValue}
                     required={required}
                     disabled={disabled}
-                    autoComplete={type === "email" ? "email" : "on"}
+                    id={id}
+                    autoComplete="on"
                 />
             }
             label={label}

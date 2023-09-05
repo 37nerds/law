@@ -90,7 +90,6 @@ const Register = () => {
                 <div className="mb-4 flex flex-col gap-4">
                     <StringInput
                         label="Email Address"
-                        type="email"
                         value={email}
                         setValue={value => {
                             setEmail(value);
@@ -99,6 +98,7 @@ const Register = () => {
                         }}
                         required={true}
                         errorMessage={emailErrorMessage}
+                        id={"email"}
                     />
                     <StringInput
                         label="Username"
@@ -106,12 +106,14 @@ const Register = () => {
                         setValue={value => setUsername(convertUsernameLogic(value))}
                         required={true}
                         errorMessage={usernameErrorMessage}
+                        id={"username"}
                     />
                     <StringInput
                         label="Name"
                         value={name}
                         setValue={value => setName(value)}
                         errorMessage={nameErrorMessage}
+                        id={"name"}
                     />
 
                     <PasswordInput
@@ -120,6 +122,7 @@ const Register = () => {
                         setValue={setPassword}
                         required={true}
                         errorMessage={passwordErrorMessage}
+                        id="password"
                     />
                     <PasswordInput
                         label="Password Again"
@@ -127,6 +130,7 @@ const Register = () => {
                         setValue={setConfirmPassword}
                         required={true}
                         errorMessage={confirmPasswordErrorMessage}
+                        id="confirm-password"
                     />
                 </div>
 

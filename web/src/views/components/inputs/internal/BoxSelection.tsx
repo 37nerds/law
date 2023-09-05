@@ -1,6 +1,6 @@
-import SingleInputBox from "./wrappers/SingleInputBox";
+import SingleInputBox from "./SingleInputBox";
 import InputSelection from "./InputSelection";
-import DoubleInputBox from "./wrappers/DoubleInputBox";
+import DoubleInputBox from "./DoubleInputBox";
 
 const BoxSelection = ({
     field,

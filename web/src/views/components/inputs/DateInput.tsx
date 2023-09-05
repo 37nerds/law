@@ -1,4 +1,5 @@
-import InputLayout from "./internal/InputLayout";
+import Input from "@components/inputs/internal/Input";
+import InputLayout from "@components/inputs/internal/InputLayout";
 
 /**
  * Select date with native html api
@@ -11,6 +12,7 @@ const DateInput = ({
     disabled = false,
     label = null,
     errorMessage = null,
+    id = "",
 }: {
     value: string;
     setValue: (value: string) => void;
@@ -19,18 +21,19 @@ const DateInput = ({
     disabled?: boolean;
     label?: string | null;
     errorMessage?: string | null;
+    id?: string;
 }) => {
     return (
         <InputLayout
             input={
-                <input
+                <Input
                     value={value || ""}
                     type="date"
                     placeholder={placeholder}
-                    onChange={e => setValue && setValue(e.target.value)}
-                    className="input-bordered input w-full"
+                    setValue={setValue}
                     required={required}
                     disabled={disabled}
+                    id={id}
                 />
             }
             label={label}

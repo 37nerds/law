@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
@@ -133,6 +134,10 @@ class AuthController extends Controller
         }
 
         $user = UserRepository::update(Auth::user()->id, ["password" => $input["new_password"]]);
+
+        auth()->guard('web')->logout();
+        auth()->guard("web")->login($user);
+        session()->regenerate();
 
         return Response::happy(200, $user);
     }

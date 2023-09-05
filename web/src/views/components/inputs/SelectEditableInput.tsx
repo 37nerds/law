@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { TLadderOption, TOption } from "@kinds/general";
 
-import SelectInput from "./SelectInput";
-import StringInput from "./StringInput";
-import LadderSelectInput from "./LadderSelectInput";
+import StringInput from "@components/inputs/StringInput";
+import LadderSelectInput from "@components/inputs/LadderSelectInput";
+import SelectInput from "@components/inputs/SelectInput";
 
 /**
  * Select input field with editable capability.

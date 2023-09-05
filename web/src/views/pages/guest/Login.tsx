@@ -8,6 +8,7 @@ import StringInput from "@components/inputs/StringInput";
 import PasswordInput from "@components/inputs/PasswordInput";
 import LoginWrapper from "@screens/login/LoginWrapper";
 import { redirect } from "@helpers/location";
+import EmailInput from "@components/inputs/EmailInput";
 
 const Login = () => {
     const [loading, setLoading] = useState(false);
@@ -72,15 +73,15 @@ const Login = () => {
                 }}
             >
                 <div className="mb-4 flex flex-col gap-4">
-                    <StringInput
+                    <EmailInput
                         label="Email Address Or Username"
-                        type="text"
                         value={emailOrUsername}
                         setValue={value => {
                             setEmailOrUsername(value);
                         }}
                         required={true}
                         errorMessage={emailOrUsernameErrorMessage}
+                        id={"email"}
                     />
 
                     <PasswordInput

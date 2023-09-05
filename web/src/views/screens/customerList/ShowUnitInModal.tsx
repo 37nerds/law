@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 import StringInput from "@components/inputs/StringInput";
-import SingleInputBox from "@components/inputs/internal/wrappers/SingleInputBox";
-import DoubleInputBox from "@components/inputs/internal/wrappers/DoubleInputBox";
+import SingleInputBox from "@components/inputs/internal/SingleInputBox";
+import DoubleInputBox from "@components/inputs/internal/DoubleInputBox";
 import LadderSelectInput from "@components/inputs/LadderSelectInput";
 import SelectEditableInput from "@components/inputs/SelectEditableInput";
 import CustomerModalLayout from "./CustomerModalLayout";

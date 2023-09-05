@@ -6,6 +6,7 @@ import NumberInput from "@components/inputs/NumberInput";
 import LadderSelectInput from "@components/inputs/LadderSelectInput";
 import DateInput from "@components/inputs/DateInput";
 import { TLadderOption, TOption } from "@kinds/general";
+import EmailInput from "../EmailInput";
 
 const InputSelection = ({
     type,
@@ -27,15 +28,13 @@ const InputSelection = ({
     const inputComponents: any = {
         string: (
             <StringInput
-                type={type as any}
                 value={values[field]}
                 setValue={value => setValue(field, value)}
                 errorMessage={errors && errors[field]}
             />
         ),
         email: (
-            <StringInput
-                type={type as any}
+            <EmailInput
                 value={values[field]}
                 setValue={value => setValue(field, value)}
                 errorMessage={errors && errors[field]}

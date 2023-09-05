@@ -4,13 +4,11 @@
 
 import { useState } from "react";
 
-export type TUpdateFormValue = (_: { updateType: string; value: boolean }) => void;
-
 type Props = {
     labelTitle: string;
     updateType: string;
     defaultValue: boolean;
-    updateFormValue: TUpdateFormValue;
+    updateFormValue: (_: { updateType: string; value: boolean }) => void;
     labelStyle?: string;
     containerStyle?: string;
 };

@@ -6,11 +6,12 @@ import TextInput from "@components/inputs/TextInput";
 import DateInput from "@components/inputs/DateInput";
 import SelectInput from "@components/inputs/SelectInput";
 import StringInput from "@components/inputs/StringInput";
-import SingleInputBox from "@components/inputs/internal/wrappers/SingleInputBox";
-import DoubleInputBox from "@components/inputs/internal/wrappers/DoubleInputBox";
+import SingleInputBox from "@components/inputs/internal/SingleInputBox";
+import DoubleInputBox from "@components/inputs/internal/DoubleInputBox";
 import LadderSelectInput from "@components/inputs/LadderSelectInput";
 import CustomerModalLayout from "./CustomerModalLayout";
 import useCustomerListStore from "@states/customerListStore";
+import EmailInput from "@components/inputs/EmailInput";
 
 /**
  * Show individual client data by ID and user can edit the data as well
@@ -130,8 +131,7 @@ const ShowClientInModal = ({ id }: { id: number }) => {
                     }
                     label2="Email"
                     element2={
-                        <StringInput
-                            type="email"
+                        <EmailInput
                             value={client["email"]}
                             disabled={!isEdit}
                             setValue={value => setClientField("email", value)}
