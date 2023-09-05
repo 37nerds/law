@@ -11,7 +11,7 @@ import LineChart from "@screens/dashboard/LineChart";
 import PageStats from "@screens/dashboard/PageStats";
 import UserChannels from "@screens/dashboard/UserChannels";
 import useSetPageTitle from "@hooks/useSetPageTitle";
-import { notify } from "@helpers/unkown";
+import { notify } from "@helpers/unknown";
 
 const statsData = [
     {

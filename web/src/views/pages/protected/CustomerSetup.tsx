@@ -6,7 +6,7 @@ import ErrorText from "@components/pure/ErrorText";
 import useCustomerSetupStore from "@states/customerSetupStore";
 import { useEffect } from "react";
 import { useFetchPopUpDataQuery } from "@external/customers";
-import { notify } from "@helpers/unkown";
+import { notify } from "@helpers/unknown";
 
 const CustomerSetup = () => {
     useSetPageTitle("Customer Setup");

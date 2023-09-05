@@ -4,7 +4,7 @@ import { profile_dropdown_links } from "@config/header";
 
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import LogoutButton from "@layout/Header/LogoutButton";
-import { getProfileUrlFromAvatarKey } from "@helpers/unkown";
+import { getProfileUrlFromAvatarKey } from "@helpers/unknown";
 
 const ProfileDropDown = () => {
     const avatar = selectLoggedUserAvatar();

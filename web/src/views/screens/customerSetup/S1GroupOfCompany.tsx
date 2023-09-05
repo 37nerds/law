@@ -9,7 +9,7 @@ import { legalFromOptions } from "@config/general";
 import { TGroupOfCompany } from "@kinds/customers";
 import { TBottomButton } from "@kinds/general";
 import { useSaveGroupOfCompanyMutation } from "@external/customers";
-import { notify } from "@helpers/unkown";
+import { notify } from "@helpers/unknown";
 
 const fields = [
     {

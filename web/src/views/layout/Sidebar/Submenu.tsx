@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import DynamicChevronIcon from "@components/icons/DynamicChevronIcon";
 import { getPathname } from "@helpers/location";
-import { usePrepareUrlForSidebarLink } from "@helpers/unkown";
+import { usePrepareUrlForSidebarLink } from "@helpers/unknown";
 
 const Submenu = ({ submenus, name, icon: Icon }: { name: string; icon: TIcon; submenus: TSidebarLink[] }) => {
     const location = useLocation();

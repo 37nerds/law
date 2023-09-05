@@ -2,7 +2,7 @@ import type { TLoggedUser } from "@kinds/users";
 import { selectLoggedUser } from "@states/authStore";
 import { useState } from "react";
 import { useUploadProfilePictureMutation } from "@external/auth";
-import { getProfileUrlFromAvatarKey } from "@helpers/unkown";
+import { getProfileUrlFromAvatarKey } from "@helpers/unknown";
 
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import PencilIcon from "@heroicons/react/24/outline/PencilIcon";

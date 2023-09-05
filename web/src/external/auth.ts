@@ -10,7 +10,7 @@ import {
 
 import type { TLoggedUser } from "@kinds/users";
 import type { TError } from "@kinds/general";
-import { isEmail, notify } from "@helpers/unkown";
+import { isEmail, notify } from "@helpers/unknown";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 

@@ -1,6 +1,6 @@
 import type { TIcon } from "@kinds/general";
 import { NavLink, useLocation } from "react-router-dom";
-import { usePrepareUrlForSidebarLink } from "@helpers/unkown";
+import { usePrepareUrlForSidebarLink } from "@helpers/unknown";
 
 const Menu = ({
     path,

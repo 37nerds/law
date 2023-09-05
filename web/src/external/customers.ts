@@ -13,7 +13,7 @@ import type { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit } from "@kin
 import type { TError } from "@kinds/general";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { notify } from "@helpers/unkown";
+import { notify } from "@helpers/unknown";
 
 import http from "../facades/http";
 import useCustomerSetupStore from "@states/customerSetupStore";
@@ -47,7 +47,7 @@ export const useSaveGroupOfCompanyMutation = () => {
         },
         mutationKey: [CUSTOMERS__GROUP_OF_COMPANIES__POST],
         onSuccess: () => {
-            return queryClient.invalidateQueries("fetchPopUpData");
+            return queryClient.invalidateQueries(CUSTOMERS__POP_UP_DATA__GET);
         },
     });
 };
@@ -98,7 +98,7 @@ export const useCustomerListQuery = () => {
     const [page, setPage] = useState(0);
 
     const fetchCustomers = async (page = 1) => {
-        return await http.get(`/customers/clients?per_page=6&page=${page}`, 200);
+        return await http.get(`/customers/clients?per_page=10&page=${page}`, 200);
     };
 
     const query = useQuery<any, TError>([CUSTOMERS__CLIENTS__GET, page], () => fetchCustomers(page), {
