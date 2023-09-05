@@ -8,10 +8,9 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Http\Resources\ClientResource;
 use App\Models\Client;
+use App\Repositories\ClientRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -20,8 +19,6 @@ class ClientController extends Controller
         $perPage = $request->query("per_page", 10);
         $paginates = collect(Client::with('unit.company.group_of_company')->paginate($perPage));
         $paginates["data"] = collect($paginates["data"])->map(function ($x) {
-            Log::info($x);
-
             return [
                 "id" => $x["id"],
                 "name" => $x["name"],
@@ -36,9 +33,6 @@ class ClientController extends Controller
         return Response::happy(200, $paginates);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreClientRequest $request): JsonResponse
     {
         $validated = $request->validated();
@@ -47,29 +41,20 @@ class ClientController extends Controller
         return Response::happy(201, new ClientResource($item));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Client $client): JsonResponse
     {
         return Response::happy(200, new ClientResource($client));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateClientRequest $request, Client $client): JsonResponse
     {
-        $client->update($request->all());
+        $client = ClientRepository::update($client, $request->all());
+
         return Response::happy(200, new ClientResource($client));
     }
 
     public function destroy(Client $client): JsonResponse
     {
-        if (!Auth::user()->tokenCan("admin")) {
-            abort(403, "Unauthorized");
-        }
-
         $client->delete();
         return Response::happy(204);
     }

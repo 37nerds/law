@@ -1,20 +1,23 @@
 <?php
 
+use App\Enums\Status;
+use App\Enums\Table;
 use App\Models\Unit;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create(Table::clients, function (Blueprint $table) {
             $table->uuid("id")->primary();
-            $table->string('name');
             $table->foreignIdFor(Unit::class, "unit_id");
+
+            $table->timestamps();
+            $table->string("status")->default(Status::active);
+
+            $table->string('name');
             $table->string('client_id')->nullable();
             $table->string('passport_no')->nullable();
             $table->string('passport_issue_date')->nullable();
@@ -36,15 +39,11 @@ return new class extends Migration {
             $table->text('address')->nullable();
             $table->text('bill_to')->nullable();
             $table->text('notes')->nullable();
-            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists(Table::clients);
     }
 };

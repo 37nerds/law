@@ -2,10 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Contracts\Repository;
 use App\Models\User;
 
-class UserRepository implements Repository
+class UserRepository
 {
     public static function create(array $properties): User
     {

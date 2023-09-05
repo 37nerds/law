@@ -7,9 +7,10 @@
 .data
 tmp*
 
+api/public/vendor
 api/.phpstorm.meta.php
 api/_ide_helper.php
-api/public/vendor
+api/_ide_helper_models.php
 
 web/.env
 
@@ -34,7 +35,6 @@ api/yarn-error.log
 api/.fleet
 api/.idea
 api/.vscode
-
 
 # WEB
 web/logs

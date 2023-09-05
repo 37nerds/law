@@ -1,20 +1,23 @@
 <?php
 
+use App\Enums\Status;
+use App\Enums\Table;
 use App\Models\GroupOfCompany;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create(Table::companies, function (Blueprint $table) {
             $table->uuid("id")->primary();
-            $table->string('name');
             $table->foreignIdFor(GroupOfCompany::class, "group_of_company_id");
+
+            $table->timestamps();
+            $table->string("status")->default(Status::active);
+
+            $table->string('name');
             $table->text('address');
             $table->string('telephone')->nullable();
             $table->string('mobile');
@@ -34,15 +37,11 @@ return new class extends Migration {
             $table->string('contact_person')->nullable();
             $table->string('contact_person_mobile')->nullable();
             $table->string('contact_person_email')->nullable();
-            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists(Table::companies);
     }
 };

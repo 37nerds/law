@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Base\ModelTrait;
+use App\Enums\Table;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 class GroupOfCompany extends Model
 {
     use HasFactory, ModelTrait, HasUuids;
+
+    protected $table = Table::group_of_companies;
 
     protected $fillable = [
         'name',
