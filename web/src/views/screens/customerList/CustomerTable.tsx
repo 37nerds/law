@@ -3,7 +3,7 @@ import { TCustomerModalOpenFor } from "@kinds/customers";
 
 import CustomerModal from "@screens/customerList/CustomerModal";
 import ModalOpener from "@components/modals/ModalOpener";
-import CustomerListDropDown from "@screens/customerList/CustomerListDropDown";
+import HoverDropDownList from "@screens/customerList/HoverDropDownList";
 
 const CustomerTable = ({ data }: { data: any }) => {
     const [modalOpenFor, setModalOpenFor] = useState<TCustomerModalOpenFor | null>(null);
@@ -73,7 +73,7 @@ const CustomerTable = ({ data }: { data: any }) => {
                                 </ModalOpener>
                             </th>
                             <th>
-                                <CustomerListDropDown clientId={customer.id} />
+                                <HoverDropDownList clientId={customer.id} />
                             </th>
                         </tr>
                     ))}

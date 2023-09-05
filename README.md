@@ -9,5 +9,5 @@ ERP solution for Low Firm
 -   Run server development: `composer run-script dev:server`
 -   Run queue worker: `composer run-script dev:queue`
 -   Then start frontend: `cd web`
--   Run setup script: `yarn setup`
--   Run development server: `yarn dev`
+-   Run setup script: `pnpm setup`
+-   Run development server: `pnpm dev`

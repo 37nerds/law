@@ -1,9 +1,8 @@
 import { useDeleteClientMutation } from "@external/customers";
 
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
-import confirmDelete from "@components/pure/confirmDelete";
 
-const CustomerListDropDown = ({ clientId }: { clientId: number }) => {
+const HoverDropDownList = ({ clientId }: { clientId: number }) => {
     const deleteClientMutation = useDeleteClientMutation();
 
     return (
@@ -20,12 +19,9 @@ const CustomerListDropDown = ({ clientId }: { clientId: number }) => {
                 {
                     content: <button className="btn btn-sm w-full text-xs">Delete</button>,
                     handler: () => {
-                        confirmDelete({
-                            onDelete: () => {
-                                deleteClientMutation.mutate(clientId);
-                            },
-                            onCancel: () => {},
-                        });
+                        if (confirm("Are you sure you want to delete this client?")) {
+                            deleteClientMutation.mutate(clientId);
+                        }
                     },
                 },
             ]}
@@ -33,4 +29,4 @@ const CustomerListDropDown = ({ clientId }: { clientId: number }) => {
     );
 };
 
-export default CustomerListDropDown;
+export default HoverDropDownList;
