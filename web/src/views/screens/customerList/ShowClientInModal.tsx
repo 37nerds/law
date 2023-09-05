@@ -9,9 +9,9 @@ import StringInput from "@components/inputs/StringInput";
 import SingleInputBox from "@components/layouts/SingleInputBox";
 import DoubleInputBox from "@components/layouts/DoubleInputBox";
 import LadderSelectInput from "@components/inputs/LadderSelectInput";
-import CustomerModalLayout from "./CustomerModalLayout";
 import useCustomerListStore from "@states/customerListStore";
 import EmailInput from "@components/inputs/EmailInput";
+import CustomerModalLayout from "@screens/customerList/CustomerModalLayout";
 
 /**
  * Show individual client data by ID and user can edit the data as well

@@ -81,7 +81,7 @@ const ForgotPassword = () => {
                             <ErrorText className="mt-12">{errorMessage}</ErrorText>
                             <button
                                 type="submit"
-                                className={"btn-primary btn mt-2 w-full" + (loading ? " loading" : "")}
+                                className={"btn btn-primary mt-2 w-full" + (loading ? " loading" : "")}
                             >
                                 Send Reset Link
                             </button>

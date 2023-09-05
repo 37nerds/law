@@ -39,17 +39,17 @@ function DashboardTopBar({ updateDashboardPeriod }: Props) {
                 />
             </div>
             <div className="text-right ">
-                <button className="btn-ghost btn-sm btn normal-case">
+                <button className="btn btn-ghost btn-sm normal-case">
                     <ArrowPathIcon className="mr-2 w-4" />
                     Refresh Data
                 </button>
-                <button className="btn-ghost btn-sm btn ml-2  normal-case">
+                <button className="btn btn-ghost btn-sm ml-2  normal-case">
                     <ShareIcon className="mr-2 w-4" />
                     Share
                 </button>
 
-                <div className="dropdown dropdown-bottom dropdown-end  ml-2">
-                    <label tabIndex={0} className="btn-ghost btn-sm btn-square btn normal-case ">
+                <div className="dropdown dropdown-end dropdown-bottom  ml-2">
+                    <label tabIndex={0} className="btn btn-square btn-ghost btn-sm normal-case ">
                         <EllipsisVerticalIcon className="w-5" />
                     </label>
                     <ul

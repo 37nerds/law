@@ -23,7 +23,7 @@ const Input = ({
             type={type}
             placeholder={placeholder}
             onChange={e => setValue && setValue(e.target.value)}
-            className="input-bordered input w-full"
+            className="input input-bordered w-full"
             required={required}
             disabled={disabled}
             autoComplete={autoComplete}

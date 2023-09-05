@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\GroupOfCompanyController;
-use App\Http\Controllers\UnitController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Customers\ClientController;
+use App\Http\Controllers\Customers\CompanyController;
+use App\Http\Controllers\Customers\CustomerController;
+use App\Http\Controllers\Customers\GroupOfCompanyController;
+use App\Http\Controllers\Customers\UnitController;
 use Illuminate\Support\Facades\Route;
 
 

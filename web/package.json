@@ -3,11 +3,11 @@
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "setup": "cp .env.example .env; yarn install",
+        "setup": "cp .env.example .env; pnpm install",
         "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "format": "prettier --write ."
+        "format": "prettier --write \"*/**/*.{js,ts,jsx,tsx,json,css}\" --config prettier.config.cjs"
     },
     "dependencies": {
         "@heroicons/react": "^2.0.13",

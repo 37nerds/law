@@ -1,8 +1,9 @@
 import { useState } from "react";
-import type { TCustomerModalOpenFor } from "./CustomerModal";
-import CustomerModal from "./CustomerModal";
+import { TCustomerModalOpenFor } from "@kinds/customers";
+
+import CustomerModal from "@screens/customerList/CustomerModal";
 import ModalOpener from "@components/modals/ModalOpener";
-import CustomerListDropDown from "./CustomerListDropDown";
+import CustomerListDropDown from "@screens/customerList/CustomerListDropDown";
 
 const CustomerTable = ({ data }: { data: any }) => {
     const [modalOpenFor, setModalOpenFor] = useState<TCustomerModalOpenFor | null>(null);
@@ -10,7 +11,7 @@ const CustomerTable = ({ data }: { data: any }) => {
     return (
         <>
             <CustomerModal modalOpenFor={modalOpenFor} />
-            <table className="table-compact table w-full rounded text-xs">
+            <table className="table table-compact w-full rounded text-xs">
                 <thead>
                     <tr>
                         <th>Client Name</th>

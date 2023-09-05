@@ -38,7 +38,7 @@ const LadderSelectInput = ({
                     ) : (
                         <label
                             tabIndex={0}
-                            className="select-bordered select flex w-full items-center"
+                            className="select select-bordered flex w-full items-center"
                             onClick={() => setIsOpen(!isOpen)}
                         >
                             {currentName || placeholder || "Select"}

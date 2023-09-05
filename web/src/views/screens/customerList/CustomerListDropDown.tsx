@@ -1,31 +1,28 @@
+import { useDeleteClientMutation } from "@external/customers";
+
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 import confirmDelete from "@components/pure/confirmDelete";
-import log from "@helpers/log";
 
 const CustomerListDropDown = ({ clientId }: { clientId: number }) => {
-    // const [deleteClient, { isSuccess, error }] = useDeleteClientMutation();
-
-    // useNotifyEffect(error, "Error in delete customer", isSuccess, "You successfully deleted the client ! xx");
+    const deleteClientMutation = useDeleteClientMutation();
 
     return (
         <ThreeDotDropdown
             options={[
                 {
-                    content: <button className="btn-primary btn-sm btn w-full text-xs">Export</button>,
-                    handler: () => {
-                        log.print("Hello");
-                    },
-                },
-                {
-                    content: <button className="btn-accent btn-sm btn w-full text-xs">Inactive</button>,
+                    content: <button className=" btn btn-primary  btn-sm w-full text-xs">Export</button>,
                     handler: () => {},
                 },
                 {
-                    content: <button className="btn-sm btn w-full text-xs">Delete</button>,
+                    content: <button className="btn btn-accent btn-sm w-full text-xs">Inactive</button>,
+                    handler: () => {},
+                },
+                {
+                    content: <button className="btn btn-sm w-full text-xs">Delete</button>,
                     handler: () => {
                         confirmDelete({
                             onDelete: () => {
-                                // deleteClient(clientId);
+                                deleteClientMutation.mutate(clientId);
                             },
                             onCancel: () => {},
                         });

@@ -6,7 +6,7 @@ const DynamicEye = ({ isEyeOpen = false, onClick }: { isEyeOpen?: boolean; onCli
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="btn-ghost btn-square btn w-10"
+            className="btn btn-square btn-ghost w-10"
             onClick={onClick}
         >
             <path
@@ -23,7 +23,7 @@ const DynamicEye = ({ isEyeOpen = false, onClick }: { isEyeOpen?: boolean; onCli
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="btn-square btn w-10"
+            className="btn btn-square w-10"
             onClick={onClick}
         >
             <path

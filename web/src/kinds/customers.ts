@@ -126,3 +126,8 @@ export type TClient = {
 };
 
 export type TClientKey = keyof TClient;
+
+export type TCustomerModalOpenFor = {
+    id: number;
+    type: "client" | "unit" | "company" | "group_of_company";
+};

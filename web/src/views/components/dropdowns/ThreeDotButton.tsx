@@ -6,7 +6,7 @@ const ThreeDotButton = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="btn-ghost btn-square btn h-6 w-6"
+            className="btn btn-square btn-ghost h-6 w-6"
         >
             <path
                 strokeLinecap="round"

@@ -8,7 +8,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
     return (
         <>
             {/* Left drawer - containing page Content and Sidebar (always open) */}
-            <div className="drawer-mobile drawer">
+            <div className="drawer drawer-mobile">
                 <input id="left-sidebar-drawer" type="checkbox" className="drawer-toggle" />
                 <Content>{children}</Content>
                 <Sidebar />

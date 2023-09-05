@@ -7,11 +7,11 @@ const NotificationButton = () => {
     const noOfNotifications = notifications?.length || 0;
 
     return (
-        <button className="btn-ghost btn-circle btn  ml-4" onClick={openNotification}>
+        <button className="btn btn-circle btn-ghost  ml-4" onClick={openNotification}>
             <div className="indicator">
                 <BellIcon className="h-6 w-6" />
                 {noOfNotifications > 0 ? (
-                    <span className="badge-secondary badge badge-sm indicator-item">{noOfNotifications}</span>
+                    <span className="badge indicator-item badge-secondary badge-sm">{noOfNotifications}</span>
                 ) : null}
             </div>
         </button>

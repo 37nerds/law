@@ -7,8 +7,8 @@ import SingleInputBox from "@components/layouts/SingleInputBox";
 import DoubleInputBox from "@components/layouts/DoubleInputBox";
 import LadderSelectInput from "@components/inputs/LadderSelectInput";
 import SelectEditableInput from "@components/inputs/SelectEditableInput";
-import CustomerModalLayout from "./CustomerModalLayout";
 import useCustomerListStore from "@states/customerListStore";
+import CustomerModalLayout from "@screens/customerList/CustomerModalLayout";
 
 /**
  * Show individual unit data by ID and user can edit the data as well

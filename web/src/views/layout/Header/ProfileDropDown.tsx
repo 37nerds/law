@@ -11,7 +11,7 @@ const ProfileDropDown = () => {
 
     return (
         <div className="dropdown dropdown-end ml-4">
-            <label tabIndex={0} className="btn-ghost btn-circle avatar btn">
+            <label tabIndex={0} className="avatar btn btn-circle btn-ghost">
                 <div className="w-10 rounded-full">
                     {avatar ? (
                         <img src={getProfileUrlFromAvatarKey(avatar)} alt="profile" />

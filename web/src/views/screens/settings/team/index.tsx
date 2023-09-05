@@ -10,7 +10,7 @@ const TopSideButtons = () => {
 
     return (
         <div className="float-right inline-block">
-            <button className="btn-primary btn-sm btn px-6 normal-case" onClick={() => addNewTeamMember()}>
+            <button className="btn btn-primary btn-sm px-6 normal-case" onClick={() => addNewTeamMember()}>
                 Invite New
             </button>
         </div>

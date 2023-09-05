@@ -79,7 +79,7 @@ const Integration = () => {
                             <div className="mt-6 text-right">
                                 <input
                                     type="checkbox"
-                                    className="toggle-success toggle toggle-lg"
+                                    className="toggle toggle-success toggle-lg"
                                     checked={i.isActive}
                                     onChange={() => updateIntegrationStatus(k)}
                                 />

@@ -30,7 +30,7 @@ const DeleteConfirmmer = ({
             </div>
             <div className="flex-none">
                 <button
-                    className="btn-ghost btn-sm btn"
+                    className="btn btn-ghost btn-sm"
                     onClick={() => {
                         onCancel && onCancel();
                         onClose();
@@ -39,7 +39,7 @@ const DeleteConfirmmer = ({
                     Cancel
                 </button>
                 <button
-                    className="btn-error btn-sm btn"
+                    className="btn btn-error btn-sm"
                     onClick={() => {
                         onDelete && onDelete();
                         onClose();

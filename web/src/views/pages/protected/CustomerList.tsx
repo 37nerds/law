@@ -1,4 +1,4 @@
-import { useCustomerListQuery } from "@external/customers";
+import { useClientsQuery } from "@external/customers";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -16,7 +16,7 @@ const CustomerList = () => {
 
     const { page: paramPage } = useParams();
 
-    const { query, page, setPage } = useCustomerListQuery();
+    const { query, page, setPage } = useClientsQuery();
 
     useEffect(() => {
         setPage(Number(paramPage) || 1);

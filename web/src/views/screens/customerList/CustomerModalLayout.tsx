@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import Loading from "@components/pure/Loading";
 import ErrorText from "@components/pure/ErrorText";
@@ -26,7 +26,7 @@ const CustomerModalLayout = ({
                 <h2 className="text-3xl font-bold">{title}</h2>
                 <div className="flex gap-3">
                     {isEdit && (
-                        <button className={`btn-success btn`} onClick={onUpdate}>
+                        <button className={`btn btn-success`} onClick={onUpdate}>
                             Update
                         </button>
                     )}

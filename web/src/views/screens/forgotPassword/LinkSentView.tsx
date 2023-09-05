@@ -11,7 +11,7 @@ const LinkSentView = () => {
             <p className="mb-8 mt-4 text-center font-semibold">Check your email to reset password</p>
             <div className="mt-4 text-center">
                 <Link to="/login">
-                    <button className="btn-primary btn-block btn ">Login</button>
+                    <button className="btn btn-primary btn-block ">Login</button>
                 </Link>
             </div>
         </>

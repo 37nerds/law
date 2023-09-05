@@ -28,7 +28,7 @@ const NumberInput = ({
                         setValue(Number(values.value));
                     }}
                     placeholder={placeholder}
-                    className="input-bordered input w-full"
+                    className="input input-bordered w-full"
                     required={required}
                     decimalScale={2}
                     fixedDecimalScale

@@ -48,7 +48,7 @@ const SelectBox = ({
                 </div>
             </label>
 
-            <select className="select-bordered select w-full" value={value} onChange={e => updateValue(e.target.value)}>
+            <select className="select select-bordered w-full" value={value} onChange={e => updateValue(e.target.value)}>
                 <option disabled value="PLACEHOLDER">
                     {placeholder}
                 </option>

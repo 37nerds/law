@@ -1,4 +1,5 @@
 import {
+    CUSTOMERS__CLIENT__DELETE,
     CUSTOMERS__CLIENT__GET,
     CUSTOMERS__CLIENT__PATCH,
     CUSTOMERS__CLIENTS__GET,
@@ -96,7 +97,7 @@ export const useSaveClientMutation = () => {
     });
 };
 
-export const useCustomerListQuery = () => {
+export const useClientsQuery = () => {
     const [page, setPage] = useState(0);
 
     const fetchCustomers = async (page = 1) => {
@@ -157,6 +158,29 @@ export const useUpdateClientMutation = () => {
             setClient(query.data);
         }
     }, [query.isError, query.isSuccess]);
+
+    return query;
+};
+
+export const useDeleteClientMutation = () => {
+    const queryClient = useQueryClient();
+
+    const query = useMutation<any, TError, number>({
+        mutationFn: async id => {
+            return await http.delete(`/customers/clients/${id}`, 204);
+        },
+        mutationKey: [CUSTOMERS__CLIENT__DELETE],
+        onSuccess: () => {
+            queryClient.invalidateQueries(CUSTOMERS__CLIENTS__GET).then(() => {});
+            queryClient.invalidateQueries(CUSTOMERS__POP_UP_DATA__GET).then(() => {});
+        },
+    });
+
+    useEffect(() => {
+        if (query.isError) {
+            notify("error", query.error?.message);
+        }
+    }, [query.isError]);
 
     return query;
 };

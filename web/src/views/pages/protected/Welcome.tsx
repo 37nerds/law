@@ -11,7 +11,7 @@ function InternalPage() {
                 <div className="max-w-md">
                     <TemplatePointers />
                     <Link to="/_/dashboard">
-                        <button className="btn-outline btn bg-base-100">Get Started</button>
+                        <button className="btn btn-outline bg-base-100">Get Started</button>
                     </Link>
                 </div>
             </div>

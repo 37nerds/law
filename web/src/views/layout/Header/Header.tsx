@@ -13,7 +13,7 @@ const Header = () => {
         <div className="navbar z-10 flex justify-between bg-base-100 shadow-md ">
             {/* Menu toggle for mobile views or small screen */}
             <div className="">
-                <label htmlFor="left-sidebar-drawer" className="btn-primary drawer-button btn lg:hidden">
+                <label htmlFor="left-sidebar-drawer" className="btn btn-primary drawer-button lg:hidden">
                     <Bars3Icon className="inline-block h-5 w-5" />
                 </label>
                 <h1 className="ml-2 text-2xl font-semibold">{pageTitle}</h1>

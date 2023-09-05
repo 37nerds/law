@@ -22,7 +22,7 @@ const TextInput = ({
             input={
                 <textarea
                     value={value || ""}
-                    className="textarea-bordered textarea w-full"
+                    className="textarea textarea-bordered w-full"
                     placeholder={placeholder}
                     onChange={e => setValue(e.target.value)}
                     required={required}

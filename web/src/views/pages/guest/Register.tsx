@@ -135,7 +135,7 @@ const Register = () => {
                 </div>
 
                 <ErrorText className="mt-8">{errorMessage}</ErrorText>
-                <button type="submit" className={"btn-primary btn mt-2 w-full" + (loading ? " loading" : "")}>
+                <button type="submit" className={"btn btn-primary mt-2 w-full" + (loading ? " loading" : "")}>
                     Register
                 </button>
 

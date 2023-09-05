@@ -15,7 +15,7 @@ const ToastNotification = () => {
     return (
         <>
             {lastNotification ? (
-                <div className="toast-end toast toast-top" style={{ zIndex: 99999 }}>
+                <div className="toast toast-end toast-top" style={{ zIndex: 99999 }}>
                     <div
                         className={`alert w-72 ${
                             lastNotification.type === "error"

@@ -19,7 +19,7 @@ const Select = ({
 }) => {
     return (
         <select
-            className="select-bordered select w-full"
+            className="select select-bordered w-full"
             value={value || ""}
             onChange={e => setValue(e.target.value)}
             disabled={disabled}

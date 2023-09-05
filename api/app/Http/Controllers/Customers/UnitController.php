@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customers;
 
 use App\Base\Controller;
 use App\Base\Response;
@@ -38,6 +38,6 @@ class UnitController extends Controller
 
     public function destroy(Unit $unit)
     {
-        
+
     }
 }
