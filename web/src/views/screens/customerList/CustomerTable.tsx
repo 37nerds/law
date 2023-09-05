@@ -11,7 +11,7 @@ const CustomerTable = ({ data }: { data: any }) => {
     return (
         <>
             <CustomerModal modalOpenFor={modalOpenFor} />
-            <table className="table table-compact w-full rounded text-xs">
+            <table className="table table-xs w-full rounded text-xs">
                 <thead>
                     <tr>
                         <th>Client Name</th>
@@ -23,7 +23,7 @@ const CustomerTable = ({ data }: { data: any }) => {
                 </thead>
                 <tbody>
                     {data.map((customer: any, index: number) => (
-                        <tr key={index} className={`${index % 2 === 1 ? "active" : ""}`}>
+                        <tr key={index} className={`${index % 2 === 1 ? "bg-base-200" : ""}`}>
                             <th>
                                 <ModalOpener
                                     onClick={() => {

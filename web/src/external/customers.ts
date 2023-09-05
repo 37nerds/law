@@ -14,7 +14,7 @@ import {
 
 import { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit, TUpdateClient } from "@kinds/customers";
 import { TError } from "@kinds/general";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { notify } from "@helpers/unknown";
 
@@ -98,17 +98,18 @@ export const useSaveClientMutation = () => {
 };
 
 export const useClientsQuery = () => {
-    const [page, setPage] = useState(0);
+    const { clientsFilters } = useCustomerListStore();
 
-    const fetchCustomers = async (page = 1) => {
-        return await http.get(`/customers/clients?per_page=10&page=${page}`, 200);
-    };
-
-    const query = useQuery<any, TError>([CUSTOMERS__CLIENTS__GET, page], () => fetchCustomers(page), {
+    return useQuery<any, TError>({
+        queryFn: async () => {
+            return await http.get(
+                `/customers/clients?per_page=10` + `&page=${clientsFilters.page}` + `&status=${clientsFilters.status}`,
+                200
+            );
+        },
+        queryKey: [CUSTOMERS__CLIENTS__GET, clientsFilters.page, clientsFilters.status],
         keepPreviousData: true,
     });
-
-    return { query, page, setPage };
 };
 
 export const useClientQuery = (id: number) => {
@@ -138,7 +139,7 @@ export const useUpdateClientMutation = () => {
     const queryClient = useQueryClient();
     const { setClient } = useCustomerListStore();
 
-    const query = useMutation<TClient, TError, TUpdateClient>({
+    const query = useMutation<TClient, TError, TUpdateClient | TClient>({
         mutationFn: async client => {
             return await http.patch(`/customers/clients/${client.id}`, client, 200);
         },

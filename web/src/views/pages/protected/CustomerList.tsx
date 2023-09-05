@@ -1,4 +1,4 @@
-import { useClientsQuery } from "../../../external/customers";
+import { useClientsQuery } from "@external/customers";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -8,18 +8,20 @@ import useSetPageTitle from "@hooks/useSetPageTitle";
 import Paginator from "@components/pure/Paginator";
 import CustomerTable from "@screens/customerList/CustomerTable";
 import Card from "@components/cards/Card";
+import FilterCustomerList from "@screens/customerList/FilterCustomerList";
+import useCustomerListStore from "@states/customerListStore";
 
 const CustomerList = () => {
     useSetPageTitle("Customer List");
 
     const navigate = useNavigate();
+    const query = useClientsQuery();
 
     const { page: paramPage } = useParams();
-
-    const { query, page, setPage } = useClientsQuery();
+    const { clientsFilters, setClientsFiltersField } = useCustomerListStore();
 
     useEffect(() => {
-        setPage(Number(paramPage) || 1);
+        setClientsFiltersField("page", Number(paramPage) || 1);
     }, [paramPage]);
 
     return (
@@ -34,9 +36,10 @@ const CustomerList = () => {
                         title="List all Customers"
                         content={
                             <div className="flex w-full flex-col gap-12">
+                                <FilterCustomerList />
                                 <CustomerTable data={query.data?.data} />
                                 <Paginator
-                                    currentPage={page}
+                                    currentPage={clientsFilters.page}
                                     totalPages={query.data?.last_page}
                                     onSetCurrentPage={page => {
                                         navigate(`/_/customers/${page}`);

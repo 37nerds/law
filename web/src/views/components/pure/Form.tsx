@@ -26,7 +26,7 @@ const Form = ({
             {children}
 
             <div>
-                <button type="submit" className={`btn ${loading ? "loading" : ""} ${buttonClassName}`}>
+                <button type="submit" className={`btn btn-neutral ${loading ? "loading" : ""} ${buttonClassName}`}>
                     {buttonContent}
                 </button>
             </div>

@@ -1,5 +1,5 @@
-import { useDeleteClientMutation, useUpdateClientMutation } from "../../../external/customers";
-import { INACTIVE } from "../../../constants/status";
+import { useDeleteClientMutation, useUpdateClientMutation } from "@external/customers";
+import { INACTIVE } from "@constants/status";
 
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 

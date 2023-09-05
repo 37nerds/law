@@ -10,7 +10,12 @@ const BottomButtons = ({
     return (
         <div className="flex flex-col justify-between gap-2 lg:flex-row lg:px-20">
             {buttons.map((label, index) => (
-                <button key={index} className="btn btn-sm lg:btn-md" onClick={() => onClick(label)} disabled={loading}>
+                <button
+                    key={index}
+                    className="btn btn-neutral btn-sm lg:btn-md"
+                    onClick={() => onClick(label)}
+                    disabled={loading}
+                >
                     {label}
                 </button>
             ))}

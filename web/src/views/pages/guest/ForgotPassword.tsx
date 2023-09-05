@@ -6,6 +6,7 @@ import ErrorText from "@components/pure/ErrorText";
 import StringInput from "@components/inputs/StringInput";
 import ForgotPasswordWrapper from "@screens/forgotPassword/ForgotPasswordWrapper";
 import LinkSentView from "@screens/forgotPassword/LinkSentView";
+import EmailInput from "@components/inputs/EmailInput";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
@@ -68,13 +69,13 @@ const ForgotPassword = () => {
                             }}
                         >
                             <div className="mb-4">
-                                <StringInput
+                                <EmailInput
                                     value={email}
                                     setValue={setEmail}
-                                    type="email"
                                     label="Email Id"
                                     required={true}
                                     errorMessage={emailErrorMessage}
+                                    id="email"
                                 />
                             </div>
 

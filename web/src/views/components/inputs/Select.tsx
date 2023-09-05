@@ -8,6 +8,7 @@ const Select = ({
     required = false,
     disabled = false,
     id = "",
+    className = "",
 }: {
     value: string;
     setValue: (value: string) => void;
@@ -16,10 +17,11 @@ const Select = ({
     required?: boolean;
     disabled?: boolean;
     id?: string;
+    className?: string;
 }) => {
     return (
         <select
-            className="select select-bordered w-full"
+            className={`select select-bordered w-full ${className}`}
             value={value || ""}
             onChange={e => setValue(e.target.value)}
             disabled={disabled}

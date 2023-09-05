@@ -108,7 +108,8 @@ const ResetPassword = () => {
                 </div>
 
                 <ErrorText className="mt-8">{errorMessage}</ErrorText>
-                <button type="submit" className={"btn btn-primary mt-2 w-full" + (loading ? " loading" : "")}>
+                <button type="submit" className={"btn btn-primary mt-2 w-full"}>
+                    {loading ? <span className="loading"></span> : ""}
                     Save
                 </button>
 

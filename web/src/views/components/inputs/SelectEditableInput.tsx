@@ -71,7 +71,7 @@ const SelectEditableInput = ({
                     />
                 )}
             </div>
-            <button disabled={disabled} onClick={() => setIsEdit(!isEdit)} className="btn">
+            <button disabled={disabled} onClick={() => setIsEdit(!isEdit)} className="btn btn-neutral">
                 {isEdit ? "Select" : "Edit"}
             </button>
         </div>

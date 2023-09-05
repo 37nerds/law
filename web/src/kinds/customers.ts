@@ -160,3 +160,5 @@ export type TCustomerModalOpenFor = {
     id: number;
     type: "client" | "unit" | "company" | "group_of_company";
 };
+
+export type TStatus = "active" | "inactive";

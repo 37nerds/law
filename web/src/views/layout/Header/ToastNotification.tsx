@@ -25,7 +25,7 @@ const ToastNotification = () => {
                                 : "alert-info"
                         }`}
                     >
-                        <div className="">{lastNotification.message}</div>
+                        {lastNotification.message}
                     </div>
                 </div>
             ) : (

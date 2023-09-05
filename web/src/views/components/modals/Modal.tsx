@@ -8,7 +8,7 @@ const Modal = ({ children }: { children?: ReactNode }) => {
                 <div className="modal-box w-11/12 max-w-5xl">
                     <div>{children}</div>
                     <div className="modal-action">
-                        <label htmlFor="___the-modal" className="btn">
+                        <label htmlFor="___the-modal" className="btn btn-neutral">
                             Close
                         </label>
                     </div>
