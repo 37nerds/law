@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { useLoginMutation } from "@external/auth";
-import { redirect_after_login } from "@config/auth";
+import { useLoginMutation } from "../../../external/auth";
+import { redirect_after_login } from "../../../config/auth";
 
 import ErrorText from "@components/pure/ErrorText";
 import Link from "@components/pure/Link";
-import StringInput from "@components/inputs/StringInput";
 import PasswordInput from "@components/inputs/PasswordInput";
 import LoginWrapper from "@screens/login/LoginWrapper";
 import { redirect } from "@helpers/location";

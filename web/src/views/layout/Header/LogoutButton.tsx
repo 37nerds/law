@@ -1,4 +1,4 @@
-import { useLogoutHit } from "@external/auth";
+import { useLogoutHit } from "../../../external/auth";
 
 const LogoutButton = () => {
     const { hitLogout } = useLogoutHit();

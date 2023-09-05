@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { selectLoggedUserAvatar } from "@states/authStore";
-import { profile_dropdown_links } from "@config/header";
+import { profile_dropdown_links } from "../../../config/header";
 
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import LogoutButton from "@layout/Header/LogoutButton";

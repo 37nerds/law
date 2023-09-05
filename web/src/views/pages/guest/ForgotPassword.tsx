@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useForgotPasswordMutation } from "@external/auth";
+import { useForgotPasswordMutation } from "../../../external/auth";
 
 import ErrorText from "@components/pure/ErrorText";
 import StringInput from "@components/inputs/StringInput";

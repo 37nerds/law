@@ -1,4 +1,4 @@
-import { sidebar_links } from "@config/sidebar";
+import { sidebar_links } from "../../../config/sidebar";
 
 import Submenu from "./Submenu";
 import Menu from "./Menu";

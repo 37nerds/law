@@ -1,4 +1,4 @@
-import { guest_routes, protected_routes, public_routes } from "@config/routes";
+import { guest_routes, protected_routes, public_routes } from "../config/routes";
 
 export const getPathname = (): string => {
     return location.pathname;

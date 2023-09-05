@@ -13,10 +13,7 @@ class ClientRepository
 
     public static function update(Client $client, array $properties): Client
     {
-        $client->name = $properties["name"] ?? $client->name;
-
-        $client->save();
-
+        $client->fill($properties)->save();
         return $client;
     }
 

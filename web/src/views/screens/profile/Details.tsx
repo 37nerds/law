@@ -1,5 +1,5 @@
 import { convertUsernameLogic } from "@helpers/unknown";
-import { useUpdateUserMutation } from "@external/auth";
+import { useUpdateUserMutation } from "../../../external/auth";
 
 import StringInput from "@components/inputs/StringInput";
 import useAuthStore from "@states/authStore";

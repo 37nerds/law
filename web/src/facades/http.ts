@@ -1,5 +1,5 @@
 import type { TJsonS, TResponse } from "@kinds/general";
-import { server_base_url } from "@config/env";
+import { server_base_url } from "../config/env";
 
 import log from "@helpers/log";
 

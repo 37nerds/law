@@ -10,9 +10,9 @@ import {
     CUSTOMERS__UNIT__GET,
     CUSTOMERS__UNIT__PATCH,
     CUSTOMERS__UNITS__POST,
-} from "@config/keys";
+} from "@constants/keys";
 
-import { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit } from "@kinds/customers";
+import { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit, TUpdateClient } from "@kinds/customers";
 import { TError } from "@kinds/general";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -138,9 +138,9 @@ export const useUpdateClientMutation = () => {
     const queryClient = useQueryClient();
     const { setClient } = useCustomerListStore();
 
-    const query = useMutation<TClient, TError, TClient>({
-        mutationFn: async (client: TClient) => {
-            return (await http.patch(`/customers/clients/${client.id}`, client, 200)) as TClient;
+    const query = useMutation<TClient, TError, TUpdateClient>({
+        mutationFn: async client => {
+            return await http.patch(`/customers/clients/${client.id}`, client, 200);
         },
         mutationKey: [CUSTOMERS__CLIENT__PATCH],
         onSuccess: () => {
@@ -165,7 +165,7 @@ export const useUpdateClientMutation = () => {
 export const useDeleteClientMutation = () => {
     const queryClient = useQueryClient();
 
-    const query = useMutation<any, TError, number>({
+    const query = useMutation<any, TError, string>({
         mutationFn: async id => {
             return await http.delete(`/customers/clients/${id}`, 204);
         },

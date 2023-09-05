@@ -6,7 +6,7 @@ import {
     AUTH__RESET_PASSWORD__POST,
     AUTH__UPDATE_USER__PATCH,
     AUTH__UPLOAD_PROFILE_PICTURE__POST,
-} from "@config/keys";
+} from "@constants/keys";
 
 import type { TLoggedUser } from "@kinds/users";
 import type { TError } from "@kinds/general";

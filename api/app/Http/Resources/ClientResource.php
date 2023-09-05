@@ -5,45 +5,13 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/**
- * @property mixed $updated_at
- * @property mixed $created_at
- * @property mixed $notes
- * @property mixed $bill_to
- * @property mixed $address
- * @property mixed $entry_terms
- * @property mixed $max_entry_limit
- * @property mixed $visa_expire_date
- * @property mixed $current_wp_validity_date
- * @property mixed $date_of_joining
- * @property mixed $tin_no
- * @property mixed $mother_name
- * @property mixed $father_name
- * @property mixed $nationality
- * @property mixed $date_of_birth
- * @property mixed $email
- * @property mixed $mobile
- * @property mixed $position_hold
- * @property mixed $gender
- * @property mixed $passport_valid_date
- * @property mixed $passport_issue_date
- * @property mixed $passport_no
- * @property mixed $client_id
- * @property mixed $unit_id
- * @property mixed $name
- * @property mixed $id
- */
 class ClientResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
+            "status" => $this->status,
             'name' => $this->name,
             'unit_id' => $this->unit_id,
             "unit_name" => $this->unit->name,

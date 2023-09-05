@@ -5,10 +5,10 @@ import useCustomerSetupStore from "@states/customerSetupStore";
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
 
-import { legalFromOptions } from "@config/general";
+import { legalFromOptions } from "../../../config/general";
 import { TGroupOfCompany } from "@kinds/customers";
 import { TBottomButton } from "@kinds/general";
-import { useSaveGroupOfCompanyMutation } from "@external/customers";
+import { useSaveGroupOfCompanyMutation } from "../../../external/customers";
 import { notify } from "@helpers/unknown";
 
 const fields = [

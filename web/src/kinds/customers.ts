@@ -127,6 +127,35 @@ export type TClient = {
 
 export type TClientKey = keyof TClient;
 
+export type TUpdateClient = {
+    id: string;
+    status?: "active" | "inactive";
+    name?: string;
+    unit_id?: string;
+    client_id?: string;
+    unit_name?: string;
+    passport_no?: string;
+    passport_issue_date?: string;
+    passport_valid_date?: string;
+    gender?: string;
+    position_hold?: string;
+    mobile?: string;
+    email?: string;
+    date_of_birth?: string;
+    nationality?: string;
+    father_name?: string;
+    mother_name?: string;
+    tin_no?: string;
+    date_of_joining?: string;
+    current_wp_validity_date?: string;
+    visa_expire_date?: string;
+    max_entry_limit?: string;
+    entry_terms?: string;
+    address?: string;
+    bill_to?: string;
+    notes?: string;
+};
+
 export type TCustomerModalOpenFor = {
     id: number;
     type: "client" | "unit" | "company" | "group_of_company";

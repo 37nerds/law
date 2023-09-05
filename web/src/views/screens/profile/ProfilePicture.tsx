@@ -1,7 +1,7 @@
 import type { TLoggedUser } from "@kinds/users";
 import { selectLoggedUser } from "@states/authStore";
 import { useState } from "react";
-import { useUploadProfilePictureMutation } from "@external/auth";
+import { useUploadProfilePictureMutation } from "../../../external/auth";
 import { getProfileUrlFromAvatarKey } from "@helpers/unknown";
 
 import UserIcon from "@heroicons/react/24/outline/UserIcon";

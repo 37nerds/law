@@ -1,9 +1,11 @@
-import { useDeleteClientMutation } from "@external/customers";
+import { useDeleteClientMutation, useUpdateClientMutation } from "../../../external/customers";
+import { INACTIVE } from "../../../constants/status";
 
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 
-const HoverDropDownList = ({ clientId }: { clientId: number }) => {
+const HoverDropDownList = ({ clientId }: { clientId: string }) => {
     const deleteClientMutation = useDeleteClientMutation();
+    const updateClientMutation = useUpdateClientMutation();
 
     return (
         <ThreeDotDropdown
@@ -14,7 +16,12 @@ const HoverDropDownList = ({ clientId }: { clientId: number }) => {
                 },
                 {
                     content: <button className="btn btn-accent btn-sm w-full text-xs">Inactive</button>,
-                    handler: () => {},
+                    handler: () => {
+                        updateClientMutation.mutate({
+                            id: clientId,
+                            status: INACTIVE,
+                        });
+                    },
                 },
                 {
                     content: <button className="btn btn-sm w-full text-xs">Delete</button>,

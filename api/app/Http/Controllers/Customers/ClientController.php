@@ -17,7 +17,11 @@ class ClientController extends Controller
     public function index(Request $request): JsonResponse
     {
         $perPage = $request->query("per_page", 10);
-        $paginates = collect(Client::with('unit.company.group_of_company')->paginate($perPage));
+        $paginates = collect(
+            Client::with('unit.company.group_of_company')
+                ->where("status", "=", "active")
+                ->paginate($perPage)
+        );
         $paginates["data"] = collect($paginates["data"])->map(function ($x) {
             return [
                 "id" => $x["id"],
@@ -49,7 +53,6 @@ class ClientController extends Controller
     public function update(UpdateClientRequest $request, Client $client): JsonResponse
     {
         $client = ClientRepository::update($client, $request->all());
-
         return Response::happy(200, new ClientResource($client));
     }
 

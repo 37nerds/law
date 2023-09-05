@@ -16,6 +16,7 @@ class Client extends Model
     protected $table = Table::clients;
 
     protected $fillable = [
+        "status",
         'name',
         'unit_id',
         'client_id',
