@@ -6,8 +6,8 @@ import RenderStep from "@components/renderers/RenderStep";
 import useCustomerSetupStore from "@states/customerSetupStore";
 
 import { TBottomButton, TOption } from "@kinds/general";
-import { legalFromOptions } from "../../../config/general";
-import { useSaveUnitMutation } from "../../../external/customers";
+import { legalFromOptions } from "@config/general";
+import { useSaveUnitMutation } from "@external/customers";
 import { TUnit } from "@kinds/customers";
 import { notify } from "@helpers/unknown";
 

@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Helpers\Cookie;
+use App\Logic\Cookie;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Auth;
 use Throwable;

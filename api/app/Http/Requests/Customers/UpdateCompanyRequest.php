@@ -1,36 +1,27 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Customers;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCompanyRequest extends FormRequest
+class UpdateCompanyRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array|string>
-     */
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'group_of_company_id' => 'required|exists:group_of_companies,id',
-            'address' => 'required|string|max:500',
+            'name' => 'nullable|string|max:255',
+            'group_of_company_id' => 'nullable|exists:group_of_companies,id',
+            'address' => 'nullable|string|max:500',
             'telephone' => 'nullable|string|max:20',
-            'mobile' => 'required|string|max:20',
-            'email' => 'required|email|max:255',
+            'mobile' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:255',
             'website' => 'nullable|url|max:255',
-            'trade_license_no' => 'required|string|max:100',
+            'trade_license_no' => 'nullable|string|max:100',
             'tin' => 'nullable|string|max:10',
             'bin' => 'nullable|string|max:10',
             'bida_reg_no' => 'nullable|string|max:10',

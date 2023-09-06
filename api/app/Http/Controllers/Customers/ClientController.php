@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Customers;
 
-use App\Base\Controller;
-use App\Base\Response;
 use App\Enums\Status;
-use App\Http\Requests\StoreClientRequest;
-use App\Http\Requests\UpdateClientRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Customers\StoreClientRequest;
+use App\Http\Requests\Customers\UpdateClientRequest;
 use App\Http\Resources\ClientResource;
+use App\Logic\Response;
 use App\Models\Client;
 use App\Repositories\ClientRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -47,7 +47,7 @@ class ClientController extends Controller
             "group_of_company_id" => $x["unit"]["company"]["group_of_company"]["id"],
             "group_of_company_name" => $x["unit"]["company"]["group_of_company"]["name"],
         ]);
-        
+
         return Response::happy(200, $paginates);
     }
 

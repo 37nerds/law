@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Base\SeederTrait;
+use App\Logic\SeederTrait;
 use App\Models\Client;
 use App\Models\Company;
 use App\Models\GroupOfCompany;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Logic;
 
 use Illuminate\Support\Facades\Cookie as CookieFacade;
 

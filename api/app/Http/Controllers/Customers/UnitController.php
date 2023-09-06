@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Customers;
 
-use App\Base\Controller;
-use App\Base\Response;
-use App\Http\Requests\StoreUnitRequest;
-use App\Http\Requests\UpdateUnitRequest;
-use App\Http\Resources\ClientResource;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Customers\StoreUnitRequest;
+use App\Http\Requests\Customers\UpdateUnitRequest;
 use App\Http\Resources\UnitResource;
+use App\Logic\Response;
 use App\Models\Unit;
+use App\Repositories\UnitRepository;
 use Illuminate\Http\JsonResponse;
 
 class UnitController extends Controller
@@ -32,8 +32,8 @@ class UnitController extends Controller
 
     public function update(UpdateUnitRequest $request, Unit $unit): JsonResponse
     {
-        $unit->update($request->all());
-        return Response::happy(200, new ClientResource($unit));
+        $unit = UnitRepository::update($unit, $request->all());
+        return Response::happy(200, new UnitResource($unit));
     }
 
     public function destroy(Unit $unit)

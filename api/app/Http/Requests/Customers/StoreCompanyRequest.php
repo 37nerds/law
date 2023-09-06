@@ -1,30 +1,21 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Customers;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUnitRequest extends FormRequest
+class StoreCompanyRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array|string>
-     */
     public function rules(): array
     {
         return [
             'name' => 'required|string|max:255',
-            'company_id' => 'required|exists:companies,id',
+            'group_of_company_id' => 'required|exists:group_of_companies,id',
             'address' => 'required|string|max:500',
             'telephone' => 'nullable|string|max:20',
             'mobile' => 'required|string|max:20',
@@ -37,6 +28,8 @@ class StoreUnitRequest extends FormRequest
             'incorporation_no' => 'nullable|string|max:10',
             'membership_no' => 'nullable|string|max:10',
             'member_of_the_association' => 'nullable|string|max:500',
+            'authorized_capital' => 'nullable|numeric|min:0',
+            'paid_up_capital' => 'nullable|numeric|min:0',
             'business_field' => 'nullable|string|max:255',
             'legal_form' => 'nullable|string|max:255',
             'contact_person' => 'nullable|string|max:255',
@@ -44,5 +37,4 @@ class StoreUnitRequest extends FormRequest
             'contact_person_email' => 'nullable|email|max:255',
         ];
     }
-
 }

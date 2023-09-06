@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Customers;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateClientRequest extends FormRequest
+class StoreClientRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,21 +14,20 @@ class UpdateClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "status" => ["sometimes", "string"],
-            'name' => 'sometimes|string|max:255',
-            'unit_id' => 'sometimes|exists:units,id',
+            'name' => 'required|string|max:255',
+            'unit_id' => 'required|exists:units,id',
             'client_id' => 'nullable|string|max:50',
-            'passport_no' => 'sometimes|string|max:50',
+            'passport_no' => 'nullable|string|max:50',
             'passport_issue_date' => 'nullable|date',
             'passport_valid_date' => 'nullable|date',
             'gender' => 'nullable|string|max:10',
             'position_hold' => 'nullable|string|max:100',
-            'mobile' => 'sometimes|string|max:20',
-            'email' => 'sometimes|email|max:255',
-            'date_of_birth' => 'sometimes|date',
+            'mobile' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'date_of_birth' => 'nullable|date',
             'nationality' => 'nullable|string|max:50',
-            'father_name' => 'sometimes|string|max:100',
-            'mother_name' => 'sometimes|string|max:100',
+            'father_name' => 'required|string|max:100',
+            'mother_name' => 'required|string|max:100',
             'tin_no' => 'nullable|string|max:50',
             'date_of_joining' => 'nullable|date',
             'current_wp_validity_date' => 'nullable|date',

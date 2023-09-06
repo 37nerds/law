@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Customers;
 
-use App\Base\Controller;
-use App\Base\Response;
-use App\Http\Requests\StoreGroupOfCompanyRequest;
-use App\Http\Requests\UpdateGroupOfCompanyRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Customers\StoreGroupOfCompanyRequest;
+use App\Http\Requests\Customers\UpdateGroupOfCompanyRequest;
 use App\Http\Resources\CompanyResource;
 use App\Http\Resources\GroupOfCompanyResource;
+use App\Logic\Response;
 use App\Models\GroupOfCompany;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

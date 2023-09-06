@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpFullyQualifiedNameUsageInspection */
+<?php
 
 namespace App\Http;
 

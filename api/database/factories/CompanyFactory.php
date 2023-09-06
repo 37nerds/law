@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Helpers\Dump;
+use App\Logic\Dump;
 use App\Models\Company;
 use App\Models\GroupOfCompany;
 use Illuminate\Database\Eloquent\Factories\Factory;

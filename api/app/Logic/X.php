@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Logic;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
