@@ -1,6 +1,7 @@
 import {
     AUTH__FORGET_PASSWORD__POST,
     AUTH__LOGIN__POST,
+    AUTH__LOGOUT__POST,
     AUTH__PASSWORD__PATCH,
     AUTH__REGISTER__POST,
     AUTH__RESET_PASSWORD__POST,
@@ -64,12 +65,13 @@ export const useLoginMutation = () => {
     });
 };
 
-export const useLogoutHit = () => {
-    const hitLogout = async () => {
-        return await http.post("/auth/f/logout", {}, 204);
-    };
-
-    return { hitLogout };
+export const useLogoutMutation = () => {
+    return useMutation<void, TError>({
+        mutationFn: async () => {
+            return await http.post("/auth/logout", {}, 204);
+        },
+        mutationKey: [AUTH__LOGOUT__POST],
+    });
 };
 
 export const useLoggedUserFetch = () => {

@@ -8,7 +8,6 @@ use App\Http\Controllers\Customers\GroupOfCompanyController;
 use App\Http\Controllers\Customers\UnitController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::prefix("/v1")
     ->middleware(["auth:sanctum"])
     ->group(function () {
@@ -16,12 +15,16 @@ Route::prefix("/v1")
         Route::prefix("/auth")
             ->group(function () {
 
-                Route::get('/rest-password/{token}', [AuthController::class, "resetPasswordRedirect"])
-                    ->name('password.reset')
-                    ->withoutMiddleware("auth:sanctum");
-
                 Route::post("/register", [AuthController::class, "register"])
                     ->name("auth.register")
+                    ->withoutMiddleware("auth:sanctum")
+                    ->middleware("guest");
+
+                Route::post("/logout", [AuthController::class, "logout"])
+                    ->name("auth.logout");
+
+                Route::get('/rest-password/{token}', [AuthController::class, "resetPasswordRedirect"])
+                    ->name('password.reset')
                     ->withoutMiddleware("auth:sanctum");
 
                 Route::post("/upload-avatar", [AuthController::class, "uploadAvatar"])

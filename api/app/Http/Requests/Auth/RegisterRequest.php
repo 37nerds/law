@@ -27,6 +27,7 @@ class RegisterRequest extends FormRequest
                 Rule::unique(User::class),
             ],
             'password' => RuleLogic::passwordRules(),
+            "remember" => ["nullable", "boolean"]
         ];
     }
 }

@@ -11,6 +11,7 @@ export const CUSTOMERS__UNIT__GET = "get.customer.unit";
 export const CUSTOMERS__UNIT__PATCH = "patch.customer.unit";
 
 export const AUTH__LOGIN__POST = "post.auth.login";
+export const AUTH__LOGOUT__POST = "post.auth.logout";
 export const AUTH__REGISTER__POST = "post.auth.register";
 export const AUTH__FORGET_PASSWORD__POST = "post.auth.forget-password";
 export const AUTH__RESET_PASSWORD__POST = "post.auth.reset-password";

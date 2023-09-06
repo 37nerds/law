@@ -17,10 +17,8 @@ class UserRepository
         ]);
     }
 
-    public static function update(string $id, array $properties): User
+    public static function update(User $user, array $properties): User
     {
-        $user = User::find($id);
-
         $user->name = $properties["name"] ?? $user->name;
         $user->username = $properties["username"] ?? $user->username;
         $user->email = $properties["email"] ?? $user->email;

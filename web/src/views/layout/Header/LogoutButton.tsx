@@ -1,16 +1,18 @@
-import { useLogoutHit } from "../../../external/auth";
+import { useEffect } from "react";
+import { useLogoutMutation } from "@external/auth";
 
 const LogoutButton = () => {
-    const { hitLogout } = useLogoutHit();
+    const logoutMutation = useLogoutMutation();
 
-    const logout = async () => {
-        await hitLogout();
-        window.location.href = "/login";
-    };
+    useEffect(() => {
+        if (logoutMutation.isSuccess) {
+            window.location.href = "/login";
+        }
+    }, [logoutMutation.isSuccess]);
 
     return (
         <li>
-            <a onClick={logout}>Logout</a>
+            <a onClick={() => logoutMutation.mutate()}>Logout</a>
         </li>
     );
 };
