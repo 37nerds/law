@@ -157,6 +157,7 @@ http {
 - Now you can simple run the api dev server
 ```bash
 cd api
+cp .env.example .env # chagne the db variables
 composer update
 php artisan serve;
 ```
@@ -168,6 +169,7 @@ php artisan queue:work --queue=high,default
 - Now you can sum web application as well
 ```bash
 cd web
+cp .env.example .env # chagne the db variables
 pnpm install
 pnpm dev
 ```
