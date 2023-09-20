@@ -6,6 +6,7 @@ use App\Http\Controllers\Customers\CompanyController;
 use App\Http\Controllers\Customers\CustomerController;
 use App\Http\Controllers\Customers\GroupOfCompanyController;
 use App\Http\Controllers\Customers\UnitController;
+use App\Http\Controllers\RBAC\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix("/v1")
@@ -42,6 +43,7 @@ Route::prefix("/v1")
             });
 
         Route::prefix("/customers")
+            ->middleware("protect")
             ->group(function () {
 
                 Route::get("/pop-up-data", [CustomerController::class, "popUpData"])
@@ -56,9 +58,24 @@ Route::prefix("/v1")
                 Route::apiResource("/units", UnitController::class)
                     ->only("store", "show", "update");
 
-                Route::apiResource("/clients", ClientController::class)
-                    ->only(["store", "index", "destroy", "show", "update"]);
 
+                Route::prefix("/clients")->group(function () {
+                    Route::post("/", [ClientController::class, "store"]);
+                    Route::delete("/", [ClientController::class, "destroy"]);
+                    Route::apiResource("/", ClientController::class)
+                        ->only(["index", "show", "update"]);
+                });
             });
 
+        Route::prefix("/rbac")
+            ->group(function () {
+
+                Route::prefix("/rbac")->group(function () {
+                    Route::get("/", [UserController::class, "index"]);
+                    Route::post("/", [UserController::class, "store"]);
+                    Route::patch("/", [UserController::class, "update"]);
+                    Route::delete("/", [UserController::class, "destroy"]);
+                });
+
+            });
     });

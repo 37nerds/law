@@ -70,8 +70,9 @@ class ClientController extends Controller
         return Response::happy(200, new ClientResource($client));
     }
 
-    public function destroy(Client $client): JsonResponse
+    public function destroy(Request $request): JsonResponse
     {
+        $client = Client::query()->find($request->query("id"));
         $client->delete();
         return Response::happy(204);
     }

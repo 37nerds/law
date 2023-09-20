@@ -13,7 +13,7 @@ class UserRepository
             "email" => $properties["email"],
             "username" => $properties["username"],
             "password" => $properties["password"],
-            "role" => $properties["role"] ?? "user"
+            "role_id" => $properties["role_id"] ?? null
         ]);
     }
 
@@ -23,7 +23,7 @@ class UserRepository
         $user->username = $properties["username"] ?? $user->username;
         $user->email = $properties["email"] ?? $user->email;
         $user->password = $properties["password"] ?? $user->password;
-        $user->role = $properties["role"] ?? $user->role;
+        $user->role = $properties["role_id"] ?? $user->role_id;
         $user->avatar = $properties["avatar"] ?? $user->avatar;
 
         $user->save();
@@ -33,10 +33,8 @@ class UserRepository
 
     public static function delete(string $id): User
     {
-        $user = User::find(1);
-
+        $user = User::find($id);
         $user->delete();
-
         return $user;
     }
 }

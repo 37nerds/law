@@ -168,7 +168,7 @@ export const useDeleteClientMutation = () => {
 
     const query = useMutation<any, TError, string>({
         mutationFn: async id => {
-            return await http.delete(`/customers/clients/${id}`, 204);
+            return await http.delete(`/customers/clients/?id=${id}`, 204);
         },
         mutationKey: [CUSTOMERS__CLIENT__DELETE],
         onSuccess: () => {

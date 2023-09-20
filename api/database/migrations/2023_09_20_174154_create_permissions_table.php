@@ -12,7 +12,7 @@ return new class extends Migration {
         Schema::create(Table::permissions, function (Blueprint $table) {
             $table->uuid("id");
             $table->foreignIdFor(Role::class, "role_id");
-            $table->string("resource");
+            $table->string("name");
             $table->string("method");
             $table->timestamps();
         });
