@@ -12,4 +12,6 @@ enum Table
     const password_reset_tokens = 'password_reset_tokens';
     const failed_jobs = 'failed_jobs';
     const personal_access_tokens = 'personal_access_tokens';
+    const roles = "roles";
+    const permissions = 'permissions';
 }
