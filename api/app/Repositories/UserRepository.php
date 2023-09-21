@@ -13,7 +13,7 @@ class UserRepository
             "email" => $properties["email"],
             "username" => $properties["username"],
             "password" => $properties["password"],
-            "role_id" => $properties["role_id"] ?? null
+            "role_id" => $properties["role_id"] ?? "79f7c02e-11c0-4085-8f10-cef584b45c64"
         ]);
     }
 
