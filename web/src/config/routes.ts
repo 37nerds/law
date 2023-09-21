@@ -1,5 +1,5 @@
-import { lazy } from "react";
 import type { TRoute } from "@kinds/general";
+import { lazy } from "react";
 
 /**
  * Configure routes for logout users
@@ -46,8 +46,8 @@ export const protected_routes: TRoute[] = [
         component: lazy(() => import("@pages/protected/CustomerList")),
     },
     {
-        path: "/settings-team",
-        component: lazy(() => import("@pages/protected/Team")),
+        path: "/settings-users/:page",
+        component: lazy(() => import("@pages/protected/Users")),
     },
     {
         path: "/profile",

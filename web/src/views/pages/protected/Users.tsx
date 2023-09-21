@@ -1,10 +1,10 @@
-import Team from "@screens/settings/team";
 import useSetPageTitle from "@hooks/useSetPageTitle";
+import Users from "@screens/users";
 
 function InternalPage() {
-    useSetPageTitle("Team Members");
+    useSetPageTitle("Users");
 
-    return <Team />;
+    return <Users />;
 }
 
 export default InternalPage;

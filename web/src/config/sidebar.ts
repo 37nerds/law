@@ -3,13 +3,12 @@ import { TSidebarLink } from "@kinds/general";
 import BoltIcon from "@heroicons/react/24/outline/BoltIcon";
 import ChartBarIcon from "@heroicons/react/24/outline/ChartBarIcon";
 import Cog6ToothIcon from "@heroicons/react/24/outline/Cog6ToothIcon";
-import InboxArrowDownIcon from "@heroicons/react/24/outline/InboxArrowDownIcon";
+import CogIcon from "@heroicons/react/24/outline/CogIcon";
+import QueueListIcon from "@heroicons/react/24/outline/QueueListIcon";
 import Squares2X2Icon from "@heroicons/react/24/outline/Squares2X2Icon";
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
 import WalletIcon from "@heroicons/react/24/outline/WalletIcon";
-import QueueListIcon from "@heroicons/react/24/outline/QueueListIcon";
-import CogIcon from "@heroicons/react/24/outline/CogIcon";
 
 /**
  * Configuration for setting the left Sidebar links with title, icon
@@ -66,9 +65,12 @@ export const sidebar_links: TSidebarLink[] = [
                 name: "Billing",
             },
             {
-                path: "/_/settings-team",
+                path: "/_/settings-users/:page",
                 icon: UsersIcon,
-                name: "Team Members",
+                name: "Users",
+                defaults: {
+                    page: 1,
+                },
             },
         ],
     },
