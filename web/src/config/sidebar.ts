@@ -65,11 +65,11 @@ export const sidebar_links: TSidebarLink[] = [
                 name: "Billing",
             },
             {
-                path: "/_/rbac/users/:page",
+                path: "/_/rbac/users/:page2",
                 icon: UsersIcon,
                 name: "Users",
                 defaults: {
-                    page: 1,
+                    page2: 1,
                 },
             },
         ],

@@ -1,5 +1,5 @@
 import type { TNotificationType } from "@kinds/general";
-import { assert_storage_url } from "../config/env";
+import { assert_storage_url } from "@config/env";
 import { useParams } from "react-router-dom";
 
 import useNotificationStore from "@states/useNotificationStore";

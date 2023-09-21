@@ -7,7 +7,6 @@ import { TUser } from "@kinds/users";
 import http from "@facades/http";
 import useUsersStore from "@states/rbacStore";
 
-
 export const useUsersQuery = () => {
     const { userFilters } = useUsersStore();
 

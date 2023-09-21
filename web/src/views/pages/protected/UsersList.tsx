@@ -17,7 +17,7 @@ const UsersList = () => {
     const query = useUsersQuery();
     const navigate = useNavigate();
 
-    const { page: paramPage } = useParams();
+    const { page2: paramPage } = useParams();
 
     const { userFilters, setUserFiltersField } = useUsersStore();
 
