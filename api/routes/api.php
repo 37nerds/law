@@ -70,7 +70,7 @@ Route::prefix("/v1")
         Route::prefix("/rbac")
             ->group(function () {
 
-                Route::prefix("/rbac")->group(function () {
+                Route::prefix("/users")->group(function () {
                     Route::get("/", [UserController::class, "index"]);
                     Route::post("/", [UserController::class, "store"]);
                     Route::patch("/", [UserController::class, "update"]);
