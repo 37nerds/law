@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
-import {TPopUpUnit} from "@kinds/customers";
-import {useFetchPopUpDataQuery, useUnitQuery, useUpdateUnitMutation} from "@external/customers";
+import { useEffect, useState } from "react";
+import { TPopUpUnit } from "@kinds/customers";
+import { useFetchPopUpDataQuery, useUnitQuery, useUpdateUnitMutation } from "@external/customers";
+import { legalFromOptions } from "@config/general";
 
 import StringInput from "@components/inputs/StringInput";
 import SingleInputBox from "@components/layouts/SingleInputBox";
@@ -10,7 +11,6 @@ import SelectEditableInput from "@components/inputs/SelectEditableInput";
 import useCustomerListStore from "@states/customerListStore";
 import CustomerModalLayout from "@screens/customerList/CustomerModalLayout";
 import SelectInput from "@components/inputs/SelectInput";
-import {legalFromOptions} from "@config/general";
 import EmailInput from "@components/inputs/EmailInput";
 
 /**

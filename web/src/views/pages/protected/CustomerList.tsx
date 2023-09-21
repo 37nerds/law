@@ -1,15 +1,15 @@
 import { useClientsQuery } from "@external/customers";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-
-import Loading from "@components/pure/Loading";
-import ErrorText from "@components/pure/ErrorText";
+import { TPaginate } from "@kinds/general";
+import { TClient } from "@kinds/customers";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import Paginator from "@components/pure/Paginator";
 import CustomerTable from "@screens/customerList/CustomerTable";
 import Card from "@components/cards/Card";
 import FilterCustomerList from "@screens/customerList/FilterCustomerList";
 import useCustomerListStore from "@states/customerListStore";
+import QueryLayout from "@components/layouts/QueryLayout";
 
 const CustomerList = () => {
     useSetPageTitle("Customer List");
@@ -25,13 +25,9 @@ const CustomerList = () => {
     }, [paramPage]);
 
     return (
-        <>
-            {query.isLoading ? (
-                <Loading />
-            ) : query.isError ? (
-                <ErrorText>{query.error?.message || ""}</ErrorText>
-            ) : (
-                <>
+        <QueryLayout<TPaginate<TClient>> query={query}>
+            <>
+                {query.data ? (
                     <Card
                         title="List all Customers"
                         content={
@@ -48,9 +44,11 @@ const CustomerList = () => {
                             </div>
                         }
                     />
-                </>
-            )}
-        </>
+                ) : (
+                    <></>
+                )}
+            </>
+        </QueryLayout>
     );
 };
 

@@ -65,7 +65,7 @@ export const sidebar_links: TSidebarLink[] = [
                 name: "Billing",
             },
             {
-                path: "/_/settings-users/:page",
+                path: "/_/rbac/users/:page",
                 icon: UsersIcon,
                 name: "Users",
                 defaults: {

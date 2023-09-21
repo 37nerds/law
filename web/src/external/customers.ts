@@ -13,7 +13,7 @@ import {
 } from "@constants/keys";
 
 import { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit, TUpdateClient } from "@kinds/customers";
-import { TError } from "@kinds/general";
+import { TError, TPaginate } from "@kinds/general";
 import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { notify } from "@helpers/unknown";
@@ -100,7 +100,7 @@ export const useSaveClientMutation = () => {
 export const useClientsQuery = () => {
     const { clientsFilters } = useCustomerListStore();
 
-    return useQuery<any, TError>({
+    return useQuery<TPaginate<TClient>, TError>({
         queryFn: async () => {
             return await http.get(
                 `/customers/clients?per_page=10` + `&page=${clientsFilters.page}` + `&status=${clientsFilters.status}`,
