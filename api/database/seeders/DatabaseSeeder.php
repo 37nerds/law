@@ -29,6 +29,27 @@ class DatabaseSeeder extends Seeder
         $this->truncate(Client::class, 50);
 
         Role::query()->create([
+            "name" => "Admin",
+        ]);
+
+        Role::query()->create([
+            "name" => "Manager",
+        ]);
+
+        Role::query()->create([
+            "name" => "Lower",
+        ]);
+
+        Role::query()->create([
+            "name" => "Foo",
+        ]);
+
+        Role::query()->create([
+            "name" => "Bar",
+        ]);
+
+
+        Role::query()->create([
             "id" => "79f7c02e-11c0-4085-8f10-cef584b45c64",
             "name" => "user",
         ]);
@@ -36,7 +57,7 @@ class DatabaseSeeder extends Seeder
         User::query()->create([
             "id" => "b9b24344-e97f-48a7-8f0e-af1de38eb380",
             'name' => "Shihab Mahamud",
-            "username" => "shihab",
+            "username" => "@shihab",
             'email' => "shihab4t@gmail.com",
             "avatar" => "https://advanced-cropper.github.io/react-advanced-cropper/img/images/pexels-photo-3761018.jpeg",
             'email_verified_at' => now(),

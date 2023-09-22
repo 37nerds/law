@@ -6,11 +6,12 @@ use App\Http\Controllers\Customers\CompanyController;
 use App\Http\Controllers\Customers\CustomerController;
 use App\Http\Controllers\Customers\GroupOfCompanyController;
 use App\Http\Controllers\Customers\UnitController;
+use App\Http\Controllers\RBAC\RoleController;
 use App\Http\Controllers\RBAC\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix("/v1")
-    ->middleware(["auth:sanctum"])
+//    ->middleware(["auth:sanctum"])
     ->group(function () {
 
         Route::prefix("/auth")
@@ -75,6 +76,10 @@ Route::prefix("/v1")
                     Route::post("/", [UserController::class, "store"]);
                     Route::patch("/", [UserController::class, "update"]);
                     Route::delete("/", [UserController::class, "destroy"]);
+                });
+
+                Route::prefix("/roles")->group(function () {
+                    Route::get("/", [RoleController::class, "index"]);
                 });
 
             });
