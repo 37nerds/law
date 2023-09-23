@@ -1,35 +1,28 @@
-import { useUsersQuery } from "@external/rbac";
-import { TPaginate } from "@kinds/general";
-import { TUser } from "@kinds/users";
-
 import TitleCard from "@components/cards/TitleCard";
-import Paginator from "@components/pure/Paginator";
-
 import QueryLayout from "@components/layouts/QueryLayout";
+import Paginator from "@components/pure/Paginator";
+import { useRolesQuery } from "@external/rbac";
 import useSetPageTitle from "@hooks/useSetPageTitle";
+import { TPaginate } from "@kinds/general";
+import { TRole } from "@kinds/users";
 import useUsersStore from "@states/rbacStore";
 
-const UsersList = () => {
-    useSetPageTitle("Users");
+const Roles = () => {
+    useSetPageTitle("Roles");
 
-    const query = useUsersQuery();
-
-    const { userFilters, setUserFiltersField } = useUsersStore();
-
-    const headers = ["Name", "Email Id", "Joined On", "Role"];
+    const query = useRolesQuery();
+    const { rolesFilters, setRolesFiltersField } = useUsersStore();
 
     return (
-        <QueryLayout<TPaginate<TUser>> query={query}>
+        <QueryLayout<TPaginate<TRole>> query={query}>
             <>
                 {query.data ? (
-                    <TitleCard title="All Users" topMargin="mt-2">
+                    <TitleCard title="All Roles" topMargin="mt-2">
                         <div className="w-full overflow-x-auto">
                             <table className="table w-full">
                                 <thead>
                                     <tr>
-                                        {headers.map((header, index) => (
-                                            <th key={index}>{header}</th>
-                                        ))}
+                                        <th>Role name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,9 +32,6 @@ const UsersList = () => {
                                                 <td>
                                                     <div className="font-bold">{user.name}</div>
                                                 </td>
-                                                <td>{user.email}</td>
-                                                <td>{user.created_at}</td>
-                                                <td>{user.role_id}</td>
                                             </tr>
                                         );
                                     })}
@@ -51,10 +41,10 @@ const UsersList = () => {
 
                         {query.data?.total > 10 && (
                             <Paginator
-                                currentPage={userFilters.page}
+                                currentPage={rolesFilters.page}
                                 totalPages={query.data.last_page}
                                 onSetCurrentPage={page => {
-                                    setUserFiltersField("page", page);
+                                    setRolesFiltersField("page", page);
                                 }}
                             />
                         )}
@@ -67,4 +57,4 @@ const UsersList = () => {
     );
 };
 
-export default UsersList;
+export default Roles;

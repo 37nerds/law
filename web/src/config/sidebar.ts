@@ -2,6 +2,7 @@ import { TSidebarLink } from "@kinds/general";
 
 import BoltIcon from "@heroicons/react/24/outline/BoltIcon";
 import ChartBarIcon from "@heroicons/react/24/outline/ChartBarIcon";
+import checkBadgeIcon from "@heroicons/react/24/outline/CheckBadgeIcon";
 import Cog6ToothIcon from "@heroicons/react/24/outline/Cog6ToothIcon";
 import CogIcon from "@heroicons/react/24/outline/CogIcon";
 import QueueListIcon from "@heroicons/react/24/outline/QueueListIcon";
@@ -65,12 +66,14 @@ export const sidebar_links: TSidebarLink[] = [
                 name: "Billing",
             },
             {
-                path: "/_/rbac/users/:page2",
+                path: "/_/rbac/users",
                 icon: UsersIcon,
                 name: "Users",
-                defaults: {
-                    page2: 1,
-                },
+            },
+            {
+                path: "/_/rbac/roles",
+                icon: checkBadgeIcon,
+                name: "Roles",
             },
         ],
     },

@@ -18,3 +18,6 @@ export const AUTH__RESET_PASSWORD__POST = "post.auth.reset-password";
 export const AUTH__UPLOAD_PROFILE_PICTURE__POST = "post.auth.upload-profile-picture";
 export const AUTH__UPDATE_USER__PATCH = "patch.auth.update-user";
 export const AUTH__PASSWORD__PATCH = "patch.auth.password";
+
+export const RBAC_USERS_GET = "get.users";
+export const RBAC_ROLES_GET = "get.roles";

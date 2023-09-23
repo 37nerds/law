@@ -24,3 +24,11 @@ export type TUser = {
     created_at: string;
     updated_at: string;
 };
+
+export type TRole = {
+    id: string;
+    name: string;
+    disable: number;
+    created_at: string;
+    updated_at: string;
+};
