@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use App\Logic\Rule as RuleLogic;
-use App\Models\User;
+use App\Models\RBAC\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

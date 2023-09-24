@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\RBAC;
 
 use App\Enums\Table;
 use App\Logic\ModelTrait;

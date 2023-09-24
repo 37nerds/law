@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Customers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UnitResource extends JsonResource
+class CompanyResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'company_id' => $this->company_id,
+            'group_of_company' => $this->group_of_company,
             'address' => $this->address,
             'telephone' => $this->telephone,
             'mobile' => $this->mobile,
@@ -25,6 +25,8 @@ class UnitResource extends JsonResource
             'incorporation_no' => $this->incorporation_no,
             'membership_no' => $this->membership_no,
             'member_of_the_association' => $this->member_of_the_association,
+            'authorized_capital' => $this->authorized_capital,
+            'paid_up_capital' => $this->paid_up_capital,
             'business_field' => $this->business_field,
             'legal_form' => $this->legal_form,
             'contact_person' => $this->contact_person,

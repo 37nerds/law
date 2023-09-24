@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Logic\Dump;
-use App\Models\Company;
-use App\Models\Unit;
+use App\Models\Customers\Company;
+use App\Models\Customers\Unit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

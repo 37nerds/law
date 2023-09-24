@@ -6,6 +6,8 @@ use App\Http\Controllers\Customers\CompanyController;
 use App\Http\Controllers\Customers\CustomerController;
 use App\Http\Controllers\Customers\GroupOfCompanyController;
 use App\Http\Controllers\Customers\UnitController;
+use App\Http\Controllers\RBAC\PermissionController;
+use App\Http\Controllers\RBAC\ResourceController;
 use App\Http\Controllers\RBAC\RoleController;
 use App\Http\Controllers\RBAC\UserController;
 use Illuminate\Support\Facades\Route;
@@ -72,15 +74,39 @@ Route::prefix("/v1")
             ->group(function () {
 
                 Route::prefix("/users")->group(function () {
+
                     Route::post("/", [UserController::class, "store"]);
                     Route::get("/", [UserController::class, "index"]);
-//                        ->middleware("protect");
                     Route::patch("/", [UserController::class, "update"]);
                     Route::delete("/", [UserController::class, "destroy"]);
+
                 });
 
                 Route::prefix("/roles")->group(function () {
+
                     Route::get("/", [RoleController::class, "index"]);
+                    Route::post("/", [RoleController::class, "store"]);
+                    Route::patch("/", [RoleController::class, "update"]);
+                    Route::delete("/", [RoleController::class, "destroy"]);
+
+                });
+
+                Route::prefix("/resources")->group(function () {
+
+                    Route::get("/", [ResourceController::class, "index"]);
+                    Route::post("/", [ResourceController::class, "store"]);
+                    Route::patch("/", [ResourceController::class, "update"]);
+                    Route::delete("/", [ResourceController::class, "destroy"]);
+
+                });
+
+                Route::prefix("/permissions")->group(function () {
+
+                    Route::get("/", [PermissionController::class, "index"]);
+                    Route::post("/", [PermissionController::class, "store"]);
+                    Route::patch("/", [PermissionController::class, "update"]);
+                    Route::delete("/", [PermissionController::class, "destroy"]);
+
                 });
 
             });

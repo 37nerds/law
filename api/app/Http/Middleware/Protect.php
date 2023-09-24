@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Permission;
-use App\Models\Resources;
+use App\Models\RBAC\Permission;
+use App\Models\RBAC\Resource;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +22,7 @@ class Protect
         $path = $request->path();
         $method = Str::lower($request->method());
 
-        $resource = Resources::query()
+        $resource = Resource::query()
             ->where("api", "=", $path)
             ->where("method", "=", $method)
             ->first();

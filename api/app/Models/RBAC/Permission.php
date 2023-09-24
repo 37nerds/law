@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\RBAC;
 
 use App\Enums\Table;
 use App\Logic\ModelTrait;
@@ -22,6 +22,6 @@ class Permission extends Model
 
     public function resource(): BelongsTo
     {
-        return $this->belongsTo(Resources::class, "resource_id");
+        return $this->belongsTo(Resource::class, "resource_id");
     }
 }
