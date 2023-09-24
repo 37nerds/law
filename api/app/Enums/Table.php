@@ -14,4 +14,5 @@ enum Table
     const personal_access_tokens = 'personal_access_tokens';
     const roles = "roles";
     const permissions = 'permissions';
+    const resources = "resources";
 }

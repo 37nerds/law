@@ -3,9 +3,11 @@
 namespace App\Http\Middleware;
 
 use App\Models\Permission;
+use App\Models\Resources;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 class Protect
@@ -15,31 +17,27 @@ class Protect
      *
      * @param Closure(Request): (Response) $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
         $path = $request->path();
-        $method = $request->method();
+        $method = Str::lower($request->method());
 
-        $relativePathPermissionConfig = config("permissions.$path");
+        $resource = Resources::query()
+            ->where("api", "=", $path)
+            ->where("method", "=", $method)
+            ->first();
 
-        if (!$relativePathPermissionConfig)
+        if (!$resource) {
             return $next($request);
-
-        if (array_key_exists($method, $relativePathPermissionConfig["methods"]))
-            return $next($request);
-
-        $permissionName = $relativePathPermissionConfig["name"];
-        $roleId = Auth::user()->role_id;
+        }
 
         $permission = Permission::query()
-            ->where("name", "=", $permissionName)
-            ->where("method", "=", $method)
-            ->where("role_id", "=", $roleId)->first();
+            ->where("resource_id", "=", $resource->id)
+            ->where("role_id", "=", Auth::user()->role_id)
+            ->first();
 
         if (!$permission) {
-            return \App\Logic\Response::json([
-                "message" => "Unauthorized"
-            ], 403);
+            abort(403, "Forbidden");
         }
 
         return $next($request);

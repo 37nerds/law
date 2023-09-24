@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\Table;
+use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,7 @@ return new class extends Migration {
             $table->string("avatar")->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string("role_id")->default("79f7c02e-11c0-4085-8f10-cef584b45c64");
+            $table->foreignIdFor(Role::class, "role_id");
             $table->rememberToken();
             $table->timestamps();
         });
