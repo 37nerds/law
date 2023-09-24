@@ -16,8 +16,8 @@ const ProfilePicture = () => {
 
     const loggedUser: TLoggedUser | null = selectLoggedUser();
 
-    const avatar: string | null = loggedUser?.avatar || null;
-    const name: string = loggedUser?.name || "";
+    const avatar: string | null = loggedUser?.user?.avatar || null;
+    const name: string = loggedUser?.user?.name || "";
 
     const uploadProfileMutation = useUploadProfilePictureMutation();
 
@@ -43,7 +43,7 @@ const ProfilePicture = () => {
                     </div>
                 </div>
                 <div className="absolute bottom-5">
-                    <div className="dropdown dropdown-bottom">
+                    <div className="dropdown-bottom dropdown">
                         <label
                             tabIndex={0}
                             className={`flex w-[70px] cursor-pointer flex-col justify-between rounded border-2 border-base-300 bg-base-200 `}
