@@ -3,10 +3,6 @@
 namespace Database\Seeders;
 
 use App\Logic\SeederTrait;
-use App\Models\Client;
-use App\Models\Company;
-use App\Models\GroupOfCompany;
-use App\Models\Unit;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,13 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        $this->truncate(User::class, 10);
-        $this->truncate(GroupOfCompany::class, 15);
-        $this->truncate(Company::class, 15);
-        $this->truncate(Unit::class, 15);
-        $this->truncate(Client::class, 50);
-
         $this->call([
+            CustomerSeeder::class,
             RBACSeeder::class
         ]);
     }

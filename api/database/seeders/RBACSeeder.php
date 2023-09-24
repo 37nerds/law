@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Logic\SeederTrait;
 use App\Models\Permission;
 use App\Models\Resources;
 use App\Models\Role;
@@ -11,6 +12,8 @@ use Illuminate\Support\Str;
 
 class RBACSeeder extends Seeder
 {
+    use SeederTrait;
+
     public function run(): void
     {
 
@@ -18,6 +21,15 @@ class RBACSeeder extends Seeder
         Role::query()->create(["name" => "Admin",]);
         Role::query()->create(["name" => "Manager",]);
         Role::query()->create(["name" => "User",]);
+
+        $resources = config("resources");
+
+        collect($resources)->each(function ($resource) use ($superAdmin) {
+            $re = Resources::query()->create($resource);
+            Permission::query()->create(["role_id" => $superAdmin->id, "resource_id" => $re->id]);
+        });
+
+        $this->truncate(User::class, 10);
 
         User::query()->create([
             'name' => "Super User",
@@ -29,12 +41,5 @@ class RBACSeeder extends Seeder
             'remember_token' => Str::random(10),
             "role_id" => $superAdmin->id,
         ]);
-
-        $resources = config("resources");
-
-        collect($resources)->each(function ($resource) use ($superAdmin) {
-            $re = Resources::query()->create($resource);
-            Permission::query()->create(["role_id" => $superAdmin->id, "resource_id" => $re->id]);
-        });
     }
 }

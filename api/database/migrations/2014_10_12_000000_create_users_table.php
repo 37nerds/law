@@ -11,15 +11,21 @@ return new class extends Migration {
     {
         Schema::create(Table::users, function (Blueprint $table) {
             $table->uuid("id");
-            $table->string("username")->unique();
-            $table->string('email')->unique();
-            $table->string('name')->nullable();
-            $table->string("avatar")->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
             $table->foreignIdFor(Role::class, "role_id");
+
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->string('email')->unique();
+            $table->string("username")->unique();
+            $table->string('password');
+
+            $table->string('name')->nullable();
+            $table->string("avatar")->nullable();
+            $table->string("phone")->nullable();
+            $table->boolean("active")->default(true);
+            $table->string("address")->nullable();
         });
     }
 
