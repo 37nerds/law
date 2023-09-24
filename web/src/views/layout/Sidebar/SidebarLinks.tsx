@@ -1,4 +1,4 @@
-import { sidebar_links } from "../../../config/sidebar";
+import { sidebar_links } from "@config/sidebar";
 
 import Submenu from "./Submenu";
 import Menu from "./Menu";
@@ -8,9 +8,9 @@ const SidebarLinks = () => {
         <>
             {sidebar_links.map((route, index) => {
                 return (
-                    <li key={index}>
+                    <div key={index}>
                         {route.submenus ? <Submenu submenus={route.submenus} {...route} /> : <Menu {...route} />}
-                    </li>
+                    </div>
                 );
             })}
         </>

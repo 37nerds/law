@@ -20,14 +20,12 @@ class UserController extends Controller
         if ($userId) {
             $user = User::query()->findOrFail($userId);
             return Response::happy(200, $user);
-
         }
 
-        $searchString = $request->query("q");
         $page = $request->query("page", 1);
         $perPage = $request->query("per_page", 10);
 
-        $paginates = User::paginate(perPage: $perPage, page: $page);
+        $paginates = User::with("role")->paginate(perPage: $perPage, page: $page);
 
         return Response::happy(200, $paginates);
     }

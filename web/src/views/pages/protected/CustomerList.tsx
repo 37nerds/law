@@ -1,6 +1,5 @@
 import { useClientsQuery } from "@external/customers";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { TPaginate } from "@kinds/general";
 import { TClient } from "@kinds/customers";
 import useSetPageTitle from "@hooks/useSetPageTitle";
@@ -17,12 +16,7 @@ const CustomerList = () => {
     const navigate = useNavigate();
     const query = useClientsQuery();
 
-    const { page: paramPage } = useParams();
     const { clientsFilters, setClientsFiltersField } = useCustomerListStore();
-
-    useEffect(() => {
-        setClientsFiltersField("page", Number(paramPage) || 1);
-    }, [paramPage]);
 
     return (
         <QueryLayout<TPaginate<TClient>> query={query}>

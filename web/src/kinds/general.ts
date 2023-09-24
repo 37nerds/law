@@ -60,6 +60,7 @@ export type TSidebarLink = {
     name: string;
     path: string;
     icon: TIcon;
+    group?: string;
     defaults?: Record<string, any>;
     submenus?: TSidebarLink[];
 };

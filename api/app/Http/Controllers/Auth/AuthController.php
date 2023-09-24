@@ -9,6 +9,8 @@ use App\Http\Requests\Auth\UpdatePasswordRequest;
 use App\Http\Requests\Auth\UploadAvatarRequest;
 use App\Logic\Response;
 use App\Logic\X;
+use App\Models\Permission;
+use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
@@ -83,9 +85,20 @@ class AuthController extends Controller
         return Response::happy(200, $user);
     }
 
-    public function show(Request $request)
+    public function show(): array
     {
-        return $request->user();
+        $user = User::with("role")
+            ->where("id", "=", Auth::id())
+            ->first();
+
+        $permissions = Permission::with('resource')
+            ->where("role_id", "=", $user->role_id)
+            ->get();
+
+        return [
+            "user" => $user,
+            "permissions" => $permissions,
+        ];
     }
 
     public function update(UpdateLoggedUserRequest $request): JsonResponse

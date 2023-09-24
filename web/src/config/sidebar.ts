@@ -24,14 +24,12 @@ export const sidebar_links: TSidebarLink[] = [
         path: "",
         icon: UserIcon,
         name: "Customers",
+        group: "customers",
         submenus: [
             {
-                path: "/_/customers/:page",
+                path: "/_/customers",
                 icon: QueueListIcon,
                 name: "Customers List",
-                defaults: {
-                    page: 1,
-                },
             },
             {
                 path: "/_/customers/setup",
@@ -51,9 +49,28 @@ export const sidebar_links: TSidebarLink[] = [
         name: "Integration",
     },
     {
+        path: "/rbac",
+        icon: Cog6ToothIcon,
+        name: "Users",
+        group: "users",
+        submenus: [
+            {
+                path: "/_/rbac/users",
+                icon: UsersIcon,
+                name: "All Users",
+            },
+            {
+                path: "/_/rbac/roles",
+                icon: checkBadgeIcon,
+                name: "Roles",
+            },
+        ],
+    },
+    {
         path: "",
         icon: Cog6ToothIcon,
         name: "Settings",
+        group: "settings",
         submenus: [
             {
                 path: "/_/profile",
@@ -64,16 +81,6 @@ export const sidebar_links: TSidebarLink[] = [
                 path: "/_/settings-billing",
                 icon: WalletIcon,
                 name: "Billing",
-            },
-            {
-                path: "/_/rbac/users",
-                icon: UsersIcon,
-                name: "Users",
-            },
-            {
-                path: "/_/rbac/roles",
-                icon: checkBadgeIcon,
-                name: "Roles",
             },
         ],
     },

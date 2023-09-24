@@ -12,7 +12,7 @@ type TAction = {
     setLoggedUserField: (field: keyof TLoggedUser, value: any) => void;
 };
 
-const useAuthStore = create<TState & TAction>()(
+export const useAuthStore = create<TState & TAction>()(
     immer(
         devtools(set => ({
             loggedUser: null,

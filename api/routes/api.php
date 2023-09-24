@@ -72,7 +72,7 @@ Route::prefix("/v1")
             ->group(function () {
 
                 Route::prefix("/users")->group(function () {
-                    Route::get("/", [UserController::class, "index"]);
+                    Route::get("/", [UserController::class, "index"])->middleware("protect");
                     Route::post("/", [UserController::class, "store"]);
                     Route::patch("/", [UserController::class, "update"]);
                     Route::delete("/", [UserController::class, "destroy"]);
