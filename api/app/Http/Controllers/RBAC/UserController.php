@@ -5,9 +5,9 @@ namespace App\Http\Controllers\RBAC;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreateUserRequest;
 use App\Http\Requests\RBAC\UpdateUserRequest;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\RBAC\UserResource;
 use App\Logic\Response;
-use App\Models\User;
+use App\Models\RBAC\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

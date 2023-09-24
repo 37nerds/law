@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\Table;
-use App\Models\Role;
+use App\Models\RBAC\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

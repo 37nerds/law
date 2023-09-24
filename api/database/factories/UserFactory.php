@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Logic\Dump;
-use App\Models\Role;
-use App\Models\User;
+use App\Models\RBAC\Role;
+use App\Models\RBAC\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

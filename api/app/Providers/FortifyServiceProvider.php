@@ -10,7 +10,7 @@ use App\DTO\Device;
 use App\Events\TryingLogin;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Logic\Cookie;
-use App\Models\User;
+use App\Models\RBAC\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;

@@ -2,7 +2,7 @@
 
 namespace App\Actions\Fortify;
 
-use App\Models\User;
+use App\Models\RBAC\User;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;

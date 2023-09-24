@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Customers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customers\StoreUnitRequest;
 use App\Http\Requests\Customers\UpdateUnitRequest;
-use App\Http\Resources\UnitResource;
+use App\Http\Resources\Customers\UnitResource;
 use App\Logic\Response;
-use App\Models\Unit;
+use App\Models\Customers\Unit;
 use App\Repositories\UnitRepository;
 use Illuminate\Http\JsonResponse;
 

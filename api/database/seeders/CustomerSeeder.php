@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use App\Logic\SeederTrait;
-use App\Models\Client;
-use App\Models\Company;
-use App\Models\GroupOfCompany;
-use App\Models\Unit;
+use App\Models\Customers\Client;
+use App\Models\Customers\Company;
+use App\Models\Customers\GroupOfCompany;
+use App\Models\Customers\Unit;
 use Illuminate\Database\Seeder;
 
 class CustomerSeeder extends Seeder

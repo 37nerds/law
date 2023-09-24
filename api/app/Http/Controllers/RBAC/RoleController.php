@@ -5,9 +5,9 @@ namespace App\Http\Controllers\RBAC;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreateRoleRequest;
 use App\Http\Requests\RBAC\UpdateRoleRequest;
-use App\Http\Resources\RoleResource;
+use App\Http\Resources\RBAC\RoleResource;
 use App\Logic\Response;
-use App\Models\Role;
+use App\Models\RBAC\Role;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

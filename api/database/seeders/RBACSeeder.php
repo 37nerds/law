@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use App\Logic\SeederTrait;
-use App\Models\Permission;
-use App\Models\Resources;
-use App\Models\Role;
-use App\Models\User;
+use App\Models\RBAC\Permission;
+use App\Models\RBAC\Resource;
+use App\Models\RBAC\Role;
+use App\Models\RBAC\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -25,7 +25,7 @@ class RBACSeeder extends Seeder
         $resources = config("resources");
 
         collect($resources)->each(function ($resource) use ($superAdmin) {
-            $re = Resources::query()->create($resource);
+            $re = Resource::query()->create($resource);
             Permission::query()->create(["role_id" => $superAdmin->id, "resource_id" => $re->id]);
         });
 

@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Unit;
+use App\Models\Customers\Unit;
 
 class UnitRepository
 {
