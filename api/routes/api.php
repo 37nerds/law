@@ -81,6 +81,9 @@ Route::prefix("/v1")
 
                 Route::prefix("/roles")->group(function () {
                     Route::get("/", [RoleController::class, "index"]);
+                    Route::post("/", [RoleController::class, "store"]);
+                    Route::patch("/", [RoleController::class, "update"]);
+                    Route::delete("/", [RoleController::class, "destroy"]);
                 });
 
             });
