@@ -16,6 +16,7 @@ const Submenu = ({
     name: string;
     group?: string;
     icon: TIcon;
+    omit?: boolean;
     submenus: TSidebarLink[];
 }) => {
     const location = useLocation();
@@ -37,7 +38,8 @@ const Submenu = ({
 
     const permissions = loggedUser?.permissions || [];
 
-    const isPermitted = !!permissions.find(p => p?.resource?.group === group);
+    let isPermitted = !!submenus.find(submenu => submenu?.omit);
+    isPermitted = isPermitted ? true : !!permissions.find(p => p?.resource?.group === group);
 
     return isPermitted ? (
         <li>
@@ -63,6 +65,7 @@ const Submenu = ({
                                     submenus: submenus2,
                                     defaults: defaults2,
                                     group: group2,
+                                    omit: omit2,
                                 },
                                 index
                             ) => {
@@ -74,7 +77,7 @@ const Submenu = ({
                                         </li>
                                     );
                                 }
-                                const isPermitted = !!permissions.find(p => p?.resource?.web === fPath);
+                                const isPermitted = omit2 ? true : !!permissions.find(p => p?.resource?.web === fPath);
                                 return (
                                     <div key={index}>
                                         {isPermitted ? (

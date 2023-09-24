@@ -13,7 +13,6 @@
         "@heroicons/react": "^2.0.13",
         "chart.js": "^4.0.1",
         "immer": "^10.0.2",
-        "moment": "^2.29.4",
         "react": "^18.2.0",
         "react-advanced-cropper": "~0.19.3",
         "react-chartjs-2": "^5.0.1",

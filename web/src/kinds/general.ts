@@ -61,6 +61,7 @@ export type TSidebarLink = {
     path: string;
     icon: TIcon;
     group?: string;
+    omit?: boolean;
     defaults?: Record<string, any>;
     submenus?: TSidebarLink[];
 };
