@@ -17,6 +17,8 @@ export type TUser = Base & {
     email_verified_at: string | null;
     role_id: string;
     role: TRole;
+    address: string;
+    phone: string;
 };
 
 export type TResource = Base & {
@@ -36,4 +38,19 @@ export type TPermission = Base & {
 export type TLoggedUser = {
     user: TUser;
     permissions: TPermission[];
+};
+
+export type TUserModalOpenFor = {
+    id?: number;
+    type: "new_user" | "edit_user";
+};
+
+export type TCreateUser = {
+    name: string;
+    email: string;
+    username: string;
+    role_id: string;
+    address: string;
+    phone: string;
+    password: string;
 };

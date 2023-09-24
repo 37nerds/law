@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
 import { gendersOptions } from "@config/general";
 import { useClientQuery, useFetchPopUpDataQuery, useUpdateClientMutation } from "@external/customers";
+import { useEffect, useState } from "react";
 
-import TextInput from "@components/inputs/TextInput";
 import DateInput from "@components/inputs/DateInput";
+import EmailInput from "@components/inputs/EmailInput";
+import LadderSelectInput from "@components/inputs/LadderSelectInput";
 import SelectInput from "@components/inputs/SelectInput";
 import StringInput from "@components/inputs/StringInput";
-import SingleInputBox from "@components/layouts/SingleInputBox";
+import TextInput from "@components/inputs/TextInput";
 import DoubleInputBox from "@components/layouts/DoubleInputBox";
-import LadderSelectInput from "@components/inputs/LadderSelectInput";
-import useCustomerListStore from "@states/customerListStore";
-import EmailInput from "@components/inputs/EmailInput";
+import SingleInputBox from "@components/layouts/SingleInputBox";
 import CustomerModalLayout from "@screens/customerList/CustomerModalLayout";
+import useCustomerListStore from "@states/customerListStore";
 
 /**
  * Show individual client data by ID and user can edit the data as well
@@ -24,6 +24,8 @@ const ShowClientInModal = ({ id }: { id: number }) => {
 
     const { client, setClientField } = useCustomerListStore();
     const { units } = useFetchPopUpDataQuery().data || {};
+
+    console.log(units);
 
     useEffect(() => {
         if (updateClientMutation.isSuccess) {

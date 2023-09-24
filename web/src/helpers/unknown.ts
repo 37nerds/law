@@ -1,5 +1,5 @@
-import type { TNotificationType } from "@kinds/general";
 import { assert_storage_url } from "@config/env";
+import type { TNotificationType } from "@kinds/general";
 import { useParams } from "react-router-dom";
 
 import useNotificationStore from "@states/useNotificationStore";
@@ -58,4 +58,10 @@ export const usePrepareUrlForSidebarLink = () => {
         });
         return parts.join("/");
     };
+};
+
+// Convert db timestamps to local time
+export const convertToLocalTime = (isoString: string) => {
+    const date = new Date(isoString);
+    return date.toLocaleString();
 };
