@@ -19,11 +19,16 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $table = Table::users;
 
     protected $fillable = [
-        "name",
+        "role_id",
+
         "email",
         "username",
         "password",
-        "role_id"
+
+        "name",
+        "phone",
+        "active",
+        "address"
     ];
 
     protected $hidden = [

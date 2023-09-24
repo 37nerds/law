@@ -23,7 +23,7 @@ class UserRepository
         $user->username = $properties["username"] ?? $user->username;
         $user->email = $properties["email"] ?? $user->email;
         $user->password = $properties["password"] ?? $user->password;
-        $user->role = $properties["role_id"] ?? $user->role_id;
+        $user->role_id = $properties["role_id"] ?? $user->role_id;
         $user->avatar = $properties["avatar"] ?? $user->avatar;
 
         $user->save();

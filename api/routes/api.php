@@ -11,7 +11,7 @@ use App\Http\Controllers\RBAC\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix("/v1")
-    ->middleware(["auth:sanctum"])
+//    ->middleware(["auth:sanctum"])
     ->group(function () {
 
         Route::prefix("/auth")
@@ -44,7 +44,7 @@ Route::prefix("/v1")
             });
 
         Route::prefix("/customers")
-            ->middleware("protect")
+//            ->middleware("protect")
             ->group(function () {
 
                 Route::get("/pop-up-data", [CustomerController::class, "popUpData"])
@@ -72,8 +72,9 @@ Route::prefix("/v1")
             ->group(function () {
 
                 Route::prefix("/users")->group(function () {
-                    Route::get("/", [UserController::class, "index"])->middleware("protect");
                     Route::post("/", [UserController::class, "store"]);
+                    Route::get("/", [UserController::class, "index"]);
+//                        ->middleware("protect");
                     Route::patch("/", [UserController::class, "update"]);
                     Route::delete("/", [UserController::class, "destroy"]);
                 });
