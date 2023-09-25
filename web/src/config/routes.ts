@@ -1,5 +1,5 @@
-import type {TRoute} from "@kinds/general";
-import {lazy} from "react";
+import type { TRoute } from "@kinds/general";
+import { lazy } from "react";
 
 /**
  * Configure routes for logout users
@@ -47,7 +47,7 @@ export const protected_routes: TRoute[] = [
     },
     {
         path: "/rbac/users",
-        component: lazy(() => import("@pages/protected/UsersList")),
+        component: lazy(() => import("@pages/protected/Users")),
     },
     {
         path: "/rbac/roles",

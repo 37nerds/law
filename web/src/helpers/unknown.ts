@@ -65,3 +65,7 @@ export const convertToLocalTime = (isoString: string) => {
     const date = new Date(isoString);
     return date.toLocaleString();
 };
+
+export const prepareErrorString = (errors: string[]): string => {
+    return errors?.reduce((s, c) => s + " | " + c);
+};

@@ -1,12 +1,12 @@
 import StringInput from "@components/inputs/StringInput";
 import { useRolesQuery } from "@external/rbac";
-import useUsersStore from "@states/rbacStore";
+import useRbacStore from "@states/rbacStore";
 import RoleModalLayout from "./RoleModalLayout";
 
 const ShowEditRoleModal = () => {
     const rolesQuery = useRolesQuery();
 
-    const { user, setUserField } = useUsersStore();
+    const { user, setUserField } = useRbacStore();
 
     return (
         <RoleModalLayout title="Edit Role" isModalForNewRole={false}>

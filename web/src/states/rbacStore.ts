@@ -20,7 +20,7 @@ type TAction = {
     setUserField: (key: keyof TCreateUser, value: any) => void;
 };
 
-const useUsersStore = create<TState & TAction>()(
+const useRbacStore = create<TState & TAction>()(
     immer(
         devtools(set => ({
             user: {
@@ -69,4 +69,4 @@ const useUsersStore = create<TState & TAction>()(
     )
 );
 
-export default useUsersStore;
+export default useRbacStore;

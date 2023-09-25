@@ -7,7 +7,7 @@ import useSetPageTitle from "@hooks/useSetPageTitle";
 import { TPaginate } from "@kinds/general";
 import { TRole, TRoleModalOpenFor } from "@kinds/users";
 import RoleModal from "@screens/roleList/RoleModal";
-import useUsersStore from "@states/rbacStore";
+import useRbacStore from "@states/rbacStore";
 import { useState } from "react";
 
 const Roles = () => {
@@ -16,7 +16,7 @@ const Roles = () => {
     const [modalOpenFor, setModalOpenFor] = useState<TRoleModalOpenFor | null>(null);
 
     const query = useRolesQuery();
-    const { rolesFilters, setRolesFiltersField } = useUsersStore();
+    const { rolesFilters, setRolesFiltersField } = useRbacStore();
 
     const Button = (
         <ModalOpener

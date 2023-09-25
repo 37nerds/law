@@ -1,6 +1,6 @@
 const InputError = ({ message }: { message: string }) => {
     return (
-        <div className="alert alert-error shadow-lg">
+        <div className="alert alert-error flex flex-row rounded-lg py-3 shadow-lg">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 flex-shrink-0 stroke-current"

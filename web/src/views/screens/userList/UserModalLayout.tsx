@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 
 import ErrorText from "@components/pure/ErrorText";
 import Loading from "@components/pure/Loading";
-import { useNewUserMutation } from "@external/rbac";
-import useUsersStore from "@states/rbacStore";
+import { useSaveUserMutation } from "@external/rbac";
+import useRbacStore from "@states/rbacStore";
 
 const UserModalLayout = ({
     title,
@@ -26,12 +26,12 @@ const UserModalLayout = ({
     onEditToggle?: () => void;
     isLoading?: boolean;
 }) => {
-    const newUserMutation = useNewUserMutation();
-    const { user } = useUsersStore();
-    const { email, name, username, role_id, address, phone, password, password_confirmation } = user;
+    const newUserMutation = useSaveUserMutation();
+    const { user } = useRbacStore();
+    const { email, name, username, role_id, address, phone, password } = user;
 
     // add new user handler
-    const handleNewUserCreation = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleNewUserCreation = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         newUserMutation.mutate({
@@ -42,7 +42,6 @@ const UserModalLayout = ({
             address,
             phone,
             password,
-            password_confirmation,
         });
     };
 
