@@ -18,7 +18,7 @@ class CreateUserRequest extends FormRequest
             "role_id" => ["required", "string"],
 
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            "username" => ["required", "string", "max:255"],
+            "username" => ["required", "string", "max:255", 'unique:users,username'],
             'password' => RuleLogic::passwordRules(),
 
             'name' => ['string', 'max:255'],
