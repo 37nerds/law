@@ -1,10 +1,10 @@
 import { notify } from "@helpers/unknown";
 import { TError, TPaginate } from "@kinds/general";
-import { TRole, TUser } from "@kinds/users";
+import { TCreateUser, TRole, TUser } from "@kinds/users";
 import { useEffect } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
-import { RBAC_ROLES_GET, RBAC_USERS_GET } from "@constants/keys";
+import { RBAC_ROLES_GET, RBAC_USERS_GET, RBAC_USERS_POST } from "@constants/keys";
 import http from "@facades/http";
 import useUsersStore from "@states/rbacStore";
 
@@ -47,4 +47,18 @@ export const useRolesQuery = () => {
     }, [query.isError]);
 
     return query;
+};
+
+export const useNewUserMutation = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation<TUser, TError, TCreateUser>({
+        mutationFn: async user => {
+            return await http.post("/rbac/users", user, 201);
+        },
+        mutationKey: [RBAC_USERS_POST],
+        onSuccess: () => {
+            return queryClient.invalidateQueries(RBAC_USERS_GET);
+        },
+    });
 };

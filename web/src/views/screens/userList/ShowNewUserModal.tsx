@@ -10,12 +10,12 @@ const ShowNewUserModal = () => {
 
     const { user, setUserField } = useUsersStore();
 
-    console.log(rolesQuery?.data?.data);
-
     return (
         <UserModalLayout title="Add user" isModalForNewUser={true}>
             <>
                 <DoubleInputBox
+                    required1
+                    required2
                     label1="Email"
                     element1={<StringInput value={user["email"]} setValue={value => setUserField("email", value)} />}
                     label2="Username"
@@ -25,15 +25,33 @@ const ShowNewUserModal = () => {
                 />
 
                 <DoubleInputBox
+                    required1
+                    required2
                     label1="Name"
                     element1={<StringInput value={user["name"]} setValue={value => setUserField("name", value)} />}
-                    label2="password"
-                    element2={
+                    label2="phone"
+                    element2={<StringInput value={user["phone"]} setValue={value => setUserField("phone", value)} />}
+                />
+
+                <DoubleInputBox
+                    required1
+                    required2
+                    label1="Password"
+                    element1={
                         <StringInput value={user["password"]} setValue={value => setUserField("password", value)} />
+                    }
+                    label2="Confirm Password"
+                    element2={
+                        <StringInput
+                            value={user["password_confirmation"]}
+                            setValue={value => setUserField("password_confirmation", value)}
+                        />
                     }
                 />
 
                 <DoubleInputBox
+                    required1
+                    required2
                     label1="Role"
                     element1={
                         <SelectInput
@@ -47,7 +65,7 @@ const ShowNewUserModal = () => {
                             setValue={value => setUserField("role_id", value)}
                         />
                     }
-                    label2="address"
+                    label2="Address"
                     element2={
                         <StringInput value={user["address"]} setValue={value => setUserField("address", value)} />
                     }

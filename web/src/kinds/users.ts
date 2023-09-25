@@ -53,4 +53,5 @@ export type TCreateUser = {
     address: string;
     phone: string;
     password: string;
+    password_confirmation: string;
 };

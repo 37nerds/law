@@ -2,6 +2,8 @@ import { ReactNode } from "react";
 
 import ErrorText from "@components/pure/ErrorText";
 import Loading from "@components/pure/Loading";
+import { useNewUserMutation } from "@external/rbac";
+import useUsersStore from "@states/rbacStore";
 
 const UserModalLayout = ({
     title,
@@ -24,6 +26,26 @@ const UserModalLayout = ({
     onEditToggle?: () => void;
     isLoading?: boolean;
 }) => {
+    const newUserMutation = useNewUserMutation();
+    const { user } = useUsersStore();
+    const { email, name, username, role_id, address, phone, password, password_confirmation } = user;
+
+    // add new user handler
+    const handleNewUserCreation = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
+        newUserMutation.mutate({
+            email,
+            name,
+            username,
+            role_id,
+            address,
+            phone,
+            password,
+            password_confirmation,
+        });
+    };
+
     return (
         <div className="flex flex-col gap-4 text-sm">
             <div className="flex items-center justify-between gap-2">
@@ -41,7 +63,11 @@ const UserModalLayout = ({
                         </button>
                     )}
 
-                    {isModalForNewUser && <button className="btn btn-success">Add user</button>}
+                    {isModalForNewUser && (
+                        <button className="btn btn-success" onClick={handleNewUserCreation}>
+                            Add user
+                        </button>
+                    )}
                 </div>
             </div>
             {isLoading ? (

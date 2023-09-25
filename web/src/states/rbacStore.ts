@@ -31,6 +31,7 @@ const useUsersStore = create<TState & TAction>()(
                 role_id: "",
                 address: "",
                 password: "",
+                password_confirmation: "",
             },
 
             userFilters: {
