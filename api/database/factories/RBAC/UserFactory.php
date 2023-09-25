@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\RBAC;
 
 use App\Logic\Dump;
 use App\Models\RBAC\Role;

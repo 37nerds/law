@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Customers;
 
 use App\Logic\Dump;
 use App\Models\Customers\Client;
