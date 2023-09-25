@@ -51,7 +51,7 @@ export const protected_routes: TRoute[] = [
     },
     {
         path: "/rbac/roles",
-        component: lazy(() => import("@pages/protected/Roles")),
+        component: lazy(() => import("@pages/protected/RoleList")),
     },
     {
         path: "/settings/profile",

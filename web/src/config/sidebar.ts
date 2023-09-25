@@ -1,4 +1,4 @@
-import {TSidebarLink} from "@kinds/general";
+import { TSidebarLink } from "@kinds/general";
 
 import BoltIcon from "@heroicons/react/24/outline/BoltIcon";
 import ChartBarIcon from "@heroicons/react/24/outline/ChartBarIcon";
@@ -61,7 +61,7 @@ export const sidebar_links: TSidebarLink[] = [
             {
                 path: "/_/rbac/roles",
                 icon: checkBadgeIcon,
-                name: "Roles",
+                name: "All Roles",
             },
         ],
     },

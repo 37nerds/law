@@ -45,6 +45,11 @@ export type TUserModalOpenFor = {
     type: "new_user" | "edit_user";
 };
 
+export type TRoleModalOpenFor = {
+    id?: number;
+    type: "new_role" | "edit_role";
+};
+
 export type TCreateUser = {
     name: string;
     email: string;
