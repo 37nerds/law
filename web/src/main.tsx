@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 import "./index.css";
 
-import Loading from "@components/pure/Loading";
+import Loading from "./components/pure/Loading";
 import App from "./App";
 
 const root = createRoot(document.getElementById("root") as HTMLElement);

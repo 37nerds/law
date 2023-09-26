@@ -7,19 +7,19 @@ import { lazy } from "react";
 export const guest_routes: TRoute[] = [
     {
         path: "/login",
-        component: lazy(() => import("@pages/guest/Login")),
+        component: lazy(() => import("../pages/guest/Login")),
     },
     {
         path: "/register",
-        component: lazy(() => import("@pages/guest/Register")),
+        component: lazy(() => import("../pages/guest/Register")),
     },
     {
         path: "/forgot-password",
-        component: lazy(() => import("@pages/guest/ForgotPassword")),
+        component: lazy(() => import("../pages/guest/ForgotPassword")),
     },
     {
         path: "/rest-password",
-        component: lazy(() => import("@pages/guest/ResetPassword")),
+        component: lazy(() => import("../pages/guest/ResetPassword")),
     },
 ];
 
@@ -31,39 +31,39 @@ export const guest_routes: TRoute[] = [
 export const protected_routes: TRoute[] = [
     {
         path: "/welcome",
-        component: lazy(() => import("@pages/protected/Welcome")),
+        component: lazy(() => import("../pages/protected/Welcome")),
     },
     {
         path: "/dashboard",
-        component: lazy(() => import("@pages/protected/Dashboard")),
+        component: lazy(() => import("../pages/protected/Dashboard")),
     },
     {
         path: "/customers/setup",
-        component: lazy(() => import("@pages/protected/CustomerSetup")),
+        component: lazy(() => import("../pages/protected/CustomerSetup")),
     },
     {
         path: "/customers",
-        component: lazy(() => import("@pages/protected/CustomerList")),
+        component: lazy(() => import("../pages/protected/CustomerList")),
     },
     {
         path: "/rbac/users",
-        component: lazy(() => import("@pages/protected/Users")),
+        component: lazy(() => import("../pages/protected/Users")),
     },
     {
         path: "/rbac/roles",
-        component: lazy(() => import("@pages/protected/Roles")),
+        component: lazy(() => import("../pages/protected/Roles")),
     },
     {
         path: "/settings/profile",
-        component: lazy(() => import("@pages/protected/Profile")),
+        component: lazy(() => import("../pages/protected/Profile")),
     },
     {
         path: "/integration",
-        component: lazy(() => import("@pages/protected/Integration")),
+        component: lazy(() => import("../pages/protected/Integration")),
     },
     {
         path: "/charts",
-        component: lazy(() => import("@pages/protected/Charts")),
+        component: lazy(() => import("../pages/protected/Charts")),
     },
 ];
 

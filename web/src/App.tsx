@@ -4,10 +4,10 @@ import { guest_routes, protected_routes, public_routes } from "@config/routes";
 import { useLoggedUserFetch } from "@fetches/auth/auth";
 import { getPathname, isGuestRoute, isPublicRoute, redirect } from "@helpers/location";
 
-import Loading from "@components/pure/Loading";
-import GuestRoute from "@components/auth/GuestRoute";
-import ProtectedRoute from "@components/auth/ProtectedRoute";
-import Page404 from "@pages/protected/Page404";
+import Loading from "./components/pure/Loading";
+import GuestRoute from "./components/auth/GuestRoute";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import Page404 from "./pages/protected/Page404";
 
 const App = () => {
     const pathname = getPathname();
