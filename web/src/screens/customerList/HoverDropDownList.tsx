@@ -1,6 +1,6 @@
 import { useDeleteClientMutation, useUpdateClientMutation } from "@fetches/customers/customers";
 
-import ThreeDotDropdown from "../../components/dropdowns/ThreeDotDropdown";
+import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 import useCustomerListStore from "@states/customerListStore";
 
 export const ACTIVE = "active";

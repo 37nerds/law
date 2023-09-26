@@ -10,7 +10,7 @@ import {
     Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import TitleCard from "../../components/cards/TitleCard";
+import TitleCard from "@components/cards/TitleCard";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler, Legend);
 

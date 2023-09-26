@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import LandingIntro from "../../components/intro/LandingIntro";
+import LandingIntro from "@components/intro/LandingIntro";
 
 const LoginWrapper = ({ children }: { children: ReactNode }) => {
     return (

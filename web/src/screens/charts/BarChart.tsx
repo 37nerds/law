@@ -1,4 +1,4 @@
-import TitleCard from "../../components/cards/TitleCard";
+import TitleCard from "@components/cards/TitleCard";
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from "chart.js";
 import { Bar } from "react-chartjs-2";
 

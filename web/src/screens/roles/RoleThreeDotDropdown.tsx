@@ -1,4 +1,4 @@
-import ThreeDotDropdown from "../../components/dropdowns/ThreeDotDropdown";
+import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 import { useDeleteRoleMutation } from "@fetches/rbac/roles";
 import useRolesStore from "@states/rolesStore";
 

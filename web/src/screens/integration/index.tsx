@@ -1,4 +1,4 @@
-import TitleCard from "../../components/cards/TitleCard";
+import TitleCard from "@components/cards/TitleCard";
 import { notify } from "@helpers/unknown";
 import { useState } from "react";
 

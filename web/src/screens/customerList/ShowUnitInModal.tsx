@@ -3,15 +3,15 @@ import { TPopUpUnit } from "@fetches/customers/customers-type";
 import { useFetchPopUpDataQuery, useUnitQuery, useUpdateUnitMutation } from "@fetches/customers/customers";
 import { legalFromOptions } from "@config/general";
 
-import StringInput from "../../components/inputs/StringInput";
-import SingleInputBox from "../../components/layouts/SingleInputBox";
-import DoubleInputBox from "../../components/layouts/DoubleInputBox";
-import LadderSelectInput from "../../components/inputs/LadderSelectInput";
-import SelectEditableInput from "../../components/inputs/SelectEditableInput";
+import StringInput from "@components/inputs/StringInput";
+import SingleInputBox from "@components/layouts/SingleInputBox";
+import DoubleInputBox from "@components/layouts/DoubleInputBox";
+import LadderSelectInput from "@components/inputs/LadderSelectInput";
+import SelectEditableInput from "@components/inputs/SelectEditableInput";
 import useCustomerListStore from "@states/customerListStore";
 import CustomerModalLayout from "./CustomerModalLayout";
-import SelectInput from "../../components/inputs/SelectInput";
-import EmailInput from "../../components/inputs/EmailInput";
+import SelectInput from "@components/inputs/SelectInput";
+import EmailInput from "@components/inputs/EmailInput";
 
 /**
  * Show individual unit data by ID and user can edit the data as well

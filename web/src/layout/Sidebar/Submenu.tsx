@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { getPathname } from "@helpers/location";
 import { usePrepareUrlForSidebarLink } from "@helpers/unknown";
 
-import DynamicChevronIcon from "../../components/icons/DynamicChevronIcon";
+import DynamicChevronIcon from "@components/icons/DynamicChevronIcon";
 import useAuthStore from "@states/authStore";
 
 const Submenu = ({

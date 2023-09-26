@@ -1,8 +1,8 @@
 import useSetPageTitle from "@hooks/useSetPageTitle";
-import Card from "../../components/cards/Card";
-import ProfilePicture from "../../screens/profile/ProfilePicture";
-import Details from "../../screens/profile/Details";
-import ChangePassword from "../../screens/profile/ChangePassword";
+import Card from "@components/cards/Card";
+import ProfilePicture from "@screens/profile/ProfilePicture";
+import Details from "@screens/profile/Details";
+import ChangePassword from "@screens/profile/ChangePassword";
 
 const Profile = () => {
     useSetPageTitle("Profile");

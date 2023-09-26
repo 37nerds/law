@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { useRolesQuery } from "@fetches/rbac/roles";
 import { useEditUserMutation, useUserQuery } from "@fetches/rbac/users";
 
-import EmailInput from "../../components/inputs/EmailInput";
-import SelectInput from "../../components/inputs/SelectInput";
-import StringInput from "../../components/inputs/StringInput";
-import QueryLayout from "../../components/layouts/QueryLayout";
-import SingleInputBox from "../../components/layouts/SingleInputBox";
-import Modal from "../../components/modals2/Modal";
-import Title from "../../components/pure/Title";
+import EmailInput from "@components/inputs/EmailInput";
+import SelectInput from "@components/inputs/SelectInput";
+import StringInput from "@components/inputs/StringInput";
+import QueryLayout from "@components/layouts/QueryLayout";
+import SingleInputBox from "@components/layouts/SingleInputBox";
+import Modal from "@components/modals2/Modal";
+import Title from "@components/pure/Title";
 import useUsersStore from "@states/usersStore";
 
 const EditUserModal = ({

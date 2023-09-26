@@ -5,9 +5,9 @@ import { getProfileUrlFromAvatarKey } from "@helpers/unknown";
 
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import PencilIcon from "@heroicons/react/24/outline/PencilIcon";
-import UploadButton from "../../components/image/ImageUploadButton";
-import ImageCropper from "../../components/image/ImageCropper";
-import SubTitle from "../../components/pure/SubTitle";
+import UploadButton from "@components/image/ImageUploadButton";
+import ImageCropper from "@components/image/ImageCropper";
+import SubTitle from "@components/pure/SubTitle";
 
 const ProfilePicture = () => {
     const [imageSrc, setImageSrc] = useState<string>("");

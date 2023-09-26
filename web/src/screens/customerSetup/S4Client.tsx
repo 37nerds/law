@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-import RenderFields from "../../components/renderers/RenderFields";
-import RenderStep from "../../components/renderers/RenderStep";
+import RenderFields from "@components/renderers/RenderFields";
+import RenderStep from "@components/renderers/RenderStep";
 
 import useCustomerSetupStore from "@states/customerSetupStore";
 

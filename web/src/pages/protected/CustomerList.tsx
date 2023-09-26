@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { TPaginate } from "../../types";
 import { TClient } from "@fetches/customers/customers-type";
 import useSetPageTitle from "@hooks/useSetPageTitle";
-import Paginator from "../../components/pure/Paginator";
-import CustomerTable from "../../screens/customerList/CustomerTable";
-import Card from "../../components/cards/Card";
-import FilterCustomerList from "../../screens/customerList/FilterCustomerList";
+import Paginator from "@components/pure/Paginator";
+import CustomerTable from "@screens/customerList/CustomerTable";
+import Card from "@components/cards/Card";
+import FilterCustomerList from "@screens/customerList/FilterCustomerList";
 import useCustomerListStore from "@states/customerListStore";
-import QueryLayout from "../../components/layouts/QueryLayout";
+import QueryLayout from "@components/layouts/QueryLayout";
 
 const CustomerList = () => {
     useSetPageTitle("Customer List");

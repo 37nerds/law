@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TCustomerModalOpenFor } from "@fetches/customers/customers-type";
 
 import CustomerModal from "./CustomerModal";
-import ModalOpener from "../../components/modals/ModalOpener";
+import ModalOpener from "@components/modals/ModalOpener";
 import HoverDropDownList from "./HoverDropDownList";
 
 const CustomerTable = ({ data }: { data: any }) => {

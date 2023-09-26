@@ -1,7 +1,7 @@
-import StringInput from "../../components/inputs/StringInput";
-import SingleInputBox from "../../components/layouts/SingleInputBox";
-import Modal from "../../components/modals2/Modal";
-import Title from "../../components/pure/Title";
+import StringInput from "@components/inputs/StringInput";
+import SingleInputBox from "@components/layouts/SingleInputBox";
+import Modal from "@components/modals2/Modal";
+import Title from "@components/pure/Title";
 import { useSaveRoleMutation } from "@fetches/rbac/roles";
 import useRolesStore from "@states/rolesStore";
 import { useEffect } from "react";

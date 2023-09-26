@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 import useCustomerSetupStore from "@states/customerSetupStore";
 
-import RenderFields from "../../components/renderers/RenderFields";
-import RenderStep from "../../components/renderers/RenderStep";
+import RenderFields from "@components/renderers/RenderFields";
+import RenderStep from "@components/renderers/RenderStep";
 
 import { legalFromOptions } from "@config/general";
 import { TGroupOfCompany } from "@fetches/customers/customers-type";

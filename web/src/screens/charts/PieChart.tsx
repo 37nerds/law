@@ -1,4 +1,4 @@
-import TitleCard from "../../components/cards/TitleCard";
+import TitleCard from "@components/cards/TitleCard";
 import { ArcElement, Chart as ChartJS, Filler, Legend, Tooltip } from "chart.js";
 import { Pie } from "react-chartjs-2";
 

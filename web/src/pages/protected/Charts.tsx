@@ -1,9 +1,9 @@
-import LineChart from "../../screens/charts/LineChart";
-import BarChart from "../../screens/charts/BarChart";
-import DoughnutChart from "../../screens/charts/DoughnutChart";
-import PieChart from "../../screens/charts/PieChart";
-import ScatterChart from "../../screens/charts/ScatterChart";
-import StackBarChart from "../../screens/charts/StackBarChart";
+import LineChart from "@screens/charts/LineChart";
+import BarChart from "@screens/charts/BarChart";
+import DoughnutChart from "@screens/charts/DoughnutChart";
+import PieChart from "@screens/charts/PieChart";
+import ScatterChart from "@screens/charts/ScatterChart";
+import StackBarChart from "@screens/charts/StackBarChart";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 
 const Charts = () => {

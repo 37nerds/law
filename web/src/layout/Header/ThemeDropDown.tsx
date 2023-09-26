@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DynamicChevronIcon from "../../components/icons/DynamicChevronIcon";
+import DynamicChevronIcon from "@components/icons/DynamicChevronIcon";
 import useChangeTheme from "@hooks/useChangeTheme";
 
 const ThemeIcon = () => (

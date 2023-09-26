@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useLoginMutation } from "@fetches/auth/auth";
 import { redirect_after_login } from "@config/auth";
 
-import ErrorText from "../../components/pure/ErrorText";
-import Link from "../../components/pure/Link";
-import PasswordInput from "../../components/inputs/PasswordInput";
-import LoginWrapper from "../../screens/login/LoginWrapper";
+import ErrorText from "@components/pure/ErrorText";
+import Link from "@components/pure/Link";
+import PasswordInput from "@components/inputs/PasswordInput";
+import LoginWrapper from "@screens/login/LoginWrapper";
 import { redirect } from "@helpers/location";
-import EmailInput from "../../components/inputs/EmailInput";
+import EmailInput from "@components/inputs/EmailInput";
 
 const Login = () => {
     const [loading, setLoading] = useState(false);

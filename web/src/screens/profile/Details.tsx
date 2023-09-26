@@ -1,10 +1,10 @@
 import { convertUsernameLogic } from "@helpers/unknown";
 import { useUpdateUserMutation } from "@fetches/auth/auth";
 
-import StringInput from "../../components/inputs/StringInput";
+import StringInput from "@components/inputs/StringInput";
 import useAuthStore from "@states/authStore";
-import SubTitle from "../../components/pure/SubTitle";
-import Form from "../../components/pure/Form";
+import SubTitle from "@components/pure/SubTitle";
+import Form from "@components/pure/Form";
 
 const Details = () => {
     const { loggedUser, setLoggedUserField } = useAuthStore();

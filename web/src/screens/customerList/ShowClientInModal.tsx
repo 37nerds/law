@@ -2,14 +2,14 @@ import { gendersOptions } from "@config/general";
 import { useClientQuery, useFetchPopUpDataQuery, useUpdateClientMutation } from "@fetches/customers/customers";
 import { useEffect, useState } from "react";
 
-import DateInput from "../../components/inputs/DateInput";
-import EmailInput from "../../components/inputs/EmailInput";
-import LadderSelectInput from "../../components/inputs/LadderSelectInput";
-import SelectInput from "../../components/inputs/SelectInput";
-import StringInput from "../../components/inputs/StringInput";
-import TextInput from "../../components/inputs/TextInput";
-import DoubleInputBox from "../../components/layouts/DoubleInputBox";
-import SingleInputBox from "../../components/layouts/SingleInputBox";
+import DateInput from "@components/inputs/DateInput";
+import EmailInput from "@components/inputs/EmailInput";
+import LadderSelectInput from "@components/inputs/LadderSelectInput";
+import SelectInput from "@components/inputs/SelectInput";
+import StringInput from "@components/inputs/StringInput";
+import TextInput from "@components/inputs/TextInput";
+import DoubleInputBox from "@components/layouts/DoubleInputBox";
+import SingleInputBox from "@components/layouts/SingleInputBox";
 import CustomerModalLayout from "./CustomerModalLayout";
 import useCustomerListStore from "@states/customerListStore";
 

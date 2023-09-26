@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useUpdatePasswordMutation } from "@fetches/auth/auth";
 
-import SubTitle from "../../components/pure/SubTitle";
-import PasswordInput from "../../components/inputs/PasswordInput";
-import Form from "../../components/pure/Form";
+import SubTitle from "@components/pure/SubTitle";
+import PasswordInput from "@components/inputs/PasswordInput";
+import Form from "@components/pure/Form";
 
 const ChangePassword = () => {
     const updatePasswordMutation = useUpdatePasswordMutation();

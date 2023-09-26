@@ -3,11 +3,11 @@ import { useRegisterMutation } from "@fetches/auth/auth";
 import { redirect_after_login } from "@config/auth";
 import { convertUsernameLogic, generateNameFromEmail, generateUsernameFromEmail } from "@helpers/unknown";
 
-import ErrorText from "../../components/pure/ErrorText";
-import StringInput from "../../components/inputs/StringInput";
-import PasswordInput from "../../components/inputs/PasswordInput";
-import Link from "../../components/pure/Link";
-import RegisterWrapper from "../../screens/register/RegisterWrapper";
+import ErrorText from "@components/pure/ErrorText";
+import StringInput from "@components/inputs/StringInput";
+import PasswordInput from "@components/inputs/PasswordInput";
+import Link from "@components/pure/Link";
+import RegisterWrapper from "@screens/register/RegisterWrapper";
 
 const Register = () => {
     const [loading, setLoading] = useState(false);

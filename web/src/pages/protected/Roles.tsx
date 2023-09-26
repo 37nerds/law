@@ -1,11 +1,11 @@
-import PageLayout from "../../components/layouts/PageLayout";
-import QueryLayout from "../../components/layouts/QueryLayout";
-import Paginator from "../../components/pure/Paginator";
+import PageLayout from "@components/layouts/PageLayout";
+import QueryLayout from "@components/layouts/QueryLayout";
+import Paginator from "@components/pure/Paginator";
 import { TRole, useRolesQuery } from "@fetches/rbac/roles";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import { TPaginate } from "../../types";
-import NewRoleModal from "../../screens/roles/NewRoleModal";
-import RoleThreeDotDropdown from "../../screens/roles/RoleThreeDotDropdown";
+import NewRoleModal from "@screens/roles/NewRoleModal";
+import RoleThreeDotDropdown from "@screens/roles/RoleThreeDotDropdown";
 import useRolesStore from "@states/rolesStore";
 
 const Roles = () => {

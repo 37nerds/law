@@ -2,8 +2,8 @@ import { useEffect } from "react";
 
 import useCustomerSetupStore from "@states/customerSetupStore";
 
-import RenderFields from "../../components/renderers/RenderFields";
-import RenderStep from "../../components/renderers/RenderStep";
+import RenderFields from "@components/renderers/RenderFields";
+import RenderStep from "@components/renderers/RenderStep";
 
 import { legalFromOptions } from "@config/general";
 import { TBottomButton, TOption } from "../../types";

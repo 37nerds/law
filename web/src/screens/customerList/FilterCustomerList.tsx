@@ -1,4 +1,4 @@
-import Select from "../../components/inputs/Select";
+import Select from "@components/inputs/Select";
 import useCustomerListStore from "@states/customerListStore";
 
 const FilterCustomerList = () => {

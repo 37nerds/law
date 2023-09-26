@@ -1,4 +1,4 @@
-import TitleCard from "../../components/cards/TitleCard";
+import TitleCard from "@components/cards/TitleCard";
 
 const userSourceData = [
     { source: "Facebook Ads", count: "26,345", conversionPercent: 10.2 },

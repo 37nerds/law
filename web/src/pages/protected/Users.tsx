@@ -2,13 +2,13 @@ import { TUser, useUsersQuery } from "@fetches/rbac/users";
 import { convertToLocalTime } from "@helpers/unknown";
 import { TPaginate } from "../../types";
 
-import PageLayout from "../../components/layouts/PageLayout";
-import QueryLayout from "../../components/layouts/QueryLayout";
-import Paginator from "../../components/pure/Paginator";
+import PageLayout from "@components/layouts/PageLayout";
+import QueryLayout from "@components/layouts/QueryLayout";
+import Paginator from "@components/pure/Paginator";
 import useSetPageTitle from "@hooks/useSetPageTitle";
-import EditUserModal from "../../screens/users/EditUserModal";
-import NewUserModal from "../../screens/users/NewUserModal";
-import UserThreeDotDropdown from "../../screens/users/UserThreeDotDropdown";
+import EditUserModal from "@screens/users/EditUserModal";
+import NewUserModal from "@screens/users/NewUserModal";
+import UserThreeDotDropdown from "@screens/users/UserThreeDotDropdown";
 import useUsersStore from "@states/usersStore";
 
 const headers = ["Name", "Email Id", "Joined On", "Role"];
