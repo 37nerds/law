@@ -10,6 +10,7 @@ export type TRole = Base & {
 };
 
 export type TUser = Base & {
+    id?: string;
     name: string;
     email: string;
     username: string;
@@ -61,6 +62,7 @@ export type TCreateUser = {
 };
 
 export type TEditUser = {
+    id?: string;
     name: string;
     email: string;
     username: string;

@@ -1,13 +1,14 @@
-import { useRolesQuery, useUserQuery } from "@external/rbac";
+import { useEditUserMutation, useRolesQuery, useUserQuery } from "@external/rbac";
 
 import EmailInput from "@components/inputs/EmailInput";
 import SelectInput from "@components/inputs/SelectInput";
 import StringInput from "@components/inputs/StringInput";
+import QueryLayout from "@components/layouts/QueryLayout";
 import SingleInputBox from "@components/layouts/SingleInputBox";
 import Modal from "@components/modals2/Modal";
 import Title from "@components/pure/Title";
 import useUsersStore from "@states/usersStore";
-import QueryLayout from "@components/layouts/QueryLayout";
+import { useEffect } from "react";
 
 const EditUserModal = ({
     open,
@@ -20,36 +21,41 @@ const EditUserModal = ({
 }) => {
     const rolesQuery = useRolesQuery();
 
-    const { editUser, setEditUserField, editUserError } = useUsersStore();
+    const { editUser, setEditUserField, editUserError, setEditUserError, setEditUserErrorField } = useUsersStore();
 
     const userQuery = useUserQuery(userId);
+    const userEditMutation = useEditUserMutation();
 
-    // useEffect(() => {
-    //     if (saveUserMutation.isError && saveUserMutation?.error?.errors) {
-    //         setNewUserError(saveUserMutation?.error?.errors);
-    //     }
-    // }, [saveUserMutation.isError, saveUserMutation?.error?.errors]);
+    useEffect(() => {
+        if (userEditMutation.isError && userEditMutation?.error?.errors) {
+            setEditUserError(userEditMutation?.error?.errors);
+        }
+    }, [userEditMutation.isError, userEditMutation?.error?.errors]);
 
-    // useEffect(() => {
-    //     if (saveUserMutation.isSuccess) {
-    //         setOpen(false);
-    //         setNewUserEmpty();
-    //     }
-    // }, [saveUserMutation.isSuccess]);
+    useEffect(() => {
+        if (userEditMutation.isSuccess) {
+            setOpen(false);
+        }
+    }, [userEditMutation.isSuccess]);
 
-    // const handleSubmit = () => {
-    //     if (newUser.username.length < 6) {
-    //         setNewUserErrorField("username", ["Must be at least 6 characters"]);
-    //         return;
-    //     }
-    // };
+    const handleSubmit = () => {
+        if (editUser.username.length < 6) {
+            setEditUserErrorField("username", ["Must be at least 6 characters"]);
+            return;
+        }
+
+        userEditMutation.mutate({
+            ...editUser,
+            id: userId,
+        });
+    };
 
     return (
         <Modal
             isForm={true}
             open={open}
             setOpen={setOpen}
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             buttons={[
                 <button type="submit" className="btn btn-success text-base-100">
                     Update

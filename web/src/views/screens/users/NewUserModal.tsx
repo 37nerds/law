@@ -1,12 +1,12 @@
 import { useRolesQuery, useSaveUserMutation } from "@external/rbac";
 
+import EmailInput from "@components/inputs/EmailInput";
+import PasswordInput from "@components/inputs/PasswordInput";
 import SelectInput from "@components/inputs/SelectInput";
 import StringInput from "@components/inputs/StringInput";
+import SingleInputBox from "@components/layouts/SingleInputBox";
 import Modal from "@components/modals2/Modal";
 import Title from "@components/pure/Title";
-import SingleInputBox from "@components/layouts/SingleInputBox";
-import PasswordInput from "@components/inputs/PasswordInput";
-import EmailInput from "@components/inputs/EmailInput";
 import useUsersStore from "@states/usersStore";
 import { useEffect } from "react";
 

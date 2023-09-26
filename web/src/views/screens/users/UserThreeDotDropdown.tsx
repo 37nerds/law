@@ -1,8 +1,11 @@
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
+import { useDeleteUserMutation } from "@external/rbac";
 import useUsersStore from "@states/usersStore";
 
 const UserThreeDotDropdown = ({ userId }: { userId: string }) => {
     const { setFiltersField } = useUsersStore();
+
+    const userDeleteMutation = useDeleteUserMutation();
 
     return (
         <ThreeDotDropdown
@@ -16,7 +19,9 @@ const UserThreeDotDropdown = ({ userId }: { userId: string }) => {
                 },
                 {
                     content: <button className=" btn btn-error btn-sm w-full text-xs text-base-100">Delete</button>,
-                    handler: () => {},
+                    handler: () => {
+                        userDeleteMutation.mutate(userId);
+                    },
                 },
             ]}
         />

@@ -1,5 +1,5 @@
-import { ReactNode, useEffect, useRef } from "react";
 import XMarkIcon from "@heroicons/react/24/outline/XMarkIcon";
+import { ReactNode, useEffect, useRef } from "react";
 
 const Box = ({ isForm, children, onSubmit }: { isForm?: boolean; onSubmit?: () => void; children: ReactNode }) => {
     const className = `p-8`;
@@ -53,7 +53,7 @@ const Modal = ({
 
     return (
         <dialog ref={dialogRef} className="modal">
-            <div className={`modal-box ${widthClass} max-w-5xl`} onSubmit={onSubmit}>
+            <div className={`modal-box ${widthClass} max-w-5xl`}>
                 <div className="flex justify-end">
                     <form method="dialog">
                         <button
@@ -67,7 +67,7 @@ const Modal = ({
                         </button>
                     </form>
                 </div>
-                <Box isForm={isForm}>
+                <Box isForm={isForm} onSubmit={onSubmit}>
                     {children}
                     <div className="modal-action">
                         {buttons.map((button, index) => (

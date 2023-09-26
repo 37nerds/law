@@ -14,15 +14,15 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "role_id" => ["string"],
+            "role_id" => ["string", "nullable"],
 
-            'email' => ['optional', 'string', 'email', 'max:255', 'unique:users,email'],
-            "username" => ["string", "max:255", 'unique:users,username'],
+            'email' => ['string', 'email', 'max:255', "nullable"],
+            "username" => ["string", "max:255", "nullable"],
 
-            'name' => ['string', 'max:255'],
-            "phone" => ["string", "max:255"],
-            "active" => ["boolean"],
-            "address" => ["string", "max:255"],
+            'name' => ['string', 'max:255', "nullable"],
+            "phone" => ["string", "max:255", "nullable"],
+            "active" => ["boolean", "nullable"],
+            "address" => ["string", "max:255", "nullable"],
         ];
     }
 }

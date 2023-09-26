@@ -1,9 +1,16 @@
+import {
+    RBAC_ROLES_GET,
+    RBAC_USERS_GET,
+    RBAC_USERS_POST,
+    RBAC_USER_DELETE,
+    RBAC_USER_GET,
+    RBAC_USER_PATCH,
+} from "@constants/keys";
 import { notify } from "@helpers/unknown";
 import { TError, TPaginate } from "@kinds/general";
-import { TCreateUser, TRole, TUser } from "@kinds/users";
+import { TCreateUser, TEditUser, TRole, TUser } from "@kinds/users";
 import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { RBAC_ROLES_GET, RBAC_USER_GET, RBAC_USERS_GET, RBAC_USERS_POST } from "@constants/keys";
 
 import http from "@facades/http";
 import useRbacStore from "@states/rbacStore";
@@ -48,13 +55,11 @@ export const useSaveUserMutation = () => {
         if (mutation.isError) {
             notify("error", mutation.error?.message);
         }
-    }, [mutation.isError]);
 
-    useEffect(() => {
         if (mutation.isSuccess) {
             notify("success", `New user created: ${mutation?.data?.username}`);
         }
-    }, [mutation.isSuccess]);
+    }, [mutation.isError, mutation.isSuccess]);
 
     return mutation;
 };
@@ -87,6 +92,58 @@ export const useUserQuery = (userId: string) => {
     }, [query.isSuccess, query.isError]);
 
     return query;
+};
+
+export const useEditUserMutation = () => {
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation<TUser, TError, TEditUser>({
+        mutationFn: async user => {
+            return await http.patch(`/rbac/users?id=${user.id}`, user, 200);
+        },
+        mutationKey: [RBAC_USER_PATCH],
+        onSuccess: () => {
+            return queryClient.invalidateQueries(RBAC_USERS_GET);
+        },
+    });
+
+    useEffect(() => {
+        if (mutation.isError) {
+            notify("error", mutation.error?.message);
+        }
+
+        if (mutation.isSuccess) {
+            notify("success", `user updated: ${mutation?.data?.username}`);
+        }
+    }, [mutation.isError, mutation.isSuccess]);
+
+    return mutation;
+};
+
+export const useDeleteUserMutation = () => {
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation<TUser, TError, string>({
+        mutationFn: async id => {
+            return await http.delete(`/rbac/users?id=${id}`, 204);
+        },
+        mutationKey: [RBAC_USER_DELETE],
+        onSuccess: () => {
+            return queryClient.invalidateQueries(RBAC_USERS_GET);
+        },
+    });
+
+    useEffect(() => {
+        if (mutation.isError) {
+            notify("error", mutation.error?.message);
+        }
+
+        if (mutation.isSuccess) {
+            notify("success", `User deleted successfully.`);
+        }
+    }, [mutation.isError, mutation.isSuccess]);
+
+    return mutation;
 };
 
 export const useRolesQuery = () => {
