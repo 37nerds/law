@@ -1,3 +1,4 @@
+import useUsersStore from "@states/usersStore";
 import { ReactNode, useEffect, useRef } from "react";
 
 const ModalBox = ({
@@ -52,6 +53,8 @@ const Modal = ({
     const dialogRef = useRef<HTMLDialogElement | null>(null);
     const closeRef = useRef<HTMLButtonElement | null>(null);
 
+    const { setNewUserEmpty } = useUsersStore();
+
     useEffect(() => {
         if (open) {
             dialogRef.current?.showModal();
@@ -66,7 +69,14 @@ const Modal = ({
                 {children}
                 <div className="modal-action">
                     <form method="dialog">
-                        <button ref={closeRef} className="btn btn-error text-base-100" onClick={() => setOpen(false)}>
+                        <button
+                            ref={closeRef}
+                            className="btn btn-error text-base-100"
+                            onClick={() => {
+                                setOpen(false);
+                                setNewUserEmpty();
+                            }}
+                        >
                             Close
                         </button>
                     </form>

@@ -4,7 +4,7 @@ import { TCreateUser, TRole, TUser } from "@kinds/users";
 import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-import { RBAC_ROLES_GET, RBAC_USERS_GET, RBAC_USERS_POST } from "@constants/keys";
+import { RBAC_ROLES_GET, RBAC_USERS_GET, RBAC_USERS_POST, RBAC_USER_GET } from "@constants/keys";
 import http from "@facades/http";
 import useRbacStore from "@states/rbacStore";
 import useUsersStore from "@states/usersStore";
@@ -57,6 +57,30 @@ export const useSaveUserMutation = () => {
     }, [mutation.isSuccess]);
 
     return mutation;
+};
+
+// Query for GET individual user
+export const useUserQuery = () => {
+    const { setEditUser, userId } = useUsersStore();
+
+    const query = useQuery<TUser, TError>({
+        queryFn: async () => {
+            return await http.get(`/rbac/users?id=${userId}`, 200);
+        },
+        queryKey: [RBAC_USER_GET, userId],
+    });
+
+    useEffect(() => {
+        if (query.isError) {
+            notify("error", query.error?.message);
+        }
+
+        if (query.isSuccess) {
+            setEditUser(query.data);
+        }
+    }, [query.isSuccess, query.isError]);
+
+    return query;
 };
 
 // Query for roles

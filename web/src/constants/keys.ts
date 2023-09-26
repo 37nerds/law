@@ -21,4 +21,6 @@ export const AUTH__PASSWORD__PATCH = "patch.auth.password";
 
 export const RBAC_USERS_GET = "get.users";
 export const RBAC_USERS_POST = "post.users";
+export const RBAC_USER_GET = "get.user";
+
 export const RBAC_ROLES_GET = "get.roles";

@@ -1,6 +1,6 @@
-import { UseQueryResult } from "react-query";
 import { TError } from "@kinds/general";
 import { ReactNode } from "react";
+import { UseQueryResult } from "react-query";
 
 import ErrorText from "@components/pure/ErrorText";
 import Loading from "@components/pure/Loading";

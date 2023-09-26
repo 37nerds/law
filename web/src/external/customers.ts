@@ -12,15 +12,15 @@ import {
     CUSTOMERS__UNITS__POST,
 } from "@constants/keys";
 
+import { notify } from "@helpers/unknown";
 import { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit, TUpdateClient } from "@kinds/customers";
 import { TError, TPaginate } from "@kinds/general";
 import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { notify } from "@helpers/unknown";
 
-import useCustomerSetupStore from "@states/customerSetupStore";
-import useCustomerListStore from "@states/customerListStore";
 import http from "@facades/http";
+import useCustomerListStore from "@states/customerListStore";
+import useCustomerSetupStore from "@states/customerSetupStore";
 
 export const useFetchPopUpDataQuery = () => {
     const fetchPopUpDataQuery = useQuery<TPopOfData, TError>({
@@ -128,6 +128,7 @@ export const useClientQuery = (id: number) => {
         }
 
         if (query.isSuccess) {
+            console.log(query.data);
             setClient(query.data);
         }
     }, [query.isError, query.isSuccess]);

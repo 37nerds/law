@@ -1,4 +1,4 @@
-import { TCreateUser } from "@kinds/users";
+import { TCreateUser, TEditUser } from "@kinds/users";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
@@ -6,6 +6,7 @@ import { immer } from "zustand/middleware/immer";
 type TFilters = {
     page: number;
     newUserModalOpen: boolean;
+    editUserModalOpen: boolean;
 };
 
 type TStore = {
@@ -18,6 +19,12 @@ type TStore = {
 
     filters: TFilters;
     setFiltersField: (key: keyof TFilters, value: any) => void;
+
+    userId: string;
+    setUserId: (id: string) => void;
+    editUser: TEditUser;
+    setEditUser: (user: TEditUser) => void;
+    setEditUserField: (key: keyof TEditUser, value: any) => void;
 };
 
 const useUsersStore = create<TStore>()(
@@ -32,6 +39,7 @@ const useUsersStore = create<TStore>()(
                 address: "",
                 password: "",
             },
+
             setNewUserField: (key, value) => {
                 set(state => {
                     state.newUser[key] = value as never;
@@ -63,10 +71,41 @@ const useUsersStore = create<TStore>()(
             filters: {
                 page: 1,
                 newUserModalOpen: false,
+                editUserModalOpen: false,
             },
+
             setFiltersField: (key, value) => {
                 set(state => {
                     state.filters[key] = value as never;
+                });
+            },
+
+            userId: "",
+
+            setUserId: id => {
+                set(state => {
+                    state.userId = id;
+                });
+            },
+
+            editUser: {
+                username: "",
+                name: "",
+                email: "",
+                phone: "",
+                role_id: "",
+                address: "",
+            },
+
+            setEditUser: user => {
+                set(state => {
+                    state.editUser = user;
+                });
+            },
+
+            setEditUserField: (key, value) => {
+                set(state => {
+                    state.editUser[key] = value as never;
                 });
             },
         }))

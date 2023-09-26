@@ -1,13 +1,15 @@
 import { useUsersQuery } from "@external/rbac";
+import { convertToLocalTime } from "@helpers/unknown";
 import { TPaginate } from "@kinds/general";
 import { TUser } from "@kinds/users";
-import { convertToLocalTime } from "@helpers/unknown";
 
-import Paginator from "@components/pure/Paginator";
-import QueryLayout from "@components/layouts/QueryLayout";
-import useSetPageTitle from "@hooks/useSetPageTitle";
 import PageLayout from "@components/layouts/PageLayout";
-import NewUserModal from "@screens/userList/NewUserModal";
+import QueryLayout from "@components/layouts/QueryLayout";
+import Paginator from "@components/pure/Paginator";
+import useSetPageTitle from "@hooks/useSetPageTitle";
+import EditUserModal from "@screens/users/EditUserModal";
+import NewUserModal from "@screens/users/NewUserModal";
+import UserThreeDotDropdown from "@screens/users/UserThreeDotDropdown";
 import useUsersStore from "@states/usersStore";
 
 const headers = ["Name", "Email Id", "Joined On", "Role"];
@@ -17,7 +19,7 @@ const Users = () => {
 
     const usersQuery = useUsersQuery();
     const {
-        filters: { newUserModalOpen, page },
+        filters: { newUserModalOpen, editUserModalOpen, page },
         setFiltersField,
     } = useUsersStore();
 
@@ -27,6 +29,13 @@ const Users = () => {
                 open={newUserModalOpen}
                 setOpen={value => {
                     setFiltersField("newUserModalOpen", value);
+                }}
+            />
+
+            <EditUserModal
+                open={editUserModalOpen}
+                setOpen={value => {
+                    setFiltersField("editUserModalOpen", value);
                 }}
             />
 
@@ -54,13 +63,16 @@ const Users = () => {
                                 <tbody>
                                     {usersQuery.data.data?.map((user, index) => {
                                         return (
-                                            <tr key={index}>
+                                            <tr key={index} className={`${index % 2 === 1 ? "bg-base-200" : ""}`}>
                                                 <td>
                                                     <div className="font-bold">{user.name}</div>
                                                 </td>
                                                 <td>{user.email}</td>
                                                 <td>{convertToLocalTime(user.created_at)}</td>
                                                 <td>{user?.role?.name}</td>
+                                                <td>
+                                                    <UserThreeDotDropdown userId={user.id} />
+                                                </td>
                                             </tr>
                                         );
                                     })}

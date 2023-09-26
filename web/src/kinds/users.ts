@@ -59,3 +59,12 @@ export type TCreateUser = {
     phone: string;
     password: string;
 };
+
+export type TEditUser = {
+    name: string;
+    email: string;
+    username: string;
+    role_id: string;
+    address: string;
+    phone: string;
+};
