@@ -1,4 +1,7 @@
 import {
+    RBAC_ROLE_DELETE,
+    RBAC_ROLE_GET,
+    RBAC_ROLE_PATCH,
     RBAC_ROLE_POST,
     RBAC_ROLES_GET,
     RBAC_USER_DELETE,
@@ -9,7 +12,7 @@ import {
 } from "@constants/keys";
 import { notify } from "@helpers/unknown";
 import { TError, TPaginate } from "@kinds/general";
-import { TCreateRole, TCreateUser, TEditUser, TRole, TUser } from "@kinds/users";
+import { TCreateRole, TCreateUser, TEditRole, TEditUser, TRole, TUser } from "@kinds/users";
 import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
@@ -114,7 +117,7 @@ export const useEditUserMutation = () => {
         }
 
         if (mutation.isSuccess) {
-            notify("success", `user updated: ${mutation?.data?.username}`);
+            notify("success", `User updated: ${mutation?.data?.username}`);
         }
     }, [mutation.isError, mutation.isSuccess]);
 
@@ -169,6 +172,24 @@ export const useRolesQuery = () => {
     return query;
 };
 
+export const useRoleQuery = (roleId: string) => {
+    const query = useQuery<TRole, TError>({
+        queryFn: async () => {
+            return await http.get(`/rbac/roles?id=${roleId}`, 200);
+        },
+        queryKey: [RBAC_ROLE_GET],
+        keepPreviousData: true,
+    });
+
+    useEffect(() => {
+        if (query.isError) {
+            notify("error", query.error?.message);
+        }
+    }, [query.isError]);
+
+    return query;
+};
+
 export const useSaveRoleMutation = () => {
     const queryClient = useQueryClient();
 
@@ -189,6 +210,58 @@ export const useSaveRoleMutation = () => {
 
         if (mutation.isSuccess) {
             notify("success", `New role created: ${mutation?.data?.name}`);
+        }
+    }, [mutation.isError, mutation.isSuccess]);
+
+    return mutation;
+};
+
+export const useDeleteRoleMutation = () => {
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation<TRole, TError, string>({
+        mutationFn: async id => {
+            return await http.delete(`/rbac/roles?id=${id}`, 204);
+        },
+        mutationKey: [RBAC_ROLE_DELETE],
+        onSuccess: () => {
+            return queryClient.invalidateQueries(RBAC_ROLES_GET);
+        },
+    });
+
+    useEffect(() => {
+        if (mutation.isError) {
+            notify("error", mutation.error?.message);
+        }
+
+        if (mutation.isSuccess) {
+            notify("success", `Role deleted successfully.`);
+        }
+    }, [mutation.isError, mutation.isSuccess]);
+
+    return mutation;
+};
+
+export const useEditRoleMutation = () => {
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation<TRole, TError, TEditRole>({
+        mutationFn: async role => {
+            return await http.patch(`/rbac/roles?id=${role.id}`, role, 200);
+        },
+        mutationKey: [RBAC_ROLE_PATCH],
+        onSuccess: () => {
+            return queryClient.invalidateQueries(RBAC_ROLES_GET);
+        },
+    });
+
+    useEffect(() => {
+        if (mutation.isError) {
+            notify("error", mutation.error?.message);
+        }
+
+        if (mutation.isSuccess) {
+            notify("success", `Role updated: ${mutation?.data?.name}`);
         }
     }, [mutation.isError, mutation.isSuccess]);
 

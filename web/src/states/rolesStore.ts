@@ -1,4 +1,4 @@
-import { TCreateRole } from "@kinds/users";
+import { TCreateRole, TEditRole } from "@kinds/users";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
@@ -15,11 +15,16 @@ type TStore = {
 
     newRole: TCreateRole;
     setNewRoleField: (key: keyof TCreateRole, value: any) => void;
-
     newRoleError: Record<string, string[]>;
     setNewRoleError: (newRoleError: Record<string, string[]>) => void;
-
     setNewRoleEmpty: () => void;
+
+    editRole: TEditRole;
+    setEditRoleField: (key: keyof TEditRole, value: any) => void;
+    editRoleError: Record<string, string[]>;
+    setEditRoleError: (newRoleError: Record<string, string[]>) => void;
+    setEditRoleEmpty: () => void;
+    setEditRoleErrorEmpty: () => void;
 };
 
 const useRolesStore = create<TStore>()(
@@ -56,6 +61,34 @@ const useRolesStore = create<TStore>()(
             setNewRoleEmpty: () => {
                 set(state => {
                     state.newRole.name = "";
+                });
+            },
+
+            editRole: {
+                name: "",
+                disable: false,
+            },
+            setEditRoleField: (key, value) => {
+                set(state => {
+                    state.editRole[key] = value as never;
+                });
+            },
+
+            editRoleError: {},
+            setEditRoleError: (newRoleError: Record<string, string[]>) => {
+                set(state => {
+                    state.newRoleError = newRoleError;
+                });
+            },
+
+            setEditRoleEmpty: () => {
+                set(state => {
+                    state.newRole.name = "";
+                });
+            },
+            setEditRoleErrorEmpty: () => {
+                set(state => {
+                    state.editRoleError = {};
                 });
             },
         }))

@@ -6,6 +6,7 @@ import useSetPageTitle from "@hooks/useSetPageTitle";
 import { TPaginate } from "@kinds/general";
 import { TRole } from "@kinds/users";
 import NewRoleModal from "@screens/roles/NewRoleModal";
+import RoleThreeDotDropdown from "@screens/roles/RoleThreeDotDropdown";
 import useRolesStore from "@states/rolesStore";
 
 const Roles = () => {
@@ -44,13 +45,18 @@ const Roles = () => {
                                 <thead>
                                     <tr>
                                         <th>Role name</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {rolesQuery.data.data.map((role, index) => {
                                         return (
-                                            <tr key={index}>
+                                            <tr key={index} className={`${index % 2 === 1 ? "bg-base-200" : ""}`}>
                                                 <td>{role.name}</td>
+                                                <td>{role.disable ? "InActive" : "Active"}</td>
+                                                <td className="flex justify-end">
+                                                    <RoleThreeDotDropdown roleId={role.id} />
+                                                </td>
                                             </tr>
                                         );
                                     })}

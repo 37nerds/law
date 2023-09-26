@@ -75,3 +75,9 @@ export type TEditUser = {
 export type TCreateRole = {
     name: string;
 };
+
+export type TEditRole = {
+    id?: string;
+    name: string;
+    disable: boolean;
+};

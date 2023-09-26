@@ -26,4 +26,7 @@ export const RBAC_USER_PATCH = "patch.user";
 export const RBAC_USER_DELETE = "delete.user";
 
 export const RBAC_ROLES_GET = "get.roles";
+export const RBAC_ROLE_GET = "get.role";
 export const RBAC_ROLE_POST = "post.roles";
+export const RBAC_ROLE_DELETE = "delete.roles";
+export const RBAC_ROLE_PATCH = "patch.roles";
