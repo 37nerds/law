@@ -38,6 +38,31 @@ class UserController extends Controller
     {
         $userId = $request->query("id");
         $user = User::query()->findOrFail($userId);
+
+        if ($user->username !== $request->username) {
+            $temp = User::query()->where("username", "=", $request->username)->first();
+            if ($temp) {
+                return Response::json([
+                    "message" => "Validation error",
+                    "errors" => [
+                        "username" => ["This username already taken"]
+                    ]
+                ], 400);
+            }
+        }
+
+        if ($user->email !== $request->email) {
+            $temp = User::query()->where("email", "=", $request->email)->first();
+            if ($temp) {
+                return Response::json([
+                    "message" => "Validation error",
+                    "errors" => [
+                        "email" => ["This email already taken"]
+                    ]
+                ], 400);
+            }
+        }
+
         $user->fill($request->all())->save();
         return Response::happy(200, new UserResource($user));
     }

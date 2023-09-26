@@ -20,13 +20,16 @@ type TStore = {
     newUserError: Record<string, string[]>;
     setNewUserError: (newUserError: Record<string, string[]>) => void;
     setNewUserErrorField: (key: string, value: string[]) => void;
+    setNewUserErrorEmpty: () => void;
 
     editUser: TEditUser;
     setEditUser: (user: TEditUser) => void;
     setEditUserField: (key: keyof TEditUser, value: any) => void;
+    setEditUserEmpty: () => void;
     editUserError: Record<string, string[]>;
     setEditUserError: (newUserError: Record<string, string[]>) => void;
     setEditUserErrorField: (key: string, value: string[]) => void;
+    setEditUserErrorEmpty: () => void;
 };
 
 const useUsersStore = create<TStore>()(
@@ -80,6 +83,11 @@ const useUsersStore = create<TStore>()(
                     state.newUserError[key] = value as never;
                 });
             },
+            setNewUserErrorEmpty: () => {
+                set(state => {
+                    state.newUserError = {};
+                });
+            },
 
             editUser: {
                 username: "",
@@ -99,6 +107,16 @@ const useUsersStore = create<TStore>()(
                     state.editUser[key] = value as never;
                 });
             },
+            setEditUserEmpty: () => {
+                set(state => {
+                    state.editUser.username = "";
+                    state.editUser.name = "";
+                    state.editUser.email = "";
+                    state.editUser.phone = "";
+                    state.editUser.role_id = "";
+                    state.editUser.address = "";
+                });
+            },
             editUserError: {},
             setEditUserError: (newUserError: Record<string, string[]>) => {
                 set(state => {
@@ -108,6 +126,11 @@ const useUsersStore = create<TStore>()(
             setEditUserErrorField: (key, value) => {
                 set(state => {
                     state.editUserError[key] = value as never;
+                });
+            },
+            setEditUserErrorEmpty: () => {
+                set(state => {
+                    state.newUserError = {};
                 });
             },
         }))

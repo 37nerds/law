@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useEditUserMutation, useRolesQuery, useUserQuery } from "@external/rbac";
 
 import EmailInput from "@components/inputs/EmailInput";
@@ -8,7 +9,6 @@ import SingleInputBox from "@components/layouts/SingleInputBox";
 import Modal from "@components/modals2/Modal";
 import Title from "@components/pure/Title";
 import useUsersStore from "@states/usersStore";
-import { useEffect } from "react";
 
 const EditUserModal = ({
     open,
@@ -21,7 +21,15 @@ const EditUserModal = ({
 }) => {
     const rolesQuery = useRolesQuery();
 
-    const { editUser, setEditUserField, editUserError, setEditUserError, setEditUserErrorField } = useUsersStore();
+    const {
+        editUser,
+        setEditUserField,
+        editUserError,
+        setEditUserError,
+        setEditUserErrorField,
+        setEditUserErrorEmpty,
+        setEditUserEmpty,
+    } = useUsersStore();
 
     const userQuery = useUserQuery(userId);
     const userEditMutation = useEditUserMutation();
@@ -35,6 +43,8 @@ const EditUserModal = ({
     useEffect(() => {
         if (userEditMutation.isSuccess) {
             setOpen(false);
+            setEditUserEmpty();
+            setEditUserErrorEmpty();
         }
     }, [userEditMutation.isSuccess]);
 

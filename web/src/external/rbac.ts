@@ -1,11 +1,11 @@
 import {
-    RBAC_ROLES_GET,
     RBAC_ROLE_POST,
-    RBAC_USERS_GET,
-    RBAC_USERS_POST,
+    RBAC_ROLES_GET,
     RBAC_USER_DELETE,
     RBAC_USER_GET,
     RBAC_USER_PATCH,
+    RBAC_USERS_GET,
+    RBAC_USERS_POST,
 } from "@constants/keys";
 import { notify } from "@helpers/unknown";
 import { TError, TPaginate } from "@kinds/general";
@@ -173,8 +173,8 @@ export const useSaveRoleMutation = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation<TRole, TError, TCreateRole>({
-        mutationFn: async rolename => {
-            return await http.post("/rbac/roles", rolename, 201);
+        mutationFn: async roleName => {
+            return await http.post("/rbac/roles", roleName, 201);
         },
         mutationKey: [RBAC_ROLE_POST],
         onSuccess: () => {

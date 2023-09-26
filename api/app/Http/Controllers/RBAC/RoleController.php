@@ -24,7 +24,7 @@ class RoleController extends Controller
         $page = $request->query("page", 1);
         $perPage = $request->query("per_page", 10);
 
-        $paginates = Role::paginate(perPage: $perPage, page: $page);
+        $paginates = Role::with("permissions")->paginate(perPage: $perPage, page: $page);
 
         return Response::happy(200, $paginates);
     }

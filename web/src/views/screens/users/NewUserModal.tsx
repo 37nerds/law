@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useRolesQuery, useSaveUserMutation } from "@external/rbac";
 
 import EmailInput from "@components/inputs/EmailInput";
@@ -8,14 +9,20 @@ import SingleInputBox from "@components/layouts/SingleInputBox";
 import Modal from "@components/modals2/Modal";
 import Title from "@components/pure/Title";
 import useUsersStore from "@states/usersStore";
-import { useEffect } from "react";
 
 const NewUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
     const rolesQuery = useRolesQuery();
     const saveUserMutation = useSaveUserMutation();
 
-    const { newUser, setNewUserField, newUserError, setNewUserErrorField, setNewUserError, setNewUserEmpty } =
-        useUsersStore();
+    const {
+        newUser,
+        setNewUserField,
+        newUserError,
+        setNewUserErrorField,
+        setNewUserError,
+        setNewUserEmpty,
+        setNewUserErrorEmpty,
+    } = useUsersStore();
 
     useEffect(() => {
         if (saveUserMutation.isError && saveUserMutation?.error?.errors) {
@@ -27,6 +34,7 @@ const NewUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolea
         if (saveUserMutation.isSuccess) {
             setOpen(false);
             setNewUserEmpty();
+            setNewUserErrorEmpty();
         }
     }, [saveUserMutation.isSuccess]);
 

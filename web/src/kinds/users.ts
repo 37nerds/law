@@ -7,6 +7,7 @@ export type Base = {
 export type TRole = Base & {
     name: string;
     disable: number;
+    permissions: TPermission[];
 };
 
 export type TUser = Base & {
