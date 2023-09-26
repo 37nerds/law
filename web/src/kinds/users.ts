@@ -70,3 +70,7 @@ export type TEditUser = {
     address: string;
     phone: string;
 };
+
+export type TCreateRole = {
+    name: string;
+};

@@ -1,5 +1,6 @@
 import {
     RBAC_ROLES_GET,
+    RBAC_ROLE_POST,
     RBAC_USERS_GET,
     RBAC_USERS_POST,
     RBAC_USER_DELETE,
@@ -8,12 +9,12 @@ import {
 } from "@constants/keys";
 import { notify } from "@helpers/unknown";
 import { TError, TPaginate } from "@kinds/general";
-import { TCreateUser, TEditUser, TRole, TUser } from "@kinds/users";
+import { TCreateRole, TCreateUser, TEditUser, TRole, TUser } from "@kinds/users";
 import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import http from "@facades/http";
-import useRbacStore from "@states/rbacStore";
+import useRolesStore from "@states/rolesStore";
 import useUsersStore from "@states/usersStore";
 
 export const useUsersQuery = () => {
@@ -147,13 +148,15 @@ export const useDeleteUserMutation = () => {
 };
 
 export const useRolesQuery = () => {
-    const { rolesFilters } = useRbacStore();
+    const {
+        filters: { page },
+    } = useRolesStore();
 
     const query = useQuery<TPaginate<TRole>, TError>({
         queryFn: async () => {
-            return await http.get(`/rbac/roles?per_page=10` + `&page=${rolesFilters.page}`, 200);
+            return await http.get(`/rbac/roles?per_page=10` + `&page=${page}`, 200);
         },
-        queryKey: [RBAC_ROLES_GET, rolesFilters.page],
+        queryKey: [RBAC_ROLES_GET, page],
         keepPreviousData: true,
     });
 
@@ -164,4 +167,30 @@ export const useRolesQuery = () => {
     }, [query.isError]);
 
     return query;
+};
+
+export const useSaveRoleMutation = () => {
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation<TRole, TError, TCreateRole>({
+        mutationFn: async rolename => {
+            return await http.post("/rbac/roles", rolename, 201);
+        },
+        mutationKey: [RBAC_ROLE_POST],
+        onSuccess: () => {
+            return queryClient.invalidateQueries(RBAC_ROLES_GET);
+        },
+    });
+
+    useEffect(() => {
+        if (mutation.isError) {
+            notify("error", mutation.error?.message);
+        }
+
+        if (mutation.isSuccess) {
+            notify("success", `New role created: ${mutation?.data?.name}`);
+        }
+    }, [mutation.isError, mutation.isSuccess]);
+
+    return mutation;
 };
