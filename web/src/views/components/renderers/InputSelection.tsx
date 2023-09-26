@@ -1,4 +1,4 @@
-import { TLadderOption, TOption } from "@kinds/general";
+import { TLadderOption, TOption } from "../../../types";
 
 import StringInput from "@components/inputs/StringInput";
 import TextInput from "@components/inputs/TextInput";

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useResetPasswordMutation } from "../../../external/auth";
+import { useResetPasswordMutation } from "@fetches/auth/auth";
 
 import ErrorText from "@components/pure/ErrorText";
 import Link from "@components/pure/Link";

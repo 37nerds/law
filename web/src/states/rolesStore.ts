@@ -1,4 +1,4 @@
-import { TCreateRole, TEditRole } from "@kinds/users";
+import { TCreateRole, TEditRole } from "@fetches/rbac/roles";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";

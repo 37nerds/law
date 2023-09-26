@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { useRolesQuery, useSaveUserMutation } from "@external/rbac";
+import { useRolesQuery } from "@fetches/rbac/roles";
+import { useSaveUserMutation } from "@fetches/rbac/users";
 
 import EmailInput from "@components/inputs/EmailInput";
 import PasswordInput from "@components/inputs/PasswordInput";

@@ -6,9 +6,9 @@ import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
 
 import { legalFromOptions } from "../../../config/general";
-import { TGroupOfCompany } from "@kinds/customers";
-import { TBottomButton } from "@kinds/general";
-import { useSaveGroupOfCompanyMutation } from "../../../external/customers";
+import { TGroupOfCompany } from "@fetches/customers/customers-type";
+import { TBottomButton } from "../../../types";
+import { useSaveGroupOfCompanyMutation } from "@fetches/customers/customers";
 import { notify } from "@helpers/unknown";
 
 const fields = [

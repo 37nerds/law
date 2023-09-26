@@ -1,4 +1,4 @@
-import { TError } from "@kinds/general";
+import { TError } from "../../../types";
 import { ReactNode } from "react";
 import { UseQueryResult } from "react-query";
 

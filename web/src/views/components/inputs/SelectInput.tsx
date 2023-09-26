@@ -1,4 +1,4 @@
-import { TOption } from "@kinds/general";
+import { TOption } from "../../../types";
 
 import InputLayout from "@components/layouts/InputLayout";
 import Select from "@components/inputs/Select";

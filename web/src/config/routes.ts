@@ -1,4 +1,4 @@
-import type { TRoute } from "@kinds/general";
+import type { TRoute } from "../types";
 import { lazy } from "react";
 
 /**

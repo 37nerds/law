@@ -1,22 +1,26 @@
-import {
-    AUTH__FORGET_PASSWORD__POST,
-    AUTH__LOGIN__POST,
-    AUTH__LOGOUT__POST,
-    AUTH__PASSWORD__PATCH,
-    AUTH__REGISTER__POST,
-    AUTH__RESET_PASSWORD__POST,
-    AUTH__UPDATE_USER__PATCH,
-    AUTH__UPLOAD_PROFILE_PICTURE__POST,
-} from "@constants/keys";
-
-import type { TLoggedUser } from "@kinds/users";
-import type { TError } from "@kinds/general";
+import type { TError } from "../../types";
 import { isEmail, notify } from "@helpers/unknown";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
+import { TUser } from "@fetches/rbac/users";
+import { TPermission } from "@fetches/rbac/permissions";
 
-import http from "../facades/http";
+import http from "@helpers/http";
 import useAuthStore from "@states/authStore";
+
+export const AUTH__LOGIN__POST = "post.auth.login";
+export const AUTH__LOGOUT__POST = "post.auth.logout";
+export const AUTH__REGISTER__POST = "post.auth.register";
+export const AUTH__FORGET_PASSWORD__POST = "post.auth.forget-password";
+export const AUTH__RESET_PASSWORD__POST = "post.auth.reset-password";
+export const AUTH__UPLOAD_PROFILE_PICTURE__POST = "post.auth.upload-profile-picture";
+export const AUTH__UPDATE_USER__PATCH = "patch.auth.update-user";
+export const AUTH__PASSWORD__PATCH = "patch.auth.password";
+
+export type TLoggedUser = {
+    user: TUser;
+    permissions: TPermission[];
+};
 
 export const useRegisterMutation = () => {
     return useMutation<TLoggedUser, TError, { username: string; name: string; email: string; password: string }>({

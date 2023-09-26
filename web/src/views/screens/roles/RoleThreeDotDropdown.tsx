@@ -1,5 +1,5 @@
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
-import { useDeleteRoleMutation } from "@external/rbac";
+import { useDeleteRoleMutation } from "@fetches/rbac/roles";
 import useRolesStore from "@states/rolesStore";
 
 const RoleThreeDotDropdown = ({ roleId }: { roleId: string }) => {

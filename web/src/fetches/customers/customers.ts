@@ -1,26 +1,31 @@
-import {
-    CUSTOMERS__CLIENT__DELETE,
-    CUSTOMERS__CLIENT__GET,
-    CUSTOMERS__CLIENT__PATCH,
-    CUSTOMERS__CLIENTS__GET,
-    CUSTOMERS__CLIENTS__POST,
-    CUSTOMERS__COMPANIES__POST,
-    CUSTOMERS__GROUP_OF_COMPANIES__POST,
-    CUSTOMERS__POP_UP_DATA__GET,
-    CUSTOMERS__UNIT__GET,
-    CUSTOMERS__UNIT__PATCH,
-    CUSTOMERS__UNITS__POST,
-} from "@constants/keys";
-
 import { notify } from "@helpers/unknown";
-import { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit, TUpdateClient } from "@kinds/customers";
-import { TError, TPaginate } from "@kinds/general";
+import {
+    TClient,
+    TCompany,
+    TGroupOfCompany,
+    TPopOfData,
+    TUnit,
+    TUpdateClient,
+} from "@fetches/customers/customers-type";
+import { TError, TPaginate } from "../../types";
 import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-import http from "@facades/http";
+import http from "@helpers/http";
 import useCustomerListStore from "@states/customerListStore";
 import useCustomerSetupStore from "@states/customerSetupStore";
+
+export const CUSTOMERS__POP_UP_DATA__GET = "get.customers.pop-up-data";
+export const CUSTOMERS__GROUP_OF_COMPANIES__POST = "post.customers.group-of-companies";
+export const CUSTOMERS__COMPANIES__POST = "post.customers.companies";
+export const CUSTOMERS__UNITS__POST = "post.customers.units";
+export const CUSTOMERS__CLIENTS__POST = "post.customers.clients";
+export const CUSTOMERS__CLIENTS__GET = "get.customers.clients_xxx";
+export const CUSTOMERS__CLIENT__GET = "get.customer.client";
+export const CUSTOMERS__CLIENT__PATCH = "patch.customer.client";
+export const CUSTOMERS__CLIENT__DELETE = "delete.customer.client";
+export const CUSTOMERS__UNIT__GET = "get.customer.unit";
+export const CUSTOMERS__UNIT__PATCH = "patch.customer.unit";
 
 export const useFetchPopUpDataQuery = () => {
     const fetchPopUpDataQuery = useQuery<TPopOfData, TError>({

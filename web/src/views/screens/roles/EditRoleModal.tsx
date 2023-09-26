@@ -1,14 +1,11 @@
 import { useEffect } from "react";
-import { useEditUserMutation, useRolesQuery, useUserQuery } from "@external/rbac";
-
-import EmailInput from "@components/inputs/EmailInput";
-import SelectInput from "@components/inputs/SelectInput";
+import { useRolesQuery } from "@fetches/rbac/roles";
+import { useEditUserMutation, useUserQuery } from "@fetches/rbac/users";
 import StringInput from "@components/inputs/StringInput";
 import QueryLayout from "@components/layouts/QueryLayout";
 import SingleInputBox from "@components/layouts/SingleInputBox";
 import Modal from "@components/modals2/Modal";
 import Title from "@components/pure/Title";
-import useUsersStore from "@states/usersStore";
 import useRolesStore from "@states/rolesStore";
 
 const EditRoleModal = ({
@@ -22,14 +19,8 @@ const EditRoleModal = ({
 }) => {
     const rolesQuery = useRolesQuery();
 
-    const {
-        editRole,
-        editRoleError,
-        setEditRoleEmpty,
-        setEditRoleError,
-        setEditRoleField,
-        setEditRoleErrorEmpty,
-    } = useRolesStore();
+    const { editRole, editRoleError, setEditRoleEmpty, setEditRoleError, setEditRoleField, setEditRoleErrorEmpty } =
+        useRolesStore();
 
     const userQuery = useUserQuery(userId);
     const userEditMutation = useEditUserMutation();
@@ -79,25 +70,25 @@ const EditRoleModal = ({
                 </div>
 
                 <QueryLayout query={userQuery}>
-                <div className="flex flex-col gap-5">
-                <div className="my-3 flex justify-center">
-                    <Title>EDIT ROLE</Title>
-                </div>
-                <div className="flex flex-col gap-5">
-                    <SingleInputBox
-                        label="Role name"
-                        required={true}
-                        element={
-                            <StringInput
+                    <div className="flex flex-col gap-5">
+                        <div className="my-3 flex justify-center">
+                            <Title>EDIT ROLE</Title>
+                        </div>
+                        <div className="flex flex-col gap-5">
+                            <SingleInputBox
+                                label="Role name"
                                 required={true}
-                                value={newRole["name"]}
-                                setValue={value => setNewRoleField("name", value)}
+                                element={
+                                    <StringInput
+                                        required={true}
+                                        value={newRole["name"]}
+                                        setValue={value => setNewRoleField("name", value)}
+                                    />
+                                }
+                                errorMessage={newRoleError["name"]}
                             />
-                        }
-                        errorMessage={newRoleError["name"]}
-                    />
-                </div>
-            </div>
+                        </div>
+                    </div>
                 </QueryLayout>
             </div>
         </Modal>

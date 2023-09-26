@@ -1,7 +1,7 @@
-import { useClientsQuery } from "@external/customers";
+import { useClientsQuery } from "@fetches/customers/customers";
 import { useNavigate } from "react-router-dom";
-import { TPaginate } from "@kinds/general";
-import { TClient } from "@kinds/customers";
+import { TPaginate } from "../../../types";
+import { TClient } from "@fetches/customers/customers-type";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import Paginator from "@components/pure/Paginator";
 import CustomerTable from "@screens/customerList/CustomerTable";

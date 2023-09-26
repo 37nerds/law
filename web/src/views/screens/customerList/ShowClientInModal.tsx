@@ -1,6 +1,6 @@
-import { gendersOptions } from "@config/general";
-import { useClientQuery, useFetchPopUpDataQuery, useUpdateClientMutation } from "@external/customers";
-import { useEffect, useState } from "react";
+import {gendersOptions} from "@config/general";
+import {useClientQuery, useFetchPopUpDataQuery, useUpdateClientMutation} from "@fetches/customers/customers";
+import {useEffect, useState} from "react";
 
 import DateInput from "@components/inputs/DateInput";
 import EmailInput from "@components/inputs/EmailInput";

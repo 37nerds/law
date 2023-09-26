@@ -5,9 +5,9 @@ import RenderStep from "@components/renderers/RenderStep";
 
 import useCustomerSetupStore from "@states/customerSetupStore";
 
-import { TBottomButton, TOption } from "@kinds/general";
+import { TBottomButton, TOption } from "../../../types";
 import { billToOptions, gendersOptions } from "@config/general";
-import { useSaveClientMutation } from "@external/customers";
+import { useSaveClientMutation } from "@fetches/customers/customers";
 import { notify } from "@helpers/unknown";
 
 const S4Client = () => {

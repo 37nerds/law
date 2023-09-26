@@ -1,4 +1,4 @@
-import { TCreateUser, TEditUser } from "@kinds/users";
+import { TCreateUser, TEditUser } from "@fetches/rbac/users";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";

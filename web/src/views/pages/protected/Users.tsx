@@ -1,7 +1,6 @@
-import { useUsersQuery } from "@external/rbac";
+import { TUser, useUsersQuery } from "@fetches/rbac/users";
 import { convertToLocalTime } from "@helpers/unknown";
-import { TPaginate } from "@kinds/general";
-import { TUser } from "@kinds/users";
+import { TPaginate } from "../../../types";
 
 import PageLayout from "@components/layouts/PageLayout";
 import QueryLayout from "@components/layouts/QueryLayout";

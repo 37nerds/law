@@ -86,3 +86,9 @@ export type TPaginate<T> = {
     to: number;
     total: number;
 };
+
+export type TBase = {
+    id: string;
+    created_at: string;
+    updated_at: string;
+};

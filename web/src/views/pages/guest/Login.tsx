@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoginMutation } from "../../../external/auth";
+import { useLoginMutation } from "@fetches/auth/auth";
 import { redirect_after_login } from "../../../config/auth";
 
 import ErrorText from "@components/pure/ErrorText";

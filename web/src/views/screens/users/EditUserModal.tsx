@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { useEditUserMutation, useRolesQuery, useUserQuery } from "@external/rbac";
+import { useRolesQuery } from "@fetches/rbac/roles";
+import { useEditUserMutation, useUserQuery } from "@fetches/rbac/users";
 
 import EmailInput from "@components/inputs/EmailInput";
 import SelectInput from "@components/inputs/SelectInput";

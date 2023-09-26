@@ -5,10 +5,10 @@ import RenderStep from "@components/renderers/RenderStep";
 
 import useCustomerSetupStore from "@states/customerSetupStore";
 
-import { TBottomButton, TOption } from "@kinds/general";
+import { TBottomButton, TOption } from "../../../types";
 import { legalFromOptions } from "@config/general";
-import { useSaveUnitMutation } from "@external/customers";
-import { TUnit } from "@kinds/customers";
+import { useSaveUnitMutation } from "@fetches/customers/customers";
+import { TUnit } from "@fetches/customers/customers-type";
 import { notify } from "@helpers/unknown";
 
 const S3Unit = () => {

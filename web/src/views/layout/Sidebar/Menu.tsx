@@ -1,4 +1,4 @@
-import type { TIcon } from "@kinds/general";
+import type { TIcon } from "../../../types";
 import { NavLink, useLocation } from "react-router-dom";
 import { usePrepareUrlForSidebarLink } from "@helpers/unknown";
 

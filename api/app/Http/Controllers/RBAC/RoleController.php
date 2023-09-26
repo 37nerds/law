@@ -39,6 +39,19 @@ class RoleController extends Controller
     {
         $roleId = $request->query("id");
         $role = Role::query()->findOrFail($roleId);
+
+        if ($role->name !== $request->name) {
+            $temp = Role::query()->where("name", "=", $request->name)->first();
+            if ($temp) {
+                return Response::json([
+                    "message" => "Validation error",
+                    "errors" => [
+                        "name" => ["This name already taken"]
+                    ]
+                ], 400);
+            }
+        }
+
         $role->fill($request->all())->save();
         return Response::happy(200, new RoleResource($role));
     }

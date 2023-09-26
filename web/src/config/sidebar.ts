@@ -1,4 +1,4 @@
-import { TSidebarLink } from "@kinds/general";
+import { TSidebarLink } from "../types";
 
 import BoltIcon from "@heroicons/react/24/outline/BoltIcon";
 import ChartBarIcon from "@heroicons/react/24/outline/ChartBarIcon";

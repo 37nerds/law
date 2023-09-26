@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { TPopUpUnit } from "@kinds/customers";
-import { useFetchPopUpDataQuery, useUnitQuery, useUpdateUnitMutation } from "@external/customers";
-import { legalFromOptions } from "@config/general";
+import {useEffect, useState} from "react";
+import {TPopUpUnit} from "@fetches/customers/customers-type";
+import {useFetchPopUpDataQuery, useUnitQuery, useUpdateUnitMutation} from "@fetches/customers/customers";
+import {legalFromOptions} from "@config/general";
 
 import StringInput from "@components/inputs/StringInput";
 import SingleInputBox from "@components/layouts/SingleInputBox";

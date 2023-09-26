@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TLadderOption, TOption } from "@kinds/general";
+import { TLadderOption, TOption } from "../../../types";
 
 import StringInput from "@components/inputs/StringInput";
 import LadderSelectInput from "@components/inputs/LadderSelectInput";

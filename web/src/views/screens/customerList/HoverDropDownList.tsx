@@ -1,8 +1,10 @@
-import { useDeleteClientMutation, useUpdateClientMutation } from "@external/customers";
-import { ACTIVE, INACTIVE } from "@constants/status";
+import { useDeleteClientMutation, useUpdateClientMutation } from "@fetches/customers/customers";
 
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 import useCustomerListStore from "@states/customerListStore";
+
+export const ACTIVE = "active";
+export const INACTIVE = "inactive";
 
 const HoverDropDownList = ({ clientId }: { clientId: string }) => {
     const deleteClientMutation = useDeleteClientMutation();

@@ -1,4 +1,4 @@
-import { TProfileDropdownLink } from "@kinds/general";
+import { TProfileDropdownLink } from "../types";
 
 export const profile_dropdown_links: TProfileDropdownLink[] = [
     {

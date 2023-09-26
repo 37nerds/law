@@ -1,4 +1,4 @@
-import { TOption } from "@kinds/general";
+import { TOption } from "../../../types";
 
 const Select = ({
     value,

@@ -1,9 +1,9 @@
 import { assert_storage_url } from "@config/env";
-import type { TNotificationType } from "@kinds/general";
+import type { TNotificationType } from "../types";
 import { useParams } from "react-router-dom";
 
 import useNotificationStore from "@states/useNotificationStore";
-import sh from "../facades/sh";
+import sh from "./sh";
 
 export const isEmail = (text: string): boolean => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

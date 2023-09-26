@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TCustomerModalOpenFor } from "@kinds/customers";
+import { TCustomerModalOpenFor } from "@fetches/customers/customers-type";
 
 import CustomerModal from "@screens/customerList/CustomerModal";
 import ModalOpener from "@components/modals/ModalOpener";

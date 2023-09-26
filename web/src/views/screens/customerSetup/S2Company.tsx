@@ -6,9 +6,9 @@ import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";
 
 import { legalFromOptions } from "../../../config/general";
-import { TBottomButton, TOption } from "@kinds/general";
-import { TCompany, TCompanyKey } from "@kinds/customers";
-import { useSaveCompanyMutation } from "../../../external/customers";
+import { TBottomButton, TOption } from "../../../types";
+import { TCompany, TCompanyKey } from "@fetches/customers/customers-type";
+import { useSaveCompanyMutation } from "@fetches/customers/customers";
 import { notify } from "@helpers/unknown";
 
 const S2Company = () => {
