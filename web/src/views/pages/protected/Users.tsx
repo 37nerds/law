@@ -19,7 +19,7 @@ const Users = () => {
 
     const usersQuery = useUsersQuery();
     const {
-        filters: { newUserModalOpen, editUserModalOpen, page },
+        filters: { newUserModalOpen, editUserModalOpen, page, editUserId },
         setFiltersField,
     } = useUsersStore();
 
@@ -37,6 +37,7 @@ const Users = () => {
                 setOpen={value => {
                     setFiltersField("editUserModalOpen", value);
                 }}
+                userId={editUserId}
             />
 
             <div className="flex justify-end rounded border border-base-300 p-2">

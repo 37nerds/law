@@ -3,8 +3,8 @@ import { TError, TPaginate } from "@kinds/general";
 import { TCreateUser, TRole, TUser } from "@kinds/users";
 import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { RBAC_ROLES_GET, RBAC_USER_GET, RBAC_USERS_GET, RBAC_USERS_POST } from "@constants/keys";
 
-import { RBAC_ROLES_GET, RBAC_USERS_GET, RBAC_USERS_POST, RBAC_USER_GET } from "@constants/keys";
 import http from "@facades/http";
 import useRbacStore from "@states/rbacStore";
 import useUsersStore from "@states/usersStore";
@@ -59,9 +59,8 @@ export const useSaveUserMutation = () => {
     return mutation;
 };
 
-// Query for GET individual user
-export const useUserQuery = () => {
-    const { setEditUser, userId } = useUsersStore();
+export const useUserQuery = (userId: string) => {
+    const { setEditUser } = useUsersStore();
 
     const query = useQuery<TUser, TError>({
         queryFn: async () => {
@@ -76,14 +75,20 @@ export const useUserQuery = () => {
         }
 
         if (query.isSuccess) {
-            setEditUser(query.data);
+            setEditUser({
+                username: query.data.username,
+                address: query.data.address,
+                email: query.data.email,
+                name: query.data.name,
+                phone: query.data.phone,
+                role_id: query.data.role_id,
+            });
         }
     }, [query.isSuccess, query.isError]);
 
     return query;
 };
 
-// Query for roles
 export const useRolesQuery = () => {
     const { rolesFilters } = useRbacStore();
 

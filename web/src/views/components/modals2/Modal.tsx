@@ -1,18 +1,8 @@
-import useUsersStore from "@states/usersStore";
 import { ReactNode, useEffect, useRef } from "react";
+import XMarkIcon from "@heroicons/react/24/outline/XMarkIcon";
 
-const ModalBox = ({
-    isForm,
-    children,
-    onSubmit,
-    widthClass = "w-11/12",
-}: {
-    isForm?: boolean;
-    onSubmit?: () => void;
-    children: ReactNode;
-    widthClass?: string;
-}) => {
-    const className = `modal-box ${widthClass} max-w-5xl p-8 `;
+const Box = ({ isForm, children, onSubmit }: { isForm?: boolean; onSubmit?: () => void; children: ReactNode }) => {
+    const className = `p-8`;
 
     return (
         <>
@@ -53,8 +43,6 @@ const Modal = ({
     const dialogRef = useRef<HTMLDialogElement | null>(null);
     const closeRef = useRef<HTMLButtonElement | null>(null);
 
-    const { setNewUserEmpty } = useUsersStore();
-
     useEffect(() => {
         if (open) {
             dialogRef.current?.showModal();
@@ -65,26 +53,29 @@ const Modal = ({
 
     return (
         <dialog ref={dialogRef} className="modal">
-            <ModalBox isForm={isForm} onSubmit={onSubmit} widthClass={widthClass}>
-                {children}
-                <div className="modal-action">
+            <div className={`modal-box ${widthClass} max-w-5xl`} onSubmit={onSubmit}>
+                <div className="flex justify-end">
                     <form method="dialog">
                         <button
                             ref={closeRef}
-                            className="btn btn-error text-base-100"
+                            className="btn btn-neutral text-base-100"
                             onClick={() => {
                                 setOpen(false);
-                                setNewUserEmpty();
                             }}
                         >
-                            Close
+                            <XMarkIcon className="w-6" />
                         </button>
                     </form>
-                    {buttons.map((button, index) => (
-                        <div key={index}>{button}</div>
-                    ))}
                 </div>
-            </ModalBox>
+                <Box isForm={isForm}>
+                    {children}
+                    <div className="modal-action">
+                        {buttons.map((button, index) => (
+                            <div key={index}>{button}</div>
+                        ))}
+                    </div>
+                </Box>
+            </div>
         </dialog>
     );
 };

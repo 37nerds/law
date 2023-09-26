@@ -7,9 +7,13 @@ type TFilters = {
     page: number;
     newUserModalOpen: boolean;
     editUserModalOpen: boolean;
+    editUserId: string;
 };
 
 type TStore = {
+    filters: TFilters;
+    setFiltersField: (key: keyof TFilters, value: any) => void;
+
     newUser: TCreateUser;
     setNewUserField: (key: keyof TCreateUser, value: any) => void;
     setNewUserEmpty: () => void;
@@ -17,19 +21,29 @@ type TStore = {
     setNewUserError: (newUserError: Record<string, string[]>) => void;
     setNewUserErrorField: (key: string, value: string[]) => void;
 
-    filters: TFilters;
-    setFiltersField: (key: keyof TFilters, value: any) => void;
-
-    userId: string;
-    setUserId: (id: string) => void;
     editUser: TEditUser;
     setEditUser: (user: TEditUser) => void;
     setEditUserField: (key: keyof TEditUser, value: any) => void;
+    editUserError: Record<string, string[]>;
+    setEditUserError: (newUserError: Record<string, string[]>) => void;
+    setEditUserErrorField: (key: string, value: string[]) => void;
 };
 
 const useUsersStore = create<TStore>()(
     immer(
         devtools(set => ({
+            filters: {
+                page: 1,
+                newUserModalOpen: false,
+                editUserModalOpen: false,
+                editUserId: "",
+            },
+            setFiltersField: (key, value) => {
+                set(state => {
+                    state.filters[key] = value as never;
+                });
+            },
+
             newUser: {
                 username: "",
                 name: "",
@@ -39,7 +53,6 @@ const useUsersStore = create<TStore>()(
                 address: "",
                 password: "",
             },
-
             setNewUserField: (key, value) => {
                 set(state => {
                     state.newUser[key] = value as never;
@@ -68,26 +81,6 @@ const useUsersStore = create<TStore>()(
                 });
             },
 
-            filters: {
-                page: 1,
-                newUserModalOpen: false,
-                editUserModalOpen: false,
-            },
-
-            setFiltersField: (key, value) => {
-                set(state => {
-                    state.filters[key] = value as never;
-                });
-            },
-
-            userId: "",
-
-            setUserId: id => {
-                set(state => {
-                    state.userId = id;
-                });
-            },
-
             editUser: {
                 username: "",
                 name: "",
@@ -96,16 +89,25 @@ const useUsersStore = create<TStore>()(
                 role_id: "",
                 address: "",
             },
-
             setEditUser: user => {
                 set(state => {
                     state.editUser = user;
                 });
             },
-
             setEditUserField: (key, value) => {
                 set(state => {
                     state.editUser[key] = value as never;
+                });
+            },
+            editUserError: {},
+            setEditUserError: (newUserError: Record<string, string[]>) => {
+                set(state => {
+                    state.editUserError = newUserError;
+                });
+            },
+            setEditUserErrorField: (key, value) => {
+                set(state => {
+                    state.editUserError[key] = value as never;
                 });
             },
         }))

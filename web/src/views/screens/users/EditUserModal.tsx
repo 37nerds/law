@@ -3,21 +3,26 @@ import { useRolesQuery, useUserQuery } from "@external/rbac";
 import EmailInput from "@components/inputs/EmailInput";
 import SelectInput from "@components/inputs/SelectInput";
 import StringInput from "@components/inputs/StringInput";
-import QueryLayout from "@components/layouts/QueryLayout";
 import SingleInputBox from "@components/layouts/SingleInputBox";
 import Modal from "@components/modals2/Modal";
 import Title from "@components/pure/Title";
 import useUsersStore from "@states/usersStore";
+import QueryLayout from "@components/layouts/QueryLayout";
 
-const EditUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
+const EditUserModal = ({
+    open,
+    setOpen,
+    userId,
+}: {
+    open: boolean;
+    setOpen: (open: boolean) => void;
+    userId: string;
+}) => {
     const rolesQuery = useRolesQuery();
 
-    const { editUser, setEditUserField, newUserError, setNewUserErrorField, setNewUserError, setNewUserEmpty } =
-        useUsersStore();
+    const { editUser, setEditUserField, editUserError } = useUsersStore();
 
-    const userQuery = useUserQuery();
-
-    console.log("single user", userQuery.data);
+    const userQuery = useUserQuery(userId);
 
     // useEffect(() => {
     //     if (saveUserMutation.isError && saveUserMutation?.error?.errors) {
@@ -56,6 +61,7 @@ const EditUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boole
                 <div className="my-3 flex justify-center">
                     <Title>EDIT USER</Title>
                 </div>
+
                 <QueryLayout query={userQuery}>
                     <div className="flex flex-col gap-5">
                         <SingleInputBox
@@ -68,7 +74,7 @@ const EditUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boole
                                     setValue={value => setEditUserField("email", value)}
                                 />
                             }
-                            errorMessage={newUserError["email"]}
+                            errorMessage={editUserError["email"]}
                         />
                         <SingleInputBox
                             required={true}
@@ -80,7 +86,7 @@ const EditUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boole
                                     setValue={value => setEditUserField("username", value)}
                                 />
                             }
-                            errorMessage={newUserError["username"]}
+                            errorMessage={editUserError["username"]}
                         />
 
                         <SingleInputBox
@@ -100,7 +106,7 @@ const EditUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boole
                                     setValue={value => setEditUserField("role_id", value)}
                                 />
                             }
-                            errorMessage={newUserError["role_id"]}
+                            errorMessage={editUserError["role_id"]}
                         />
 
                         <SingleInputBox
@@ -113,7 +119,7 @@ const EditUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boole
                                     setValue={value => setEditUserField("name", value)}
                                 />
                             }
-                            errorMessage={newUserError["name"]}
+                            errorMessage={editUserError["name"]}
                         />
 
                         <SingleInputBox
@@ -124,7 +130,7 @@ const EditUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boole
                                     setValue={value => setEditUserField("phone", value)}
                                 />
                             }
-                            errorMessage={newUserError["phone"]}
+                            errorMessage={editUserError["phone"]}
                         />
 
                         <SingleInputBox
@@ -135,7 +141,7 @@ const EditUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boole
                                     setValue={value => setEditUserField("address", value)}
                                 />
                             }
-                            errorMessage={newUserError["address"]}
+                            errorMessage={editUserError["address"]}
                         />
                     </div>
                 </QueryLayout>
