@@ -25,7 +25,7 @@ const Form = ({
         >
             {children}
 
-            <div>
+            <div className="flex justify-end">
                 <button
                     type="submit"
                     className={`btn btn-success mt-3 text-base-100 ${loading ? "loading" : ""} ${buttonClassName}`}

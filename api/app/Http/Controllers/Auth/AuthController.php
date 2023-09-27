@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Exceptions\JsonException;
+use App\Helpers\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\UpdateLoggedUserRequest;
 use App\Http\Requests\Auth\UpdatePasswordRequest;
 use App\Http\Requests\Auth\UploadAvatarRequest;
-use App\Logic\Response;
+use App\Http\Resources\RBAC\UserResource;
+use App\Logic\RBAC;
 use App\Logic\X;
-use App\Models\RBAC\Permission;
 use App\Models\RBAC\User;
 use App\Repositories\UserRepository;
 use Illuminate\Auth\Events\Registered;
@@ -91,16 +93,21 @@ class AuthController extends Controller
             ->where("id", "=", Auth::id())
             ->first();
 
-        $user["permissions"] = Permission::with('resource')
-            ->where("role_id", "=", $user->role_id)
-            ->get();
+        $user["permissions"] = RBAC::getPermissionWithResource($user);
 
         return Response::happy(200, $user);
     }
 
     public function update(UpdateLoggedUserRequest $request): JsonResponse
     {
-        $user = UserRepository::update(Auth::user(), $request->all());
-        return Response::happy(200, $user);
+        try {
+            $user = RBAC::updateUser(Auth::id(), $request);
+        } catch (JsonException $exception) {
+            return $exception->response();
+        }
+
+        $user["permissions"] = RBAC::getPermissionWithResource($user);
+
+        return Response::happy(200, new UserResource($user));
     }
 }

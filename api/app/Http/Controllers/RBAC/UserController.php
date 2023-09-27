@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\RBAC;
 
+use App\Exceptions\JsonException;
+use App\Helpers\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreateUserRequest;
 use App\Http\Requests\RBAC\UpdateUserRequest;
 use App\Http\Resources\RBAC\UserResource;
-use App\Logic\Response;
+use App\Logic\RBAC;
 use App\Models\RBAC\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -37,30 +39,11 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request): JsonResponse
     {
-        $userId = $request->query("id");
-        $user = User::query()->findOrFail($userId);
-
-        if ($user->username !== $request->username) {
-            $temp = User::query()->where("username", "=", $request->username)->first();
-            if ($temp) {
-                return Response::error(400, "Validation error", [
-                    "errors" => [
-                        "username" => ["This username already taken"]
-                    ]
-                ]);
-            }
+        try {
+            $user = RBAC::updateUser($request->query("id"), $request);
+        } catch (JsonException $exception) {
+            return $exception->response();
         }
-
-        if ($user->email !== $request->email) {
-            $temp = User::query()->where("email", "=", $request->email)->first();
-            if ($temp) {
-                return Response::error(400, "Validation error", [
-                    "errors" => ["email" => ["This email already taken"]]
-                ]);
-            }
-        }
-
-        $user->fill($request->all())->save();
         return Response::happy(200, new UserResource($user));
     }
 

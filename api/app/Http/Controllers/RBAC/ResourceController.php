@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\RBAC;
 
+use App\Helpers\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreateResourceRequest;
 use App\Http\Requests\RBAC\UpdateResourceRequest;
 use App\Http\Resources\RBAC\ResourceResource;
-use App\Logic\Response;
 use App\Models\RBAC\Resource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

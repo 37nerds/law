@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Logic;
+namespace App\Helpers;
 
 use Illuminate\Http\JsonResponse;
 
@@ -16,9 +16,10 @@ class Response
         return static::json($data, $status);
     }
 
-    public static function error(int $status, $message = "", $data = []): JsonResponse
+    public static function error(int $status, $message = "", $errors = [], $data = []): JsonResponse
     {
         $data["message"] = $data["message"] ?? $message;
+        $data["errors"] = $data["errors"] ?? $errors;
         return static::json($data, $status);
     }
 }

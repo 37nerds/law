@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\RBAC;
 
+use App\Helpers\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreatePermissionRequest;
 use App\Http\Requests\RBAC\UpdatePermissionRequest;
 use App\Http\Resources\RBAC\PermissionResource;
-use App\Logic\Response;
 use App\Models\RBAC\Permission;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

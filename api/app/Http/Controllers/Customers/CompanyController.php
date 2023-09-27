@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Customers;
 
+use App\Helpers\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customers\StoreCompanyRequest;
 use App\Http\Requests\Customers\UpdateCompanyRequest;
 use App\Http\Resources\Customers\CompanyResource;
-use App\Logic\Response;
 use App\Models\Customers\Company;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

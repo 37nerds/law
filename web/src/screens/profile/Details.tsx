@@ -5,6 +5,7 @@ import StringInput from "@components/inputs/StringInput";
 import useAuthStore from "@states/auth_store";
 import SubTitle from "@components/pure/SubTitle";
 import Form from "@components/pure/Form";
+import { convertToLocalTime } from "@helpers/time";
 
 const Details = () => {
     const { loggedUser, setLoggedUserField } = useAuthStore();
@@ -36,6 +37,18 @@ const Details = () => {
                 label="Username"
                 value={loggedUser?.username || ""}
                 setValue={value => setLoggedUserField("username", convertUsernameLogic(value))}
+            />
+            <StringInput disabled={true} label="Role" value={loggedUser?.role?.name || ""} />
+            <StringInput disabled={true} label="Joined On" value={convertToLocalTime(loggedUser?.created_at || "")} />
+            <StringInput
+                label="Phone"
+                value={loggedUser?.phone || ""}
+                setValue={value => setLoggedUserField("phone", value)}
+            />
+            <StringInput
+                label="Address"
+                value={loggedUser?.phone || ""}
+                setValue={value => setLoggedUserField("address", value)}
             />
         </Form>
     );

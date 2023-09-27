@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Customers;
 
 use App\Enums\Status;
+use App\Helpers\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customers\StoreClientRequest;
 use App\Http\Requests\Customers\UpdateClientRequest;
 use App\Http\Resources\Customers\ClientResource;
-use App\Logic\Response;
 use App\Models\Customers\Client;
 use App\Repositories\ClientRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
