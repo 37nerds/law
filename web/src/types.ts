@@ -1,4 +1,4 @@
-import type { ForwardRefExoticComponent, LazyExoticComponent, PropsWithoutRef, SVGProps } from "react";
+import type { ForwardRefExoticComponent, LazyExoticComponent, PropsWithoutRef, SVGProps, JSX } from "react";
 
 export type TOption = {
     name: string;
@@ -62,7 +62,6 @@ export type TSidebarLink = {
     icon: TIcon;
     group?: string;
     omit?: boolean;
-    defaults?: Record<string, any>;
     submenus?: TSidebarLink[];
 };
 

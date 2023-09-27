@@ -1,6 +1,8 @@
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
+
+import { prepareErrorString } from "@helpers/strings";
+
 import InputError from "../pure/InputError";
-import { prepareErrorString } from "@helpers/unknown";
 
 const SingleInputBox = ({
     label,

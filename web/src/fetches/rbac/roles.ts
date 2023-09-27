@@ -1,7 +1,7 @@
 import type { TBase, TError, TPaginate } from "src/types";
 import type { TPermission } from "@fetches/rbac/permissions";
 
-import { notify } from "@helpers/unknown";
+import { notify } from "@helpers/notify";
 import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 

@@ -1,6 +1,7 @@
-import TitleCard from "@components/cards/TitleCard";
-import { notify } from "@helpers/unknown";
+import { notify } from "@helpers/notify";
 import { useState } from "react";
+
+import TitleCard from "@components/cards/TitleCard";
 
 const INITIAL_INTEGRATION_LIST = [
     {

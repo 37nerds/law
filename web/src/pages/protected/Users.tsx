@@ -2,7 +2,8 @@ import type { TUser } from "@fetches/rbac/users";
 import type { TPaginate } from "src/types";
 
 import { useUsersQuery } from "@fetches/rbac/users";
-import { convertToLocalTime, getProfileUrlFromAvatarKey } from "@helpers/unknown";
+import { convertToLocalTime } from "@helpers/time";
+import { getProfileUrlFromAvatarKey } from "@helpers/location";
 
 import useUsersStore from "@states/usersStore";
 

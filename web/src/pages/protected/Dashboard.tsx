@@ -1,3 +1,5 @@
+import { notify } from "@helpers/notify";
+
 import CircleStackIcon from "@heroicons/react/24/outline/CircleStackIcon";
 import CreditCardIcon from "@heroicons/react/24/outline/CreditCardIcon";
 import UserGroupIcon from "@heroicons/react/24/outline/UserGroupIcon";
@@ -11,7 +13,6 @@ import LineChart from "@screens/dashboard/LineChart";
 import PageStats from "@screens/dashboard/PageStats";
 import UserChannels from "@screens/dashboard/UserChannels";
 import useSetPageTitle from "@hooks/useSetPageTitle";
-import { notify } from "@helpers/unknown";
 
 const statsData = [
     {

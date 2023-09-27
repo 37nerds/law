@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { selectLoggedUserAvatar } from "@states/authStore";
 import { profile_dropdown_links } from "@config/header";
+import { getProfileUrlFromAvatarKey } from "@helpers/location";
 
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import LogoutButton from "./LogoutButton";
-import { getProfileUrlFromAvatarKey } from "@helpers/unknown";
 
 const ProfileDropDown = () => {
     const avatar = selectLoggedUserAvatar();

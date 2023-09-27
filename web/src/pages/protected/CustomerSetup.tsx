@@ -1,12 +1,13 @@
-import useSetPageTitle from "@hooks/useSetPageTitle";
+import { useEffect } from "react";
+import { useFetchPopUpDataQuery } from "@fetches/customers/customers";
+import { notify } from "@helpers/notify";
 import { customersSetupSteps, getStepComponentByLabel } from "@screens/customerSetup";
+
+import useSetPageTitle from "@hooks/useSetPageTitle";
 import NavigatorCard from "@components/cards/NavigatorCard";
 import Loading from "@components/pure/Loading";
 import ErrorText from "@components/pure/ErrorText";
 import useCustomerSetupStore from "@states/customerSetupStore";
-import { useEffect } from "react";
-import { useFetchPopUpDataQuery } from "@fetches/customers/customers";
-import { notify } from "@helpers/unknown";
 
 const CustomerSetup = () => {
     useSetPageTitle("Customer Setup");

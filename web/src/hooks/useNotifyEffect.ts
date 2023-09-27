@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { notify } from "@helpers/unknown";
+import { notify } from "@helpers/notify";
 
 const useNotifyEffect = (error: any, errorPrefix: string, isSuccess: boolean = false, successMessage: string = "") => {
     useEffect(() => {

@@ -2,7 +2,6 @@ import type { TIcon, TSidebarLink } from "../../types";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { getPathname } from "@helpers/location";
-import { usePrepareUrlForSidebarLink } from "@helpers/unknown";
 
 import DynamicChevronIcon from "@components/icons/DynamicChevronIcon";
 import useAuthStore from "@states/authStore";
@@ -31,8 +30,6 @@ const Submenu = ({
         )
             setIsExpanded(true);
     }, []);
-
-    const prepareUrlForSidebarLink = usePrepareUrlForSidebarLink();
 
     const { loggedUser } = useAuthStore();
 
@@ -63,13 +60,12 @@ const Submenu = ({
                                     path: path2,
                                     name: name2,
                                     submenus: submenus2,
-                                    defaults: defaults2,
                                     group: group2,
                                     omit: omit2,
                                 },
                                 index
                             ) => {
-                                const fPath = prepareUrlForSidebarLink(path2, defaults2);
+                                const fPath = path2;
                                 if (submenus2) {
                                     return (
                                         <li key={index}>

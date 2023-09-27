@@ -3,7 +3,7 @@ import type { TRole } from "@fetches/rbac/roles";
 
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useEffect } from "react";
-import { notify } from "@helpers/unknown";
+import { notify } from "@helpers/notify";
 
 import http from "@helpers/http";
 import useUsersStore from "@states/usersStore";

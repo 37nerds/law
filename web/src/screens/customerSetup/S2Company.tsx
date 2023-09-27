@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 
-import useCustomerSetupStore from "@states/customerSetupStore";
-
-import RenderFields from "@components/renderers/RenderFields";
-import RenderStep from "@components/renderers/RenderStep";
-
 import { legalFromOptions } from "@config/general";
 import { TBottomButton, TOption } from "../../types";
 import { TCompany, TCompanyKey } from "@fetches/customers/customers-type";
 import { useSaveCompanyMutation } from "@fetches/customers/customers";
-import { notify } from "@helpers/unknown";
+import { notify } from "@helpers/notify";
+
+import useCustomerSetupStore from "@states/customerSetupStore";
+
+import RenderFields from "@components/renderers/RenderFields";
+import RenderStep from "@components/renderers/RenderStep";
 
 const S2Company = () => {
     const { popUpData, company, setCompanyField, setActiveStep, setUnitField } = useCustomerSetupStore();

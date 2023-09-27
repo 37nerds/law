@@ -9,7 +9,7 @@ import type {
 
 import type { TError, TPaginate } from "src/types";
 
-import { notify } from "@helpers/unknown";
+import { notify } from "@helpers/notify";
 import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 

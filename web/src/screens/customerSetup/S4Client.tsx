@@ -1,14 +1,14 @@
-import { useEffect } from "react";
+import type { TBottomButton, TOption } from "src/types";
 
-import RenderFields from "@components/renderers/RenderFields";
-import RenderStep from "@components/renderers/RenderStep";
+import { useEffect } from "react";
+import { billToOptions, gendersOptions } from "@config/general";
+import { useSaveClientMutation } from "@fetches/customers/customers";
+import { notify } from "@helpers/notify";
 
 import useCustomerSetupStore from "@states/customerSetupStore";
 
-import { TBottomButton, TOption } from "../../types";
-import { billToOptions, gendersOptions } from "@config/general";
-import { useSaveClientMutation } from "@fetches/customers/customers";
-import { notify } from "@helpers/unknown";
+import RenderFields from "@components/renderers/RenderFields";
+import RenderStep from "@components/renderers/RenderStep";
 
 const S4Client = () => {
     const { popUpData, client, setClientField } = useCustomerSetupStore();

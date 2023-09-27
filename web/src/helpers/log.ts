@@ -1,3 +1,7 @@
+import { TNotificationType } from "src/types";
+
+import useNotificationStore from "@states/useNotificationStore";
+
 const log = {
     print: (...data: any[]) => {
         console.log(...data);
@@ -17,3 +21,10 @@ const log = {
 };
 
 export default log;
+
+export const notify = (type: TNotificationType, message: string = "") => {
+    useNotificationStore.setState(state => {
+        state.notifications.push({ type, message });
+        state.lastNotification = { type, message };
+    });
+};
