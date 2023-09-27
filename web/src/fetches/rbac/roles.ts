@@ -52,32 +52,6 @@ export const useRolesQuery = () => {
     return query;
 };
 
-export const useRoleQuery = (id: string) => {
-    const { setEditRole } = useRolesStore();
-
-    const query = useQuery<TRole, TError>({
-        queryFn: async () => {
-            return await http.get(`/rbac/roles?id=${id}`, 200);
-        },
-        queryKey: [RBAC_ROLE_GET, id],
-    });
-
-    useEffect(() => {
-        if (query.isError) {
-            notify("error", query.error?.message);
-        }
-
-        if (query.isSuccess) {
-            setEditRole({
-                name: query.data?.name,
-                disable: query.data.disable,
-            });
-        }
-    }, [query.isError, query.isSuccess, query.data]);
-
-    return query;
-};
-
 export const useSaveRoleMutation = () => {
     const queryClient = useQueryClient();
 
@@ -130,6 +104,32 @@ export const useDeleteRoleMutation = () => {
     return mutation;
 };
 
+export const useRoleQuery = (id: string) => {
+    const { setEditRole } = useRolesStore();
+
+    const query = useQuery<TRole, TError>({
+        queryFn: async () => {
+            return await http.get(`/rbac/roles?id=${id}`, 200);
+        },
+        queryKey: [RBAC_ROLE_GET, id],
+    });
+
+    useEffect(() => {
+        if (query.isError) {
+            notify("error", query.error?.message);
+        }
+
+        if (query.isSuccess) {
+            setEditRole({
+                name: query.data?.name,
+                disable: query.data.disable,
+            });
+        }
+    }, [query.isError, query.isSuccess, query.data]);
+
+    return query;
+};
+
 export const useEditRoleMutation = () => {
     const queryClient = useQueryClient();
 
@@ -138,8 +138,9 @@ export const useEditRoleMutation = () => {
             return await http.patch(`/rbac/roles?id=${role.id}`, role, 200);
         },
         mutationKey: [RBAC_ROLE_PATCH],
-        onSuccess: () => {
-            return queryClient.invalidateQueries(RBAC_ROLES_GET);
+        onSuccess: role => {
+            queryClient.invalidateQueries([RBAC_ROLE_GET, role.id]).then();
+            queryClient.invalidateQueries(RBAC_ROLES_GET).then();
         },
     });
 

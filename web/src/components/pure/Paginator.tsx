@@ -21,7 +21,7 @@ const Paginator = ({
             className={`flex items-center rounded border border-base-300 py-2 ${className}`}
         >
             <PaginationPrev className="h-[40px] w-[40px] data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50">{`<`}</PaginationPrev>
-            <PaginationList className="relative h-[40px] w-[40px] rounded-lg transition-all data-[active=true]:bg-indigo-500" />
+            <PaginationList className="relative h-[40px] w-[40px] rounded-lg transition-all data-[active=true]:bg-success data-[active=true]:text-base-100" />
             <PaginationNext className="h-[40px] w-[40px] data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50">{`>`}</PaginationNext>
         </Pagination>
     );

@@ -85,20 +85,17 @@ class AuthController extends Controller
         return Response::happy(200, $user);
     }
 
-    public function show(): array
+    public function show(): JsonResponse
     {
         $user = User::with("role")
             ->where("id", "=", Auth::id())
             ->first();
 
-        $permissions = Permission::with('resource')
+        $user["permissions"] = Permission::with('resource')
             ->where("role_id", "=", $user->role_id)
             ->get();
 
-        return [
-            "user" => $user,
-            "permissions" => $permissions,
-        ];
+        return Response::happy(200, $user);
     }
 
     public function update(UpdateLoggedUserRequest $request): JsonResponse

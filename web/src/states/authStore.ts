@@ -37,7 +37,7 @@ export const selectLoggedUser = (): TLoggedUser | null => {
 export const selectLoggedUserAvatar = (): string | null => {
     const loggedUser = selectLoggedUser();
     if (!loggedUser) return null;
-    return loggedUser.user.avatar;
+    return loggedUser?.avatar;
 };
 
 export const isUserLoggedIn = (): boolean => {

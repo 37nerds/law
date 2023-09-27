@@ -15,8 +15,8 @@ const ProfilePicture = () => {
 
     const loggedUser: TLoggedUser | null = selectLoggedUser();
 
-    const avatar: string | null = loggedUser?.user?.avatar || null;
-    const name: string = loggedUser?.user?.name || "";
+    const avatar: string | null = loggedUser?.avatar || null;
+    const name: string = loggedUser?.name || "";
 
     const uploadProfileMutation = useUploadProfilePictureMutation();
 

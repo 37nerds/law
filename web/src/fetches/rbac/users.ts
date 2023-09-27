@@ -132,8 +132,9 @@ export const useEditUserMutation = () => {
             return await http.patch(`/rbac/users?id=${user.id}`, user, 200);
         },
         mutationKey: [RBAC_USER_PATCH],
-        onSuccess: () => {
-            return queryClient.invalidateQueries(RBAC__USERS__GET);
+        onSuccess: user => {
+            queryClient.invalidateQueries([RBAC__USER__GET, user.id]).then();
+            queryClient.invalidateQueries(RBAC__USERS__GET).then();
         },
     });
 
