@@ -29,7 +29,7 @@ class RBACSeeder extends Seeder
             Permission::query()->create(["role_id" => $superAdmin->id, "resource_id" => $re->id]);
         });
 
-        $this->truncate(User::class, 10);
+        $this->truncate(User::class, 25);
 
         User::query()->create([
             'name' => "Super User",

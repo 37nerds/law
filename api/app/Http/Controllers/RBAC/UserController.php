@@ -10,6 +10,7 @@ use App\Logic\Response;
 use App\Models\RBAC\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -42,24 +43,20 @@ class UserController extends Controller
         if ($user->username !== $request->username) {
             $temp = User::query()->where("username", "=", $request->username)->first();
             if ($temp) {
-                return Response::json([
-                    "message" => "Validation error",
+                return Response::error(400, "Validation error", [
                     "errors" => [
                         "username" => ["This username already taken"]
                     ]
-                ], 400);
+                ]);
             }
         }
 
         if ($user->email !== $request->email) {
             $temp = User::query()->where("email", "=", $request->email)->first();
             if ($temp) {
-                return Response::json([
-                    "message" => "Validation error",
-                    "errors" => [
-                        "email" => ["This email already taken"]
-                    ]
-                ], 400);
+                return Response::error(400, "Validation error", [
+                    "errors" => ["email" => ["This email already taken"]]
+                ]);
             }
         }
 
@@ -71,6 +68,11 @@ class UserController extends Controller
     {
         $userId = $request->query("id");
         $user = User::query()->findOrFail($userId);
+
+        if ($user->id === Auth::id()) {
+            return Response::error(400, "You can't delete yourself");
+        }
+
         $user->delete();
         return Response::happy(204);
     }

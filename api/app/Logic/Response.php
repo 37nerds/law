@@ -15,4 +15,10 @@ class Response
     {
         return static::json($data, $status);
     }
+
+    public static function error(int $status, $message = "", $data = []): JsonResponse
+    {
+        $data["message"] = $data["message"] ?? $message;
+        return static::json($data, $status);
+    }
 }

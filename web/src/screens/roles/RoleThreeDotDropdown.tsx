@@ -22,7 +22,9 @@ const RoleThreeDotDropdown = ({ roleId }: { roleId: string }) => {
                 {
                     content: <button className=" btn btn-error btn-sm w-full text-xs text-base-100">Delete</button>,
                     handler: () => {
-                        roleDeleteMutation.mutate(roleId);
+                        if (confirm("Are you sure you want to delete this role?")) {
+                            roleDeleteMutation.mutate(roleId);
+                        }
                     },
                 },
             ]}
