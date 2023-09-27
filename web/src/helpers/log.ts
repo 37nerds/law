@@ -1,4 +1,4 @@
-import { TNotificationType } from "src/types";
+import type { TNotificationType } from "@helpers/types";
 
 import useNotificationStore from "@states/useNotificationStore";
 

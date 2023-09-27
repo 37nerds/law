@@ -7,7 +7,7 @@ import type {
     TUpdateClient,
 } from "@fetches/customers/customers-type";
 
-import type { TError, TPaginate } from "src/types";
+import type { TError, TPaginate } from "@helpers/types";
 
 import { notify } from "@helpers/notify";
 import { useEffect } from "react";

@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import type { TBottomButton, TOption } from "@helpers/types";
+import type { TCompany, TCompanyKey } from "@fetches/customers/customers-type";
 
+import { useEffect } from "react";
 import { legalFromOptions } from "@config/general";
-import { TBottomButton, TOption } from "../../types";
-import { TCompany, TCompanyKey } from "@fetches/customers/customers-type";
 import { useSaveCompanyMutation } from "@fetches/customers/customers";
 import { notify } from "@helpers/notify";
 

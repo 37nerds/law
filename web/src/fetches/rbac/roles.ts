@@ -1,4 +1,4 @@
-import type { TBase, TError, TPaginate } from "src/types";
+import type { TBase, TError, TPaginate } from "@helpers/types";
 import type { TPermission } from "@fetches/rbac/permissions";
 
 import { notify } from "@helpers/notify";

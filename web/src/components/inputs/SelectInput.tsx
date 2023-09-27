@@ -1,4 +1,4 @@
-import { TOption } from "../../types";
+import type { TOption } from "@helpers/types";
 
 import InputLayout from "../layouts/InputLayout";
 import Select from "./Select";

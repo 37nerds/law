@@ -1,5 +1,5 @@
 import type { TResource } from "@fetches/rbac/resources";
-import type { TBase } from "src/types";
+import type { TBase } from "@helpers/types";
 
 export type TPermission = TBase & {
     role_id: string;

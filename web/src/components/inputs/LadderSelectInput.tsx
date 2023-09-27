@@ -1,5 +1,6 @@
+import type { TLadderOption } from "@helpers/types";
+
 import { useState } from "react";
-import { TLadderOption } from "../../types";
 
 import InputLayout from "../layouts/InputLayout";
 import Input from "./Input";

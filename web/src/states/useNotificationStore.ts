@@ -1,7 +1,8 @@
+import type { TNotification } from "@helpers/types";
+
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { devtools } from "zustand/middleware";
-import { TNotification } from "../types";
 
 type TState = {
     notifications: TNotification[];

@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import type { TBottomButton, TOption } from "@helpers/types";
+import type { TUnit } from "@fetches/customers/customers-type";
 
-import { TBottomButton, TOption } from "../../types";
+import { useEffect } from "react";
 import { legalFromOptions } from "@config/general";
 import { useSaveUnitMutation } from "@fetches/customers/customers";
-import { TUnit } from "@fetches/customers/customers-type";
 import { notify } from "@helpers/notify";
 
 import useCustomerSetupStore from "@states/customerSetupStore";

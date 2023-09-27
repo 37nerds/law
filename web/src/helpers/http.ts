@@ -1,4 +1,4 @@
-import type { TJsonS, TResponse } from "src/types";
+import type { TJsonS, TResponse } from "@helpers/types";
 
 import { server_base_url } from "@config/env";
 

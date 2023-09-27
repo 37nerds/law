@@ -1,4 +1,4 @@
-import type { TIcon } from "src/types";
+import type { TIcon } from "@helpers/types";
 
 import { NavLink, useLocation } from "react-router-dom";
 

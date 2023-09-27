@@ -1,5 +1,5 @@
 import type { TUser } from "@fetches/rbac/users";
-import type { TPaginate } from "src/types";
+import type { TPaginate } from "@helpers/types";
 
 import { useUsersQuery } from "@fetches/rbac/users";
 import { convertToLocalTime } from "@helpers/time";

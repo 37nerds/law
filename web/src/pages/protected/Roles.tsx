@@ -1,5 +1,5 @@
 import type { TRole } from "@fetches/rbac/roles";
-import type { TPaginate } from "src/types";
+import type { TPaginate } from "@helpers/types";
 
 import { useRolesQuery } from "@fetches/rbac/roles";
 

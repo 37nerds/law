@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import type { TGroupOfCompany } from "@fetches/customers/customers-type";
+import type { TBottomButton } from "@helpers/types";
 
-import { legalFromOptions } from "@config/general";
-import { TGroupOfCompany } from "@fetches/customers/customers-type";
-import { TBottomButton } from "../../types";
 import { useSaveGroupOfCompanyMutation } from "@fetches/customers/customers";
 import { notify } from "@helpers/notify";
+import { useEffect, useState } from "react";
+import { legalFromOptions } from "@config/general";
 
 import useCustomerSetupStore from "@states/customerSetupStore";
 

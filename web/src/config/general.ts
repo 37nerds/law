@@ -1,4 +1,4 @@
-import { TOption } from "../types";
+import type { TOption } from "@helpers/types";
 
 export const MODAL_BODY_TYPES = {
     USER_DETAIL: "USER_DETAIL",

@@ -1,4 +1,4 @@
-import { TLadderOption, TOption } from "../../types";
+import type { TLadderOption, TOption } from "@helpers/types";
 
 import StringInput from "../inputs/StringInput";
 import TextInput from "../inputs/TextInput";

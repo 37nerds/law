@@ -1,4 +1,4 @@
-import { TSidebarLink } from "../types";
+import type { TSidebarLink } from "@helpers/types";
 
 import BoltIcon from "@heroicons/react/24/outline/BoltIcon";
 import ChartBarIcon from "@heroicons/react/24/outline/ChartBarIcon";

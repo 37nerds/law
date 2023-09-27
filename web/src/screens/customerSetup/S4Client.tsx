@@ -1,4 +1,4 @@
-import type { TBottomButton, TOption } from "src/types";
+import type { TBottomButton, TOption } from "@helpers/types";
 
 import { useEffect } from "react";
 import { billToOptions, gendersOptions } from "@config/general";

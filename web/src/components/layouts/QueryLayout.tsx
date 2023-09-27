@@ -1,6 +1,6 @@
-import { TError } from "../../types";
-import { ReactNode } from "react";
-import { UseQueryResult } from "react-query";
+import type { ReactNode } from "react";
+import type { TError } from "@helpers/types";
+import type { UseQueryResult } from "react-query";
 
 import ErrorText from "../pure/ErrorText";
 import Loading from "../pure/Loading";

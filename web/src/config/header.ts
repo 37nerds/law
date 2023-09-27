@@ -1,4 +1,4 @@
-import { TProfileDropdownLink } from "../types";
+import type { TProfileDropdownLink } from "@helpers/types";
 
 export const profile_dropdown_links: TProfileDropdownLink[] = [
     {

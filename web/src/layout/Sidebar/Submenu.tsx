@@ -1,4 +1,4 @@
-import type { TIcon, TSidebarLink } from "../../types";
+import type { TIcon, TSidebarLink } from "@helpers/types";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { getPathname } from "@helpers/location";

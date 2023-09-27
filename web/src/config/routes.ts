@@ -1,4 +1,5 @@
-import type { TRoute } from "../types";
+import type { TRoute } from "@helpers/types";
+
 import { lazy } from "react";
 
 /**

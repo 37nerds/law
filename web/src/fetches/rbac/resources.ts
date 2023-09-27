@@ -1,4 +1,4 @@
-import type { TBase } from "src/types";
+import type { TBase } from "@helpers/types";
 
 export type TResource = TBase & {
     api: string;

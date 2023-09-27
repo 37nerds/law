@@ -1,4 +1,4 @@
-import type { TError } from "src/types";
+import type { TError } from "@helpers/types";
 import type { TUser } from "@fetches/rbac/users";
 import type { TPermission } from "@fetches/rbac/permissions";
 

@@ -1,4 +1,4 @@
-import { TOption } from "../../types";
+import type { TOption } from "@helpers/types";
 
 const Select = ({
     value,
