@@ -1,9 +1,11 @@
+import type { ReactNode } from "react";
+import { useEffect, useRef } from "react";
+
+import Title from "@components/pure/Title";
 import XMarkIcon from "@heroicons/react/24/outline/XMarkIcon";
-import { ReactNode, useEffect, useRef } from "react";
 
 const Box = ({ isForm, children, onSubmit }: { isForm?: boolean; onSubmit?: () => void; children: ReactNode }) => {
-    const className = `p-8`;
-
+    const className = `py-5`;
     return (
         <>
             {isForm ? (
@@ -31,6 +33,7 @@ const Modal = ({
     isForm = false,
     onSubmit,
     widthClass,
+    title = "",
 }: {
     open: boolean;
     setOpen: (open: boolean) => void;
@@ -39,6 +42,7 @@ const Modal = ({
     isForm?: boolean;
     onSubmit?: () => void;
     widthClass?: string;
+    title?: string;
 }) => {
     const dialogRef = useRef<HTMLDialogElement | null>(null);
     const closeRef = useRef<HTMLButtonElement | null>(null);
@@ -52,31 +56,38 @@ const Modal = ({
     }, [open]);
 
     return (
-        <dialog ref={dialogRef} className="modal">
-            <div className={`modal-box ${widthClass} max-w-5xl`}>
-                <div className="flex justify-end">
-                    <form method="dialog">
-                        <button
-                            ref={closeRef}
-                            className="btn btn-neutral text-base-100"
-                            onClick={() => {
-                                setOpen(false);
-                            }}
-                        >
-                            <XMarkIcon className="w-6" />
-                        </button>
-                    </form>
-                </div>
-                <Box isForm={isForm} onSubmit={onSubmit}>
-                    {children}
-                    <div className="modal-action">
-                        {buttons.map((button, index) => (
-                            <div key={index}>{button}</div>
-                        ))}
+        <>
+            {open ? (
+                <dialog ref={dialogRef} className="modal">
+                    <div className={`modal-box ${widthClass} max-w-5xl p-8`}>
+                        <div className="relative flex items-center justify-center py-3">
+                            <Title className="text-center">{title}</Title>
+                            <form method="dialog" className="absolute right-0 top-0">
+                                <button
+                                    ref={closeRef}
+                                    className="btn"
+                                    onClick={() => {
+                                        setOpen(false);
+                                    }}
+                                >
+                                    <XMarkIcon className="w-6" />
+                                </button>
+                            </form>
+                        </div>
+                        <Box isForm={isForm} onSubmit={onSubmit}>
+                            {children}
+                            <div className="modal-action">
+                                {buttons.map((button, index) => (
+                                    <div key={index}>{button}</div>
+                                ))}
+                            </div>
+                        </Box>
                     </div>
-                </Box>
-            </div>
-        </dialog>
+                </dialog>
+            ) : (
+                <></>
+            )}
+        </>
     );
 };
 

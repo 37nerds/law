@@ -1,4 +1,5 @@
-import { TCreateRole, TEditRole } from "@fetches/rbac/roles";
+import type { TCreateRole, TEditRole } from "@fetches/rbac/roles";
+
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
@@ -7,6 +8,7 @@ type TFilters = {
     page: number;
     newRoleModalOpen: boolean;
     editRoleModalOpen: boolean;
+    editRoleId: string;
 };
 
 type TStore = {
@@ -20,6 +22,7 @@ type TStore = {
     setNewRoleEmpty: () => void;
 
     editRole: TEditRole;
+    setEditRole: (editRole: TEditRole) => void;
     setEditRoleField: (key: keyof TEditRole, value: any) => void;
     editRoleError: Record<string, string[]>;
     setEditRoleError: (newRoleError: Record<string, string[]>) => void;
@@ -34,6 +37,7 @@ const useRolesStore = create<TStore>()(
                 page: 1,
                 newRoleModalOpen: false,
                 editRoleModalOpen: false,
+                editRoleId: "",
             },
 
             setFiltersField: (key, value) => {
@@ -68,19 +72,22 @@ const useRolesStore = create<TStore>()(
                 name: "",
                 disable: false,
             },
+            setEditRole: editRole => {
+                set(state => {
+                    state.editRole = editRole;
+                });
+            },
             setEditRoleField: (key, value) => {
                 set(state => {
                     state.editRole[key] = value as never;
                 });
             },
-
             editRoleError: {},
             setEditRoleError: (newRoleError: Record<string, string[]>) => {
                 set(state => {
                     state.newRoleError = newRoleError;
                 });
             },
-
             setEditRoleEmpty: () => {
                 set(state => {
                     state.newRole.name = "";

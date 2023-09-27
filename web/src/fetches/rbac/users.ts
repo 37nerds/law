@@ -1,10 +1,12 @@
-import useUsersStore from "@states/usersStore";
+import type { TBase, TError, TPaginate } from "src/types";
+import type { TRole } from "@fetches/rbac/roles";
+
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { TBase, TError, TPaginate } from "../../types";
-import http from "@helpers/http";
 import { useEffect } from "react";
 import { notify } from "@helpers/unknown";
-import { TRole } from "@fetches/rbac/roles";
+
+import http from "@helpers/http";
+import useUsersStore from "@states/usersStore";
 
 export const RBAC__USERS__GET = "get.users";
 export const RBAC__USERS__POST = "post.users";
@@ -13,7 +15,6 @@ export const RBAC_USER_PATCH = "patch.user";
 export const RBAC_USER_DELETE = "delete.user";
 
 export type TUser = TBase & {
-    id?: string;
     name: string;
     email: string;
     username: string;
@@ -118,7 +119,7 @@ export const useUserQuery = (userId: string) => {
                 role_id: query.data.role_id,
             });
         }
-    }, [query.isSuccess, query.isError]);
+    }, [query.isSuccess, query.isError, query.data]);
 
     return query;
 };

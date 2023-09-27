@@ -16,7 +16,10 @@ class RoleResource extends JsonResource
     {
         return array_merge(
             parent::toArray($request),
-            ["permissions" => $this->permissions]
+            [
+                "disable" => boolval($this->disable),
+                "permissions" => $this->permissions
+            ]
         );
     }
 }

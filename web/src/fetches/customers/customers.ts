@@ -1,5 +1,4 @@
-import { notify } from "@helpers/unknown";
-import {
+import type {
     TClient,
     TCompany,
     TGroupOfCompany,
@@ -7,7 +6,10 @@ import {
     TUnit,
     TUpdateClient,
 } from "@fetches/customers/customers-type";
-import { TError, TPaginate } from "../../types";
+
+import type { TError, TPaginate } from "src/types";
+
+import { notify } from "@helpers/unknown";
 import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
@@ -133,7 +135,6 @@ export const useClientQuery = (id: number) => {
         }
 
         if (query.isSuccess) {
-            console.log(query.data);
             setClient(query.data);
         }
     }, [query.isError, query.isSuccess]);

@@ -1,6 +1,8 @@
-import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 import { useDeleteRoleMutation } from "@fetches/rbac/roles";
+
 import useRolesStore from "@states/rolesStore";
+
+import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 
 const RoleThreeDotDropdown = ({ roleId }: { roleId: string }) => {
     const { setFiltersField } = useRolesStore();
@@ -13,8 +15,8 @@ const RoleThreeDotDropdown = ({ roleId }: { roleId: string }) => {
                 {
                     content: <button className=" btn btn-success btn-sm w-full text-xs text-base-100">Edit</button>,
                     handler: () => {
-                        // setFiltersField("editUserId", userId);
-                        // setFiltersField("editUserModalOpen", true);
+                        setFiltersField("editRoleId", roleId);
+                        setFiltersField("editRoleModalOpen", true);
                     },
                 },
                 {

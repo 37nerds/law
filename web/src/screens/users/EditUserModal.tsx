@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { useRolesQuery } from "@fetches/rbac/roles";
 import { useEditUserMutation, useUserQuery } from "@fetches/rbac/users";
 
+import useUsersStore from "@states/usersStore";
+
 import EmailInput from "@components/inputs/EmailInput";
 import SelectInput from "@components/inputs/SelectInput";
 import StringInput from "@components/inputs/StringInput";
 import QueryLayout from "@components/layouts/QueryLayout";
 import SingleInputBox from "@components/layouts/SingleInputBox";
 import Modal from "@components/modals2/Modal";
-import Title from "@components/pure/Title";
-import useUsersStore from "@states/usersStore";
 
 const EditUserModal = ({
     open,
@@ -73,12 +73,9 @@ const EditUserModal = ({
                 </button>,
             ]}
             widthClass="w-[800px]"
+            title="EDIT USER"
         >
             <div className="flex flex-col gap-5">
-                <div className="my-3 flex justify-center">
-                    <Title>EDIT USER</Title>
-                </div>
-
                 <QueryLayout query={userQuery}>
                     <div className="flex flex-col gap-5">
                         <SingleInputBox

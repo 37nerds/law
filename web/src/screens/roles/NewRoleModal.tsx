@@ -1,10 +1,10 @@
+import { useSaveRoleMutation } from "@fetches/rbac/roles";
+import { useEffect } from "react";
+
 import StringInput from "@components/inputs/StringInput";
 import SingleInputBox from "@components/layouts/SingleInputBox";
 import Modal from "@components/modals2/Modal";
-import Title from "@components/pure/Title";
-import { useSaveRoleMutation } from "@fetches/rbac/roles";
 import useRolesStore from "@states/rolesStore";
-import { useEffect } from "react";
 
 const NewRoleModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
     const { newRole, setNewRoleField, newRoleError, setNewRoleError, setNewRoleEmpty } = useRolesStore();
@@ -36,25 +36,21 @@ const NewRoleModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolea
                 </button>,
             ]}
             widthClass="w-[800px]"
+            title="ADD NEW ROLE"
         >
             <div className="flex flex-col gap-5">
-                <div className="my-3 flex justify-center">
-                    <Title>ADD NEW ROLE</Title>
-                </div>
-                <div className="flex flex-col gap-5">
-                    <SingleInputBox
-                        label="Role name"
-                        required={true}
-                        element={
-                            <StringInput
-                                required={true}
-                                value={newRole["name"]}
-                                setValue={value => setNewRoleField("name", value)}
-                            />
-                        }
-                        errorMessage={newRoleError["name"]}
-                    />
-                </div>
+                <SingleInputBox
+                    label="Role name"
+                    required={true}
+                    element={
+                        <StringInput
+                            required={true}
+                            value={newRole["name"]}
+                            setValue={value => setNewRoleField("name", value)}
+                        />
+                    }
+                    errorMessage={newRoleError["name"]}
+                />
             </div>
         </Modal>
     );

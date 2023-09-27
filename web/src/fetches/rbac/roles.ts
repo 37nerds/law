@@ -1,11 +1,12 @@
+import type { TBase, TError, TPaginate } from "src/types";
+import type { TPermission } from "@fetches/rbac/permissions";
+
 import { notify } from "@helpers/unknown";
-import { TBase, TError, TPaginate } from "../../types";
 import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import http from "@helpers/http";
 import useRolesStore from "@states/rolesStore";
-import { TPermission } from "@fetches/rbac/permissions";
 
 export const RBAC_ROLES_GET = "get.roles";
 export const RBAC_ROLE_GET = "get.role";
@@ -15,7 +16,7 @@ export const RBAC_ROLE_PATCH = "patch.roles";
 
 export type TRole = TBase & {
     name: string;
-    disable: number;
+    disable: boolean;
     permissions: TPermission[];
 };
 
@@ -51,20 +52,28 @@ export const useRolesQuery = () => {
     return query;
 };
 
-export const useRoleQuery = (roleId: string) => {
+export const useRoleQuery = (id: string) => {
+    const { setEditRole } = useRolesStore();
+
     const query = useQuery<TRole, TError>({
         queryFn: async () => {
-            return await http.get(`/rbac/roles?id=${roleId}`, 200);
+            return await http.get(`/rbac/roles?id=${id}`, 200);
         },
-        queryKey: [RBAC_ROLE_GET],
-        keepPreviousData: true,
+        queryKey: [RBAC_ROLE_GET, id],
     });
 
     useEffect(() => {
         if (query.isError) {
             notify("error", query.error?.message);
         }
-    }, [query.isError]);
+
+        if (query.isSuccess) {
+            setEditRole({
+                name: query.data?.name,
+                disable: query.data.disable,
+            });
+        }
+    }, [query.isError, query.isSuccess, query.data]);
 
     return query;
 };

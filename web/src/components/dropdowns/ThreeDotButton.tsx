@@ -1,4 +1,4 @@
-const ThreeDotButton = () => {
+const ThreeDotButton = ({ onClick }: { onClick?: () => void }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +6,8 @@ const ThreeDotButton = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="btn btn-square btn-ghost w-6"
+            className="w-6 cursor-pointer"
+            onClick={onClick}
         >
             <path
                 strokeLinecap="round"

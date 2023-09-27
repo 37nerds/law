@@ -15,7 +15,10 @@ class Role extends Model
 
     protected $table = Table::roles;
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'disable'
+    ];
 
     public function users(): HasMany
     {

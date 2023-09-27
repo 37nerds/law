@@ -1,5 +1,6 @@
-import { assert_storage_url } from "@config/env";
 import type { TNotificationType } from "../types";
+
+import { assert_storage_url } from "@config/env";
 import { useParams } from "react-router-dom";
 
 import useNotificationStore from "@states/useNotificationStore";
@@ -41,7 +42,7 @@ export const isLink = (value: string): boolean => {
 };
 
 export const getProfileUrlFromAvatarKey = (avatar: string): string => {
-    return isLink(avatar) ? avatar : `${assert_storage_url}/storage/profile/picture/${avatar}`;
+    return isLink(avatar) ? avatar : `${assert_storage_url}/profile/picture/${avatar}`;
 };
 
 export const convertUsernameLogic = (text: string) => {

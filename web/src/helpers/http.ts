@@ -1,4 +1,5 @@
-import type { TJsonS, TResponse } from "../types";
+import type { TJsonS, TResponse } from "src/types";
+
 import { server_base_url } from "@config/env";
 
 import log from "@helpers/log";
@@ -76,7 +77,6 @@ const post = async (path: string, body: TJsonS, happyStatus: number, csrf = true
 };
 
 const form_post = async (path: string, body: FormData, happyStatus: number, csrf = true): Promise<any> => {
-    console.log("FC");
     return await lara_request("POST", path, body, happyStatus, {
         contentType: "x/none",
         csrf,

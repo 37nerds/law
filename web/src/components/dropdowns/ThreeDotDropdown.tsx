@@ -1,5 +1,6 @@
-import ThreeDotButton from "./ThreeDotButton";
 import { ReactNode, useEffect, useState } from "react";
+
+import ThreeDotButton from "./ThreeDotButton";
 
 type TDropDownOption = {
     content: ReactNode;
@@ -14,14 +15,14 @@ const ThreeDotDropdown = ({ options }: { options: TDropDownOption[] }) => {
     }, [open]);
 
     return (
-        <div className="dropdown dropdown-left dropdown-hover">
+        <div className="dropdown-left dropdown-hover dropdown">
             <label tabIndex={0}>
                 <ThreeDotButton />
             </label>
             {open && (
                 <ul
                     tabIndex={0}
-                    className="menu dropdown-content rounded-box bg-base-300 p-2 shadow"
+                    className="menu dropdown-content rounded-box w-32 bg-base-300 p-2 shadow"
                     style={{ zIndex: 2000 }}
                 >
                     {options.map((option, index) => (
@@ -33,7 +34,7 @@ const ThreeDotDropdown = ({ options }: { options: TDropDownOption[] }) => {
                                 setOpen(false);
                             }}
                         >
-                            <a>{option.content}</a>
+                            <a className="flex items-center justify-center">{option.content}</a>
                         </li>
                     ))}
                 </ul>

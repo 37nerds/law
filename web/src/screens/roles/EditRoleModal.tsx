@@ -1,53 +1,47 @@
 import { useEffect } from "react";
-import { useRolesQuery } from "@fetches/rbac/roles";
-import { useEditUserMutation, useUserQuery } from "@fetches/rbac/users";
+import { useEditRoleMutation, useRoleQuery } from "@fetches/rbac/roles";
+
+import useRolesStore from "@states/rolesStore";
+
 import StringInput from "@components/inputs/StringInput";
-import QueryLayout from "@components/layouts/QueryLayout";
 import SingleInputBox from "@components/layouts/SingleInputBox";
 import Modal from "@components/modals2/Modal";
-import Title from "@components/pure/Title";
-import useRolesStore from "@states/rolesStore";
+import Loading from "@components/pure/Loading";
+import ErrorText from "@components/pure/ErrorText";
 
 const EditRoleModal = ({
     open,
     setOpen,
-    userId,
+    roleId,
 }: {
     open: boolean;
     setOpen: (open: boolean) => void;
-    userId: string;
+    roleId: string;
 }) => {
-    const rolesQuery = useRolesQuery();
-
     const { editRole, editRoleError, setEditRoleEmpty, setEditRoleError, setEditRoleField, setEditRoleErrorEmpty } =
         useRolesStore();
 
-    const userQuery = useUserQuery(userId);
-    const userEditMutation = useEditUserMutation();
+    const roleQuery = useRoleQuery(roleId);
+    const roleEditMutation = useEditRoleMutation();
 
     useEffect(() => {
-        if (userEditMutation.isError && userEditMutation?.error?.errors) {
-            setEditUserError(userEditMutation?.error?.errors);
+        if (roleEditMutation.isError && roleEditMutation?.error?.errors) {
+            setEditRoleError(roleEditMutation?.error?.errors);
         }
-    }, [userEditMutation.isError, userEditMutation?.error?.errors]);
+    }, [roleEditMutation.isError, roleEditMutation?.error?.errors]);
 
     useEffect(() => {
-        if (userEditMutation.isSuccess) {
+        if (roleEditMutation.isSuccess) {
             setOpen(false);
-            setEditUserEmpty();
-            setEditUserErrorEmpty();
+            setEditRoleEmpty();
+            setEditRoleErrorEmpty();
         }
-    }, [userEditMutation.isSuccess]);
+    }, [roleEditMutation.isSuccess]);
 
     const handleSubmit = () => {
-        if (editUser.username.length < 6) {
-            setEditUserErrorField("username", ["Must be at least 6 characters"]);
-            return;
-        }
-
-        userEditMutation.mutate({
-            ...editUser,
-            id: userId,
+        roleEditMutation.mutate({
+            ...editRole,
+            id: roleId,
         });
     };
 
@@ -63,33 +57,42 @@ const EditRoleModal = ({
                 </button>,
             ]}
             widthClass="w-[800px]"
+            title="EDIT ROLE"
         >
             <div className="flex flex-col gap-5">
-                <div className="my-3 flex justify-center">
-                    <Title>EDIT Role</Title>
-                </div>
-
-                <QueryLayout query={userQuery}>
+                {roleQuery.isLoading ? (
+                    <Loading />
+                ) : roleQuery.isError ? (
+                    <ErrorText>{roleQuery.error?.message || ""}</ErrorText>
+                ) : !roleQuery.data ? (
+                    <ErrorText>{"data is null"}</ErrorText>
+                ) : (
                     <div className="flex flex-col gap-5">
-                        <div className="my-3 flex justify-center">
-                            <Title>EDIT ROLE</Title>
-                        </div>
-                        <div className="flex flex-col gap-5">
-                            <SingleInputBox
-                                label="Role name"
-                                required={true}
-                                element={
-                                    <StringInput
-                                        required={true}
-                                        value={newRole["name"]}
-                                        setValue={value => setNewRoleField("name", value)}
-                                    />
-                                }
-                                errorMessage={newRoleError["name"]}
-                            />
-                        </div>
+                        <SingleInputBox
+                            label="Role name"
+                            required={true}
+                            element={
+                                <StringInput
+                                    required={true}
+                                    value={editRole["name"]}
+                                    setValue={value => setEditRoleField("name", value)}
+                                />
+                            }
+                            errorMessage={editRoleError["name"]}
+                        />
+                        <SingleInputBox
+                            label={"Is Enable"}
+                            element={
+                                <input
+                                    type="checkbox"
+                                    checked={!editRole.disable}
+                                    className="checkbox"
+                                    onClick={() => setEditRoleField("disable", !editRole.disable)}
+                                />
+                            }
+                        />
                     </div>
-                </QueryLayout>
+                )}
             </div>
         </Modal>
     );

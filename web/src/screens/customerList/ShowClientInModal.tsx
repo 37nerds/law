@@ -2,6 +2,8 @@ import { gendersOptions } from "@config/general";
 import { useClientQuery, useFetchPopUpDataQuery, useUpdateClientMutation } from "@fetches/customers/customers";
 import { useEffect, useState } from "react";
 
+import useCustomerListStore from "@states/customerListStore";
+
 import DateInput from "@components/inputs/DateInput";
 import EmailInput from "@components/inputs/EmailInput";
 import LadderSelectInput from "@components/inputs/LadderSelectInput";
@@ -11,7 +13,6 @@ import TextInput from "@components/inputs/TextInput";
 import DoubleInputBox from "@components/layouts/DoubleInputBox";
 import SingleInputBox from "@components/layouts/SingleInputBox";
 import CustomerModalLayout from "./CustomerModalLayout";
-import useCustomerListStore from "@states/customerListStore";
 
 /**
  * Show individual client data by ID and user can edit the data as well
@@ -24,8 +25,6 @@ const ShowClientInModal = ({ id }: { id: number }) => {
 
     const { client, setClientField } = useCustomerListStore();
     const { units } = useFetchPopUpDataQuery().data || {};
-
-    console.log(units);
 
     useEffect(() => {
         if (updateClientMutation.isSuccess) {

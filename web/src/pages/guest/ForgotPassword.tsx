@@ -45,7 +45,6 @@ const ForgotPassword = () => {
         }
 
         if (forgotPasswordMutation.isSuccess) {
-            console.log(forgotPasswordMutation.data);
             setLoading(false);
             setLinkSent(true);
         }
