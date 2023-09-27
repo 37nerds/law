@@ -13,7 +13,7 @@ use App\Http\Controllers\RBAC\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix("/v1")
-//    ->middleware(["auth:sanctum"])
+    ->middleware(["auth:sanctum"])
     ->group(function () {
 
         Route::prefix("/auth")
@@ -46,7 +46,7 @@ Route::prefix("/v1")
             });
 
         Route::prefix("/customers")
-//            ->middleware("protect")
+            ->middleware("protect")
             ->group(function () {
 
                 Route::get("/pop-up-data", [CustomerController::class, "popUpData"])
@@ -66,11 +66,13 @@ Route::prefix("/v1")
                     Route::delete("/", [ClientController::class, "destroy"]);
                     Route::apiResource("/", ClientController::class)
                         ->only(["index", "show", "update"]);
+
                 });
 
             });
 
         Route::prefix("/rbac")
+            ->middleware("protect")
             ->group(function () {
 
                 Route::prefix("/users")->group(function () {
@@ -102,9 +104,7 @@ Route::prefix("/v1")
 
                 Route::prefix("/permissions")->group(function () {
 
-                    Route::get("/", [PermissionController::class, "index"]);
                     Route::post("/", [PermissionController::class, "store"]);
-                    Route::patch("/", [PermissionController::class, "update"]);
                     Route::delete("/", [PermissionController::class, "destroy"]);
 
                 });

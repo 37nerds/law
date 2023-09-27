@@ -17,7 +17,6 @@ const usePermissionsStore = create<TStore>()(
             filters: {
                 role_id: "",
             },
-
             setFiltersField: (key, value) => {
                 set(state => {
                     state.filters[key] = value as never;

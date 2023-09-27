@@ -15,8 +15,8 @@ class PermissionController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $permissionId = $request->query("id");
-        if ($permissionId) {
+        if (array_key_exists("id", $request->all())) {
+            $permissionId = $request->query("id");
             $permission = Permission::query()->findOrFail($permissionId);
             return Response::happy(200, new PermissionResource($permission));
         }

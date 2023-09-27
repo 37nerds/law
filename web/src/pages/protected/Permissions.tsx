@@ -3,6 +3,10 @@ import PageLayout from "@components/layouts/PageLayout";
 import SingleInputBox from "@components/layouts/SingleInputBox";
 import { useRolesQuery } from "@fetches/rbac/roles";
 import usePermissionsStore from "@states/permissions_store";
+import CheckboxInput from "@components/inputs/CheckboxInput";
+import ResourcesTable from "@screens/permissions/ResourcesTable";
+import { useEffect } from "react";
+import useAuthStore from "@states/auth_store";
 
 const Permissions = () => {
     const rolesQuery = useRolesQuery();
@@ -12,12 +16,18 @@ const Permissions = () => {
         setFiltersField,
     } = usePermissionsStore();
 
+    const { loggedUser } = useAuthStore();
+
+    useEffect(() => {
+        if (loggedUser?.role_id) {
+            setFiltersField("role_id", loggedUser?.role_id);
+        }
+    }, [loggedUser?.role_id]);
+
     return (
         <PageLayout>
-            {/* selection */}
-            <div>
+            <div className="flex flex-col gap-5">
                 <SingleInputBox
-                    required={true}
                     label="Role"
                     element={
                         <SelectInput
@@ -33,24 +43,15 @@ const Permissions = () => {
                             setValue={value => setFiltersField("role_id", value)}
                         />
                     }
-                    // errorMessage={newUserError["role_id"]}
                 />
 
-                <SingleInputBox
-                    label={"Select/Deselect All"}
-                    element={
-                        <input
-                            type="checkbox"
-                            checked={false}
-                            className="checkbox"
-                            onClick={() => console.log("checkebox")}
-                        />
-                    }
-                />
+                <ResourcesTable />
+
+                <div className="flex justify-end gap-5">
+                    <div>Select/Deselect All</div>
+                    <CheckboxInput checked={false} onChange={() => console.log("clicked")} />
+                </div>
             </div>
-
-            {/* header */}
-            <div></div>
         </PageLayout>
     );
 };

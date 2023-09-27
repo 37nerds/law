@@ -105,11 +105,9 @@ export const useDeleteRoleMutation = () => {
 };
 
 export const useRoleQuery = (id: string) => {
-    const { setEditRole } = useRolesStore();
-
     const query = useQuery<TRole, TError>({
         queryFn: async () => {
-            return await http.get(`/rbac/roles?id=${id}`, 200);
+            return id === "" ? Promise.resolve({}) : await http.get(`/rbac/roles?id=${id}`, 200);
         },
         queryKey: [RBAC_ROLE_GET, id],
     });
@@ -118,14 +116,7 @@ export const useRoleQuery = (id: string) => {
         if (query.isError) {
             notify("error", query.error?.message);
         }
-
-        if (query.isSuccess) {
-            setEditRole({
-                name: query.data?.name,
-                disable: query.data.disable,
-            });
-        }
-    }, [query.isError, query.isSuccess, query.data]);
+    }, [query.isError]);
 
     return query;
 };

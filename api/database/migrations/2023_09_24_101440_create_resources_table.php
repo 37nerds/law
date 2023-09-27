@@ -11,7 +11,7 @@ return new class extends Migration {
         Schema::create(Table::resources, function (Blueprint $table) {
             $table->uuid("id");
             $table->string("api");
-            $table->string("web");
+            $table->json("web")->nullable();
             $table->string("method");
             $table->string("label");
             $table->string("group")->default("Unknown");

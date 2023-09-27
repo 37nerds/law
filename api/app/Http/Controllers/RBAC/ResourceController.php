@@ -21,12 +21,9 @@ class ResourceController extends Controller
             return Response::happy(200, new ResourceResource($resource));
         }
 
-        $page = $request->query("page", 1);
-        $perPage = $request->query("per_page", 10);
+        $resources = Resource::query()->get();
 
-        $paginates = Resource::paginate(perPage: $perPage, page: $page);
-
-        return Response::happy(200, $paginates);
+        return Response::happy(200, $resources);
     }
 
     public function store(CreateResourceRequest $request): JsonResponse

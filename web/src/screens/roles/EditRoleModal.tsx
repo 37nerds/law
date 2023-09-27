@@ -8,6 +8,7 @@ import SingleInputBox from "@components/layouts/SingleInputBox";
 import Modal from "@components/modals2/Modal";
 import Loading from "@components/pure/Loading";
 import ErrorText from "@components/pure/ErrorText";
+import CheckboxInput from "@components/inputs/CheckboxInput";
 
 const EditRoleModal = ({
     open,
@@ -18,10 +19,27 @@ const EditRoleModal = ({
     setOpen: (open: boolean) => void;
     roleId: string;
 }) => {
-    const { editRole, editRoleError, setEditRoleEmpty, setEditRoleError, setEditRoleField, setEditRoleErrorEmpty } =
-        useRolesStore();
+    const {
+        setEditRole,
+        editRole,
+        editRoleError,
+        setEditRoleEmpty,
+        setEditRoleError,
+        setEditRoleField,
+        setEditRoleErrorEmpty,
+    } = useRolesStore();
 
     const roleQuery = useRoleQuery(roleId);
+
+    useEffect(() => {
+        if (roleQuery.isSuccess) {
+            setEditRole({
+                name: roleQuery.data?.name,
+                disable: roleQuery.data.disable,
+            });
+        }
+    }, [roleQuery.isSuccess, roleQuery.data]);
+
     const roleEditMutation = useEditRoleMutation();
 
     useEffect(() => {
@@ -83,11 +101,9 @@ const EditRoleModal = ({
                         <SingleInputBox
                             label={"Is Enable"}
                             element={
-                                <input
-                                    type="checkbox"
+                                <CheckboxInput
                                     checked={!editRole.disable}
-                                    className="checkbox"
-                                    onClick={() => setEditRoleField("disable", !editRole.disable)}
+                                    onChange={() => setEditRoleField("disable", !editRole.disable)}
                                 />
                             }
                         />

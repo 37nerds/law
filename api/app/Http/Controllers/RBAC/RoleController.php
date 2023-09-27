@@ -15,8 +15,8 @@ class RoleController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $roleId = $request->query("id");
-        if ($roleId) {
+        if (array_key_exists("id", $request->all())) {
+            $roleId = $request->query("id");
             $role = Role::query()->findOrFail($roleId);
             return Response::happy(200, new RoleResource($role));
         }

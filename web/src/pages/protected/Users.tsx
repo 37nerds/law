@@ -16,6 +16,7 @@ import NewUserModal from "@screens/users/NewUserModal";
 import UserThreeDotDropdown from "@screens/users/UserThreeDotDropdown";
 import Td from "@components/tables/Td";
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
+import useAuthStore from "@states/auth_store";
 
 const Users = () => {
     useSetPageTitle("Users List");
@@ -25,6 +26,12 @@ const Users = () => {
         filters: { newUserModalOpen, editUserModalOpen, page, editUserId },
         setFiltersField,
     } = useUsersStore();
+
+    const { loggedUser } = useAuthStore();
+
+    const isCreateUserPermitted = !!loggedUser?.permissions.find(
+        permission => permission.resource.api === "api/v1/rbac/users" && permission.resource.method === "post"
+    );
 
     return (
         <PageLayout>
@@ -43,14 +50,18 @@ const Users = () => {
                 userId={editUserId}
             />
 
-            <div className="flex justify-end rounded border border-base-300 p-2">
-                <button
-                    className="text btn btn-success rounded text-base-100"
-                    onClick={() => setFiltersField("newUserModalOpen", true)}
-                >
-                    Add new user
-                </button>
-            </div>
+            {isCreateUserPermitted ? (
+                <div className="flex justify-end rounded border border-base-300 p-2">
+                    <button
+                        className="text btn btn-success rounded text-base-100"
+                        onClick={() => setFiltersField("newUserModalOpen", true)}
+                    >
+                        Add new user
+                    </button>
+                </div>
+            ) : (
+                <></>
+            )}
 
             <QueryLayout<TPaginate<TUser>> query={usersQuery}>
                 {usersQuery.data ? (

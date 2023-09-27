@@ -17,7 +17,7 @@ class RBACSeeder extends Seeder
     public function run(): void
     {
 
-        $superAdmin = Role::query()->create(["name" => "Super Admin",]);
+        $superAdmin = Role::query()->create(["name" => "Super Admin"]);
         Role::query()->create(["name" => "Admin",]);
         Role::query()->create(["name" => "Manager",]);
         Role::query()->create(["name" => "User",]);

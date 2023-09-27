@@ -73,7 +73,10 @@ const Submenu = ({
                                         </li>
                                     );
                                 }
-                                const isPermitted = omit2 ? true : !!permissions.find(p => p?.resource?.web === fPath);
+                                const isPermitted = omit2
+                                    ? true
+                                    : !!permissions.find(p => p?.resource?.web.find(p2 => fPath === p2));
+
                                 return (
                                     <div key={index}>
                                         {isPermitted ? (

@@ -26,8 +26,23 @@ class UserController extends Controller
 
         $page = $request->query("page", 1);
         $perPage = $request->query("per_page", 10);
+        $sortColumn = $request->query("sort_column", "created_at"); // created_at, email, username, name, phone, active, address
+        $sortOrder = $request->query("sort_order", "desc"); // "asc", "desc"
+        $search = $request->query("search", "");
 
-        $paginates = User::with("role")->paginate(perPage: $perPage, page: $page);
+        $enableColumnForSearch = ["email", "username", "name", "phone", "address"];
+
+        $paginates = User::with("role")
+            ->when($search, function ($query) use ($search, $enableColumnForSearch) {
+                $query->where(function ($innerQuery) use ($search, $enableColumnForSearch) {
+                    foreach ($enableColumnForSearch as $column) {
+                        $innerQuery->orWhere($column, 'LIKE', "%$search%");
+                    }
+                });
+            })
+            ->orderBy($sortColumn, $sortOrder)
+            ->paginate($perPage, ['*'], 'page', $page);
+
         return Response::happy(200, $paginates);
     }
 
