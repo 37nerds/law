@@ -1,11 +1,11 @@
 import type { TBottomButton, TOption } from "@helpers/types";
 
 import { useEffect } from "react";
-import { billToOptions, gendersOptions } from "@config/general";
+import { billToOptions, gendersOptions } from "@config/base";
 import { useSaveClientMutation } from "@fetches/customers/customers";
 import { notify } from "@helpers/notify";
 
-import useCustomerSetupStore from "@states/customerSetupStore";
+import useCustomerSetupStore from "@states/customer_setup_store";
 
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";

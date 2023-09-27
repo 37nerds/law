@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRegisterMutation } from "@fetches/auth/auth";
-import { redirect_after_login } from "@config/auth";
+import { redirect_after_login } from "@config/base";
 import { convertUsernameLogic, generateNameFromEmail, generateUsernameFromEmail } from "@helpers/strings";
 
 import ErrorText from "@components/pure/ErrorText";

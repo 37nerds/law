@@ -1,5 +1,5 @@
 import BellIcon from "@heroicons/react/24/outline/BellIcon";
-import useNotificationStore from "@states/useNotificationStore";
+import useNotificationStore from "@states/notification_store";
 
 const NotificationButton = () => {
     const { notifications, openNotification } = useNotificationStore();

@@ -1,5 +1,5 @@
 import useDelayedFunction from "@hooks/useDelayedFunction";
-import useNotificationStore from "@states/useNotificationStore";
+import useNotificationStore from "@states/notification_store";
 
 const ToastNotification = () => {
     const { lastNotification, clearLastNotification } = useNotificationStore();

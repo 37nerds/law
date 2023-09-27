@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { devtools } from "zustand/middleware";
-import { TClient, TClientKey, TStatus, TUnit, TUnitKey } from "@fetches/customers/customers-type";
+import { TClient, TClientKey, TStatus, TUnit, TUnitKey } from "@fetches/customers/customers_type";
 
 type TClientsFilters = {
     status: TStatus;

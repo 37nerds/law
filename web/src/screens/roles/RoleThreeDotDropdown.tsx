@@ -1,6 +1,6 @@
 import { useDeleteRoleMutation } from "@fetches/rbac/roles";
 
-import useRolesStore from "@states/rolesStore";
+import useRolesStore from "@states/roles_store";
 
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 

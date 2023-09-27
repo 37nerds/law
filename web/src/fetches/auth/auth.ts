@@ -8,7 +8,7 @@ import { useMutation } from "react-query";
 import { isEmail } from "@helpers/strings";
 
 import http from "@helpers/http";
-import useAuthStore from "@states/authStore";
+import useAuthStore from "@states/auth_store";
 
 export const AUTH__LOGIN__POST = "post.auth.login";
 export const AUTH__LOGOUT__POST = "post.auth.logout";

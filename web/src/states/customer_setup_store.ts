@@ -13,7 +13,7 @@ import {
     TPopOfData,
     TUnit,
     TUnitKey,
-} from "@fetches/customers/customers-type";
+} from "@fetches/customers/customers_type";
 
 type TState = {
     activeStep: TCustomerSetupSteps;

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { selectLoggedUserAvatar } from "@states/authStore";
-import { profile_dropdown_links } from "@config/header";
+import { selectLoggedUserAvatar } from "@states/auth_store";
+import { profile_dropdown_links } from "@config/base";
 import { getProfileUrlFromAvatarKey } from "@helpers/location";
 
 import UserIcon from "@heroicons/react/24/outline/UserIcon";

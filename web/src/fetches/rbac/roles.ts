@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import http from "@helpers/http";
-import useRolesStore from "@states/rolesStore";
+import useRolesStore from "@states/roles_store";
 
 export const RBAC_ROLES_GET = "get.roles";
 export const RBAC_ROLE_GET = "get.role";

@@ -35,5 +35,12 @@ return [
         "method" => "get",
         "label" => "View roles",
         "group" => "users",
+    ],
+    [
+        "api" => "",
+        "web" => "/_/rbac/permissions",
+        "method" => "get",
+        "label" => "Assign Permissions",
+        "group" => "users",
     ]
 ];

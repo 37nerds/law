@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import { isUserLoggedIn } from "@states/authStore";
+import { isUserLoggedIn } from "@states/auth_store";
 
 /**
  * Logged user can't visit this route

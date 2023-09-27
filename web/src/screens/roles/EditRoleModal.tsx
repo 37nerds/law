@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useEditRoleMutation, useRoleQuery } from "@fetches/rbac/roles";
 
-import useRolesStore from "@states/rolesStore";
+import useRolesStore from "@states/roles_store";
 
 import StringInput from "@components/inputs/StringInput";
 import SingleInputBox from "@components/layouts/SingleInputBox";

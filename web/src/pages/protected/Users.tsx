@@ -5,7 +5,7 @@ import { useUsersQuery } from "@fetches/rbac/users";
 import { convertToLocalTime } from "@helpers/time";
 import { getProfileUrlFromAvatarKey } from "@helpers/location";
 
-import useUsersStore from "@states/usersStore";
+import useUsersStore from "@states/users_store";
 
 import PageLayout from "@components/layouts/PageLayout";
 import QueryLayout from "@components/layouts/QueryLayout";

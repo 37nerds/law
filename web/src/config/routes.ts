@@ -31,10 +31,6 @@ export const guest_routes: TRoute[] = [
  */
 export const protected_routes: TRoute[] = [
     {
-        path: "/welcome",
-        component: lazy(() => import("../pages/protected/Welcome")),
-    },
-    {
         path: "/dashboard",
         component: lazy(() => import("../pages/protected/Dashboard")),
     },

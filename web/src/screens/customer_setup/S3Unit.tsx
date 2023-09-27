@@ -1,12 +1,12 @@
 import type { TBottomButton, TOption } from "@helpers/types";
-import type { TUnit } from "@fetches/customers/customers-type";
+import type { TUnit } from "@fetches/customers/customers_type";
 
 import { useEffect } from "react";
-import { legalFromOptions } from "@config/general";
+import { legalFromOptions } from "@config/base";
 import { useSaveUnitMutation } from "@fetches/customers/customers";
 import { notify } from "@helpers/notify";
 
-import useCustomerSetupStore from "@states/customerSetupStore";
+import useCustomerSetupStore from "@states/customer_setup_store";
 
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";

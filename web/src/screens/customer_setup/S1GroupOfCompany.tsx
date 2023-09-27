@@ -1,12 +1,12 @@
-import type { TGroupOfCompany } from "@fetches/customers/customers-type";
+import type { TGroupOfCompany } from "@fetches/customers/customers_type";
 import type { TBottomButton } from "@helpers/types";
 
 import { useSaveGroupOfCompanyMutation } from "@fetches/customers/customers";
 import { notify } from "@helpers/notify";
 import { useEffect, useState } from "react";
-import { legalFromOptions } from "@config/general";
+import { legalFromOptions } from "@config/base";
 
-import useCustomerSetupStore from "@states/customerSetupStore";
+import useCustomerSetupStore from "@states/customer_setup_store";
 
 import RenderFields from "@components/renderers/RenderFields";
 import RenderStep from "@components/renderers/RenderStep";

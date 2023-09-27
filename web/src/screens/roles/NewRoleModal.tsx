@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import StringInput from "@components/inputs/StringInput";
 import SingleInputBox from "@components/layouts/SingleInputBox";
 import Modal from "@components/modals2/Modal";
-import useRolesStore from "@states/rolesStore";
+import useRolesStore from "@states/roles_store";
 
 const NewRoleModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
     const { newRole, setNewRoleField, newRoleError, setNewRoleError, setNewRoleEmpty } = useRolesStore();

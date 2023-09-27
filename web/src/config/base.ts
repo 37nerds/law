@@ -1,10 +1,4 @@
-import type { TOption } from "@helpers/types";
-
-export const MODAL_BODY_TYPES = {
-    USER_DETAIL: "USER_DETAIL",
-    LEAD_ADD_NEW: "LEAD_ADD_NEW",
-    DEFAULT: "",
-};
+import type { TOption, TProfileDropdownLink } from "@helpers/types";
 
 export const gendersOptions: TOption[] = [
     { name: "Male", value: "male" },
@@ -23,3 +17,12 @@ export const billToOptions: TOption[] = [
 ];
 
 export const default_theme = "system";
+
+export const redirect_after_login = "/_/dashboard";
+
+export const profile_dropdown_links: TProfileDropdownLink[] = [
+    {
+        title: "Profile",
+        link: "/_/settings/profile",
+    },
+];

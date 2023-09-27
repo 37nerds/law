@@ -4,7 +4,7 @@ import NotificationButton from "./NotificationButton";
 import ThemeDropDown from "./ThemeDropDown";
 import ToastNotification from "./ToastNotification";
 import ProfileDropDown from "./ProfileDropDown";
-import { selectPageTitle } from "@states/generalStore";
+import { selectPageTitle } from "@states/general_store";
 
 const Header = () => {
     const pageTitle = selectPageTitle();

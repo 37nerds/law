@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { notify } from "@helpers/notify";
 
 import http from "@helpers/http";
-import useUsersStore from "@states/usersStore";
+import useUsersStore from "@states/users_store";
 
 export const RBAC__USERS__GET = "get.users";
 export const RBAC__USERS__POST = "post.users";

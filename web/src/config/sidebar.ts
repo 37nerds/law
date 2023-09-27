@@ -9,6 +9,8 @@ import QueueListIcon from "@heroicons/react/24/outline/QueueListIcon";
 import Squares2X2Icon from "@heroicons/react/24/outline/Squares2X2Icon";
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
+import ArrowLeftOnRectangleIcon from "@heroicons/react/24/outline/ArrowLeftOnRectangleIcon";
+import PuzzlePieceIcon from "@heroicons/react/24/outline/PuzzlePieceIcon";
 
 /**
  * Configuration for setting the left Sidebar links with title, icon
@@ -18,6 +20,16 @@ export const sidebar_links: TSidebarLink[] = [
         path: "/_/dashboard",
         icon: Squares2X2Icon,
         name: "Dashboard",
+    },
+    {
+        path: "/_/charts",
+        icon: ChartBarIcon,
+        name: "Charts",
+    },
+    {
+        path: "/_/integration",
+        icon: BoltIcon,
+        name: "Integration",
     },
     {
         path: "",
@@ -38,18 +50,8 @@ export const sidebar_links: TSidebarLink[] = [
         ],
     },
     {
-        path: "/_/charts",
-        icon: ChartBarIcon,
-        name: "Charts",
-    },
-    {
-        path: "/_/integration",
-        icon: BoltIcon,
-        name: "Integration",
-    },
-    {
         path: "/rbac",
-        icon: Cog6ToothIcon,
+        icon: ArrowLeftOnRectangleIcon,
         name: "Users",
         group: "users",
         submenus: [
@@ -62,6 +64,11 @@ export const sidebar_links: TSidebarLink[] = [
                 path: "/_/rbac/roles",
                 icon: checkBadgeIcon,
                 name: "All Roles",
+            },
+            {
+                path: "/_/rbac/permissions",
+                icon: PuzzlePieceIcon,
+                name: "Permissions",
             },
         ],
     },

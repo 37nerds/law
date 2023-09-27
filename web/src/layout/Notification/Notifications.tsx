@@ -1,4 +1,4 @@
-import useNotificationStore from "@states/useNotificationStore";
+import useNotificationStore from "@states/notification_store";
 
 const Notifications = () => {
     const { notifications } = useNotificationStore();

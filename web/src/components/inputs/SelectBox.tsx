@@ -1,3 +1,5 @@
+// Todo
+
 import type { TOption } from "@helpers/types";
 
 import { useState } from "react";
@@ -32,7 +34,6 @@ const SelectBox = ({
     const [value, setValue] = useState(defaultValue || "");
 
     const updateValue = (newValue: string) => {
-        const x = { updateType, value: newValue };
         updateFormValue({ updateType, value: newValue });
         setValue(newValue);
     };

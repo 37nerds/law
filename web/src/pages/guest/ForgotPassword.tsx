@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useForgotPasswordMutation } from "@fetches/auth/auth";
 
 import ErrorText from "@components/pure/ErrorText";
-import ForgotPasswordWrapper from "@screens/forgotPassword/ForgotPasswordWrapper";
-import LinkSentView from "@screens/forgotPassword/LinkSentView";
+import ForgotPasswordWrapper from "@screens/forgot_password/ForgotPasswordWrapper";
+import LinkSentView from "@screens/forgot_password/LinkSentView";
 import EmailInput from "@components/inputs/EmailInput";
 
 const ForgotPassword = () => {

@@ -4,7 +4,7 @@ import { useResetPasswordMutation } from "@fetches/auth/auth";
 import ErrorText from "@components/pure/ErrorText";
 import Link from "@components/pure/Link";
 import PasswordInput from "@components/inputs/PasswordInput";
-import ResetPasswordWrapper from "@screens/resetPassword/ResetPasswordWrapper";
+import ResetPasswordWrapper from "@screens/reset_password/ResetPasswordWrapper";
 import useQueryParams from "@hooks/useQueryParams";
 import { redirect } from "@helpers/location";
 

@@ -1,6 +1,6 @@
 import Notifications from "./Notifications";
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
-import useNotificationStore from "@states/useNotificationStore";
+import useNotificationStore from "@states/notification_store";
 
 const NotificationBody = () => {
     const { closeNotification, clearNotifications } = useNotificationStore();

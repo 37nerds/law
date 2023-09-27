@@ -3,7 +3,7 @@ import type { TPaginate } from "@helpers/types";
 
 import { useRolesQuery } from "@fetches/rbac/roles";
 
-import useRolesStore from "@states/rolesStore";
+import useRolesStore from "@states/roles_store";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 
 import PageLayout from "@components/layouts/PageLayout";

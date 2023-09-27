@@ -1,4 +1,4 @@
-import { TCustomerModalOpenFor } from "@fetches/customers/customers-type";
+import { TCustomerModalOpenFor } from "@fetches/customers/customers_type";
 
 import Modal from "@components/modals/Modal";
 import ShowClientInModal from "./ShowClientInModal";

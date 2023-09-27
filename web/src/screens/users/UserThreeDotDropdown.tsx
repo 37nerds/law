@@ -1,7 +1,7 @@
 import { useDeleteUserMutation } from "@fetches/rbac/users";
 
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
-import useUsersStore from "@states/usersStore";
+import useUsersStore from "@states/users_store";
 
 const UserThreeDotDropdown = ({ userId }: { userId: string }) => {
     const { setFiltersField } = useUsersStore();

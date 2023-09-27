@@ -1,6 +1,6 @@
 import type { TNotificationType } from "@helpers/types";
 
-import useNotificationStore from "@states/useNotificationStore";
+import useNotificationStore from "@states/notification_store";
 
 const log = {
     print: (...data: any[]) => {

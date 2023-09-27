@@ -5,7 +5,7 @@ import type {
     TPopOfData,
     TUnit,
     TUpdateClient,
-} from "@fetches/customers/customers-type";
+} from "@fetches/customers/customers_type";
 
 import type { TError, TPaginate } from "@helpers/types";
 
@@ -14,8 +14,8 @@ import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import http from "@helpers/http";
-import useCustomerListStore from "@states/customerListStore";
-import useCustomerSetupStore from "@states/customerSetupStore";
+import useCustomerListStore from "@states/customer_list_store";
+import useCustomerSetupStore from "@states/customer_setup_store";
 
 export const CUSTOMERS__POP_UP_DATA__GET = "get.customers.pop-up-data";
 export const CUSTOMERS__GROUP_OF_COMPANIES__POST = "post.customers.group-of-companies";

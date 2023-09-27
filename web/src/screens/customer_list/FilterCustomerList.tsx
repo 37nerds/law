@@ -1,5 +1,5 @@
 import Select from "@components/inputs/Select";
-import useCustomerListStore from "@states/customerListStore";
+import useCustomerListStore from "@states/customer_list_store";
 
 const FilterCustomerList = () => {
     const { clientsFilters, setClientsFiltersField } = useCustomerListStore();

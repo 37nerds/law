@@ -1,4 +1,4 @@
-import { selectLoggedUser } from "@states/authStore";
+import { selectLoggedUser } from "@states/auth_store";
 import { useState } from "react";
 import { TLoggedUser, useUploadProfilePictureMutation } from "@fetches/auth/auth";
 import { getProfileUrlFromAvatarKey } from "@helpers/location";

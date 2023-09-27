@@ -1,7 +1,7 @@
 import { lazy, ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
-import { isUserLoggedIn } from "@states/authStore";
+import { isUserLoggedIn } from "@states/auth_store";
 
 const Layout = lazy(() => import("../../layout/Layout"));
 

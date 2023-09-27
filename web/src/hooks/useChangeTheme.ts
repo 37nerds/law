@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { default_theme } from "../config/general";
+import { default_theme } from "@config/base";
 
 import storage from "@helpers/storage";
 

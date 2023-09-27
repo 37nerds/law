@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { getPathname } from "@helpers/location";
 
 import DynamicChevronIcon from "@components/icons/DynamicChevronIcon";
-import useAuthStore from "@states/authStore";
+import useAuthStore from "@states/auth_store";
 
 const Submenu = ({
     submenus,

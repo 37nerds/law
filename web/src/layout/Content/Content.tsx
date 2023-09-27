@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useRef } from "react";
 
 import Header from "../Header/Header";
 
-import useGeneralStore from "@states/generalStore";
+import useGeneralStore from "@states/general_store";
 
 const Content = ({ children }: { children: ReactNode }) => {
     const { pageTitle } = useGeneralStore();

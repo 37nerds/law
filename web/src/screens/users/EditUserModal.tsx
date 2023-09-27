@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRolesQuery } from "@fetches/rbac/roles";
 import { useEditUserMutation, useUserQuery } from "@fetches/rbac/users";
 
-import useUsersStore from "@states/usersStore";
+import useUsersStore from "@states/users_store";
 
 import EmailInput from "@components/inputs/EmailInput";
 import SelectInput from "@components/inputs/SelectInput";

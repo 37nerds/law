@@ -1,5 +1,5 @@
 import NotificationBody from "./NotificationBody";
-import useNotificationStore from "@states/useNotificationStore";
+import useNotificationStore from "@states/notification_store";
 
 const Notification = () => {
     const { isNotificationOpen, closeNotification } = useNotificationStore();
