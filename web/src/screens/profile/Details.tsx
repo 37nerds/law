@@ -20,7 +20,7 @@ const Details = () => {
     };
 
     return (
-        <Form className="flex flex-col gap-2" onSubmit={handleSubmit} loading={updateUserMutation.isLoading}>
+        <Form className="flex flex-col gap-3" onSubmit={handleSubmit} loading={updateUserMutation.isLoading}>
             <SubTitle divider={true}>Details</SubTitle>
             <StringInput
                 label="Name"

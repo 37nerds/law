@@ -52,7 +52,7 @@ const Submenu = ({
 
                 {/** Submenu list */}
                 <div className={` w-full ` + (isExpanded ? "" : "hidden")}>
-                    <ul className={`menu-compact menu`}>
+                    <ul className={`menu rounded p-0`}>
                         {submenus.map(
                             (
                                 {
@@ -77,7 +77,7 @@ const Submenu = ({
                                 return (
                                     <div key={index}>
                                         {isPermitted ? (
-                                            <li>
+                                            <li className="rounded">
                                                 {isPermitted ? (
                                                     <Link to={fPath}>
                                                         <Icon2 className="h-5 w-5" /> {name2}

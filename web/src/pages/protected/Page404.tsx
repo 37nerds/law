@@ -1,6 +1,6 @@
-import FaceFrownIcon from "@heroicons/react/24/solid/FaceFrownIcon";
-
 import useSetPageTitle from "@hooks/useSetPageTitle";
+
+import FaceFrownIcon from "@heroicons/react/24/solid/FaceFrownIcon";
 
 const Page404 = () => {
     useSetPageTitle("404");

@@ -53,7 +53,7 @@ const Roles = () => {
                 {rolesQuery.data ? (
                     <div className="flex flex-col gap-2">
                         <div className="w-full rounded border border-base-300">
-                            <table className="table w-full">
+                            <table className="table table-sm w-full">
                                 <thead>
                                     <tr>
                                         <th>Role name</th>

@@ -10,9 +10,9 @@ const Notifications = () => {
                     key={index}
                     className={`bg-layouts-200 card rounded-box mt-3 grid p-3 ${
                         notification.type === "error"
-                            ? "bg-error text-white"
+                            ? "bg-error text-base-100"
                             : notification.type === "success"
-                            ? "bg-success text-white"
+                            ? "bg-success text-base-100"
                             : "bg-base-200"
                     }`}
                 >

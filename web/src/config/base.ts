@@ -16,6 +16,9 @@ export const billToOptions: TOption[] = [
     { name: "Bar", value: "bar" },
 ];
 
+export const dashboard_title = "L12Erp";
+export const dashboard_logo = "/logo192.png";
+
 export const default_theme = "system";
 
 export const redirect_after_login = "/_/dashboard";

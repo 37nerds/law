@@ -2,7 +2,7 @@ import type { TSidebarLink } from "@helpers/types";
 
 import BoltIcon from "@heroicons/react/24/outline/BoltIcon";
 import ChartBarIcon from "@heroicons/react/24/outline/ChartBarIcon";
-import checkBadgeIcon from "@heroicons/react/24/outline/CheckBadgeIcon";
+import CheckBadgeIcon from "@heroicons/react/24/outline/CheckBadgeIcon";
 import Cog6ToothIcon from "@heroicons/react/24/outline/Cog6ToothIcon";
 import CogIcon from "@heroicons/react/24/outline/CogIcon";
 import QueueListIcon from "@heroicons/react/24/outline/QueueListIcon";
@@ -11,6 +11,8 @@ import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
 import ArrowLeftOnRectangleIcon from "@heroicons/react/24/outline/ArrowLeftOnRectangleIcon";
 import PuzzlePieceIcon from "@heroicons/react/24/outline/PuzzlePieceIcon";
+import ArrowsPointingInIcon from "@heroicons/react/24/outline/ArrowsPointingInIcon";
+import DocumentChartBarIcon from "@heroicons/react/24/outline/DocumentChartBarIcon";
 
 /**
  * Configuration for setting the left Sidebar links with title, icon
@@ -22,18 +24,28 @@ export const sidebar_links: TSidebarLink[] = [
         name: "Dashboard",
     },
     {
-        path: "/_/charts",
-        icon: ChartBarIcon,
-        name: "Charts",
-    },
-    {
-        path: "/_/integration",
-        icon: BoltIcon,
-        name: "Integration",
+        path: "",
+        icon: DocumentChartBarIcon,
+        name: "Reports",
+        group: "reports",
+        submenus: [
+            {
+                path: "/_/charts",
+                icon: ChartBarIcon,
+                name: "Charts",
+                omit: true,
+            },
+            {
+                path: "/_/integration",
+                icon: BoltIcon,
+                name: "Integration",
+                omit: true,
+            },
+        ],
     },
     {
         path: "",
-        icon: UserIcon,
+        icon: ArrowsPointingInIcon,
         name: "Customers",
         group: "customers",
         submenus: [
@@ -58,12 +70,12 @@ export const sidebar_links: TSidebarLink[] = [
             {
                 path: "/_/rbac/users",
                 icon: UsersIcon,
-                name: "All Users",
+                name: "Users List",
             },
             {
                 path: "/_/rbac/roles",
-                icon: checkBadgeIcon,
-                name: "All Roles",
+                icon: CheckBadgeIcon,
+                name: "Roles",
             },
             {
                 path: "/_/rbac/permissions",
