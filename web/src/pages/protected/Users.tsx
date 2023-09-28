@@ -1,7 +1,6 @@
 import useUsersStore from "@states/users_store";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 
-
 import PageLayout from "@components/layouts/PageLayout";
 import EditUserModal from "@screens/users/EditUserModal";
 import NewUser from "@screens/users/NewUser";
@@ -11,10 +10,8 @@ import IsPermitted from "@components/auth/IsPermitted";
 const Users = () => {
     useSetPageTitle("Users List");
 
-    const {
-        filters: { editUserModalOpen, editUserId },
-        setFiltersField,
-    } = useUsersStore();
+    const { editUserModalOpen, editUserId } = useUsersStore(state => state.filters);
+    const { setFiltersField } = useUsersStore();
 
     return (
         <PageLayout>

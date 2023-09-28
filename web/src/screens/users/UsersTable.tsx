@@ -4,7 +4,6 @@ import type { TPaginate } from "@helpers/types";
 import { useUsersQuery } from "@fetches/rbac/users";
 import { convertToLocalTime } from "@helpers/time";
 import { getProfileUrlFromAvatarKey } from "@helpers/location";
-import { useAuthStore } from "@states/auth_store";
 
 import useUsersStore from "@states/users_store";
 
@@ -24,10 +23,6 @@ const UsersTable = () => {
         setFiltersField,
     } = useUsersStore();
 
-    const { loggedUser } = useAuthStore();
-    !!loggedUser?.permissions.find(
-        permission => permission.resource.api === "api/v1/rbac/users" && permission.resource.method === "post"
-    );
     return (
         <QueryLayout<TPaginate<TUser>> query={usersQuery}>
             {usersQuery.data ? (
@@ -81,17 +76,15 @@ const UsersTable = () => {
                         </table>
                     </div>
 
-                    {usersQuery.data?.total > usersQuery.data?.per_page ? (
-                        <Paginator
-                            currentPage={page}
-                            totalPages={usersQuery.data.last_page}
-                            onSetCurrentPage={page => {
-                                setFiltersField("page", page);
-                            }}
-                        />
-                    ) : (
-                        <></>
-                    )}
+                    <Paginator
+                        currentPage={page}
+                        totalPages={usersQuery.data.last_page}
+                        totalItems={usersQuery.data?.total}
+                        totalPerPageItems={usersQuery.data?.per_page}
+                        onSetCurrentPage={page => {
+                            setFiltersField("page", page);
+                        }}
+                    />
                 </div>
             ) : (
                 <></>

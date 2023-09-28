@@ -17,23 +17,25 @@ const CustomerList = () => {
     useSetPageTitle("Customer List");
 
     const navigate = useNavigate();
-    const query = useClientsQuery();
+    const clientQuery = useClientsQuery();
 
-    const { clientsFilters, setClientsFiltersField } = useCustomerListStore();
+    const { clientsFilters } = useCustomerListStore();
 
     return (
-        <QueryLayout<TPaginate<TClient>> query={query}>
+        <QueryLayout<TPaginate<TClient>> query={clientQuery}>
             <>
-                {query.data ? (
+                {clientQuery.data ? (
                     <Card
                         title="List all Customers"
                         content={
                             <div className="flex w-full flex-col gap-12">
                                 <FilterCustomerList />
-                                <CustomerTable data={query.data?.data} />
+                                <CustomerTable data={clientQuery.data?.data} />
                                 <Paginator
                                     currentPage={clientsFilters.page}
-                                    totalPages={query.data?.last_page}
+                                    totalPages={clientQuery.data?.last_page}
+                                    totalItems={clientQuery.data.total}
+                                    totalPerPageItems={clientQuery.data.per_page}
                                     onSetCurrentPage={page => {
                                         navigate(`/_/customers/${page}`);
                                     }}

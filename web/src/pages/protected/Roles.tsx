@@ -76,17 +76,15 @@ const Roles = () => {
                             </table>
                         </div>
 
-                        {rolesQuery.data?.total > rolesQuery.data?.per_page ? (
-                            <Paginator
-                                currentPage={page}
-                                totalPages={rolesQuery.data.last_page}
-                                onSetCurrentPage={page => {
-                                    setFiltersField("page", page);
-                                }}
-                            />
-                        ) : (
-                            <></>
-                        )}
+                        <Paginator
+                            currentPage={page}
+                            totalPages={rolesQuery.data.last_page}
+                            totalItems={rolesQuery.data?.total}
+                            totalPerPageItems={rolesQuery.data?.per_page}
+                            onSetCurrentPage={page => {
+                                setFiltersField("page", page);
+                            }}
+                        />
                     </div>
                 ) : (
                     <></>
