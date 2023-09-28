@@ -1,12 +1,13 @@
+import { useRolesQuery } from "@fetches/rbac/roles";
+import { useEffect } from "react";
+import { useAuthStore } from "@states/auth_store";
+
 import SelectInput from "@components/inputs/SelectInput";
 import PageLayout from "@components/layouts/PageLayout";
 import SingleInputBox from "@components/layouts/SingleInputBox";
-import { useRolesQuery } from "@fetches/rbac/roles";
 import usePermissionsStore from "@states/permissions_store";
 import CheckboxInput from "@components/inputs/CheckboxInput";
 import ResourcesTable from "@screens/permissions/ResourcesTable";
-import { useEffect } from "react";
-import useAuthStore from "@states/auth_store";
 
 const Permissions = () => {
     const rolesQuery = useRolesQuery();

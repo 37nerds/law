@@ -29,6 +29,7 @@ const PermissionCheckbox = ({ resource, roleId = "" }: { resource?: TResource | 
             checked={!!permission}
             onChange={handlePermissionToggle}
             disabled={!roleId || deletePermissionMutation.isLoading || savePermissionMutation.isLoading}
+            className="checkbox-primary"
         />
     );
 };

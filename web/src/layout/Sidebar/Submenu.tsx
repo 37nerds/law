@@ -1,10 +1,11 @@
 import type { TIcon, TSidebarLink } from "@helpers/types";
+
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { getPathname } from "@helpers/location";
+import { useAuthStore } from "@states/auth_store";
 
 import DynamicChevronIcon from "@components/icons/DynamicChevronIcon";
-import useAuthStore from "@states/auth_store";
 
 const Submenu = ({
     submenus,

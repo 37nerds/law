@@ -1,7 +1,9 @@
+import type { TLoggedUser } from "@fetches/auth/auth";
+import type { TMethod } from "@helpers/types";
+
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { devtools } from "zustand/middleware";
-import { TLoggedUser } from "@fetches/auth/auth";
 
 type TState = {
     loggedUser: TLoggedUser | null;
@@ -44,4 +46,8 @@ export const isUserLoggedIn = (): boolean => {
     return !!selectLoggedUser();
 };
 
-export default useAuthStore;
+export const isPermitted = (api: string, method: TMethod) => {
+    return !!useAuthStore.getState().loggedUser?.permissions?.some(permission => {
+        return permission?.resource?.api === api && permission?.resource?.method === method;
+    });
+};

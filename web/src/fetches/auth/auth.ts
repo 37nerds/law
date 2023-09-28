@@ -6,9 +6,9 @@ import { notify } from "@helpers/notify";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { isEmail } from "@helpers/strings";
+import { useAuthStore } from "@states/auth_store";
 
 import http from "@helpers/http";
-import useAuthStore from "@states/auth_store";
 
 export const AUTH__LOGIN__POST = "post.auth.login";
 export const AUTH__LOGOUT__POST = "post.auth.logout";

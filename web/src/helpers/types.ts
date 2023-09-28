@@ -1,4 +1,5 @@
 import type { ForwardRefExoticComponent, LazyExoticComponent, PropsWithoutRef, SVGProps, JSX } from "react";
+import type { ReactNode } from "react";
 
 export type TOption = {
     name: string;
@@ -90,4 +91,11 @@ export type TBase = {
     id: string;
     created_at: string;
     updated_at: string;
+};
+
+export type TMethod = "get" | "post" | "patch" | "delete";
+
+export type TThreeDropDownOption = {
+    content: ReactNode;
+    handler: () => void;
 };

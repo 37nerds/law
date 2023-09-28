@@ -17,6 +17,8 @@ return [
         "label" => "View Pop-up Data",
         "group" => "customers"
     ],
+
+    // users
     [
         "api" => "api/v1/rbac/users",
         "web" => ["/_/rbac/users"],
@@ -26,11 +28,27 @@ return [
     ],
     [
         "api" => "api/v1/rbac/users",
-        "web" => [],
+        "web" => ["/_/rbac/users"],
         "method" => "post",
         "label" => "Users",
         "group" => "users",
     ],
+    [
+        "api" => "api/v1/rbac/users",
+        "web" => [],
+        "method" => "patch",
+        "label" => "Users",
+        "group" => "users",
+    ],
+    [
+        "api" => "api/v1/rbac/users",
+        "web" => [],
+        "method" => "delete",
+        "label" => "Users",
+        "group" => "users",
+    ],
+
+    // roles
     [
         "api" => "api/v1/rbac/roles",
         "web" => ["/_/rbac/roles"],
@@ -40,7 +58,7 @@ return [
     ],
     [
         "api" => "api/v1/rbac/roles",
-        "web" => [],
+        "web" => ["/_/rbac/roles"],
         "method" => "post",
         "label" => "Roles",
         "group" => "users",

@@ -1,11 +1,11 @@
 import { useUpdateUserMutation } from "@fetches/auth/auth";
 import { convertUsernameLogic } from "@helpers/strings";
+import { useAuthStore } from "@states/auth_store";
+import { convertToLocalTime } from "@helpers/time";
 
 import StringInput from "@components/inputs/StringInput";
-import useAuthStore from "@states/auth_store";
 import SubTitle from "@components/pure/SubTitle";
 import Form from "@components/pure/Form";
-import { convertToLocalTime } from "@helpers/time";
 
 const Details = () => {
     const { loggedUser, setLoggedUserField } = useAuthStore();

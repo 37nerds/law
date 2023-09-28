@@ -1,18 +1,19 @@
-import { ReactNode, useEffect, useState } from "react";
+import type { TThreeDropDownOption } from "@helpers/types";
+
+import { useEffect, useState } from "react";
 
 import ThreeDotButton from "./ThreeDotButton";
 
-type TDropDownOption = {
-    content: ReactNode;
-    handler: () => void;
-};
-
-const ThreeDotDropdown = ({ options }: { options: TDropDownOption[] }) => {
+const ThreeDotDropdown = ({ options }: { options: TThreeDropDownOption[] }) => {
     const [open, setOpen] = useState(true);
 
     useEffect(() => {
         setOpen(true);
     }, [open]);
+
+    if (options.length <= 0) {
+        return <></>;
+    }
 
     return (
         <div className="dropdown-left dropdown-hover dropdown">
