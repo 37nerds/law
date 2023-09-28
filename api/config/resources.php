@@ -76,5 +76,51 @@ return [
         "method" => "delete",
         "label" => "Roles",
         "group" => "users",
-    ]
+    ],
+
+    // resources
+    [
+        "api" => "api/v1/rbac/resources",
+        "web" => [],
+        "method" => "get",
+        "label" => "Resources",
+        "group" => "users",
+    ],
+    [
+        "api" => "api/v1/rbac/resources",
+        "web" => [],
+        "method" => "post",
+        "label" => "Resources",
+        "group" => "users",
+    ],
+    [
+        "api" => "api/v1/rbac/resources",
+        "web" => [],
+        "method" => "patch",
+        "label" => "Resources",
+        "group" => "users",
+    ],
+    [
+        "api" => "api/v1/rbac/resources",
+        "web" => [],
+        "method" => "delete",
+        "label" => "Resources",
+        "group" => "users",
+    ],
+    
+    // permissions
+    [
+        "api" => "api/v1/rbac/permissions",
+        "web" => ["/_/rbac/permissions"],
+        "method" => "post",
+        "label" => "Permissions",
+        "group" => "users",
+    ],
+    [
+        "api" => "api/v1/rbac/permissions",
+        "web" => [],
+        "method" => "delete",
+        "label" => "Permissions",
+        "group" => "users",
+    ],
 ];
