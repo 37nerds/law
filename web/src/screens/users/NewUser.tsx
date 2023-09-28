@@ -8,8 +8,8 @@ import EmailInput from "@components/inputs/EmailInput";
 import PasswordInput from "@components/inputs/PasswordInput";
 import SelectInput from "@components/inputs/SelectInput";
 import StringInput from "@components/inputs/StringInput";
-import SingleInputBox from "@components/layouts/SingleInputBox";
-import Modal from "@components/modals2/Modal";
+import SingleInputBox from "@components/inputs/SingleInputBox";
+import Modal from "@components/modals/Modal";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 
 const NewUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
@@ -168,9 +168,9 @@ const NewUser = () => {
                     setFiltersField("newUserModalOpen", value);
                 }}
             />
-            <div className="flex justify-end rounded border border-base-300 p-2">
+            <div className="flex justify-end rounded-lg border border-base-300 p-2">
                 <button
-                    className="text btn btn-success rounded text-base-100"
+                    className="text btn btn-success rounded-md text-base-100"
                     onClick={() => setFiltersField("newUserModalOpen", true)}
                 >
                     Add new user

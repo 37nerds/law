@@ -53,7 +53,7 @@ const Submenu = ({
 
                 {/** Submenu list */}
                 <div className={` w-full ` + (isExpanded ? "" : "hidden")}>
-                    <ul className={`menu rounded p-0`}>
+                    <ul className={`menu p-0`}>
                         {submenus.map(
                             (
                                 {

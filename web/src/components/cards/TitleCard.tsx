@@ -1,8 +1,6 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
-import SubTitle from "../pure/SubTitle";
-
-// will be removed
+import SubTitle from "@components/pure/SubTitle";
 
 const TitleCard = ({
     title,

@@ -1,11 +1,47 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForgotPasswordMutation } from "@fetches/auth/auth";
 
 import ErrorText from "@components/pure/ErrorText";
-import ForgotPasswordWrapper from "@screens/forgot_password/ForgotPasswordWrapper";
-import LinkSentView from "@screens/forgot_password/LinkSentView";
 import EmailInput from "@components/inputs/EmailInput";
+import LandingIntro from "@components/pure/LandingIntro";
+import CheckCircleIcon from "@heroicons/react/24/solid/CheckCircleIcon";
+
+const LinkSentView = () => {
+    return (
+        <>
+            <div className="mt-8 text-center">
+                <CheckCircleIcon className="inline-block w-32 text-success" />
+            </div>
+            <p className="my-4 text-center text-xl font-bold">Link Sent</p>
+            <p className="mb-8 mt-4 text-center font-semibold">Check your email to reset password</p>
+            <div className="mt-4 text-center">
+                <Link to="/login">
+                    <button className="btn btn-primary btn-block ">Login</button>
+                </Link>
+            </div>
+        </>
+    );
+};
+
+const ForgotPasswordWrapper = ({ children }: { children: ReactNode }) => {
+    return (
+        <div className="flex min-h-screen items-center bg-base-200">
+            <div className="card mx-auto w-full max-w-5xl  shadow-xl">
+                <div className="grid  grid-cols-1 rounded-xl  bg-base-100 md:grid-cols-2">
+                    <div className="">
+                        <LandingIntro />
+                    </div>
+                    <div className="px-10 py-24">
+                        <h2 className="mb-2 text-center text-2xl font-semibold">Forgot Password</h2>
+
+                        {children}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");

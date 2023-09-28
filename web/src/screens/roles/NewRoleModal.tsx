@@ -2,8 +2,8 @@ import { useSaveRoleMutation } from "@fetches/rbac/roles";
 import { useEffect } from "react";
 
 import StringInput from "@components/inputs/StringInput";
-import SingleInputBox from "@components/layouts/SingleInputBox";
-import Modal from "@components/modals2/Modal";
+import SingleInputBox from "@components/inputs/SingleInputBox";
+import Modal from "@components/modals/Modal";
 import useRolesStore from "@states/roles_store";
 
 const NewRoleModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {

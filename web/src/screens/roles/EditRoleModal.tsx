@@ -4,8 +4,8 @@ import { useEditRoleMutation, useRoleQuery } from "@fetches/rbac/roles";
 import useRolesStore from "@states/roles_store";
 
 import StringInput from "@components/inputs/StringInput";
-import SingleInputBox from "@components/layouts/SingleInputBox";
-import Modal from "@components/modals2/Modal";
+import SingleInputBox from "@components/inputs/SingleInputBox";
+import Modal from "@components/modals/Modal";
 import Loading from "@components/pure/Loading";
 import ErrorText from "@components/pure/ErrorText";
 import CheckboxInput from "@components/inputs/CheckboxInput";

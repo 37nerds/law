@@ -6,8 +6,8 @@ import { useRolesQuery } from "@fetches/rbac/roles";
 import useRolesStore from "@states/roles_store";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 
-import PageLayout from "@components/layouts/PageLayout";
-import QueryLayout from "@components/layouts/QueryLayout";
+import PageCard from "@components/cards/PageCard";
+import QueryLayout from "@components/pure/QueryLayout";
 import Paginator from "@components/pure/Paginator";
 import NewRoleModal from "@screens/roles/NewRoleModal";
 import RoleThreeDotDropdown from "@screens/roles/RoleThreeDotDropdown";
@@ -24,7 +24,7 @@ const Roles = () => {
     } = useRolesStore();
 
     return (
-        <PageLayout>
+        <PageCard>
             <NewRoleModal
                 open={newRoleModalOpen}
                 setOpen={value => {
@@ -40,9 +40,9 @@ const Roles = () => {
                 roleId={editRoleId}
             />
 
-            <div className="flex justify-end rounded border border-base-300 p-2">
+            <div className="flex justify-end rounded-lg border border-base-300 p-2">
                 <button
-                    className="text btn btn-success rounded text-base-100"
+                    className="text btn btn-success rounded-md text-base-100"
                     onClick={() => setFiltersField("newRoleModalOpen", true)}
                 >
                     Add new role
@@ -52,7 +52,7 @@ const Roles = () => {
             <QueryLayout<TPaginate<TRole>> query={rolesQuery}>
                 {rolesQuery.data ? (
                     <div className="flex flex-col gap-2">
-                        <div className="w-full rounded border border-base-300">
+                        <div className="w-full rounded-lg border border-base-300">
                             <table className="table table-sm w-full">
                                 <thead>
                                     <tr>
@@ -90,7 +90,7 @@ const Roles = () => {
                     <></>
                 )}
             </QueryLayout>
-        </PageLayout>
+        </PageCard>
     );
 };
 

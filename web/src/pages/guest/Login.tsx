@@ -1,13 +1,33 @@
+import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
+
 import { useLoginMutation } from "@fetches/auth/auth";
 import { redirect_after_login } from "@config/base";
+import { redirect } from "@helpers/location";
 
 import ErrorText from "@components/pure/ErrorText";
 import Link from "@components/pure/Link";
 import PasswordInput from "@components/inputs/PasswordInput";
-import LoginWrapper from "@screens/login/LoginWrapper";
-import { redirect } from "@helpers/location";
 import EmailInput from "@components/inputs/EmailInput";
+import LandingIntro from "@components/pure/LandingIntro";
+
+const LoginWrapper = ({ children }: { children: ReactNode }) => {
+    return (
+        <div className="flex min-h-screen items-center bg-base-200">
+            <div className="card mx-auto w-full max-w-5xl  shadow-xl">
+                <div className="grid  grid-cols-1 rounded-xl  bg-base-100 md:grid-cols-2">
+                    <div className="">
+                        <LandingIntro />
+                    </div>
+                    <div className="px-10 py-24">
+                        <h2 className="mb-2 text-center text-2xl font-semibold">Login</h2>
+                        {children}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const Login = () => {
     const [loading, setLoading] = useState(false);

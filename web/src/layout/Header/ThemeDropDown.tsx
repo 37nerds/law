@@ -73,7 +73,7 @@ const ThemeDropDown = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div title="Change Theme" className="dropdown dropdown-end">
+        <div title="Change Theme" className="dropdown-end dropdown">
             <div
                 tabIndex={0}
                 className="btn btn-ghost gap-1 normal-case"
@@ -87,7 +87,7 @@ const ThemeDropDown = () => {
                 <DynamicChevronIcon className="h-5 w-5" isExpanded={isExpanded} />
             </div>
             {isOpen && (
-                <div className="dropdown-content rounded-t-box rounded-b-box top-px mt-16 h-[70vh] max-h-96 w-52 overflow-y-auto bg-base-200 text-base-content shadow-2xl">
+                <div className="dropdown-content top-px mt-16 h-[70vh] max-h-96 w-52 overflow-y-auto rounded-lg bg-base-200 text-base-content shadow-2xl">
                     <div className="grid grid-cols-1 gap-3 p-3" tabIndex={0}>
                         {themes.map((_theme, index) => {
                             return (
@@ -110,10 +110,10 @@ const ThemeDropDown = () => {
                                                 <MarkIcon visible={_theme === theme} />
                                                 <div className="flex-grow text-sm font-bold">{_theme}</div>
                                                 <div className="flex h-full flex-shrink-0 flex-wrap gap-1">
-                                                    <div className="w-2 rounded bg-primary" />
-                                                    <div className="w-2 rounded bg-secondary" />
-                                                    <div className="w-2 rounded bg-accent" />
-                                                    <div className="w-2 rounded bg-neutral" />
+                                                    <div className="w-2 rounded-lg bg-primary" />
+                                                    <div className="w-2 rounded-lg bg-secondary" />
+                                                    <div className="w-2 rounded-lg bg-accent" />
+                                                    <div className="w-2 rounded-lg bg-neutral" />
                                                 </div>
                                             </div>
                                         </div>

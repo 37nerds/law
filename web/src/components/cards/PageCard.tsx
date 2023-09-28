@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-const PageLayout = ({ children, className = "" }: { children: ReactNode; className?: string }) => {
+const PageCard = ({ children, className = "" }: { children: ReactNode; className?: string }) => {
     return (
         <div className={`card flex w-full flex-col gap-3 rounded-lg bg-base-100 p-6 shadow-md ${className}`}>
             {children}
@@ -8,4 +8,4 @@ const PageLayout = ({ children, className = "" }: { children: ReactNode; classNa
     );
 };
 
-export default PageLayout;
+export default PageCard;

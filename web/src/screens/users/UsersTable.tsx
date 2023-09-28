@@ -7,7 +7,7 @@ import { getProfileUrlFromAvatarKey } from "@helpers/location";
 
 import useUsersStore from "@states/users_store";
 
-import QueryLayout from "@components/layouts/QueryLayout";
+import QueryLayout from "@components/pure/QueryLayout";
 import Paginator from "@components/pure/Paginator";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import UserThreeDotDropdown from "@screens/users/UserThreeDotDropdown";
@@ -27,7 +27,7 @@ const UsersTable = () => {
         <QueryLayout<TPaginate<TUser>> query={usersQuery}>
             {usersQuery.data ? (
                 <div className="flex flex-col gap-2">
-                    <div className="w-full rounded border border-base-300">
+                    <div className="w-full rounded-lg border border-base-300">
                         <table className="table table-sm w-full">
                             <thead>
                                 <tr>

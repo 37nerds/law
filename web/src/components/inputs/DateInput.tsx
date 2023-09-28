@@ -1,5 +1,5 @@
 import Input from "./Input";
-import InputLayout from "../layouts/InputLayout";
+import InputLayout from "./InputLayout";
 
 /**
  * Select date with native html api

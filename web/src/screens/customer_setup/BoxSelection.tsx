@@ -1,6 +1,6 @@
-import SingleInputBox from "../layouts/SingleInputBox";
-import InputSelection from "./InputSelection";
-import DoubleInputBox from "../layouts/DoubleInputBox";
+import SingleInputBox from "@components/inputs/SingleInputBox";
+import InputSelection from "@screens/customer_setup/InputSelection";
+import DoubleInputBox from "@components/inputs/DoubleInputBox";
 
 const BoxSelection = ({
     field,

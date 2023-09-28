@@ -1,7 +1,7 @@
 import useUsersStore from "@states/users_store";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 
-import PageLayout from "@components/layouts/PageLayout";
+import PageCard from "@components/cards/PageCard";
 import EditUserModal from "@screens/users/EditUserModal";
 import NewUser from "@screens/users/NewUser";
 import UsersTable from "@screens/users/UsersTable";
@@ -14,7 +14,7 @@ const Users = () => {
     const { setFiltersField } = useUsersStore();
 
     return (
-        <PageLayout>
+        <PageCard>
             <EditUserModal
                 open={editUserModalOpen}
                 setOpen={value => {
@@ -25,7 +25,7 @@ const Users = () => {
 
             <IsPermitted api={"api/v1/rbac/users"} method={"post"} element={<NewUser />} />
             <IsPermitted api={"api/v1/rbac/users"} method={"get"} element={<UsersTable />} />
-        </PageLayout>
+        </PageCard>
     );
 };
 

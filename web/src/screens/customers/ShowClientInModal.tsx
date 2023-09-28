@@ -10,8 +10,8 @@ import LadderSelectInput from "@components/inputs/LadderSelectInput";
 import SelectInput from "@components/inputs/SelectInput";
 import StringInput from "@components/inputs/StringInput";
 import TextInput from "@components/inputs/TextInput";
-import DoubleInputBox from "@components/layouts/DoubleInputBox";
-import SingleInputBox from "@components/layouts/SingleInputBox";
+import DoubleInputBox from "@components/inputs/DoubleInputBox";
+import SingleInputBox from "@components/inputs/SingleInputBox";
 import CustomerModalLayout from "./CustomerModalLayout";
 
 /**

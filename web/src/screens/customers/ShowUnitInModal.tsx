@@ -4,8 +4,8 @@ import { useFetchPopUpDataQuery, useUnitQuery, useUpdateUnitMutation } from "@fe
 import { legalFromOptions } from "@config/base";
 
 import StringInput from "@components/inputs/StringInput";
-import SingleInputBox from "@components/layouts/SingleInputBox";
-import DoubleInputBox from "@components/layouts/DoubleInputBox";
+import SingleInputBox from "@components/inputs/SingleInputBox";
+import DoubleInputBox from "@components/inputs/DoubleInputBox";
 import LadderSelectInput from "@components/inputs/LadderSelectInput";
 import SelectEditableInput from "@components/inputs/SelectEditableInput";
 import useCustomerListStore from "@states/customer_list_store";

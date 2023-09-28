@@ -2,7 +2,7 @@ import type { TLadderOption } from "@helpers/types";
 
 import { useState } from "react";
 
-import InputLayout from "../layouts/InputLayout";
+import InputLayout from "./InputLayout";
 import Input from "./Input";
 
 const LadderSelectInput = ({

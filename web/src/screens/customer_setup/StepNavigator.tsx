@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { TNavigatorStep } from "src/screens/customer_setup";
+import { TNavigatorStep } from "@screens/customer_setup/index";
 
 const StepNavigator = ({
     currentStepLabel,

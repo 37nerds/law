@@ -1,12 +1,30 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useResetPasswordMutation } from "@fetches/auth/auth";
+import { redirect } from "@helpers/location";
 
 import ErrorText from "@components/pure/ErrorText";
 import Link from "@components/pure/Link";
 import PasswordInput from "@components/inputs/PasswordInput";
-import ResetPasswordWrapper from "@screens/reset_password/ResetPasswordWrapper";
 import useQueryParams from "@hooks/useQueryParams";
-import { redirect } from "@helpers/location";
+import LandingIntro from "@components/pure/LandingIntro";
+
+const ResetPasswordWrapper = ({ children }: { children: ReactNode }) => {
+    return (
+        <div className="flex min-h-screen items-center bg-base-200">
+            <div className="card mx-auto w-full max-w-5xl  shadow-xl">
+                <div className="grid  grid-cols-1 rounded-xl  bg-base-100 md:grid-cols-2">
+                    <div className="">
+                        <LandingIntro />
+                    </div>
+                    <div className="px-10 py-24">
+                        <h2 className="mb-2 text-center text-2xl font-semibold">Reset Password</h2>
+                        {children}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const ResetPassword = () => {
     const params = useQueryParams();

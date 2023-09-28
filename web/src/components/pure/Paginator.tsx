@@ -24,7 +24,7 @@ const Paginator = ({
                     total={totalPages}
                     boundaries={1}
                     siblings={1}
-                    className={`flex items-center rounded border border-base-300 py-2 ${className}`}
+                    className={`flex items-center rounded-lg border border-base-300 py-2 ${className}`}
                 >
                     <PaginationPrev className="h-[40px] w-[40px] data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50">{`<`}</PaginationPrev>
                     <PaginationList className="relative h-[40px] w-[40px] rounded-lg transition-all data-[active=true]:bg-success data-[active=true]:text-base-100" />

@@ -7,9 +7,9 @@ import useUsersStore from "@states/users_store";
 import EmailInput from "@components/inputs/EmailInput";
 import SelectInput from "@components/inputs/SelectInput";
 import StringInput from "@components/inputs/StringInput";
-import QueryLayout from "@components/layouts/QueryLayout";
-import SingleInputBox from "@components/layouts/SingleInputBox";
-import Modal from "@components/modals2/Modal";
+import QueryLayout from "@components/pure/QueryLayout";
+import SingleInputBox from "@components/inputs/SingleInputBox";
+import Modal from "@components/modals/Modal";
 
 const EditUserModal = ({
     open,

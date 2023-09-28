@@ -1,4 +1,6 @@
-import { CircleStencil, Cropper, CropperRef } from "react-advanced-cropper";
+import type { CropperRef } from "react-advanced-cropper";
+
+import { CircleStencil, Cropper } from "react-advanced-cropper";
 import { useRef } from "react";
 
 import "react-advanced-cropper/dist/style.css";
@@ -20,10 +22,10 @@ const ImageCropper = ({
     return dialogOpen ? (
         <div className={`fixed inset-0 z-50 overflow-auto bg-gray-900 bg-opacity-50`}>
             <div className="flex min-h-screen items-center justify-center">
-                <div className="mx-auto w-[95%] overflow-hidden rounded bg-base-300 shadow-lg md:w-[600px]">
+                <div className="mx-auto w-[95%] overflow-hidden rounded-lg bg-base-300 shadow-lg md:w-[600px]">
                     <div className="p-4">
                         <div className="mb-4 text-xl font-bold">Crop Image</div>
-                        <div className="relative h-[265px] w-full rounded bg-base-200 md:h-[360px]">
+                        <div className="relative h-[265px] w-full rounded-lg bg-base-200 md:h-[360px]">
                             <Cropper
                                 ref={cropperRef}
                                 src={imageSrc}
@@ -35,7 +37,7 @@ const ImageCropper = ({
                                     grid: true,
                                 }}
                                 stencilComponent={CircleStencil}
-                                className="cropper"
+                                className="cropper rounded-lg"
                             />
                         </div>
                         <div className="mt-4 flex justify-between">
@@ -43,12 +45,12 @@ const ImageCropper = ({
                                 onClick={() => {
                                     setDialogOpen(false);
                                 }}
-                                className="cursor-pointer rounded bg-neutral px-4 py-2 text-white"
+                                className="cursor-pointer rounded-lg bg-error px-4 py-2 text-white"
                             >
                                 Close
                             </div>
                             <div
-                                className="cursor-pointer rounded bg-neutral px-4 py-2 text-white"
+                                className="cursor-pointer rounded-lg bg-success px-4 py-2 text-white"
                                 onClick={() => {
                                     const canvas = cropperRef.current?.getCanvas();
                                     if (canvas) {

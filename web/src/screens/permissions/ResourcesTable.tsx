@@ -1,5 +1,5 @@
 import PermissionCheckbox from "@screens/permissions/PermissionCheckbox";
-import QueryLayout from "@components/layouts/QueryLayout";
+import QueryLayout from "@components/pure/QueryLayout";
 import usePermissionsStore from "@states/permissions_store";
 import { TResource, useResourcesQuery } from "@fetches/rbac/resources";
 

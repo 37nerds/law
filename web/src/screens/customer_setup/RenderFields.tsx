@@ -1,4 +1,4 @@
-import BoxSelection from "./BoxSelection";
+import BoxSelection from "@screens/customer_setup/BoxSelection";
 
 const RenderFields = ({
     fields,

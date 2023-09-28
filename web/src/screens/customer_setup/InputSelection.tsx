@@ -1,13 +1,13 @@
 import type { TLadderOption, TOption } from "@helpers/types";
 
-import StringInput from "../inputs/StringInput";
-import TextInput from "../inputs/TextInput";
-import SelectInput from "../inputs/SelectInput";
-import SelectEditableInput from "../inputs/SelectEditableInput";
-import NumberInput from "../inputs/NumberInput";
-import LadderSelectInput from "../inputs/LadderSelectInput";
-import DateInput from "../inputs/DateInput";
-import EmailInput from "../inputs/EmailInput";
+import StringInput from "@components/inputs/StringInput";
+import TextInput from "@components/inputs/TextInput";
+import SelectInput from "@components/inputs/SelectInput";
+import SelectEditableInput from "@components/inputs/SelectEditableInput";
+import NumberInput from "@components/inputs/NumberInput";
+import LadderSelectInput from "@components/inputs/LadderSelectInput";
+import DateInput from "@components/inputs/DateInput";
+import EmailInput from "@components/inputs/EmailInput";
 
 const InputSelection = ({
     type,

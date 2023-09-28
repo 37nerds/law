@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import Input from "./Input";
-import InputLayout from "../layouts/InputLayout";
+import InputLayout from "./InputLayout";
 import DynamicEye from "../icons/DynamicEye";
 
 const PasswordInput = ({

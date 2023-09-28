@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import type { TError } from "@helpers/types";
 import type { UseQueryResult } from "react-query";
 
-import ErrorText from "../pure/ErrorText";
-import Loading from "../pure/Loading";
+import ErrorText from "./ErrorText";
+import Loading from "./Loading";
 
 const QueryLayout = <T,>({ query, children }: { query: UseQueryResult<T, TError>; children: ReactNode }) => {
     return (

@@ -8,8 +8,8 @@ import { legalFromOptions } from "@config/base";
 
 import useCustomerSetupStore from "@states/customer_setup_store";
 
-import RenderFields from "@components/renderers/RenderFields";
-import RenderStep from "@components/renderers/RenderStep";
+import RenderFields from "@screens/customer_setup/RenderFields";
+import RenderStep from "@screens/customer_setup/RenderStep";
 
 const fields = [
     {

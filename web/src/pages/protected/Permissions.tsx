@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useAuthStore } from "@states/auth_store";
 
 import SelectInput from "@components/inputs/SelectInput";
-import PageLayout from "@components/layouts/PageLayout";
-import SingleInputBox from "@components/layouts/SingleInputBox";
+import PageCard from "@components/cards/PageCard";
+import SingleInputBox from "@components/inputs/SingleInputBox";
 import usePermissionsStore from "@states/permissions_store";
 import CheckboxInput from "@components/inputs/CheckboxInput";
 import ResourcesTable from "@screens/permissions/ResourcesTable";
@@ -26,7 +26,7 @@ const Permissions = () => {
     }, [loggedUser?.role_id]);
 
     return (
-        <PageLayout>
+        <PageCard>
             <div className="flex flex-col gap-5">
                 <SingleInputBox
                     label="Role"
@@ -53,7 +53,7 @@ const Permissions = () => {
                     <CheckboxInput checked={false} onChange={() => console.log("clicked")} />
                 </div>
             </div>
-        </PageLayout>
+        </PageCard>
     );
 };
 

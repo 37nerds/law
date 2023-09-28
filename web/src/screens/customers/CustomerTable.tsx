@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { TCustomerModalOpenFor } from "@fetches/customers/customers_type";
 
 import CustomerModal from "./CustomerModal";
-import ModalOpener from "@components/modals/ModalOpener";
 import HoverDropDownList from "./HoverDropDownList";
+
+const ModalOpener = ({ children, onClick }: { children: ReactNode; onClick: () => void }) => {
+    return (
+        <label htmlFor="___the-modal" className="cursor-pointer" onClick={onClick}>
+            {children}
+        </label>
+    );
+};
 
 const CustomerTable = ({ data }: { data: any }) => {
     const [modalOpenFor, setModalOpenFor] = useState<TCustomerModalOpenFor | null>(null);
@@ -11,7 +18,7 @@ const CustomerTable = ({ data }: { data: any }) => {
     return (
         <>
             <CustomerModal modalOpenFor={modalOpenFor} />
-            <table className="table table-xs w-full rounded text-xs">
+            <table className="table table-sm w-full border border-base-300 text-xs">
                 <thead>
                     <tr>
                         <th>Client Name</th>

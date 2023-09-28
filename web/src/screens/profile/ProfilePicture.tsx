@@ -42,7 +42,7 @@ const ProfilePicture = () => {
                     </div>
                 </div>
                 <div className="absolute bottom-5">
-                    <div className="dropdown-bottom dropdown">
+                    <div className="dropdown dropdown-bottom">
                         <label
                             tabIndex={0}
                             className={`flex w-[70px] cursor-pointer flex-col justify-between rounded border-2 border-base-300 bg-base-200 `}

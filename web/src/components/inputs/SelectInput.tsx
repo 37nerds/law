@@ -1,6 +1,6 @@
 import type { TOption } from "@helpers/types";
 
-import InputLayout from "../layouts/InputLayout";
+import InputLayout from "./InputLayout";
 import Select from "./Select";
 
 const SelectInput = ({
