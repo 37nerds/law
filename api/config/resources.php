@@ -1,22 +1,22 @@
 <?php
 
-// we can specific a web page is permitted if at least main api route is permitted
-
 return [
-    [
-        "api" => "api/v1/customers/clients",
-        "web" => ["/_/customers"],
-        "method" => "get",
-        "label" => "View Clients",
-        "group" => "customers",
-    ],
-    [
-        "api" => "api/v1/customers/pop-up-data",
-        "web" => ["/_/customers/setup"],
-        "method" => "get",
-        "label" => "View Pop-up Data",
-        "group" => "customers"
-    ],
+//    [
+//        "api" => "api/v1/customers/clients",
+//        "web" => ["/_/customers"],
+//        "method" => "get",
+//        "label" => "View Clients",
+//        "group" => "customers",
+//        "dependencies" => []
+//    ],
+//    [
+//        "api" => "api/v1/customers/pop-up-data",
+//        "web" => ["/_/customers/setup"],
+//        "method" => "get",
+//        "label" => "View Pop-up Data",
+//        "group" => "customers",
+//        "dependencies" => []
+//    ],
 
     // users
     [
@@ -25,6 +25,7 @@ return [
         "method" => "get",
         "label" => "Users",
         "group" => "users",
+        "dependencies" => []
     ],
     [
         "api" => "api/v1/rbac/users",
@@ -32,7 +33,12 @@ return [
         "method" => "post",
         "label" => "Users",
         "group" => "users",
-        // "dependencies" => ["api/v1/rbac/roles"]
+        "dependencies" => [
+            [
+                "api" => "api/v1/rbac/roles",
+                "method" => "get"
+            ]
+        ]
     ],
     [
         "api" => "api/v1/rbac/users",
@@ -40,7 +46,16 @@ return [
         "method" => "patch",
         "label" => "Users",
         "group" => "users",
-        // "dependencies" => ["api/v1/rbac/roles"]
+        "dependencies" => [
+            [
+                "api" => "api/v1/rbac/roles",
+                "method" => "get"
+            ],
+            [
+                "api" => "api/v1/rbac/users",
+                "method" => "get"
+            ]
+        ]
     ],
     [
         "api" => "api/v1/rbac/users",
@@ -48,6 +63,7 @@ return [
         "method" => "delete",
         "label" => "Users",
         "group" => "users",
+        "dependencies" => []
     ],
 
     // roles
@@ -57,6 +73,7 @@ return [
         "method" => "get",
         "label" => "Roles",
         "group" => "users",
+        "dependencies" => []
     ],
     [
         "api" => "api/v1/rbac/roles",
@@ -64,6 +81,7 @@ return [
         "method" => "post",
         "label" => "Roles",
         "group" => "users",
+        "dependencies" => []
     ],
     [
         "api" => "api/v1/rbac/roles",
@@ -71,7 +89,12 @@ return [
         "method" => "patch",
         "label" => "Roles",
         "group" => "users",
-        // "dependencies" => ["api/v1/rbac/users"]
+        "dependencies" => [
+            [
+                "api" => "api/v1/rbac/roles",
+                "method" => "get"
+            ]
+        ]
     ],
     [
         "api" => "api/v1/rbac/roles",
@@ -79,7 +102,7 @@ return [
         "method" => "delete",
         "label" => "Roles",
         "group" => "users",
-        // "dependencies" => ["api/v1/rbac/users"]
+        "dependencies" => [],
     ],
 
     // resources
@@ -90,28 +113,28 @@ return [
         "label" => "Resources",
         "group" => "users",
     ],
-    [
-        "api" => "api/v1/rbac/resources",
-        "web" => [],
-        "method" => "post",
-        "label" => "Resources",
-        "group" => "users",
-    ],
-    [
-        "api" => "api/v1/rbac/resources",
-        "web" => [],
-        "method" => "patch",
-        "label" => "Resources",
-        "group" => "users",
-    ],
-    [
-        "api" => "api/v1/rbac/resources",
-        "web" => [],
-        "method" => "delete",
-        "label" => "Resources",
-        "group" => "users",
-    ],
-    
+//    [
+//        "api" => "api/v1/rbac/resources",
+//        "web" => [],
+//        "method" => "post",
+//        "label" => "Resources",
+//        "group" => "users",
+//    ],
+//    [
+//        "api" => "api/v1/rbac/resources",
+//        "web" => [],
+//        "method" => "patch",
+//        "label" => "Resources",
+//        "group" => "users",
+//    ],
+//    [
+//        "api" => "api/v1/rbac/resources",
+//        "web" => [],
+//        "method" => "delete",
+//        "label" => "Resources",
+//        "group" => "users",
+//    ],
+
     // permissions
     [
         "api" => "api/v1/rbac/permissions",
@@ -119,6 +142,16 @@ return [
         "method" => "post",
         "label" => "Permissions",
         "group" => "users",
+        "dependencies" => [
+            [
+                "api" => "api/v1/rbac/permissions",
+                "method" => "delete"
+            ],
+            [
+                "api" => "api/v1/rbac/resources",
+                "method" => "get"
+            ]
+        ]
     ],
     [
         "api" => "api/v1/rbac/permissions",
@@ -126,5 +159,15 @@ return [
         "method" => "delete",
         "label" => "Permissions",
         "group" => "users",
+        "dependencies" => [
+            [
+                "api" => "api/v1/rbac/permissions",
+                "method" => "post"
+            ],
+            [
+                "api" => "api/v1/rbac/resources",
+                "method" => "get"
+            ]
+        ]
     ],
 ];

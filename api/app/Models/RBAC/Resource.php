@@ -5,12 +5,11 @@ namespace App\Models\RBAC;
 use App\Enums\Table;
 use App\Logic\ModelTrait;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Resource extends Model
 {
-    use HasFactory, ModelTrait, HasUuids;
+    use ModelTrait, HasUuids;
 
     protected $table = Table::resources;
 
@@ -21,6 +20,7 @@ class Resource extends Model
         'method',
         'label',
         'group',
+        'dependencies'
     ];
 
     public function getWebAttribute($value)
@@ -31,5 +31,15 @@ class Resource extends Model
     public function setWebAttribute($value): void
     {
         $this->attributes['web'] = json_encode($value);
+    }
+
+    public function getDependenciesAttribute($value)
+    {
+        return json_decode($value, true) ?? [];
+    }
+
+    public function setDependenciesAttribute($value): void
+    {
+        $this->attributes['dependencies'] = json_encode($value);
     }
 }

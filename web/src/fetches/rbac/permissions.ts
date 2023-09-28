@@ -49,8 +49,8 @@ export const useDeletePermissionMutation = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation<null, TError, { permissionId: string; roleId: string }>({
-        mutationFn: async ({ permissionId }) => {
-            return await http.delete(`/rbac/permissions?id=${permissionId}`, 204);
+        mutationFn: async ({ permissionId, roleId }) => {
+            return await http.delete(`/rbac/permissions?id=${permissionId}&role_id=${roleId}`, 204);
         },
         mutationKey: [RBAC_PERMISSION_DELETE],
         onSuccess: (_, { roleId }) => {

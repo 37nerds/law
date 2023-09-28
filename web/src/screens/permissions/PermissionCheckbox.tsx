@@ -2,6 +2,7 @@ import type { TResource } from "@fetches/rbac/resources";
 
 import { useRoleQuery } from "@fetches/rbac/roles";
 import { useDeletePermissionMutation, useSavePermissionMutation } from "@fetches/rbac/permissions";
+import { useAuthStore } from "@states/auth_store";
 
 import CheckboxInput from "@components/inputs/CheckboxInput";
 
@@ -24,11 +25,18 @@ const PermissionCheckbox = ({ resource, roleId = "" }: { resource?: TResource | 
         }
     };
 
+    const loggedUserRoleId = useAuthStore(state => state.loggedUser?.role_id);
+
     return (
         <CheckboxInput
             checked={!!permission}
             onChange={handlePermissionToggle}
-            disabled={!roleId || deletePermissionMutation.isLoading || savePermissionMutation.isLoading}
+            disabled={
+                !roleId ||
+                deletePermissionMutation.isLoading ||
+                savePermissionMutation.isLoading ||
+                loggedUserRoleId === roleId
+            }
             className="checkbox-primary"
         />
     );

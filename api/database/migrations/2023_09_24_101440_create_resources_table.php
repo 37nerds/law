@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string("method");
             $table->string("label");
             $table->string("group")->default("Unknown");
+            $table->json("dependencies")->nullable();
             $table->timestamps();
         });
     }
