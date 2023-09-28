@@ -81,7 +81,6 @@ export const sidebar_links: TSidebarLink[] = [
                 path: "/_/rbac/permissions",
                 icon: PuzzlePieceIcon,
                 name: "Permissions",
-                omit: true,
             },
         ],
     },

@@ -32,6 +32,7 @@ return [
         "method" => "post",
         "label" => "Users",
         "group" => "users",
+        // "dependencies" => ["api/v1/rbac/roles"]
     ],
     [
         "api" => "api/v1/rbac/users",
@@ -39,6 +40,7 @@ return [
         "method" => "patch",
         "label" => "Users",
         "group" => "users",
+        // "dependencies" => ["api/v1/rbac/roles"]
     ],
     [
         "api" => "api/v1/rbac/users",
@@ -69,6 +71,7 @@ return [
         "method" => "patch",
         "label" => "Roles",
         "group" => "users",
+        // "dependencies" => ["api/v1/rbac/users"]
     ],
     [
         "api" => "api/v1/rbac/roles",
@@ -76,6 +79,7 @@ return [
         "method" => "delete",
         "label" => "Roles",
         "group" => "users",
+        // "dependencies" => ["api/v1/rbac/users"]
     ],
 
     // resources
@@ -118,7 +122,7 @@ return [
     ],
     [
         "api" => "api/v1/rbac/permissions",
-        "web" => [],
+        "web" => ["/_/rbac/permissions"],
         "method" => "delete",
         "label" => "Permissions",
         "group" => "users",

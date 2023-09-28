@@ -1,11 +1,11 @@
-import useUsersStore from "@states/users_store";
 import useSetPageTitle from "@hooks/useSetPageTitle";
+import useUsersStore from "@states/users_store";
 
+import IsPermitted from "@components/auth/IsPermitted";
 import PageCard from "@components/cards/PageCard";
 import EditUserModal from "@screens/users/EditUserModal";
 import NewUser from "@screens/users/NewUser";
 import UsersTable from "@screens/users/UsersTable";
-import IsPermitted from "@components/auth/IsPermitted";
 
 const Users = () => {
     useSetPageTitle("Users List");
