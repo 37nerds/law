@@ -2,26 +2,31 @@ import type { TUser } from "@fetches/rbac/users";
 import type { TPaginate } from "@helpers/types";
 
 import { useUsersQuery } from "@fetches/rbac/users";
-import { convertToLocalTime } from "@helpers/time";
 import { getProfileUrlFromAvatarKey } from "@helpers/location";
+import { convertToLocalTime } from "@helpers/time";
 
 import useUsersStore from "@states/users_store";
 
-import QueryLayout from "@components/pure/QueryLayout";
 import Paginator from "@components/pure/Paginator";
-import useSetPageTitle from "@hooks/useSetPageTitle";
-import UserThreeDotDropdown from "@screens/users/UserThreeDotDropdown";
+import QueryLayout from "@components/pure/QueryLayout";
 import Td from "@components/tables/Td";
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
+import useSetPageTitle from "@hooks/useSetPageTitle";
+import UserThreeDotDropdown from "@screens/users/UserThreeDotDropdown";
 
 const UsersTable = () => {
     useSetPageTitle("Users List");
 
     const usersQuery = useUsersQuery();
+
     const {
         filters: { page },
         setFiltersField,
     } = useUsersStore();
+
+    if (usersQuery?.data?.data?.length === 0) {
+        return <div className="mt-5 text-center text-error">No data found!</div>;
+    }
 
     return (
         <QueryLayout<TPaginate<TUser>> query={usersQuery}>

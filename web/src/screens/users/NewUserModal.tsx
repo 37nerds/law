@@ -1,16 +1,15 @@
-import { useEffect } from "react";
 import { useRolesQuery } from "@fetches/rbac/roles";
 import { useSaveUserMutation } from "@fetches/rbac/users";
+import { useEffect } from "react";
 
 import useUsersStore from "@states/users_store";
 
 import EmailInput from "@components/inputs/EmailInput";
 import PasswordInput from "@components/inputs/PasswordInput";
 import SelectInput from "@components/inputs/SelectInput";
-import StringInput from "@components/inputs/StringInput";
 import SingleInputBox from "@components/inputs/SingleInputBox";
+import StringInput from "@components/inputs/StringInput";
 import Modal from "@components/modals/Modal";
-import useSetPageTitle from "@hooks/useSetPageTitle";
 
 const NewUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
     const rolesQuery = useRolesQuery();
@@ -154,30 +153,4 @@ const NewUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolea
     );
 };
 
-const NewUser = () => {
-    useSetPageTitle("Users List");
-
-    const newUserModalOpen = useUsersStore(state => state.filters.newUserModalOpen);
-    const setFiltersField = useUsersStore(state => state.setFiltersField);
-
-    return (
-        <>
-            <NewUserModal
-                open={newUserModalOpen}
-                setOpen={value => {
-                    setFiltersField("newUserModalOpen", value);
-                }}
-            />
-            <div className="flex justify-end rounded-lg border border-base-300 p-2">
-                <button
-                    className="text btn btn-success rounded-md text-base-100"
-                    onClick={() => setFiltersField("newUserModalOpen", true)}
-                >
-                    Add new user
-                </button>
-            </div>
-        </>
-    );
-};
-
-export default NewUser;
+export default NewUserModal;

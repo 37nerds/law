@@ -8,6 +8,7 @@ type TFilters = {
     newUserModalOpen: boolean;
     editUserModalOpen: boolean;
     editUserId: string;
+    searchQuery: string;
 };
 
 type TStore = {
@@ -40,6 +41,7 @@ const useUsersStore = create<TStore>()(
                 newUserModalOpen: false,
                 editUserModalOpen: false,
                 editUserId: "",
+                searchQuery: "",
             },
             setFiltersField: (key, value) => {
                 set(state => {

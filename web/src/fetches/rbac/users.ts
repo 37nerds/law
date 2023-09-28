@@ -1,9 +1,9 @@
-import type { TBase, TError, TPaginate } from "@helpers/types";
 import type { TRole } from "@fetches/rbac/roles";
+import type { TBase, TError, TPaginate } from "@helpers/types";
 
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useEffect } from "react";
 import { notify } from "@helpers/notify";
+import { useEffect } from "react";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import http from "@helpers/http";
 import useUsersStore from "@states/users_store";
@@ -48,22 +48,32 @@ export type TEditUser = {
 
 export const useUsersQuery = () => {
     const {
-        filters: { page },
+        filters: { searchQuery, page },
+        setFiltersField,
     } = useUsersStore();
 
     const query = useQuery<TPaginate<TUser>, TError>({
         queryFn: async () => {
-            return await http.get(`/rbac/users?per_page=10` + `&page=${page}`, 200);
+            let url = `/rbac/users?per_page=10` + `&page=${page}`;
+            if (searchQuery !== null && searchQuery.trim() !== "") {
+                url += `&search=${encodeURIComponent(searchQuery.trim())}`;
+            }
+            return await http.get(url, 200);
         },
-        queryKey: [RBAC__USERS__GET, page],
+        queryKey: [RBAC__USERS__GET, page, searchQuery],
         keepPreviousData: true,
+        enabled: true,
     });
 
     useEffect(() => {
         if (query.isError) {
             notify("error", query.error?.message);
         }
-    }, [query.isError]);
+
+        if (searchQuery.trim() !== "") {
+            setFiltersField("page", 1);
+        }
+    }, [query.isError, searchQuery, setFiltersField]);
 
     return query;
 };
