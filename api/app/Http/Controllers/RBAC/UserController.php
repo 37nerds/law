@@ -26,8 +26,10 @@ class UserController extends Controller
 
         $page = $request->query("page", 1);
         $perPage = $request->query("per_page", 10);
+
         $sortColumn = $request->query("sort_column", "created_at"); // created_at, email, username, name, phone, active, address
         $sortOrder = $request->query("sort_order", "desc"); // "asc", "desc"
+
         $search = $request->query("search", "");
 
         $enableColumnForSearch = ["email", "username", "name", "phone", "address"];
