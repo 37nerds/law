@@ -1,8 +1,8 @@
 import { useSaveRoleMutation } from "@fetches/rbac/roles";
 import { useEffect } from "react";
 
-import StringInput from "@components/inputs/StringInput";
 import SingleInputBox from "@components/inputs/SingleInputBox";
+import StringInput from "@components/inputs/StringInput";
 import Modal from "@components/modals/Modal";
 import useRolesStore from "@states/roles_store";
 
@@ -56,4 +56,29 @@ const NewRoleModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolea
     );
 };
 
-export default NewRoleModal;
+const NewRole = () => {
+    const newRoleModalOpen = useRolesStore(state => state.filters.newRoleModalOpen);
+    const setFiltersField = useRolesStore(state => state.setFiltersField);
+
+    return (
+        <>
+            <NewRoleModal
+                open={newRoleModalOpen}
+                setOpen={value => {
+                    setFiltersField("newRoleModalOpen", value);
+                }}
+            />
+
+            <div className="flex justify-end rounded-lg border border-base-300 p-2">
+                <button
+                    className="text btn btn-success rounded-md text-base-100"
+                    onClick={() => setFiltersField("newRoleModalOpen", true)}
+                >
+                    Add new role
+                </button>
+            </div>
+        </>
+    );
+};
+
+export default NewRole;

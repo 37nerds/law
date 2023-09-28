@@ -1,7 +1,7 @@
-import PermissionCheckbox from "@screens/permissions/PermissionCheckbox";
 import QueryLayout from "@components/pure/QueryLayout";
-import usePermissionsStore from "@states/permissions_store";
 import { TResource, useResourcesQuery } from "@fetches/rbac/resources";
+import PermissionCheckbox from "@screens/permissions/PermissionCheckbox";
+import usePermissionsStore from "@states/permissions_store";
 
 type TGroupAPIs = {
     group: string;
@@ -22,7 +22,6 @@ const processResources = (resources: TResource[]): TGroupAPIs[] => {
                 return sm;
             }, {}),
         });
-
         return p;
     }, []);
 };

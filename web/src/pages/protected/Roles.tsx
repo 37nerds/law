@@ -1,37 +1,22 @@
-import type { TRole } from "@fetches/rbac/roles";
-import type { TPaginate } from "@helpers/types";
-
-import { useRolesQuery } from "@fetches/rbac/roles";
-
-import useRolesStore from "@states/roles_store";
 import useSetPageTitle from "@hooks/useSetPageTitle";
+import useRolesStore from "@states/roles_store";
 
+import IsPermitted from "@components/auth/IsPermitted";
 import PageCard from "@components/cards/PageCard";
-import QueryLayout from "@components/pure/QueryLayout";
-import Paginator from "@components/pure/Paginator";
-import NewRoleModal from "@screens/roles/NewRoleModal";
-import RoleThreeDotDropdown from "@screens/roles/RoleThreeDotDropdown";
 import EditRoleModal from "@screens/roles/EditRoleModal";
+import NewRole from "@screens/roles/NewRole";
+import { RolesTable } from "@screens/roles/RolesTable";
 
 const Roles = () => {
     useSetPageTitle("Roles");
 
-    const rolesQuery = useRolesQuery();
-
     const {
-        filters: { page, newRoleModalOpen, editRoleModalOpen, editRoleId },
+        filters: { editRoleModalOpen, editRoleId },
         setFiltersField,
     } = useRolesStore();
 
     return (
         <PageCard>
-            <NewRoleModal
-                open={newRoleModalOpen}
-                setOpen={value => {
-                    setFiltersField("newRoleModalOpen", value);
-                }}
-            />
-
             <EditRoleModal
                 open={editRoleModalOpen}
                 setOpen={value => {
@@ -40,56 +25,8 @@ const Roles = () => {
                 roleId={editRoleId}
             />
 
-            <div className="flex justify-end rounded-lg border border-base-300 p-2">
-                <button
-                    className="text btn btn-success rounded-md text-base-100"
-                    onClick={() => setFiltersField("newRoleModalOpen", true)}
-                >
-                    Add new role
-                </button>
-            </div>
-
-            <QueryLayout<TPaginate<TRole>> query={rolesQuery}>
-                {rolesQuery.data ? (
-                    <div className="flex flex-col gap-2">
-                        <div className="w-full rounded-lg border border-base-300">
-                            <table className="table table-sm w-full">
-                                <thead>
-                                    <tr>
-                                        <th>Role name</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {rolesQuery.data.data.map((role, index) => {
-                                        return (
-                                            <tr key={index} className={`${index % 2 === 1 ? "bg-base-200" : ""}`}>
-                                                <td>{role.name}</td>
-                                                <td>{role.disable ? "Inactive" : "Active"}</td>
-                                                <td className="flex justify-end">
-                                                    <RoleThreeDotDropdown roleId={role.id} />
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <Paginator
-                            currentPage={page}
-                            totalPages={rolesQuery.data.last_page}
-                            totalItems={rolesQuery.data?.total}
-                            totalPerPageItems={rolesQuery.data?.per_page}
-                            onSetCurrentPage={page => {
-                                setFiltersField("page", page);
-                            }}
-                        />
-                    </div>
-                ) : (
-                    <></>
-                )}
-            </QueryLayout>
+            <IsPermitted api={"api/v1/rbac/roles"} method={"post"} element={<NewRole />} />
+            <IsPermitted api={"api/v1/rbac/roles"} method={"get"} element={<RolesTable />} />
         </PageCard>
     );
 };
