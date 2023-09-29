@@ -1,4 +1,6 @@
-import { TCreateUser, TEditUser } from "@fetches/rbac/users";
+import type { TCreateUser, TEditUser, TUserColumn } from "@fetches/rbac/users";
+import type { TOrder } from "@helpers/types";
+
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
@@ -9,16 +11,16 @@ type TFilters = {
     editUserModalOpen: boolean;
     editUserId: string;
     searchQuery: string;
-    sortColumn: string;
-    sortOrder: string;
+    sortColumn: TUserColumn;
+    sortOrder: TOrder;
 };
 
 type TStore = {
     filters: TFilters;
-    setFiltersField: (key: keyof TFilters, value: any) => void;
+    setFiltersField: <K extends keyof TFilters>(key: K, value: TFilters[K]) => void;
 
     newUser: TCreateUser;
-    setNewUserField: (key: keyof TCreateUser, value: any) => void;
+    setNewUserField: (key: keyof TCreateUser, value: TCreateUser[keyof TCreateUser]) => void;
     setNewUserEmpty: () => void;
     newUserError: Record<string, string[]>;
     setNewUserError: (newUserError: Record<string, string[]>) => void;
@@ -27,7 +29,7 @@ type TStore = {
 
     editUser: TEditUser;
     setEditUser: (user: TEditUser) => void;
-    setEditUserField: (key: keyof TEditUser, value: any) => void;
+    setEditUserField: (key: keyof TEditUser, value: TEditUser[keyof TEditUser]) => void;
     setEditUserEmpty: () => void;
     editUserError: Record<string, string[]>;
     setEditUserError: (newUserError: Record<string, string[]>) => void;
@@ -44,12 +46,13 @@ const useUsersStore = create<TStore>()(
                 editUserModalOpen: false,
                 editUserId: "",
                 searchQuery: "",
-                sortColumn: "",
-                sortOrder: "",
+                sortColumn: "created_at",
+                sortOrder: "asc",
             },
             setFiltersField: (key, value) => {
+                console.log("Here", key, value);
                 set(state => {
-                    state.filters[key] = value as never;
+                    state.filters[key] = value;
                 });
             },
 

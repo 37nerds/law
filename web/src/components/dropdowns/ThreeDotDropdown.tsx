@@ -16,7 +16,7 @@ const ThreeDotDropdown = ({ options }: { options: TThreeDropDownOption[] }) => {
     }
 
     return (
-        <div className="dropdown-left dropdown-hover dropdown">
+        <div className="dropdown dropdown-left dropdown-hover">
             <label tabIndex={0}>
                 <ThreeDotButton />
             </label>

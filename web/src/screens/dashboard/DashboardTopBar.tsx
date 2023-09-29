@@ -48,7 +48,7 @@ function DashboardTopBar({ updateDashboardPeriod }: Props) {
                     Share
                 </button>
 
-                <div className="dropdown-bottom dropdown dropdown-end  ml-2">
+                <div className="dropdown dropdown-end dropdown-bottom  ml-2">
                     <label tabIndex={0} className="btn btn-square btn-ghost btn-sm normal-case ">
                         <EllipsisVerticalIcon className="w-5" />
                     </label>

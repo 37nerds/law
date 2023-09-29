@@ -1,9 +1,10 @@
 import type { TRole } from "@fetches/rbac/roles";
 import type { TPaginate } from "@helpers/types";
 
-import Paginator from "@components/pure/Paginator";
-import QueryLayout from "@components/pure/QueryLayout";
 import { useRolesQuery } from "@fetches/rbac/roles";
+
+import Paginator from "@components/pure/Paginator";
+import QueryWrapper from "@components/wrappers/QueryWrapper";
 import useRolesStore from "@states/roles_store";
 import RoleThreeDotDropdown from "./RoleThreeDotDropdown";
 
@@ -16,7 +17,7 @@ export const RolesTable = () => {
     } = useRolesStore();
 
     return (
-        <QueryLayout<TPaginate<TRole>> query={rolesQuery}>
+        <QueryWrapper<TPaginate<TRole>> query={rolesQuery}>
             {rolesQuery.data ? (
                 <div className="flex flex-col gap-2">
                     <div className="w-full rounded-lg border border-base-300">
@@ -56,6 +57,6 @@ export const RolesTable = () => {
             ) : (
                 <></>
             )}
-        </QueryLayout>
+        </QueryWrapper>
     );
 };

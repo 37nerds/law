@@ -46,25 +46,18 @@ export type TEditUser = {
     phone: string;
 };
 
+export type TUserColumn = "name" | "email" | "username" | "created_at" | "phone" | "address";
+
 export const useUsersQuery = () => {
-    const {
-        filters: { searchQuery, page, sortColumn, sortOrder },
-        setFiltersField,
-    } = useUsersStore();
+    const { searchQuery, page, sortColumn, sortOrder } = useUsersStore(state => state.filters);
+    const { setFiltersField } = useUsersStore();
 
     const query = useQuery<TPaginate<TUser>, TError>({
         queryFn: async () => {
-            let url = `/rbac/users?per_page=10` + `&page=${page}`;
-
-            if (searchQuery !== null && searchQuery.trim() !== "") {
+            let url = `/rbac/users?per_page=10&page=${page}&sort_column=${sortColumn}&sort_order=${sortOrder}`;
+            if (searchQuery.trim() !== "") {
                 url += `&search=${encodeURIComponent(searchQuery.trim())}`;
             }
-
-            if (sortColumn && sortOrder) {
-                console.log("hi", sortColumn, sortOrder);
-                url += `&sort_column=${sortColumn}&sort_order=${sortOrder}`;
-            }
-
             return await http.get(url, 200);
         },
         queryKey: [RBAC__USERS__GET, page, searchQuery, sortColumn, sortOrder],
@@ -75,10 +68,6 @@ export const useUsersQuery = () => {
     useEffect(() => {
         if (query.isError) {
             notify("error", query.error?.message);
-        }
-
-        if (searchQuery.trim() !== "") {
-            setFiltersField("page", 1);
         }
     }, [query.isError, searchQuery, setFiltersField]);
 

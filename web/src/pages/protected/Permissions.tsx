@@ -2,6 +2,8 @@ import { useRolesQuery } from "@fetches/rbac/roles";
 import { useEffect } from "react";
 import { useAuthStore } from "@states/auth_store";
 
+import useSetPageTitle from "@hooks/useSetPageTitle";
+
 import SelectInput from "@components/inputs/SelectInput";
 import PageCard from "@components/cards/PageCard";
 import SingleInputBox from "@components/inputs/SingleInputBox";
@@ -10,6 +12,8 @@ import CheckboxInput from "@components/inputs/CheckboxInput";
 import ResourcesTable from "@screens/permissions/ResourcesTable";
 
 const Permissions = () => {
+    useSetPageTitle("Give Permissions");
+
     const rolesQuery = useRolesQuery();
 
     const {

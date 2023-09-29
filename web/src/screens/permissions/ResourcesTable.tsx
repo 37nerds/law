@@ -1,7 +1,11 @@
-import QueryLayout from "@components/pure/QueryLayout";
-import { TResource, useResourcesQuery } from "@fetches/rbac/resources";
-import PermissionCheckbox from "@screens/permissions/PermissionCheckbox";
+import type { TResource } from "@fetches/rbac/resources";
+
+import { useResourcesQuery } from "@fetches/rbac/resources";
+
 import usePermissionsStore from "@states/permissions_store";
+
+import QueryWrapper from "@components/wrappers/QueryWrapper";
+import PermissionCheckbox from "@screens/permissions/PermissionCheckbox";
 
 type TGroupAPIs = {
     group: string;
@@ -34,7 +38,7 @@ const ResourcesTable = () => {
     const resourcesQuery = useResourcesQuery();
 
     return (
-        <QueryLayout query={resourcesQuery}>
+        <QueryWrapper query={resourcesQuery}>
             <div className="flex flex-col gap-5">
                 <div className="flex justify-between text-lg font-semibold">
                     <div>Resource Name</div>
@@ -97,7 +101,7 @@ const ResourcesTable = () => {
                     <></>
                 )}
             </div>
-        </QueryLayout>
+        </QueryWrapper>
     );
 };
 

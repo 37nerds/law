@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
-import InputLabel from "../pure/InputLabel";
-import InputError from "../pure/InputError";
+import InputError from "@components/pure/InputError";
+import InputLabel from "@components/pure/InputLabel";
 
 const InputLayout = ({
     input,
@@ -17,7 +17,7 @@ const InputLayout = ({
     return (
         <div className="form-control flex w-full flex-col">
             {label && <InputLabel label={`${label} ${required ? "*" : ""}`} />}
-            <div className="flex flex-col gap-2">
+            <div className="flex w-full flex-col gap-2">
                 {input}
                 {errorMessage && <InputError message={errorMessage} />}
             </div>

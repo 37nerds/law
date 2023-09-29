@@ -7,7 +7,7 @@ import useUsersStore from "@states/users_store";
 import EmailInput from "@components/inputs/EmailInput";
 import SelectInput from "@components/inputs/SelectInput";
 import StringInput from "@components/inputs/StringInput";
-import QueryLayout from "@components/pure/QueryLayout";
+import QueryWrapper from "@components/wrappers/QueryWrapper";
 import SingleInputBox from "@components/inputs/SingleInputBox";
 import Modal from "@components/modals/Modal";
 
@@ -76,7 +76,7 @@ const EditUserModal = ({
             title="EDIT USER"
         >
             <div className="flex flex-col gap-5">
-                <QueryLayout query={userQuery}>
+                <QueryWrapper query={userQuery}>
                     <div className="flex flex-col gap-5">
                         <SingleInputBox
                             label="Email"
@@ -158,7 +158,7 @@ const EditUserModal = ({
                             errorMessage={editUserError["address"]}
                         />
                     </div>
-                </QueryLayout>
+                </QueryWrapper>
             </div>
         </Modal>
     );

@@ -99,3 +99,5 @@ export type TThreeDropDownOption = {
     content: ReactNode;
     handler: () => void;
 };
+
+export type TOrder = "desc" | "asc";

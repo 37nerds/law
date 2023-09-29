@@ -9,7 +9,7 @@ import useSetPageTitle from "@hooks/useSetPageTitle";
 import Paginator from "@components/pure/Paginator";
 import CustomerTable from "@screens/customers/CustomerTable";
 import FilterCustomerList from "@screens/customers/FilterCustomerList";
-import QueryLayout from "@components/pure/QueryLayout";
+import QueryWrapper from "@components/wrappers/QueryWrapper";
 import PageCard from "@components/cards/PageCard";
 
 const Customers = () => {
@@ -21,7 +21,7 @@ const Customers = () => {
 
     return (
         <PageCard>
-            <QueryLayout<TPaginate<TClient>> query={clientQuery}>
+            <QueryWrapper<TPaginate<TClient>> query={clientQuery}>
                 {clientQuery.data && (
                     <div className="flex w-full flex-col gap-12">
                         <FilterCustomerList />
@@ -35,7 +35,7 @@ const Customers = () => {
                         />
                     </div>
                 )}
-            </QueryLayout>
+            </QueryWrapper>
         </PageCard>
     );
 };

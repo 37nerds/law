@@ -2,10 +2,10 @@ import type { ReactNode } from "react";
 import type { TError } from "@helpers/types";
 import type { UseQueryResult } from "react-query";
 
-import ErrorText from "./ErrorText";
-import Loading from "./Loading";
+import ErrorText from "@components/pure/ErrorText";
+import Loading from "@components/pure/Loading";
 
-const QueryLayout = <T,>({ query, children }: { query: UseQueryResult<T, TError>; children: ReactNode }) => {
+const QueryWrapper = <T,>({ query, children }: { query: UseQueryResult<T, TError>; children: ReactNode }) => {
     return (
         <>
             {query.isLoading ? (
@@ -21,4 +21,4 @@ const QueryLayout = <T,>({ query, children }: { query: UseQueryResult<T, TError>
     );
 };
 
-export default QueryLayout;
+export default QueryWrapper;
