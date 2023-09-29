@@ -10,14 +10,18 @@ import useUsersStore from "@states/users_store";
 import Paginator from "@components/pure/Paginator";
 import QueryLayout from "@components/pure/QueryLayout";
 import Td from "@components/tables/Td";
+import DownArrow from "@heroicons/react/24/outline/ArrowDownIcon";
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import UserThreeDotDropdown from "@screens/users/UserThreeDotDropdown";
+import { useState } from "react";
 
 const UsersTable = () => {
     useSetPageTitle("Users List");
 
     const usersQuery = useUsersQuery();
+    const [sortColumn, setSortColumn] = useState<string | null>(null);
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
     const {
         filters: { page },
@@ -28,6 +32,24 @@ const UsersTable = () => {
         return <div className="mt-5 text-center text-error">No data found!</div>;
     }
 
+    const handleSort = (column: string) => {
+        if (sortColumn !== column) {
+            setSortOrder("asc");
+            setSortColumn(column);
+            sortOptions(column, "asc");
+        } else {
+            const nextOrder = sortOrder === "asc" ? "desc" : "asc";
+            setSortOrder(nextOrder);
+            sortOptions(column, nextOrder);
+        }
+    };
+
+    const sortOptions = (column: string, order: string) => {
+        setFiltersField("sortColumn", column);
+        setFiltersField("sortOrder", order);
+        setFiltersField("page", 1);
+    };
+
     return (
         <QueryLayout<TPaginate<TUser>> query={usersQuery}>
             {usersQuery.data ? (
@@ -37,13 +59,25 @@ const UsersTable = () => {
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Username</th>
+                                    <th className="flex cursor-pointer gap-1" onClick={() => handleSort("name")}>
+                                        Name <DownArrow className="w-4" />
+                                    </th>
+                                    <th onClick={() => handleSort("email")}>
+                                        Email <DownArrow className="w-4" />
+                                    </th>
+                                    <th onClick={() => handleSort("username")}>
+                                        Username <DownArrow className="w-4" />
+                                    </th>
                                     <th>Role</th>
-                                    <th>Joined On</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
+                                    <th onClick={() => handleSort("created_at")}>
+                                        Joined On <DownArrow className="w-4" />
+                                    </th>
+                                    <th onClick={() => handleSort("phone")}>
+                                        Phone <DownArrow className="w-4" />
+                                    </th>
+                                    <th onClick={() => handleSort("address")}>
+                                        Address <DownArrow className="w-4" />
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>

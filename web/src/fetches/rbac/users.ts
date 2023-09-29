@@ -48,19 +48,26 @@ export type TEditUser = {
 
 export const useUsersQuery = () => {
     const {
-        filters: { searchQuery, page },
+        filters: { searchQuery, page, sortColumn, sortOrder },
         setFiltersField,
     } = useUsersStore();
 
     const query = useQuery<TPaginate<TUser>, TError>({
         queryFn: async () => {
             let url = `/rbac/users?per_page=10` + `&page=${page}`;
+
             if (searchQuery !== null && searchQuery.trim() !== "") {
                 url += `&search=${encodeURIComponent(searchQuery.trim())}`;
             }
+
+            if (sortColumn && sortOrder) {
+                console.log("hi", sortColumn, sortOrder);
+                url += `&sort_column=${sortColumn}&sort_order=${sortOrder}`;
+            }
+
             return await http.get(url, 200);
         },
-        queryKey: [RBAC__USERS__GET, page, searchQuery],
+        queryKey: [RBAC__USERS__GET, page, searchQuery, sortColumn, sortOrder],
         keepPreviousData: true,
         enabled: true,
     });
