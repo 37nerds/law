@@ -12,7 +12,7 @@ import NewUser from "@screens/users/NewUser";
 const Users = () => {
     useSetPageTitle("Users List");
 
-    const { editUserModalOpen, editUserId } = useUsersStore(state => state.filters);
+    const { editUserModalOpen, editUserId, searchQuery } = useUsersStore(state => state.filters);
     const { setFiltersField } = useUsersStore();
 
     return (
@@ -25,8 +25,16 @@ const Users = () => {
                 userId={editUserId}
             />
             <BarWrapper>
-                <IsPermitted api="api/v1/rbac/users" method="post" element={<NewUser />} />
-                <SearchInput placeholder="Search Users" onSearch={s => setFiltersField("searchQuery", s)} />
+                <div>
+                    <IsPermitted api="api/v1/rbac/users" method="post" element={<NewUser />} />
+                </div>
+                <div>
+                    <SearchInput
+                        value={searchQuery}
+                        placeholder="Search Users"
+                        onSearch={s => setFiltersField("searchQuery", s)}
+                    />
+                </div>
             </BarWrapper>
             <IsPermitted api={"api/v1/rbac/users"} method={"get"} element={<UsersTable />} />
         </PageCard>

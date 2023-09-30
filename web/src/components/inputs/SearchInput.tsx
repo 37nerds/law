@@ -6,12 +6,14 @@ const SearchInput = ({
     onSearch,
     placeholder = "",
     className = "",
+    value = "",
 }: {
     onSearch: (searchString: string) => void;
     placeholder?: string;
     className?: string;
+    value?: string;
 }) => {
-    const [searchString, setSearchString] = useState("");
+    const [searchString, setSearchString] = useState<string>(value);
 
     return (
         <form className={`flex w-[450px] gap-2 rounded-lg ${className}`} onSubmit={e => e.preventDefault()}>

@@ -1,5 +1,5 @@
-import InputLayout from "./InputLayout";
-import Input from "./Input";
+import InputLayout from "@components/inputs/InputLayout";
+import Input from "@components/inputs/Input";
 
 const StringInput = ({
     value,

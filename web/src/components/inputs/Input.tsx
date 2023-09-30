@@ -28,6 +28,7 @@ const Input = ({
             disabled={disabled}
             autoComplete={autoComplete}
             id={id}
+            name={id}
         />
     );
 };
