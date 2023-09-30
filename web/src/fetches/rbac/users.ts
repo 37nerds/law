@@ -105,7 +105,7 @@ export const useUserQuery = (userId: string) => {
 
     const query = useQuery<TUser, TError>({
         queryFn: async () => {
-            return await http.get(`/rbac/users?id=${userId}`, 200);
+            return !userId ? Promise.resolve({}) : await http.get(`/rbac/users?id=${userId}`, 200);
         },
         queryKey: [RBAC__USER__GET, userId],
     });

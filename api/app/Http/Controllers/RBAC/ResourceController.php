@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreateResourceRequest;
 use App\Http\Requests\RBAC\UpdateResourceRequest;
 use App\Http\Resources\RBAC\ResourceResource;
+use App\Logic\Index;
 use App\Models\RBAC\Resource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,14 +16,15 @@ class ResourceController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $resourceId = $request->query("id");
-        if ($resourceId) {
-            $resource = Resource::query()->findOrFail($resourceId);
+        $resource = Index::validatedAndFindWithID(
+            request: $request,
+            query: Resource::query()
+        );
+        if ($resource) {
             return Response::happy(200, new ResourceResource($resource));
         }
 
         $resources = Resource::query()->get();
-
         return Response::happy(200, $resources);
     }
 

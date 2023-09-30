@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreateUserRequest;
 use App\Http\Requests\RBAC\UpdateUserRequest;
 use App\Http\Resources\RBAC\UserResource;
+use App\Logic\Index;
 use App\Logic\RBAC;
 use App\Models\RBAC\User;
 use Illuminate\Http\JsonResponse;
@@ -18,33 +19,19 @@ class UserController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $userId = $request->query("id");
-        if ($userId) {
-            $user = User::query()->findOrFail($userId);
+        $user = Index::validatedAndFindWithID(
+            request: $request,
+            query: User::query()
+        );
+        if ($user) {
             return Response::happy(200, new UserResource($user));
         }
 
-        $page = $request->query("page", 1);
-        $perPage = $request->query("per_page", 10);
-
-        $sortColumn = $request->query("sort_column", "created_at"); // created_at, email, username, name, phone, active, address
-        $sortOrder = $request->query("sort_order", "desc"); // "asc", "desc"
-
-        $search = $request->query("search", "");
-
-        $enableColumnForSearch = ["email", "username", "name", "phone", "address"];
-
-        $paginates = User::with("role")
-            ->when($search, function ($query) use ($search, $enableColumnForSearch) {
-                $query->where(function ($innerQuery) use ($search, $enableColumnForSearch) {
-                    foreach ($enableColumnForSearch as $column) {
-                        $innerQuery->orWhere($column, 'LIKE', "%$search%");
-                    }
-                });
-            })
-            ->orderBy($sortColumn, $sortOrder)
-            ->paginate($perPage, ['*'], 'page', $page);
-
+        $paginates = Index::paginatedSearchAndSort(
+            request: $request,
+            query: User::query()->with("role"),
+            allowedColumnsForSearch: ["email", "username", "name", "phone", "address"]
+        );
         return Response::happy(200, $paginates);
     }
 

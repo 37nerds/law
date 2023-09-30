@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreateRoleRequest;
 use App\Http\Requests\RBAC\UpdateRoleRequest;
 use App\Http\Resources\RBAC\RoleResource;
+use App\Logic\Index;
 use App\Models\RBAC\Role;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,17 +16,19 @@ class RoleController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        if (array_key_exists("id", $request->all())) {
-            $roleId = $request->query("id");
-            $role = Role::query()->findOrFail($roleId);
+        $role = Index::validatedAndFindWithID(
+            request: $request,
+            query: Role::query()
+        );
+        if ($role) {
             return Response::happy(200, new RoleResource($role));
         }
 
-        $page = $request->query("page", 1);
-        $perPage = $request->query("per_page", 10);
-
-        $paginates = Role::with("permissions")->paginate(perPage: $perPage, page: $page);
-
+        $paginates = Index::paginatedSearchAndSort(
+            request: $request,
+            query: Role::query()->with("permissions"),
+            allowedColumnsForSearch: ["name"]
+        );
         return Response::happy(200, $paginates);
     }
 
