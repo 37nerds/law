@@ -30,7 +30,8 @@ class UserController extends Controller
         $paginates = Index::paginatedSearchAndSort(
             request: $request,
             query: User::query()->with("role"),
-            allowedColumnsForSearch: ["email", "username", "name", "phone", "address"]
+            allowedColumnsForSearch: ["email", "username", "name", "phone", "address"],
+            allowedColumnsForSorting: ["created_at", "email", "username", "name", "phone", "active", "address"]
         );
         return Response::happy(200, $paginates);
     }

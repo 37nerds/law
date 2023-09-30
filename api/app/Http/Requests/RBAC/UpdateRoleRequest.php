@@ -4,6 +4,9 @@ namespace App\Http\Requests\RBAC;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property string $name
+ */
 class UpdateRoleRequest extends FormRequest
 {
     public function authorize(): bool

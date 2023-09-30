@@ -27,7 +27,8 @@ class RoleController extends Controller
         $paginates = Index::paginatedSearchAndSort(
             request: $request,
             query: Role::query()->with("permissions"),
-            allowedColumnsForSearch: ["name"]
+            allowedColumnsForSearch: ["name"],
+            allowedColumnsForSorting: ["name", "disable"]
         );
         return Response::happy(200, $paginates);
     }

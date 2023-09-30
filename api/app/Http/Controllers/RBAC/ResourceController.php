@@ -9,12 +9,13 @@ use App\Http\Requests\RBAC\UpdateResourceRequest;
 use App\Http\Resources\RBAC\ResourceResource;
 use App\Logic\Index;
 use App\Models\RBAC\Resource;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ResourceController extends Controller
 {
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): LengthAwarePaginator|JsonResponse
     {
         $resource = Index::validatedAndFindWithID(
             request: $request,
@@ -22,6 +23,18 @@ class ResourceController extends Controller
         );
         if ($resource) {
             return Response::happy(200, new ResourceResource($resource));
+        }
+
+        $validated = $request->validate(["paginated" => ["nullable", "in:true,false"]]);
+        if (array_key_exists("paginated", $validated)) {
+            if ($validated["paginated"] === "true") {
+                return Index::paginatedSearchAndSort(
+                    request: $request,
+                    query: Resource::query(),
+                    allowedColumnsForSearch: ['api', 'web', 'method', 'label', 'group', 'dependencies'],
+                    allowedColumnsForSorting: ['api', 'web', 'method', 'label', 'group', 'dependencies']
+                );
+            }
         }
 
         $resources = Resource::query()->get();

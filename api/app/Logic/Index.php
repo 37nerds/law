@@ -7,6 +7,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule as LaraRule;
 
 class Index
 {
@@ -24,10 +25,12 @@ class Index
         Request $request,
         Builder $query,
         array   $allowedColumnsForSearch,
+        array   $allowedColumnsForSorting
     ): LengthAwarePaginator
     {
         $params = self::validateRequestQueryStringForPaginatedSearchAndSort(
-            request: $request
+            request: $request,
+            allowedColumnsForSorting: $allowedColumnsForSorting
         );
         return self::executeQueryWithPaginatedSearchAndSort(
             query: $query,
@@ -36,18 +39,18 @@ class Index
         );
     }
 
-    private static function validateRequestQueryStringForPaginatedSearchAndSort(Request $request): PSSParams
+    private static function validateRequestQueryStringForPaginatedSearchAndSort(Request $request, array $allowedColumnsForSorting): PSSParams
     {
         $validated = $request->validate([
             'page' => ['nullable', 'integer', 'min:1'],
             'per_page' => ['nullable', 'integer', 'min:1'],
-            'sort_column' => ['nullable', 'string', 'in:created_at,email,username,name,phone,active,address'],
+            'sort_column' => ['nullable', 'string', LaraRule::in($allowedColumnsForSorting)],
             'sort_order' => ['nullable', 'string', 'in:asc,desc'],
             'search' => ['nullable', 'string'],
         ]);
         return new PSSParams(
             $validated['page'] ?? 1,
-            $validated['per_page'] ?? 1,
+            $validated['per_page'] ?? 10,
             $validated['sort_column'] ?? 'created_at',
             $validated['sort_order'] ?? 'asc',
             $validated['search'] ?? ''
