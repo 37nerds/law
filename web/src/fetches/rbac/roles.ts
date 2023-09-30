@@ -1,5 +1,5 @@
-import type { TBase, TError, TPaginate } from "@helpers/types";
 import type { TPermission } from "@fetches/rbac/permissions";
+import type { TBase, TError, TPaginate } from "@helpers/types";
 
 import { notify } from "@helpers/notify";
 import { useEffect } from "react";
@@ -31,15 +31,17 @@ export type TEditRole = {
 };
 
 export const useRolesQuery = () => {
-    const {
-        filters: { page },
-    } = useRolesStore();
+    const { page, searchQuery } = useRolesStore(state => state.filters);
 
     const query = useQuery<TPaginate<TRole>, TError>({
         queryFn: async () => {
-            return await http.get(`/rbac/roles?per_page=10` + `&page=${page}`, 200);
+            let url = `/rbac/roles?per_page=10&page=${page}`;
+            if (searchQuery.trim() !== "") {
+                url += `&search=${encodeURIComponent(searchQuery.trim())}`;
+            }
+            return await http.get(url, 200);
         },
-        queryKey: [RBAC_ROLES_GET, page],
+        queryKey: [RBAC_ROLES_GET, page, searchQuery],
         keepPreviousData: true,
     });
 

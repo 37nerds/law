@@ -9,6 +9,7 @@ type TFilters = {
     newRoleModalOpen: boolean;
     editRoleModalOpen: boolean;
     editRoleId: string;
+    searchQuery: string;
 };
 
 type TStore = {
@@ -38,6 +39,7 @@ const useRolesStore = create<TStore>()(
                 newRoleModalOpen: false,
                 editRoleModalOpen: false,
                 editRoleId: "",
+                searchQuery: "",
             },
 
             setFiltersField: (key, value) => {

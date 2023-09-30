@@ -69,14 +69,12 @@ const NewRole = () => {
                 }}
             />
 
-            <div className="flex justify-end rounded-lg border border-base-300 p-2">
-                <button
-                    className="text btn btn-success rounded-md text-base-100"
-                    onClick={() => setFiltersField("newRoleModalOpen", true)}
-                >
-                    Add new role
-                </button>
-            </div>
+            <button
+                className="text btn btn-success rounded-md text-base-100"
+                onClick={() => setFiltersField("newRoleModalOpen", true)}
+            >
+                Add new role
+            </button>
         </>
     );
 };

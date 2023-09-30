@@ -50,7 +50,6 @@ export type TUserColumn = "name" | "email" | "username" | "created_at" | "phone"
 
 export const useUsersQuery = () => {
     const { searchQuery, page, sortColumn, sortOrder } = useUsersStore(state => state.filters);
-    const { setFiltersField } = useUsersStore();
 
     const query = useQuery<TPaginate<TUser>, TError>({
         queryFn: async () => {
@@ -69,7 +68,7 @@ export const useUsersQuery = () => {
         if (query.isError) {
             notify("error", query.error?.message);
         }
-    }, [query.isError, searchQuery, setFiltersField]);
+    }, [query.isError]);
 
     return query;
 };
