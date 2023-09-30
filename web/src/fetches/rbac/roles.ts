@@ -30,18 +30,20 @@ export type TEditRole = {
     disable: boolean;
 };
 
+export type TRoleColumn = "name" | "disable";
+
 export const useRolesQuery = () => {
-    const { page, searchQuery } = useRolesStore(state => state.filters);
+    const { page, searchQuery, sortColumn, sortOrder } = useRolesStore(state => state.filters);
 
     const query = useQuery<TPaginate<TRole>, TError>({
         queryFn: async () => {
-            let url = `/rbac/roles?per_page=10&page=${page}`;
+            let url = `/rbac/roles?per_page=10&page=${page}&sort_column=${sortColumn}&sort_order=${sortOrder}`;
             if (searchQuery.trim() !== "") {
                 url += `&search=${encodeURIComponent(searchQuery.trim())}`;
             }
             return await http.get(url, 200);
         },
-        queryKey: [RBAC_ROLES_GET, page, searchQuery],
+        queryKey: [RBAC_ROLES_GET, page, searchQuery, sortColumn, sortOrder],
         keepPreviousData: true,
     });
 

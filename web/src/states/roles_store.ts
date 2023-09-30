@@ -1,4 +1,5 @@
-import type { TCreateRole, TEditRole } from "@fetches/rbac/roles";
+import type { TCreateRole, TEditRole, TRoleColumn } from "@fetches/rbac/roles";
+import { TOrder } from "@helpers/types";
 
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
@@ -10,6 +11,8 @@ type TFilters = {
     editRoleModalOpen: boolean;
     editRoleId: string;
     searchQuery: string;
+    sortColumn: TRoleColumn;
+    sortOrder: TOrder;
 };
 
 type TStore = {
@@ -40,6 +43,8 @@ const useRolesStore = create<TStore>()(
                 editRoleModalOpen: false,
                 editRoleId: "",
                 searchQuery: "",
+                sortColumn: "disable",
+                sortOrder: "asc",
             },
 
             setFiltersField: (key, value) => {
