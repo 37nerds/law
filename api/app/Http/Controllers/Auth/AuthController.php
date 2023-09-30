@@ -58,7 +58,8 @@ class AuthController extends Controller
 
         $user = UserRepository::update(Auth::user(), ["avatar" => $name]);
 
-        return Response::happy(200, $user);
+        return Response::happy(200, array_merge($user->toArray(),
+            ["permissions" => RBAC::getPermissionWithResource($user)]));
     }
 
     public function updatePassword(UpdatePasswordRequest $request): JsonResponse

@@ -1,36 +1,51 @@
-import type { ImageListType } from "react-images-uploading/dist/typings";
-import type { ReactNode } from "react";
+import type { ReactNode, ChangeEvent } from "react";
 
-import { useState } from "react";
-
-import ImageUploading from "react-images-uploading";
+import { useRef } from "react";
 
 const ImageButton = ({
     onChange,
     children,
     className,
-    ...props
 }: {
     onChange: (value: string) => void;
     children: ReactNode;
     className?: string;
 }) => {
-    const [image, setImage] = useState<ImageListType>([]);
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+    const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = event.target.files?.[0];
+        if (selectedFile) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const dataUrl = e?.target?.result;
+                onChange(String(dataUrl));
+            };
+            reader.readAsDataURL(selectedFile);
+        }
+        event.target.value = "";
+    };
 
     return (
-        <ImageUploading
-            onChange={image => {
-                setImage(image);
-                onChange(image.length > 0 ? image[0].dataURL || "" : "");
-            }}
-            value={image}
-        >
-            {({ onImageUpload, onImageUpdate }) => (
-                <div className={className} onClick={image ? onImageUpload : () => onImageUpdate(0)} {...props}>
-                    {children}
-                </div>
-            )}
-        </ImageUploading>
+        <>
+            <div
+                className={className}
+                onClick={() => {
+                    if (fileInputRef.current) {
+                        fileInputRef.current.click();
+                    }
+                }}
+            >
+                {children}
+            </div>
+            <input
+                type="file"
+                hidden={true}
+                ref={fileInputRef}
+                onChange={handleFileInputChange}
+                accept=".png, .jpg, .svg"
+            />
+        </>
     );
 };
 
