@@ -12,15 +12,13 @@ import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import UserThreeDotDropdown from "@screens/users/UserThreeDotDropdown";
 import Th from "@components/tables/Th";
 import Table from "@components/tables/Table";
+import { THeader } from "@helpers/types";
 
 const UsersTable = () => {
     const usersQuery = useUsersQuery();
 
-    const page = useUsersStore(state => state?.filters?.page);
-    const sortColumn = useUsersStore(state => state.filters.sortColumn);
-    const sortOrder = useUsersStore(state => state.filters.sortOrder);
-
-    const setFiltersField = useUsersStore(state => state?.setFiltersField);
+    const { page, sortColumn, sortOrder } = useUsersStore(state => state?.filters);
+    const { setFiltersField } = useUsersStore(state => state);
 
     const handleSort = (column: TUserColumn) => {
         setFiltersField("page", 1);
@@ -33,7 +31,7 @@ const UsersTable = () => {
         }
     };
 
-    const headers: { name: TUserColumn | null; label: string }[] = [
+    const headers: THeader<TUserColumn>[] = [
         { name: "name", label: "Name" },
         { name: "email", label: "Email ID" },
         { name: "username", label: "Username" },
@@ -55,20 +53,16 @@ const UsersTable = () => {
                 <thead>
                     <tr>
                         <th></th>
-                        {headers.map((header, index) =>
-                            header.name === null ? (
-                                <th key={index}>Role</th>
-                            ) : (
-                                <Th<TUserColumn>
-                                    key={index}
-                                    onClick={handleSort}
-                                    column={sortColumn}
-                                    order={sortOrder}
-                                    name={header.name}
-                                    label={header.label}
-                                />
-                            )
-                        )}
+                        {headers.map((header, index) => (
+                            <Th<TUserColumn>
+                                key={index}
+                                onClick={handleSort}
+                                column={sortColumn}
+                                order={sortOrder}
+                                name={header.name}
+                                label={header.label}
+                            />
+                        ))}
                     </tr>
                 </thead>
                 <tbody>

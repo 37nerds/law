@@ -15,24 +15,30 @@ const Th = <T,>({
     onClick: (name: T) => void;
     order: TOrder;
     column: T;
-    name: T;
+    name: T | null;
     label: string | ReactNode;
 }) => {
     return (
-        <th className="cursor-pointer " onClick={() => onClick(name)}>
-            <div className="flex items-center gap-1">
-                {label}
-                {column === name ? (
-                    order === "asc" ? (
-                        <ArrowDownIcon className="w-4" />
-                    ) : (
-                        <ArrowUpIcon className="w-4" />
-                    )
-                ) : (
-                    <MinusIcon className="w-4" />
-                )}
-            </div>
-        </th>
+        <>
+            {name ? (
+                <th className="cursor-pointer " onClick={() => onClick(name)}>
+                    <div className="flex items-center gap-1">
+                        {label}
+                        {column === name ? (
+                            order === "asc" ? (
+                                <ArrowDownIcon className="w-4" />
+                            ) : (
+                                <ArrowUpIcon className="w-4" />
+                            )
+                        ) : (
+                            <MinusIcon className="w-4" />
+                        )}
+                    </div>
+                </th>
+            ) : (
+                <th>{label}</th>
+            )}
+        </>
     );
 };
 

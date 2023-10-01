@@ -5,15 +5,13 @@ import Th from "@components/tables/Th";
 import PaginationWrapper from "@components/wrappers/PaginationWrapper";
 import useRolesStore from "@states/roles_store";
 import RoleThreeDotDropdown from "./RoleThreeDotDropdown";
+import { THeader } from "@helpers/types";
 
 export const RolesTable = () => {
     const rolesQuery = useRolesQuery();
 
-    const page = useRolesStore(state => state.filters.page);
-    const sortColumn = useRolesStore(state => state.filters.sortColumn);
-    const sortOrder = useRolesStore(state => state.filters.sortOrder);
-
-    const setFiltersField = useRolesStore(state => state.setFiltersField);
+    const { page, sortColumn, sortOrder } = useRolesStore(state => state.filters);
+    const { setFiltersField } = useRolesStore(state => state);
 
     const handleSort = (column: TRoleColumn) => {
         setFiltersField("page", 1);
@@ -26,7 +24,7 @@ export const RolesTable = () => {
         }
     };
 
-    const headers: { name: TRoleColumn | null; label: string }[] = [
+    const headers: THeader<TRoleColumn>[] = [
         { name: "name", label: "Role name" },
         { name: "disable", label: "Status" },
     ];
@@ -42,20 +40,16 @@ export const RolesTable = () => {
             <Table>
                 <thead>
                     <tr>
-                        {headers.map((header, index) =>
-                            header.name === null ? (
-                                <th key={index}>Role</th>
-                            ) : (
-                                <Th<TRoleColumn>
-                                    key={index}
-                                    onClick={handleSort}
-                                    column={sortColumn}
-                                    order={sortOrder}
-                                    name={header.name}
-                                    label={header.label}
-                                />
-                            )
-                        )}
+                        {headers.map((header, index) => (
+                            <Th<TRoleColumn>
+                                key={index}
+                                onClick={handleSort}
+                                column={sortColumn}
+                                order={sortOrder}
+                                name={header.name}
+                                label={header.label}
+                            />
+                        ))}
                     </tr>
                 </thead>
                 <tbody>

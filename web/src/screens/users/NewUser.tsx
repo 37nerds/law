@@ -154,8 +154,8 @@ const NewUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolea
 };
 
 const NewUser = () => {
-    const newUserModalOpen = useUsersStore(state => state.filters.newUserModalOpen);
-    const setFiltersField = useUsersStore(state => state.setFiltersField);
+    const { newUserModalOpen } = useUsersStore(state => state.filters);
+    const { setFiltersField } = useUsersStore(state => state);
 
     return (
         <>

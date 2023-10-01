@@ -12,10 +12,8 @@ import { RolesTable } from "@screens/roles/RolesTable";
 const Roles = () => {
     useSetPageTitle("Roles");
 
-    const {
-        filters: { editRoleModalOpen, editRoleId, searchQuery },
-        setFiltersField,
-    } = useRolesStore();
+    const { editRoleModalOpen, editRoleId, searchQuery } = useRolesStore(state => state.filters);
+    const { setFiltersField } = useRolesStore(state => state);
 
     return (
         <PageCard>

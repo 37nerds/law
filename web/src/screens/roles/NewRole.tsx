@@ -57,8 +57,8 @@ const NewRoleModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolea
 };
 
 const NewRole = () => {
-    const newRoleModalOpen = useRolesStore(state => state.filters.newRoleModalOpen);
-    const setFiltersField = useRolesStore(state => state.setFiltersField);
+    const { newRoleModalOpen } = useRolesStore(state => state.filters);
+    const { setFiltersField } = useRolesStore(state => state);
 
     return (
         <>

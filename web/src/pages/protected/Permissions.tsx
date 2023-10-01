@@ -16,12 +16,9 @@ const Permissions = () => {
 
     const rolesQuery = useRolesQuery();
 
-    const {
-        filters: { role_id },
-        setFiltersField,
-    } = usePermissionsStore();
-
-    const { loggedUser } = useAuthStore();
+    const { role_id } = usePermissionsStore(state => state.filters);
+    const { setFiltersField } = usePermissionsStore(state => state);
+    const { loggedUser } = useAuthStore(state => state);
 
     useEffect(() => {
         if (loggedUser?.role_id) {

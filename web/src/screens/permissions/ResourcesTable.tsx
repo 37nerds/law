@@ -31,9 +31,7 @@ const processResources = (resources: TResource[]): TGroupAPIs[] => {
 };
 
 const ResourcesTable = () => {
-    const {
-        filters: { role_id },
-    } = usePermissionsStore();
+    const { role_id } = usePermissionsStore(state => state.filters);
 
     const resourcesQuery = useResourcesQuery();
 

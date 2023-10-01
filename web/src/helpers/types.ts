@@ -1,5 +1,6 @@
 import type { ForwardRefExoticComponent, LazyExoticComponent, PropsWithoutRef, SVGProps, JSX } from "react";
 import type { ReactNode } from "react";
+import { TUserColumn } from "@fetches/rbac/users";
 
 export type TOption = {
     name: string;
@@ -101,3 +102,5 @@ export type TThreeDropDownOption = {
 };
 
 export type TOrder = "desc" | "asc";
+
+export type THeader<T> = { name: T | null; label: string };
