@@ -1,8 +1,6 @@
 import type { ReactNode } from "react";
 import type { TOrder } from "@helpers/types";
 
-import ArrowDownIcon from "@heroicons/react/24/outline/ArrowDownIcon";
-import ArrowUpIcon from "@heroicons/react/24/outline/ArrowUpIcon";
 import SortIcon from "@components/icons/SortIcon";
 
 const Th = <T,>({
@@ -24,15 +22,7 @@ const Th = <T,>({
                 <th className="cursor-pointer " onClick={() => onClick(name)}>
                     <div className="flex items-center gap-1">
                         {label}
-                        {column === name ? (
-                            order === "asc" ? (
-                                <SortIcon sort={"asc"} />
-                            ) : (
-                                <SortIcon sort={"desc"} />
-                            )
-                        ) : (
-                            <SortIcon />
-                        )}
+                        <SortIcon sort={column === name ? order : null} />
                     </div>
                 </th>
             ) : (

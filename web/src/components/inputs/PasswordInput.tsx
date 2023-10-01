@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Input from "./Input";
 import InputLayout from "./InputLayout";
-import DynamicEye from "../icons/DynamicEye";
+import EyeIcon from "../icons/EyeIcon";
 
 const PasswordInput = ({
     value,
@@ -41,7 +41,7 @@ const PasswordInput = ({
                         autoComplete={newPassword ? "new-password" : "current-password"}
                         id={id}
                     />
-                    <DynamicEye
+                    <EyeIcon
                         isEyeOpen={type === "text"}
                         onClick={() => setType(type === "text" ? "password" : "text")}
                     />

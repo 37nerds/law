@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { getPathname } from "@helpers/location";
 import { useAuthStore } from "@states/auth_store";
 
-import DynamicChevronIcon from "@components/icons/DynamicChevronIcon";
+import ChevronIcon from "@components/icons/ChevronIcon";
 
 const Submenu = ({
     submenus,
@@ -48,7 +48,7 @@ const Submenu = ({
                         <Icon className="h-6 w-6" />
                         {name}
                     </div>
-                    <DynamicChevronIcon className="mt-1 h-5 w-5" isExpanded={isExpanded} />
+                    <ChevronIcon className="mt-1 h-5 w-5" isExpanded={isExpanded} />
                 </div>
 
                 {/** Submenu list */}

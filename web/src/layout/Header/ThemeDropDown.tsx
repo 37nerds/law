@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DynamicChevronIcon from "@components/icons/DynamicChevronIcon";
+import ChevronIcon from "@components/icons/ChevronIcon";
 import useChangeTheme from "@hooks/useChangeTheme";
 
 const ThemeIcon = () => (
@@ -84,7 +84,7 @@ const ThemeDropDown = () => {
             >
                 <ThemeIcon />
                 <span className="c hidden capitalize md:inline">{theme}</span>
-                <DynamicChevronIcon className="h-5 w-5" isExpanded={isExpanded} />
+                <ChevronIcon className="h-5 w-5" isExpanded={isExpanded} />
             </div>
             {isOpen && (
                 <div className="dropdown-content top-px mt-16 h-[70vh] max-h-96 w-52 overflow-y-auto rounded-lg bg-base-200 text-base-content shadow-2xl">

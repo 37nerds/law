@@ -1,4 +1,4 @@
-const DynamicEye = ({ isEyeOpen = false, onClick }: { isEyeOpen?: boolean; onClick: () => void }) => {
+const EyeIcon = ({ isEyeOpen = false, onClick }: { isEyeOpen?: boolean; onClick: () => void }) => {
     return isEyeOpen ? (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -35,4 +35,4 @@ const DynamicEye = ({ isEyeOpen = false, onClick }: { isEyeOpen?: boolean; onCli
     );
 };
 
-export default DynamicEye;
+export default EyeIcon;
