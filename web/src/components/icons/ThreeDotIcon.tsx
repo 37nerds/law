@@ -1,4 +1,4 @@
-const ThreeDotButton = ({ onClick }: { onClick?: () => void }) => {
+const ThreeDotIcon = ({ onClick }: { onClick?: () => void }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -18,4 +18,4 @@ const ThreeDotButton = ({ onClick }: { onClick?: () => void }) => {
     );
 };
 
-export default ThreeDotButton;
+export default ThreeDotIcon;

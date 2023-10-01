@@ -17,8 +17,8 @@ const SingleInputBox = ({
 }) => {
     return (
         <div className="flex flex-col gap-2">
-            <div className="flex w-full flex-col items-center lg:flex-row">
-                <div className="w-full lg:w-1/6">
+            <div className="flex w-full flex-col items-start justify-start lg:flex-row">
+                <div className="w-full py-3 lg:w-1/6">
                     {label}
                     {required ? " * " : ""}
                 </div>

@@ -2,7 +2,7 @@ import type { TThreeDropDownOption } from "@helpers/types";
 
 import { useEffect, useState } from "react";
 
-import ThreeDotButton from "./ThreeDotButton";
+import ThreeDotIcon from "@components/icons/ThreeDotIcon";
 
 const ThreeDotDropdown = ({ options }: { options: TThreeDropDownOption[] }) => {
     const [open, setOpen] = useState(true);
@@ -18,7 +18,7 @@ const ThreeDotDropdown = ({ options }: { options: TThreeDropDownOption[] }) => {
     return (
         <div className="dropdown dropdown-left dropdown-hover">
             <label tabIndex={0}>
-                <ThreeDotButton />
+                <ThreeDotIcon />
             </label>
             {open && (
                 <ul

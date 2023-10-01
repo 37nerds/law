@@ -10,6 +10,7 @@ import SingleInputBox from "@components/inputs/SingleInputBox";
 import Modal from "@components/modals/Modal";
 import AddButton from "@components/buttons/AddButton";
 import SubmitButton from "@components/buttons/SubmitButton";
+import ArrayInput from "@components/inputs/ArrayInput";
 
 const NewResourceModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
     const saveResourceMutation = useSaveResourceMutation();
@@ -56,7 +57,7 @@ const NewResourceModal = ({ open, setOpen }: { open: boolean; setOpen: (open: bo
                     label="API"
                     required={true}
                     element={
-                        <EmailInput
+                        <StringInput
                             required={true}
                             value={newResource["api"]}
                             setValue={value => setNewResourceField("api", value)}
@@ -68,7 +69,11 @@ const NewResourceModal = ({ open, setOpen }: { open: boolean; setOpen: (open: bo
                     required={true}
                     label="Web"
                     element={
-                        <StringInput required={true} value={""} setValue={value => setNewResourceField("web", value)} />
+                        <ArrayInput
+                            required={true}
+                            value={newResource["web"]}
+                            setValue={value => setNewResourceField("web", value)}
+                        />
                     }
                     errorMessage={newResourceError["web"]}
                 />

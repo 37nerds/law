@@ -7,6 +7,7 @@ const Input = ({
     disabled = false,
     id = "",
     autoComplete = "",
+    className = "",
 }: {
     value: string;
     setValue?: (value: string) => void;
@@ -16,6 +17,7 @@ const Input = ({
     disabled?: boolean;
     id?: string;
     autoComplete?: string;
+    className?: string;
 }) => {
     return (
         <input
@@ -23,7 +25,7 @@ const Input = ({
             type={type}
             placeholder={placeholder}
             onChange={e => setValue && setValue(e.target.value)}
-            className="input input-bordered w-full rounded-lg"
+            className={`input input-bordered w-full rounded-lg ${className}`}
             required={required}
             disabled={disabled}
             autoComplete={autoComplete}
