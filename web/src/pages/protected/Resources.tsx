@@ -1,19 +1,19 @@
 import useSetPageTitle from "@hooks/useSetPageTitle";
-import useUsersStore from "@states/users_store";
+import useResourcesStore from "@states/resources_store";
 
 import IsPermitted from "@components/auth/IsPermitted";
 import PageCard from "@components/cards/PageCard";
 import EditUserModal from "@screens/users/EditUserModal";
-import UsersTable from "@screens/users/UsersTable";
 import SearchInput from "@components/inputs/SearchInput";
 import BarWrapper from "@components/wrappers/BarWrapper";
-import NewUser from "@screens/users/NewUser";
+import ResourcesListTable from "@screens/resources/ResourcesListTable";
+import NewResource from "@screens/resources/NewResource";
 
-const Users = () => {
-    useSetPageTitle("Users List");
+const Resources = () => {
+    useSetPageTitle("Resources");
 
-    const { editUserModalOpen, editUserId, searchQuery } = useUsersStore(state => state.filters);
-    const { setFiltersField } = useUsersStore();
+    const { editResourceModalOpen, editResourceId, searchQuery } = useResourcesStore(state => state.filters);
+    const { setFiltersField } = useResourcesStore();
 
     return (
         <PageCard>
@@ -22,17 +22,15 @@ const Users = () => {
                 method="patch"
                 element={
                     <EditUserModal
-                        open={editUserModalOpen}
-                        setOpen={value => {
-                            setFiltersField("editUserModalOpen", value);
-                        }}
-                        userId={editUserId}
+                        open={editResourceModalOpen}
+                        setOpen={value => setFiltersField("editResourceModalOpen", value)}
+                        userId={editResourceId}
                     />
                 }
             />
             <BarWrapper>
                 <div>
-                    <IsPermitted api="api/v1/rbac/users" method="post" element={<NewUser />} />
+                    <IsPermitted api="api/v1/rbac/users" method="post" element={<NewResource />} />
                 </div>
                 <div>
                     <SearchInput
@@ -42,9 +40,9 @@ const Users = () => {
                     />
                 </div>
             </BarWrapper>
-            <IsPermitted api={"api/v1/rbac/users"} method={"get"} element={<UsersTable />} />
+            <IsPermitted api={"api/v1/rbac/users"} method={"get"} element={<ResourcesListTable />} />
         </PageCard>
     );
 };
 
-export default Users;
+export default Resources;

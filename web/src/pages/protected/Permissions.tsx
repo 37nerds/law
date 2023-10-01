@@ -1,13 +1,11 @@
 import { useRolesQuery } from "@fetches/rbac/roles";
-import { useEffect } from "react";
-import { useAuthStore } from "@states/auth_store";
 
 import useSetPageTitle from "@hooks/useSetPageTitle";
+import usePermissionsStore from "@states/permissions_store";
 
 import SelectInput from "@components/inputs/SelectInput";
 import PageCard from "@components/cards/PageCard";
 import SingleInputBox from "@components/inputs/SingleInputBox";
-import usePermissionsStore from "@states/permissions_store";
 import CheckboxInput from "@components/inputs/CheckboxInput";
 import ResourcesTable from "@screens/permissions/ResourcesTable";
 
@@ -18,13 +16,6 @@ const Permissions = () => {
 
     const { role_id } = usePermissionsStore(state => state.filters);
     const { setFiltersField } = usePermissionsStore(state => state);
-    const { loggedUser } = useAuthStore(state => state);
-
-    useEffect(() => {
-        if (loggedUser?.role_id) {
-            setFiltersField("role_id", loggedUser?.role_id);
-        }
-    }, [loggedUser?.role_id]);
 
     return (
         <PageCard>

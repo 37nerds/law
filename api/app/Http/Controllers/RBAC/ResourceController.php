@@ -31,8 +31,8 @@ class ResourceController extends Controller
                 return Index::paginatedSearchAndSort(
                     request: $request,
                     query: Resource::query(),
-                    allowedColumnsForSearch: ['api', 'web', 'method', 'label', 'group', 'dependencies'],
-                    allowedColumnsForSorting: ['api', 'web', 'method', 'label', 'group', 'dependencies']
+                    allowedColumnsForSearch: ['api', 'web', 'method', 'label', 'group', 'dependencies', "created_at" ],
+                    allowedColumnsForSorting: ['api', 'method', 'label', 'group', "created_at"]
                 );
             }
         }

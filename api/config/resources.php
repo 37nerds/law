@@ -1,22 +1,22 @@
 <?php
 
 return [
-//    [
-//        "api" => "api/v1/customers/clients",
-//        "web" => ["/_/customers"],
-//        "method" => "get",
-//        "label" => "View Clients",
-//        "group" => "customers",
-//        "dependencies" => []
-//    ],
-//    [
-//        "api" => "api/v1/customers/pop-up-data",
-//        "web" => ["/_/customers/setup"],
-//        "method" => "get",
-//        "label" => "View Pop-up Data",
-//        "group" => "customers",
-//        "dependencies" => []
-//    ],
+    [
+        "api" => "api/v1/customers/clients",
+        "web" => ["/_/customers"],
+        "method" => "get",
+        "label" => "View Clients",
+        "group" => "customers",
+        "dependencies" => []
+    ],
+    [
+        "api" => "api/v1/customers/pop-up-data",
+        "web" => ["/_/customers/setup"],
+        "method" => "get",
+        "label" => "View Pop-up Data",
+        "group" => "customers",
+        "dependencies" => []
+    ],
 
     // users
     [
@@ -63,7 +63,12 @@ return [
         "method" => "delete",
         "label" => "Users",
         "group" => "users",
-        "dependencies" => []
+        "dependencies" => [
+            [
+                "api" => "api/v1/rbac/users",
+                "method" => "get"
+            ]
+        ]
     ],
 
     // roles
@@ -102,38 +107,13 @@ return [
         "method" => "delete",
         "label" => "Roles",
         "group" => "users",
-        "dependencies" => [],
+        "dependencies" => [
+            [
+                "api" => "api/v1/rbac/roles",
+                "method" => "get"
+            ]
+        ],
     ],
-
-    // resources
-    [
-        "api" => "api/v1/rbac/resources",
-        "web" => [],
-        "method" => "get",
-        "label" => "Resources",
-        "group" => "users",
-    ],
-//    [
-//        "api" => "api/v1/rbac/resources",
-//        "web" => [],
-//        "method" => "post",
-//        "label" => "Resources",
-//        "group" => "users",
-//    ],
-//    [
-//        "api" => "api/v1/rbac/resources",
-//        "web" => [],
-//        "method" => "patch",
-//        "label" => "Resources",
-//        "group" => "users",
-//    ],
-//    [
-//        "api" => "api/v1/rbac/resources",
-//        "web" => [],
-//        "method" => "delete",
-//        "label" => "Resources",
-//        "group" => "users",
-//    ],
 
     // permissions
     [
@@ -169,5 +149,54 @@ return [
                 "method" => "get"
             ]
         ]
+    ],
+
+    // resources
+    [
+        "api" => "api/v1/rbac/resources",
+        "web" => ["/_/rbac/resources"],
+        "method" => "get",
+        "label" => "Resources",
+        "group" => "users",
+        "dependencies" => [],
+    ],
+    [
+        "api" => "api/v1/rbac/resources",
+        "web" => ["/_/rbac/resources"],
+        "method" => "post",
+        "label" => "Resources",
+        "group" => "users",
+        "dependencies" => [
+            [
+                "api" => "api/v1/rbac/resources",
+                "method" => "get"
+            ]
+        ],
+    ],
+    [
+        "api" => "api/v1/rbac/resources",
+        "web" => [],
+        "method" => "patch",
+        "label" => "Resources",
+        "group" => "users",
+        "dependencies" => [
+            [
+                "api" => "api/v1/rbac/resources",
+                "method" => "get"
+            ]
+        ],
+    ],
+    [
+        "api" => "api/v1/rbac/resources",
+        "web" => [],
+        "method" => "delete",
+        "label" => "Resources",
+        "group" => "users",
+        "dependencies" => [
+            [
+                "api" => "api/v1/rbac/resources",
+                "method" => "get"
+            ]
+        ],
     ],
 ];

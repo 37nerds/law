@@ -96,6 +96,9 @@ Route::prefix("/v1")
                 Route::prefix("/resources")->group(function () {
 
                     Route::get("/", [ResourceController::class, "index"]);
+                    Route::post("/", [ResourceController::class, "store"]);
+                    Route::patch("/", [ResourceController::class, "update"]);
+                    Route::delete("/", [ResourceController::class, "destroy"]);
 
                 });
 

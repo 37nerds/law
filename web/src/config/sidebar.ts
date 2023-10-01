@@ -13,6 +13,7 @@ import ArrowLeftOnRectangleIcon from "@heroicons/react/24/outline/ArrowLeftOnRec
 import PuzzlePieceIcon from "@heroicons/react/24/outline/PuzzlePieceIcon";
 import ArrowsPointingInIcon from "@heroicons/react/24/outline/ArrowsPointingInIcon";
 import DocumentChartBarIcon from "@heroicons/react/24/outline/DocumentChartBarIcon";
+import { PaperClipIcon } from "@heroicons/react/24/outline";
 
 /**
  * Configuration for setting the left Sidebar links with title, icon
@@ -81,6 +82,11 @@ export const sidebar_links: TSidebarLink[] = [
                 path: "/_/rbac/permissions",
                 icon: PuzzlePieceIcon,
                 name: "Permissions",
+            },
+            {
+                path: "/_/rbac/resources",
+                icon: PaperClipIcon,
+                name: "Resources",
             },
         ],
     },

@@ -34,9 +34,11 @@ export type TJsonS =
           [key: string]: TJsonS;
       };
 
+export type TColumnErrors = Record<string, string[]>;
+
 export type TError = {
     message?: string;
-    errors?: Record<string, string[]>;
+    errors?: TColumnErrors;
 };
 
 export type TResponse = {
