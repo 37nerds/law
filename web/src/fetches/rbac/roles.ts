@@ -44,7 +44,6 @@ export const useRolesQuery = () => {
             return await http.get(url, 200);
         },
         queryKey: [RBAC_ROLES_GET, page, searchQuery, sortColumn, sortOrder],
-        keepPreviousData: true,
     });
 
     useEffect(() => {

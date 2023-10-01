@@ -60,8 +60,6 @@ export const useUsersQuery = () => {
             return await http.get(url, 200);
         },
         queryKey: [RBAC__USERS__GET, page, searchQuery, sortColumn, sortOrder],
-        keepPreviousData: true,
-        enabled: true,
     });
 
     useEffect(() => {

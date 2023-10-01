@@ -1,4 +1,5 @@
 import type { TBase, TMethod, TPaginate } from "@helpers/types";
+
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { TError } from "@helpers/types";
 import { useEffect } from "react";
@@ -77,8 +78,6 @@ export const usePaginatedResourcesQuery = () => {
             return await http.get(url, 200);
         },
         queryKey: [RBAC__RESOURCES_PAGINATED_GET, page, searchQuery, sortColumn, sortOrder],
-        keepPreviousData: true,
-        enabled: true,
     });
 
     useEffect(() => {
