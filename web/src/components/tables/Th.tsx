@@ -3,7 +3,7 @@ import type { TOrder } from "@helpers/types";
 
 import ArrowDownIcon from "@heroicons/react/24/outline/ArrowDownIcon";
 import ArrowUpIcon from "@heroicons/react/24/outline/ArrowUpIcon";
-import MinusIcon from "@heroicons/react/24/outline/MinusIcon";
+import SortIcon from "@components/icons/SortIcon";
 
 const Th = <T,>({
     onClick,
@@ -26,12 +26,12 @@ const Th = <T,>({
                         {label}
                         {column === name ? (
                             order === "asc" ? (
-                                <ArrowDownIcon className="w-4" />
+                                <SortIcon sort={"asc"} />
                             ) : (
-                                <ArrowUpIcon className="w-4" />
+                                <SortIcon sort={"desc"} />
                             )
                         ) : (
-                            <MinusIcon className="w-4" />
+                            <SortIcon />
                         )}
                     </div>
                 </th>
