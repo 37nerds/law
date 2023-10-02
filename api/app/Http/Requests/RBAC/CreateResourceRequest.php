@@ -15,11 +15,11 @@ class CreateResourceRequest extends FormRequest
     {
         return [
             'api' => ["required", 'string', 'max:255'],
-            'web' => ["required", 'array'],
+            'web' => ["nullable", 'array'],
             'method' => ["required", 'string', 'max:255'],
             'label' => ["required", 'string', 'max:255'],
             'group' => ["required", 'string', 'max:255'],
-            "dependencies" => ["required", "array"],
+            "dependencies" => ["nullable", "array"],
         ];
     }
 }

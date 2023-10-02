@@ -72,7 +72,7 @@ class Index
                 ->when($search, function ($query) use ($search, $allowedColumnsForSearch) {
                     $query->where(function ($innerQuery) use ($search, $allowedColumnsForSearch) {
                         foreach ($allowedColumnsForSearch as $column) {
-                            $innerQuery->orWhere($column, 'LIKE', "%$search%");
+                            $innerQuery->orWhere($column, 'ILIKE', "%$search%");
                         }
                     });
                 });

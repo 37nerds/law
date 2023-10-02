@@ -31,7 +31,7 @@ class ResourceController extends Controller
                 return Index::paginatedSearchAndSort(
                     request: $request,
                     query: Resource::query(),
-                    allowedColumnsForSearch: ['api', 'web', 'method', 'label', 'group', 'dependencies', "created_at" ],
+                    allowedColumnsForSearch: ['api', 'method', 'label', 'group', "created_at" ],
                     allowedColumnsForSorting: ['api', 'method', 'label', 'group', "created_at"]
                 );
             }
@@ -43,7 +43,7 @@ class ResourceController extends Controller
 
     public function store(CreateResourceRequest $request): JsonResponse
     {
-        $resource = Resource::create($request->all());
+        $resource = Resource::query()->create($request->all());
         return Response::happy(201, new ResourceResource($resource));
     }
 
