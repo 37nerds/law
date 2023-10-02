@@ -1,4 +1,4 @@
-import { TRoleColumn, useRolesQuery } from "@fetches/rbac/roles";
+import { TRoleColumn, useRolesPaginatedQuery } from "@fetches/rbac/roles";
 
 import Table from "@components/tables/Table";
 import Th from "@components/tables/Th";
@@ -8,7 +8,7 @@ import RoleThreeDotDropdown from "./RoleThreeDotDropdown";
 import { THeader } from "@helpers/types";
 
 export const RolesTable = () => {
-    const rolesQuery = useRolesQuery();
+    const rolesQuery = useRolesPaginatedQuery();
 
     const { page, sortColumn, sortOrder } = useRolesStore(state => state.filters);
     const { setFiltersField } = useRolesStore(state => state);

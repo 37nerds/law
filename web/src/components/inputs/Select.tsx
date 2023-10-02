@@ -28,12 +28,14 @@ const Select = ({
             required={required}
             id={id}
         >
-            <option disabled value="">
-                {placeholder}
-            </option>
+            {placeholder && (
+                <option disabled value="">
+                    {placeholder}
+                </option>
+            )}
             {options.map((o, k) => {
                 return (
-                    <option value={o.value || o.name} key={k}>
+                    <option value={o.value} key={k}>
                         {o.name}
                     </option>
                 );

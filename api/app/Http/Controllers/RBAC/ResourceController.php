@@ -25,19 +25,17 @@ class ResourceController extends Controller
             return Response::happy(200, new ResourceResource($resource));
         }
 
-        $validated = $request->validate(["paginated" => ["nullable", "in:true,false"]]);
-        if (array_key_exists("paginated", $validated)) {
-            if ($validated["paginated"] === "true") {
-                return Index::paginatedSearchAndSort(
-                    request: $request,
-                    query: Resource::query(),
-                    allowedColumnsForSearch: ['api', 'method', 'label', 'group', "created_at" ],
-                    allowedColumnsForSorting: ['api', 'method', 'label', 'group', "created_at"]
-                );
-            }
+        if (Index::isPaginatedRequest($request)) {
+            $resources =  Index::paginatedSearchAndSort(
+                request: $request,
+                query: Resource::query(),
+                allowedColumnsForSearch: ['api', 'method', 'label', 'group', "created_at" ],
+                allowedColumnsForSorting: ['api', 'method', 'label', 'group', "created_at"]
+            );
+        } else {
+            $resources = Resource::query()->get();
         }
 
-        $resources = Resource::query()->get();
         return Response::happy(200, $resources);
     }
 

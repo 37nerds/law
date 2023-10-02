@@ -8,6 +8,7 @@ use App\Http\Requests\RBAC\CreateRoleRequest;
 use App\Http\Requests\RBAC\UpdateRoleRequest;
 use App\Http\Resources\RBAC\RoleResource;
 use App\Logic\Index;
+use App\Models\RBAC\Resource;
 use App\Models\RBAC\Role;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,13 +25,19 @@ class RoleController extends Controller
             return Response::happy(200, new RoleResource($role));
         }
 
-        $paginates = Index::paginatedSearchAndSort(
-            request: $request,
-            query: Role::query()->with("permissions"),
-            allowedColumnsForSearch: ["name"],
-            allowedColumnsForSorting: ["name", "disable"]
-        );
-        return Response::happy(200, $paginates);
+        $query = Role::query()->with("permissions");
+        if (Index::isPaginatedRequest($request)) {
+            $roles = Index::paginatedSearchAndSort(
+                request: $request,
+                query: $query,
+                allowedColumnsForSearch: ["name"],
+                allowedColumnsForSorting: ["name", "disable"]
+            );
+        } else {
+            $roles = $query->get();
+        }
+
+        return Response::happy(200, $roles);
     }
 
     public function store(CreateRoleRequest $request): JsonResponse

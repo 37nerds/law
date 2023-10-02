@@ -112,7 +112,7 @@ const EditUserModal = ({
                                     placeholder={"Choose role"}
                                     value={editUser["role_id"]}
                                     options={
-                                        rolesQuery?.data?.data.map((role: any) => ({
+                                        rolesQuery?.data?.map((role: any) => ({
                                             name: role.name,
                                             value: role.id,
                                         })) || []

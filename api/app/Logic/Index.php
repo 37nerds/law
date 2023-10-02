@@ -11,6 +11,10 @@ use Illuminate\Validation\Rule as LaraRule;
 
 class Index
 {
+    public static function isPaginatedRequest(Request $request) {
+        $validated = $request->validate(["paginated" => ["nullable", "in:true,false"]]);
+        return array_key_exists("paginated", $validated) && $validated["paginated"] === "true";
+    }
     public static function validatedAndFindWithID(Request $request, Builder $query): Model|null
     {
         $validated = $request->validate(["id" => ["nullable", "string"]]);

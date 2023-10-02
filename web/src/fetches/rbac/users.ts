@@ -49,17 +49,20 @@ export type TEditUser = {
 export type TUserColumn = "name" | "email" | "username" | "created_at" | "phone" | "address";
 
 export const useUsersQuery = () => {
-    const { searchQuery, page, sortColumn, sortOrder } = useUsersStore(state => state.filters);
+    const { searchQuery, page, sortColumn, sortOrder, filterRoleId } = useUsersStore(state => state.filters);
 
     const query = useQuery<TPaginate<TUser>, TError>({
         queryFn: async () => {
-            let url = `/rbac/users?per_page=10&page=${page}&sort_column=${sortColumn}&sort_order=${sortOrder}`;
+            let url = `/rbac/users?paginated=true&per_page=10&page=${page}&sort_column=${sortColumn}&sort_order=${sortOrder}`;
+            if (filterRoleId.trim() !== "") {
+                url += `&filter_role_id=${filterRoleId}`;
+            }
             if (searchQuery.trim() !== "") {
                 url += `&search=${encodeURIComponent(searchQuery.trim())}`;
             }
             return await http.get(url, 200);
         },
-        queryKey: [RBAC__USERS__GET, page, searchQuery, sortColumn, sortOrder],
+        queryKey: [RBAC__USERS__GET, page, searchQuery, sortColumn, sortOrder, filterRoleId],
     });
 
     useEffect(() => {

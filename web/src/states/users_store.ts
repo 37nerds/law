@@ -13,6 +13,7 @@ type TFilters = {
     searchQuery: string;
     sortColumn: TUserColumn;
     sortOrder: TOrder;
+    filterRoleId: string;
 };
 
 type TStore = {
@@ -48,6 +49,7 @@ const useUsersStore = create<TStore>()(
                 searchQuery: "",
                 sortColumn: "created_at",
                 sortOrder: "asc",
+                filterRoleId: " ",
             },
             setFiltersField: (key, value) => {
                 set(state => {

@@ -1,4 +1,4 @@
-import { useRolesQuery } from "@fetches/rbac/roles";
+import { useRolesPaginatedQuery } from "@fetches/rbac/roles";
 
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import usePermissionsStore from "@states/permissions_store";
@@ -12,7 +12,7 @@ import ResourcesTable from "@screens/permissions/ResourcesTable";
 const Permissions = () => {
     useSetPageTitle("Give Permissions");
 
-    const rolesQuery = useRolesQuery();
+    const rolesQuery = useRolesPaginatedQuery();
 
     const { role_id } = usePermissionsStore(state => state.filters);
     const { setFiltersField } = usePermissionsStore(state => state);

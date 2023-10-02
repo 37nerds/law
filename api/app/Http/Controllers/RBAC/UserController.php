@@ -27,9 +27,18 @@ class UserController extends Controller
             return Response::happy(200, new UserResource($user));
         }
 
+        $query = User::query()->with("role");
+
+        $validated = $request->validate([
+           "filter_role_id" => ["nullable", "string"]
+        ]);
+        if (array_key_exists("filter_role_id", $validated) && $validated["filter_role_id"] ) {
+            $query = $query->where("role_id", "=", $validated["filter_role_id"]);
+        }
+
         $paginates = Index::paginatedSearchAndSort(
             request: $request,
-            query: User::query()->with("role"),
+            query: $query,
             allowedColumnsForSearch: ["email", "username", "name", "phone", "address"],
             allowedColumnsForSorting: ["created_at", "email", "username", "name", "phone", "active", "address"]
         );
@@ -38,7 +47,7 @@ class UserController extends Controller
 
     public function store(CreateUserRequest $request): JsonResponse
     {
-        $user = User::create($request->all());
+        $user = User::query()->create($request->all());
         return Response::happy(201, new UserResource($user));
     }
 

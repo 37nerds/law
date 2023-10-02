@@ -109,7 +109,7 @@ const NewUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolea
                             placeholder={"Choose role"}
                             value={newUser["role_id"]}
                             options={
-                                rolesQuery?.data?.data.map((role: any) => ({
+                                rolesQuery?.data?.map((role: any) => ({
                                     name: role.name,
                                     value: role.id,
                                 })) || []

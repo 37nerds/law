@@ -8,7 +8,8 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import http from "@helpers/http";
 import useRolesStore from "@states/roles_store";
 
-export const RBAC_ROLES_GET = "get.roles";
+export const RBAC_ROLES__GET = "get.rbac-roles";
+export const RBAC_ROLES__PAGINATED__GET = "get.paginated.rbac-roles";
 export const RBAC_ROLE_GET = "get.role";
 export const RBAC_ROLE_POST = "post.roles";
 export const RBAC_ROLE_DELETE = "delete.roles";
@@ -33,17 +34,35 @@ export type TEditRole = {
 export type TRoleColumn = "name" | "disable";
 
 export const useRolesQuery = () => {
+    const query = useQuery<TRole[], TError>({
+        queryFn: async () => {
+            let url = `/rbac/roles`;
+            return await http.get(url, 200);
+        },
+        queryKey: [RBAC_ROLES__GET],
+    });
+
+    useEffect(() => {
+        if (query.isError) {
+            notify("error", query.error?.message);
+        }
+    }, [query.isError]);
+
+    return query;
+};
+
+export const useRolesPaginatedQuery = () => {
     const { page, searchQuery, sortColumn, sortOrder } = useRolesStore(state => state.filters);
 
     const query = useQuery<TPaginate<TRole>, TError>({
         queryFn: async () => {
-            let url = `/rbac/roles?per_page=10&page=${page}&sort_column=${sortColumn}&sort_order=${sortOrder}`;
+            let url = `/rbac/roles?paginated=true&&per_page=10&page=${page}&sort_column=${sortColumn}&sort_order=${sortOrder}`;
             if (searchQuery.trim() !== "") {
                 url += `&search=${encodeURIComponent(searchQuery.trim())}`;
             }
             return await http.get(url, 200);
         },
-        queryKey: [RBAC_ROLES_GET, page, searchQuery, sortColumn, sortOrder],
+        queryKey: [RBAC_ROLES__PAGINATED__GET, page, searchQuery, sortColumn, sortOrder],
     });
 
     useEffect(() => {
@@ -64,7 +83,8 @@ export const useSaveRoleMutation = () => {
         },
         mutationKey: [RBAC_ROLE_POST],
         onSuccess: () => {
-            return queryClient.invalidateQueries(RBAC_ROLES_GET);
+            queryClient.invalidateQueries(RBAC_ROLES__GET).then();
+            queryClient.invalidateQueries(RBAC_ROLES__PAGINATED__GET).then();
         },
     });
 
@@ -90,7 +110,8 @@ export const useDeleteRoleMutation = () => {
         },
         mutationKey: [RBAC_ROLE_DELETE],
         onSuccess: () => {
-            return queryClient.invalidateQueries(RBAC_ROLES_GET);
+            queryClient.invalidateQueries(RBAC_ROLES__GET).then();
+            queryClient.invalidateQueries(RBAC_ROLES__PAGINATED__GET).then();
         },
     });
 
@@ -134,7 +155,8 @@ export const useEditRoleMutation = () => {
         mutationKey: [RBAC_ROLE_PATCH],
         onSuccess: role => {
             queryClient.invalidateQueries([RBAC_ROLE_GET, role.id]).then();
-            queryClient.invalidateQueries(RBAC_ROLES_GET).then();
+            queryClient.invalidateQueries(RBAC_ROLES__GET).then();
+            queryClient.invalidateQueries(RBAC_ROLES__PAGINATED__GET).then();
         },
     });
 
