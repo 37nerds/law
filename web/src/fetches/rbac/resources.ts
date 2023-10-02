@@ -55,6 +55,7 @@ export const useResourcesQuery = () => {
             return await http.get("/rbac/resources", 200);
         },
         queryKey: [RBAC__RESOURCES_GET],
+        retry: false,
     });
 
     useEffect(() => {
@@ -78,6 +79,7 @@ export const usePaginatedResourcesQuery = () => {
             return await http.get(url, 200);
         },
         queryKey: [RBAC__RESOURCES_PAGINATED_GET, page, searchQuery, sortColumn, sortOrder],
+        retry: false,
     });
 
     useEffect(() => {

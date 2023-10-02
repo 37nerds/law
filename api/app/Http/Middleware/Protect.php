@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\RBAC\Permission;
 use App\Models\RBAC\Resource;
+use App\Models\RBAC\Role;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,11 @@ class Protect
      */
     public function handle(Request $request, Closure $next)
     {
+        $role = Role::query()->find(Auth::user()->role_id);
+        if ($role->disable) {
+            abort(403, "Forbidden !!");
+        }
+
         $path = $request->path();
         $method = Str::lower($request->method());
 

@@ -63,6 +63,7 @@ export const useRolesPaginatedQuery = () => {
             return await http.get(url, 200);
         },
         queryKey: [RBAC_ROLES__PAGINATED__GET, page, searchQuery, sortColumn, sortOrder],
+        retry: false,
     });
 
     useEffect(() => {
