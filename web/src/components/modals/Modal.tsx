@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
 
 import Title from "@components/pure/Title";
-import XMarkIcon from "@heroicons/react/24/outline/XMarkIcon";
+import XIcon from "@components/icons/XIcon";
 
 const Box = ({ isForm, children, onSubmit }: { isForm?: boolean; onSubmit?: () => void; children: ReactNode }) => {
     const className = `py-5`;
@@ -70,7 +70,7 @@ const Modal = ({
                                         setOpen(false);
                                     }}
                                 >
-                                    <XMarkIcon className="w-6" />
+                                    <XIcon className="w-6" />
                                 </button>
                             </form>
                         </div>

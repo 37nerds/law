@@ -1,9 +1,11 @@
+import type { TOption } from "@helpers/types";
+
 import { useState } from "react";
 
-import Input from "@components/inputs/Input";
 import ArrayInputLayout from "@components/inputs/ArrayInputLayout";
+import Select from "@components/inputs/Select";
 
-const ArrayInput = ({
+const ArraySelectInput = ({
     value,
     setValue,
     placeholder = "",
@@ -12,6 +14,7 @@ const ArrayInput = ({
     label = null,
     errorMessage = null,
     id = "",
+    options,
 }: {
     value: string[];
     setValue?: (value: string[]) => void;
@@ -21,25 +24,25 @@ const ArrayInput = ({
     label?: string | null;
     errorMessage?: string | null;
     id?: string;
+    options: TOption[];
 }) => {
     const [text, setText] = useState("");
 
     return (
         <ArrayInputLayout
             input={
-                <Input
+                <Select
+                    placeholder={placeholder}
                     value={text}
-                    type="text"
-                    placeholder="Enter here"
                     setValue={setText}
                     disabled={disabled}
+                    required={required}
+                    options={options}
                     id={id}
-                    autoComplete="on"
                 />
             }
             errorMessage={errorMessage}
             label={label}
-            placeholder={placeholder}
             required={required}
             setText={setText}
             setValue={setValue}
@@ -49,4 +52,4 @@ const ArrayInput = ({
     );
 };
 
-export default ArrayInput;
+export default ArraySelectInput;

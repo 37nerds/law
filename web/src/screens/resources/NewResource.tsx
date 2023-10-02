@@ -1,9 +1,10 @@
+import type { TResource, TResourceDependency } from "@fetches/rbac/resources";
+
 import { useEffect } from "react";
-import { useSaveResourceMutation } from "@fetches/rbac/resources";
+import { useResourcesQuery, useSaveResourceMutation } from "@fetches/rbac/resources";
 
 import useResourcesStore from "@states/resources_store";
 
-import EmailInput from "@components/inputs/EmailInput";
 import SelectInput from "@components/inputs/SelectInput";
 import StringInput from "@components/inputs/StringInput";
 import SingleInputBox from "@components/inputs/SingleInputBox";
@@ -11,6 +12,9 @@ import Modal from "@components/modals/Modal";
 import AddButton from "@components/buttons/AddButton";
 import SubmitButton from "@components/buttons/SubmitButton";
 import ArrayInput from "@components/inputs/ArrayInput";
+import QueryWrapper from "@components/wrappers/QueryWrapper";
+import ArraySelectInput from "@components/inputs/ArraySelectInput";
+import { TMethod } from "@helpers/types";
 
 const NewResourceModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
     const saveResourceMutation = useSaveResourceMutation();
@@ -42,6 +46,8 @@ const NewResourceModal = ({ open, setOpen }: { open: boolean; setOpen: (open: bo
         saveResourceMutation.mutate(newResource);
     };
 
+    const resourcesQuery = useResourcesQuery();
+
     return (
         <Modal
             isForm={true}
@@ -52,89 +58,106 @@ const NewResourceModal = ({ open, setOpen }: { open: boolean; setOpen: (open: bo
             widthClass="w-[800px]"
             title="ADD NEW RESOURCE"
         >
-            <div className="flex flex-col gap-5">
-                <SingleInputBox
-                    label="API"
-                    required={true}
-                    element={
-                        <StringInput
-                            required={true}
-                            value={newResource["api"]}
-                            setValue={value => setNewResourceField("api", value)}
-                        />
-                    }
-                    errorMessage={newResourceError["api"]}
-                />
-                <SingleInputBox
-                    required={true}
-                    label="Web"
-                    element={
-                        <ArrayInput
-                            required={true}
-                            value={newResource["web"]}
-                            setValue={value => setNewResourceField("web", value)}
-                        />
-                    }
-                    errorMessage={newResourceError["web"]}
-                />
-                <SingleInputBox
-                    required={true}
-                    label="Method"
-                    element={
-                        <SelectInput
-                            placeholder={"Choose method"}
-                            required={true}
-                            value={newResource["method"]}
-                            setValue={value => setNewResourceField("method", value)}
-                            options={[
-                                { name: "get", value: "get" },
-                                { name: "post", value: "post" },
-                                { name: "patch", value: "patch" },
-                                { name: "delete", value: "delete" },
-                            ]}
-                        />
-                    }
-                    errorMessage={newResourceError["method"]}
-                />
-                <SingleInputBox
-                    required={true}
-                    label="Label"
-                    element={
-                        <StringInput
-                            required={true}
-                            value={newResource["label"]}
-                            setValue={value => setNewResourceField("label", value)}
-                        />
-                    }
-                    errorMessage={newResourceError["label"]}
-                />
+            <QueryWrapper<TResource[]> query={resourcesQuery}>
+                <div className="flex flex-col gap-5">
+                    <SingleInputBox
+                        label="API"
+                        required={true}
+                        element={
+                            <StringInput
+                                required={true}
+                                value={newResource["api"]}
+                                setValue={value => setNewResourceField("api", value)}
+                            />
+                        }
+                        errorMessage={newResourceError["api"]}
+                    />
+                    <SingleInputBox
+                        label="Web"
+                        element={
+                            <ArrayInput
+                                value={newResource["web"]}
+                                setValue={value => setNewResourceField("web", value)}
+                            />
+                        }
+                        errorMessage={newResourceError["web"]}
+                    />
+                    <SingleInputBox
+                        required={true}
+                        label="Method"
+                        element={
+                            <SelectInput
+                                placeholder={"Choose method"}
+                                required={true}
+                                value={newResource["method"]}
+                                setValue={value => setNewResourceField("method", value)}
+                                options={[
+                                    { name: "get", value: "get" },
+                                    { name: "post", value: "post" },
+                                    { name: "patch", value: "patch" },
+                                    { name: "delete", value: "delete" },
+                                ]}
+                            />
+                        }
+                        errorMessage={newResourceError["method"]}
+                    />
+                    <SingleInputBox
+                        required={true}
+                        label="Label"
+                        element={
+                            <StringInput
+                                required={true}
+                                value={newResource["label"]}
+                                setValue={value => setNewResourceField("label", value)}
+                            />
+                        }
+                        errorMessage={newResourceError["label"]}
+                    />
 
-                <SingleInputBox
-                    required={true}
-                    label="Group"
-                    element={
-                        <StringInput
-                            required={true}
-                            value={newResource["group"]}
-                            setValue={value => setNewResourceField("group", value)}
-                        />
-                    }
-                    errorMessage={newResourceError["group"]}
-                />
+                    <SingleInputBox
+                        required={true}
+                        label="Group"
+                        element={
+                            <StringInput
+                                required={true}
+                                value={newResource["group"]}
+                                setValue={value => setNewResourceField("group", value)}
+                            />
+                        }
+                        errorMessage={newResourceError["group"]}
+                    />
 
-                <SingleInputBox
-                    required={true}
-                    label="Dependencies"
-                    element={
-                        <StringInput
-                            required={true}
-                            value={""}
-                            setValue={value => setNewResourceField("dependencies", value)}
-                        />
-                    }
-                    errorMessage={newResourceError["dependencies"]}
-                />
-            </div>
+                    <SingleInputBox
+                        label="Dependencies"
+                        element={
+                            <ArraySelectInput
+                                value={newResource["dependencies"].map(x => `${x.method} ${x.api}`)}
+                                setValue={value =>
+                                    setNewResourceField(
+                                        "dependencies",
+                                        value.map(x => {
+                                            const split = x.split(" ");
+                                            const resourceDependency: TResourceDependency = {
+                                                api: split[1],
+                                                method: split[0] as TMethod,
+                                            };
+                                            return resourceDependency;
+                                        })
+                                    )
+                                }
+                                options={
+                                    resourcesQuery?.data?.map(resource => {
+                                        const x = `${resource.method} ${resource.api}`;
+                                        return { name: x, value: x };
+                                    }) || []
+                                }
+                                placeholder={"Choose dependent api"}
+                            />
+                        }
+                        errorMessage={newResourceError["dependencies"]}
+                    />
+                </div>
+            </QueryWrapper>
         </Modal>
     );
 };
