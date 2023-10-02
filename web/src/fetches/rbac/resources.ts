@@ -151,7 +151,7 @@ export const useEditResourceMutation = () => {
             return await http.patch(`/rbac/resources?id=${editResource.id}`, editResource, 200);
         },
         mutationKey: [RBAC__RESOURCE_PATCH],
-        onSuccess: user => {
+        onSuccess: () => {
             queryClient.invalidateQueries(RBAC__RESOURCES_GET).then();
             queryClient.invalidateQueries(RBAC__RESOURCES_PAGINATED_GET).then();
         },

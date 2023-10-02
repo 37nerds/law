@@ -23,7 +23,7 @@ const ResourcesThreeDotDropdown = ({ resourceId }: { resourceId: string }) => {
 
     const options: TThreeDropDownOption[] = [];
 
-    if (isPermitted("api/v1/rbac/users", "patch")) {
+    if (isPermitted("api/v1/rbac/resources", "patch")) {
         options.push({
             content: <EditButton />,
             handler: () => {
@@ -33,7 +33,7 @@ const ResourcesThreeDotDropdown = ({ resourceId }: { resourceId: string }) => {
         });
     }
 
-    if (isPermitted("api/v1/rbac/users", "delete")) {
+    if (isPermitted("api/v1/rbac/resources", "delete")) {
         options.push({
             content: <DeleteButton />,
             handler: () => {

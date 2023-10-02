@@ -50,7 +50,6 @@ const useUsersStore = create<TStore>()(
                 sortOrder: "asc",
             },
             setFiltersField: (key, value) => {
-                console.log("Here", key, value);
                 set(state => {
                     state.filters[key] = value;
                 });
