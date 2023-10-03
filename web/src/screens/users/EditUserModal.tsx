@@ -10,7 +10,6 @@ import StringInput from "@components/inputs/StringInput";
 import QueryWrapper from "@components/wrappers/QueryWrapper";
 import SingleInputBox from "@components/inputs/SingleInputBox";
 import Modal from "@components/modals/Modal";
-import { notify } from "@helpers/notify";
 
 const EditUserModal = ({
     open,

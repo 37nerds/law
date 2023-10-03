@@ -1,5 +1,10 @@
 import type { TResource, TResourceDependency } from "@fetches/rbac/resources";
 
+import {
+    convertArraySelectInputValueStringArrayIntoResourceDependencyArray,
+    prepareDependenciesOptions,
+} from "@logic/resources";
+
 import { useEffect } from "react";
 import { useResourcesQuery, useSaveResourceMutation } from "@fetches/rbac/resources";
 
@@ -14,7 +19,7 @@ import SubmitButton from "@components/buttons/SubmitButton";
 import ArrayInput from "@components/inputs/ArrayInput";
 import QueryWrapper from "@components/wrappers/QueryWrapper";
 import ArraySelectInput from "@components/inputs/ArraySelectInput";
-import { TMethod } from "@helpers/types";
+
 
 const NewResourceModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
     const saveResourceMutation = useSaveResourceMutation();
@@ -135,22 +140,10 @@ const NewResourceModal = ({ open, setOpen }: { open: boolean; setOpen: (open: bo
                                 setValue={value =>
                                     setNewResourceField(
                                         "dependencies",
-                                        value.map(x => {
-                                            const split = x.split(" ");
-                                            const resourceDependency: TResourceDependency = {
-                                                api: split[1],
-                                                method: split[0] as TMethod,
-                                            };
-                                            return resourceDependency;
-                                        })
+                                        convertArraySelectInputValueStringArrayIntoResourceDependencyArray(value)
                                     )
                                 }
-                                options={
-                                    resourcesQuery?.data?.map(resource => {
-                                        const x = `${resource.method} ${resource.api}`;
-                                        return { name: x, value: x };
-                                    }) || []
-                                }
+                                options={prepareDependenciesOptions(resourcesQuery.data, newResource["dependencies"])}
                                 placeholder={"Choose dependent api"}
                             />
                         }

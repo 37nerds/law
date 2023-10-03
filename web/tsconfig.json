@@ -23,9 +23,10 @@
             "@helpers/*": ["src/helpers/*"],
             "@hooks/*": ["src/hooks/*"],
             "@layout/*": ["src/layout/*"],
+            "@logic/*": ["src/logic/*"],
             "@pages/*": ["src/pages/*"],
             "@screens/*": ["src/screens/*"],
-            "@states/*": ["src/states/*"],
+            "@states/*": ["src/states/*"]
         }
     },
     "include": ["src"],

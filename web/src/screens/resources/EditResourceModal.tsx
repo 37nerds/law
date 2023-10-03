@@ -1,5 +1,9 @@
-import type { TResource, TResourceDependency } from "@fetches/rbac/resources";
-import type { TMethod } from "@helpers/types";
+import type { TResource } from "@fetches/rbac/resources";
+
+import {
+    convertArraySelectInputValueStringArrayIntoResourceDependencyArray,
+    prepareDependenciesOptions,
+} from "@logic/resources";
 
 import { useEffect } from "react";
 import { useEditResourceMutation, useResourceQuery, useResourcesQuery } from "@fetches/rbac/resources";
@@ -174,22 +178,10 @@ const EditResourceModal = ({
                                 setValue={value =>
                                     setEditResourceField(
                                         "dependencies",
-                                        value?.map(x => {
-                                            const split = x.split(" ");
-                                            const resourceDependency: TResourceDependency = {
-                                                api: split[1],
-                                                method: split[0] as TMethod,
-                                            };
-                                            return resourceDependency;
-                                        })
+                                        convertArraySelectInputValueStringArrayIntoResourceDependencyArray(value)
                                     )
                                 }
-                                options={
-                                    resourcesQuery?.data?.map(resource => {
-                                        const x = `${resource.method} ${resource.api}`;
-                                        return { name: x, value: x };
-                                    }) || []
-                                }
+                                options={prepareDependenciesOptions(resourcesQuery?.data, editResource["dependencies"])}
                                 placeholder={"Choose dependent api"}
                             />
                         }
