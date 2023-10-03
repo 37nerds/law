@@ -43,7 +43,7 @@ export const useSavePermissionMutation = () => {
 export const useDeletePermissionMutation = () => {
     const c = useQueryClient();
     const m = useMutation<null, TError, TDeletePermission>({
-        mutationFn: d => http.delete(`/rbac/permissions?id=${d.permissionId}&role_id=${d.roleId}`, 204),
+        mutationFn: d => http.delete(`/rbac/permissions?foo=bar&id=${d.permissionId}&role_id=${d.roleId}`, 204),
         mutationKey: [RBAC_PERMISSION__DELETE],
         onSuccess: (_, { roleId }) => c.invalidateQueries([RBAC_ROLE__GET, roleId]).then(),
     });
@@ -65,7 +65,7 @@ export const useGiveAllPermissionMutation = () => {
 export const useRemoveAllPermissionMutation = () => {
     const c = useQueryClient();
     const m = useMutation<null, TError, string>({
-        mutationFn: roleId => http.delete(`/rbac/permissions/all?role_id=${roleId}`, 200),
+        mutationFn: roleId => http.delete(`/rbac/permissions/all?foo=bar&role_id=${roleId}`, 200),
         mutationKey: [RBAC_PERMISSION_ALL__DELETE],
         onSuccess: (_, roleId) => c.invalidateQueries([RBAC_ROLE__GET, roleId]).then(),
     });

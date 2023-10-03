@@ -65,8 +65,8 @@ export const usePaginatedResourcesQuery = () => {
     const q = useQuery<TPaginate<TResource>, TError>({
         queryFn: () => {
             let uri =
-                `/rbac/resources` +
-                `?per_page=10&page=${page}` +
+                `/rbac/resources?foo=bar` +
+                `&per_page=10&page=${page}` +
                 `&sort_column=${sortColumn}` +
                 `&sort_order=${sortOrder}` +
                 `&paginated=true`;
@@ -86,7 +86,7 @@ export const usePaginatedResourcesQuery = () => {
 export const useDeleteResourceMutation = () => {
     const c = useQueryClient();
     const m = useMutation<null, TError, string>({
-        mutationFn: id => http.delete(`/rbac/resources?id=${id}`, 204),
+        mutationFn: id => http.delete(`/rbac/resources?foo=bar&id=${id}`, 204),
         mutationKey: [RBAC_RESOURCE__DELETE],
         onSuccess: () => {
             c.invalidateQueries(RBAC_RESOURCES__PAGINATED__GET).then();
@@ -117,7 +117,7 @@ export const useEditResourceMutation = () => {
     const c = useQueryClient();
 
     const m = useMutation<TResource, TError, TEditResource>({
-        mutationFn: editResource => http.patch(`/rbac/resources?id=${editResource.id}`, editResource, 200),
+        mutationFn: editResource => http.patch(`/rbac/resources?foo=bar&id=${editResource.id}`, editResource, 200),
         mutationKey: [RBAC_RESOURCE__PATCH],
         onSuccess: () => {
             c.invalidateQueries(RBAC_RESOURCES__GET).then();

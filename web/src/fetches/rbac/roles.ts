@@ -48,8 +48,8 @@ export const useRolesPaginatedQuery = () => {
     const q = useQuery<TPaginate<TRole>, TError>({
         queryFn: () => {
             let url =
-                `/rbac/roles` +
-                `?per_page=10&page=${page}` +
+                `/rbac/roles?foo=bar` +
+                `&per_page=10&page=${page}` +
                 `&sort_column=${sortColumn}` +
                 `&sort_order=${sortOrder}` +
                 `&paginated=true`;
@@ -67,7 +67,7 @@ export const useRolesPaginatedQuery = () => {
 
 export const useRoleQuery = (roleId: string) => {
     const q = useQuery<TRole, TError>({
-        queryFn: () => (roleId === "" ? Promise.resolve({}) : http.get(`/rbac/roles?id=${roleId}`, 200)),
+        queryFn: () => (roleId === "" ? Promise.resolve({}) : http.get(`/rbac/roles/?foo=bar&id=${roleId}`, 200)),
         queryKey: [RBAC_ROLE__GET, roleId],
     });
     useQueryErrorMessage(q);
@@ -92,7 +92,7 @@ export const useSaveRoleMutation = () => {
 export const useDeleteRoleMutation = () => {
     const c = useQueryClient();
     const m = useMutation<TRole, TError, string>({
-        mutationFn: roleId => http.delete(`/rbac/roles?id=${roleId}`, 204),
+        mutationFn: roleId => http.delete(`/rbac/roles?foo=bar&id=${roleId}`, 204),
         mutationKey: [RBAC_ROLE__DELETE],
         onSuccess: () => {
             c.invalidateQueries(RBAC_ROLES__GET).then();
@@ -107,7 +107,7 @@ export const useDeleteRoleMutation = () => {
 export const useEditRoleMutation = () => {
     const c = useQueryClient();
     const m = useMutation<TRole, TError, TEditRole>({
-        mutationFn: role => http.patch(`/rbac/roles?id=${role.id}`, role, 200),
+        mutationFn: role => http.patch(`/rbac/roles?foo=bar&id=${role.id}`, role, 200),
         mutationKey: [RBAC_ROLE__PATCH],
         onSuccess: role => {
             c.invalidateQueries([RBAC_ROLE__GET, role.id]).then();

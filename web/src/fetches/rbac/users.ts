@@ -54,8 +54,8 @@ export const useUsersPaginatedQuery = () => {
     const q = useQuery<TPaginate<TUser>, TError>({
         queryFn: () => {
             let url =
-                `/rbac/users` +
-                `?per_page=10&page=${page}` +
+                `/rbac/users?foo=bar` +
+                `&per_page=10&page=${page}` +
                 `&sort_column=${sortColumn}` +
                 `&sort_order=${sortOrder}` +
                 `&paginated=true`;
@@ -76,7 +76,7 @@ export const useUsersPaginatedQuery = () => {
 
 export const useUserQuery = (userId: string) => {
     const q = useQuery<TUser, TError>({
-        queryFn: () => (!userId ? Promise.resolve({}) : http.get(`/rbac/users?id=${userId}`, 200)),
+        queryFn: () => (!userId ? Promise.resolve({}) : http.get(`/rbac/users?foo=bar&id=${userId}`, 200)),
         queryKey: [RBAC_USER__GET, userId],
     });
     useQueryErrorMessage(q);
@@ -99,7 +99,7 @@ export const useUserEditMutation = () => {
     const c = useQueryClient();
     const m = useMutation<TUser, TError, TEditUser>({
         mutationFn: async user => {
-            return await http.patch(`/rbac/users?id=${user.id}`, user, 200);
+            return await http.patch(`/rbac/users?foo=bar&id=${user.id}`, user, 200);
         },
         mutationKey: [RBAC_USER_PATCH],
         onSuccess: user => {
@@ -115,7 +115,7 @@ export const useUserEditMutation = () => {
 export const useUserDeleteMutation = () => {
     const c = useQueryClient();
     const m = useMutation<TUser, TError, string>({
-        mutationFn: userId => http.delete(`/rbac/users?id=${userId}`, 204),
+        mutationFn: userId => http.delete(`/rbac/users?foo=bar&id=${userId}`, 204),
         mutationKey: [RBAC_USER_DELETE],
         onSuccess: () => c.invalidateQueries(RBAC_USERS__GET).then(),
     });
