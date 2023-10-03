@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+if [[ $1 == "artisan" || $1 == "a" ]]; then
+    docker exec law_php php artisan ${*:2}
+fi
