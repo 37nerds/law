@@ -1,4 +1,4 @@
-import { useRolesPaginatedQuery } from "@fetches/rbac/roles";
+import { useRolesQuery } from "@fetches/rbac/roles";
 
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import usePermissionsStore from "@states/permissions_store";
@@ -6,13 +6,13 @@ import usePermissionsStore from "@states/permissions_store";
 import SelectInput from "@components/inputs/SelectInput";
 import PageCard from "@components/cards/PageCard";
 import SingleInputBox from "@components/inputs/SingleInputBox";
-import CheckboxInput from "@components/inputs/CheckboxInput";
-import ResourcesTable from "@screens/permissions/ResourcesTable";
+import PermissionView from "@screens/permissions/PermissionView";
+import SelectDeselectAllButton from "@screens/permissions/SelectDeselectAllButton";
 
 const Permissions = () => {
     useSetPageTitle("Give Permissions");
 
-    const rolesQuery = useRolesPaginatedQuery();
+    const rolesQuery = useRolesQuery();
 
     const { role_id } = usePermissionsStore(state => state.filters);
     const { setFiltersField } = usePermissionsStore(state => state);
@@ -28,7 +28,7 @@ const Permissions = () => {
                             placeholder={"Select role"}
                             value={role_id}
                             options={
-                                rolesQuery?.data?.data.map((role: any) => ({
+                                rolesQuery?.data?.map((role: any) => ({
                                     name: role.name,
                                     value: role.id,
                                 })) || []
@@ -38,12 +38,8 @@ const Permissions = () => {
                     }
                 />
 
-                <ResourcesTable />
-
-                <div className="flex justify-end gap-5">
-                    <div>Select/Deselect All</div>
-                    <CheckboxInput checked={false} onChange={() => console.log("clicked")} />
-                </div>
+                <PermissionView />
+                <SelectDeselectAllButton roleId={role_id} />
             </div>
         </PageCard>
     );

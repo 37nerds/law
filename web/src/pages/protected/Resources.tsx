@@ -35,7 +35,7 @@ const Resources = () => {
                 <div>
                     <SearchInput
                         value={searchQuery}
-                        placeholder="Search Users"
+                        placeholder="Search Resources"
                         onSearch={s => setFiltersField("searchQuery", s)}
                     />
                 </div>

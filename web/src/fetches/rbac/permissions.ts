@@ -3,11 +3,10 @@ import type { TBase } from "@helpers/types";
 import type { TError } from "@helpers/types";
 
 import { useMutation, useQueryClient } from "react-query";
-import { RBAC_ROLE_GET } from "@fetches/rbac/roles";
-import { useEffect } from "react";
-import { notify } from "@helpers/notify";
+import { RBAC_ROLE__GET } from "@fetches/rbac/roles";
 
 import http from "@helpers/http";
+import useMutationErrorHandling from "@hooks/useMutationErrorHandling";
 
 export type TPermission = TBase & {
     role_id: string;
@@ -20,49 +19,56 @@ export type TCreatePermission = {
     resource_id: string;
 };
 
-const RBAC_PERMISSION_POST = "post.rbac-permission";
-const RBAC_PERMISSION_DELETE = "delete.rbac-permission";
+export type TDeletePermission = {
+    permissionId: string;
+    roleId: string;
+};
+
+const RBAC_PERMISSION__POST = "post.rbac-permission";
+const RBAC_PERMISSION__DELETE = "delete.rbac-permission";
+const RBAC_PERMISSION_ALL__POST = "post.rbac-permission-all";
+const RBAC_PERMISSION_ALL__DELETE = "delete.rbac-permission-all";
 
 export const useSavePermissionMutation = () => {
-    const queryClient = useQueryClient();
-
-    const mutation = useMutation<TPermission, TError, TCreatePermission>({
-        mutationFn: async createPermission => {
-            return await http.post("/rbac/permissions", createPermission, 201);
-        },
-        mutationKey: [RBAC_PERMISSION_POST],
-        onSuccess: permission => {
-            queryClient.invalidateQueries([RBAC_ROLE_GET, permission.role_id]).then();
-        },
+    const c = useQueryClient();
+    const m = useMutation<TPermission, TError, TCreatePermission>({
+        mutationFn: createPermission => http.post("/rbac/permissions", createPermission, 201),
+        mutationKey: [RBAC_PERMISSION__POST],
+        onSuccess: permission => c.invalidateQueries([RBAC_ROLE__GET, permission.role_id]).then(),
     });
-
-    useEffect(() => {
-        if (mutation.isError) {
-            notify("error", mutation.error?.message);
-        }
-    }, [mutation.isError]);
-
-    return mutation;
+    useMutationErrorHandling(m);
+    return m;
 };
 
 export const useDeletePermissionMutation = () => {
-    const queryClient = useQueryClient();
-
-    const mutation = useMutation<null, TError, { permissionId: string; roleId: string }>({
-        mutationFn: async ({ permissionId, roleId }) => {
-            return await http.delete(`/rbac/permissions?id=${permissionId}&role_id=${roleId}`, 204);
-        },
-        mutationKey: [RBAC_PERMISSION_DELETE],
-        onSuccess: (_, { roleId }) => {
-            queryClient.invalidateQueries([RBAC_ROLE_GET, roleId]).then();
-        },
+    const c = useQueryClient();
+    const m = useMutation<null, TError, TDeletePermission>({
+        mutationFn: d => http.delete(`/rbac/permissions?id=${d.permissionId}&role_id=${d.roleId}`, 204),
+        mutationKey: [RBAC_PERMISSION__DELETE],
+        onSuccess: (_, { roleId }) => c.invalidateQueries([RBAC_ROLE__GET, roleId]).then(),
     });
+    useMutationErrorHandling(m);
+    return m;
+};
 
-    useEffect(() => {
-        if (mutation.isError) {
-            notify("error", mutation.error?.message);
-        }
-    }, [mutation.isError]);
+export const useGiveAllPermissionMutation = () => {
+    const c = useQueryClient();
+    const m = useMutation<null, TError, string>({
+        mutationFn: roleId => http.post("/rbac/permissions/all", { role_id: roleId }, 200),
+        mutationKey: [RBAC_PERMISSION_ALL__POST],
+        onSuccess: (_, roleId) => c.invalidateQueries([RBAC_ROLE__GET, roleId]).then(),
+    });
+    useMutationErrorHandling(m);
+    return m;
+};
 
-    return mutation;
+export const useRemoveAllPermissionMutation = () => {
+    const c = useQueryClient();
+    const m = useMutation<null, TError, string>({
+        mutationFn: async roleId => await http.delete(`/rbac/permissions/all?role_id=${roleId}`, 200),
+        mutationKey: [RBAC_PERMISSION_ALL__DELETE],
+        onSuccess: (_, roleId) => c.invalidateQueries([RBAC_ROLE__GET, roleId]).then(),
+    });
+    useMutationErrorHandling(m);
+    return m;
 };

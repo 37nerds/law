@@ -10,7 +10,7 @@ import useRolesStore from "@states/roles_store";
 
 export const RBAC_ROLES__GET = "get.rbac-roles";
 export const RBAC_ROLES__PAGINATED__GET = "get.paginated.rbac-roles";
-export const RBAC_ROLE_GET = "get.role";
+export const RBAC_ROLE__GET = "get.rbac-role";
 export const RBAC_ROLE_POST = "post.roles";
 export const RBAC_ROLE_DELETE = "delete.roles";
 export const RBAC_ROLE_PATCH = "patch.roles";
@@ -134,7 +134,7 @@ export const useRoleQuery = (id: string) => {
         queryFn: async () => {
             return id === "" ? Promise.resolve({}) : await http.get(`/rbac/roles?id=${id}`, 200);
         },
-        queryKey: [RBAC_ROLE_GET, id],
+        queryKey: [RBAC_ROLE__GET, id],
     });
 
     useEffect(() => {
@@ -155,7 +155,7 @@ export const useEditRoleMutation = () => {
         },
         mutationKey: [RBAC_ROLE_PATCH],
         onSuccess: role => {
-            queryClient.invalidateQueries([RBAC_ROLE_GET, role.id]).then();
+            queryClient.invalidateQueries([RBAC_ROLE__GET, role.id]).then();
             queryClient.invalidateQueries(RBAC_ROLES__GET).then();
             queryClient.invalidateQueries(RBAC_ROLES__PAGINATED__GET).then();
         },

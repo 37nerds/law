@@ -30,7 +30,7 @@ const processResources = (resources: TResource[]): TGroupAPIs[] => {
     }, []);
 };
 
-const ResourcesTable = () => {
+const PermissionView = () => {
     const { role_id } = usePermissionsStore(state => state.filters);
 
     const resourcesQuery = useResourcesQuery();
@@ -103,4 +103,4 @@ const ResourcesTable = () => {
     );
 };
 
-export default ResourcesTable;
+export default PermissionView;
