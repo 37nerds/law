@@ -1,6 +1,6 @@
 import type { TThreeDropDownOption } from "@helpers/types";
 
-import { useDeleteUserMutation } from "@fetches/rbac/users";
+import { useUserDeleteMutation } from "@fetches/rbac/users";
 import { isPermitted } from "@states/auth_store";
 
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
@@ -9,7 +9,7 @@ import useUsersStore from "@states/users_store";
 const UserThreeDotDropdown = ({ userId }: { userId: string }) => {
     const { setFiltersField } = useUsersStore();
 
-    const userDeleteMutation = useDeleteUserMutation();
+    const userDeleteMutation = useUserDeleteMutation();
 
     const options: TThreeDropDownOption[] = [];
 

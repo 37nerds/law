@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRolesQuery } from "@fetches/rbac/roles";
-import { useSaveUserMutation } from "@fetches/rbac/users";
+import { useUserSaveMutation } from "@fetches/rbac/users";
 
 import useUsersStore from "@states/users_store";
 
@@ -13,7 +13,7 @@ import Modal from "@components/modals/Modal";
 
 const NewUserModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
     const rolesQuery = useRolesQuery();
-    const saveUserMutation = useSaveUserMutation();
+    const saveUserMutation = useUserSaveMutation();
 
     const {
         newUser,

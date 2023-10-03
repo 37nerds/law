@@ -3,7 +3,7 @@ import { notify } from "@helpers/notify";
 import { UseMutationResult } from "react-query";
 import { TError } from "@helpers/types";
 
-const useMutationErrorHandling = <T, T2>(mutation: UseMutationResult<T, TError, T2>) => {
+const useMutationErrorMessage = <T, T2>(mutation: UseMutationResult<T, TError, T2>) => {
     useEffect(() => {
         if (mutation.isError) {
             notify("error", mutation.error?.message);
@@ -11,4 +11,4 @@ const useMutationErrorHandling = <T, T2>(mutation: UseMutationResult<T, TError, 
     }, [mutation.isError]);
 };
 
-export default useMutationErrorHandling;
+export default useMutationErrorMessage;

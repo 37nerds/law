@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRolesQuery } from "@fetches/rbac/roles";
-import { useEditUserMutation, useUserQuery } from "@fetches/rbac/users";
+import { useUserEditMutation, useUserQuery } from "@fetches/rbac/users";
 
 import useUsersStore from "@states/users_store";
 
@@ -10,6 +10,7 @@ import StringInput from "@components/inputs/StringInput";
 import QueryWrapper from "@components/wrappers/QueryWrapper";
 import SingleInputBox from "@components/inputs/SingleInputBox";
 import Modal from "@components/modals/Modal";
+import { notify } from "@helpers/notify";
 
 const EditUserModal = ({
     open,
@@ -20,8 +21,6 @@ const EditUserModal = ({
     setOpen: (open: boolean) => void;
     userId: string;
 }) => {
-    const rolesQuery = useRolesQuery();
-
     const {
         editUser,
         setEditUserField,
@@ -30,10 +29,27 @@ const EditUserModal = ({
         setEditUserErrorField,
         setEditUserErrorEmpty,
         setEditUserEmpty,
+        setEditUser,
     } = useUsersStore();
 
+    const rolesQuery = useRolesQuery();
+
     const userQuery = useUserQuery(userId);
-    const userEditMutation = useEditUserMutation();
+
+    useEffect(() => {
+        if (userQuery.isSuccess) {
+            setEditUser({
+                username: userQuery.data.username,
+                address: userQuery.data.address,
+                email: userQuery.data.email,
+                name: userQuery.data.name,
+                phone: userQuery.data.phone,
+                role_id: userQuery.data.role_id,
+            });
+        }
+    }, [userQuery.isSuccess]);
+
+    const userEditMutation = useUserEditMutation();
 
     useEffect(() => {
         if (userEditMutation.isError && userEditMutation?.error?.errors) {

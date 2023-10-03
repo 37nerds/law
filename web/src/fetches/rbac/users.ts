@@ -1,18 +1,19 @@
 import type { TRole } from "@fetches/rbac/roles";
 import type { TBase, TError, TPaginate } from "@helpers/types";
 
-import { notify } from "@helpers/notify";
-import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import http from "@helpers/http";
 import useUsersStore from "@states/users_store";
+import useQueryErrorMessage from "@hooks/useQueryErrorMessage";
+import useMutationErrorMessage from "@hooks/useMutationErrorMessage";
+import useMutationSuccessMessage from "@hooks/useMutationSuccessMessage";
 
-export const RBAC__USERS__GET = "get.users";
-export const RBAC__USERS__POST = "post.users";
-export const RBAC__USER__GET = "get.user";
-export const RBAC_USER_PATCH = "patch.user";
-export const RBAC_USER_DELETE = "delete.user";
+export const RBAC_USERS__GET = "get.rbac-users";
+export const RBAC_USERS__POST = "post.rbac-users";
+export const RBAC_USER__GET = "get.rbac-user";
+export const RBAC_USER_PATCH = "patch.rbac-user";
+export const RBAC_USER_DELETE = "delete.rbac-user";
 
 export type TUser = TBase & {
     name: string;
@@ -48,138 +49,76 @@ export type TEditUser = {
 
 export type TUserColumn = "name" | "email" | "username" | "created_at" | "phone" | "address";
 
-export const useUsersQuery = () => {
+export const useUsersPaginatedQuery = () => {
     const { searchQuery, page, sortColumn, sortOrder, filterRoleId } = useUsersStore(state => state.filters);
-
-    const query = useQuery<TPaginate<TUser>, TError>({
-        queryFn: async () => {
-            let url = `/rbac/users?paginated=true&per_page=10&page=${page}&sort_column=${sortColumn}&sort_order=${sortOrder}`;
+    const q = useQuery<TPaginate<TUser>, TError>({
+        queryFn: () => {
+            let url =
+                `/rbac/users?paginated=true` +
+                `&per_page=10&page=${page}` +
+                `&sort_column=${sortColumn}` +
+                `&sort_order=${sortOrder}`;
             if (filterRoleId.trim() !== "") {
                 url += `&filter_role_id=${filterRoleId}`;
             }
             if (searchQuery.trim() !== "") {
                 url += `&search=${encodeURIComponent(searchQuery.trim())}`;
             }
-            return await http.get(url, 200);
+            return http.get(url, 200);
         },
-        queryKey: [RBAC__USERS__GET, page, searchQuery, sortColumn, sortOrder, filterRoleId],
+        queryKey: [RBAC_USERS__GET, page, searchQuery, sortColumn, sortOrder, filterRoleId],
         retry: false,
     });
-
-    useEffect(() => {
-        if (query.isError) {
-            notify("error", query.error?.message);
-        }
-    }, [query.isError]);
-
-    return query;
-};
-
-export const useSaveUserMutation = () => {
-    const queryClient = useQueryClient();
-
-    const mutation = useMutation<TUser, TError, TCreateUser>({
-        mutationFn: async user => {
-            return await http.post("/rbac/users", { ...user, password_confirmation: user.password }, 201);
-        },
-        mutationKey: [RBAC__USERS__POST],
-        onSuccess: () => {
-            return queryClient.invalidateQueries(RBAC__USERS__GET);
-        },
-    });
-
-    useEffect(() => {
-        if (mutation.isError) {
-            notify("error", mutation.error?.message);
-        }
-
-        if (mutation.isSuccess) {
-            notify("success", `New user created: ${mutation?.data?.username}`);
-        }
-    }, [mutation.isError, mutation.isSuccess]);
-
-    return mutation;
+    useQueryErrorMessage(q);
+    return q;
 };
 
 export const useUserQuery = (userId: string) => {
-    const { setEditUser } = useUsersStore();
-
-    const query = useQuery<TUser, TError>({
-        queryFn: async () => {
-            return !userId ? Promise.resolve({}) : await http.get(`/rbac/users?id=${userId}`, 200);
-        },
-        queryKey: [RBAC__USER__GET, userId],
+    const q = useQuery<TUser, TError>({
+        queryFn: () => (!userId ? Promise.resolve({}) : http.get(`/rbac/users?id=${userId}`, 200)),
+        queryKey: [RBAC_USER__GET, userId],
     });
-
-    useEffect(() => {
-        if (query.isError) {
-            notify("error", query.error?.message);
-        }
-
-        if (query.isSuccess) {
-            setEditUser({
-                username: query.data.username,
-                address: query.data.address,
-                email: query.data.email,
-                name: query.data.name,
-                phone: query.data.phone,
-                role_id: query.data.role_id,
-            });
-        }
-    }, [query.isSuccess, query.isError, query.data]);
-
-    return query;
+    useQueryErrorMessage(q);
+    return q;
 };
 
-export const useEditUserMutation = () => {
-    const queryClient = useQueryClient();
+export const useUserSaveMutation = () => {
+    const c = useQueryClient();
+    const m = useMutation<TUser, TError, TCreateUser>({
+        mutationFn: user => http.post("/rbac/users", { ...user, password_confirmation: user.password }, 201),
+        mutationKey: [RBAC_USERS__POST],
+        onSuccess: () => c.invalidateQueries(RBAC_USERS__GET).then(),
+    });
+    useMutationErrorMessage(m);
+    useMutationSuccessMessage(m, `New user created: ${m?.data?.username}`);
+    return m;
+};
 
-    const mutation = useMutation<TUser, TError, TEditUser>({
+export const useUserEditMutation = () => {
+    const c = useQueryClient();
+    const m = useMutation<TUser, TError, TEditUser>({
         mutationFn: async user => {
             return await http.patch(`/rbac/users?id=${user.id}`, user, 200);
         },
         mutationKey: [RBAC_USER_PATCH],
         onSuccess: user => {
-            queryClient.invalidateQueries([RBAC__USER__GET, user.id]).then();
-            queryClient.invalidateQueries(RBAC__USERS__GET).then();
+            c.invalidateQueries([RBAC_USER__GET, user.id]).then();
+            c.invalidateQueries(RBAC_USERS__GET).then();
         },
     });
-
-    useEffect(() => {
-        if (mutation.isError) {
-            notify("error", mutation.error?.message);
-        }
-
-        if (mutation.isSuccess) {
-            notify("success", `User updated: ${mutation?.data?.username}`);
-        }
-    }, [mutation.isError, mutation.isSuccess]);
-
-    return mutation;
+    useMutationErrorMessage(m);
+    useMutationSuccessMessage(m, `User updated: ${m?.data?.username}`);
+    return m;
 };
 
-export const useDeleteUserMutation = () => {
-    const queryClient = useQueryClient();
-
-    const mutation = useMutation<TUser, TError, string>({
-        mutationFn: async id => {
-            return await http.delete(`/rbac/users?id=${id}`, 204);
-        },
+export const useUserDeleteMutation = () => {
+    const c = useQueryClient();
+    const m = useMutation<TUser, TError, string>({
+        mutationFn: userId => http.delete(`/rbac/users?id=${userId}`, 204),
         mutationKey: [RBAC_USER_DELETE],
-        onSuccess: () => {
-            return queryClient.invalidateQueries(RBAC__USERS__GET);
-        },
+        onSuccess: () => c.invalidateQueries(RBAC_USERS__GET).then(),
     });
-
-    useEffect(() => {
-        if (mutation.isError) {
-            notify("error", mutation.error?.message);
-        }
-
-        if (mutation.isSuccess) {
-            notify("success", `User deleted successfully.`);
-        }
-    }, [mutation.isError, mutation.isSuccess]);
-
-    return mutation;
+    useMutationErrorMessage(m);
+    useMutationSuccessMessage(m, `User deleted successfully.`);
+    return m;
 };

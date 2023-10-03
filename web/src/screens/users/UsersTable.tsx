@@ -1,6 +1,6 @@
 import type { TUser, TUserColumn } from "@fetches/rbac/users";
 
-import { useUsersQuery } from "@fetches/rbac/users";
+import { useUsersPaginatedQuery } from "@fetches/rbac/users";
 import { getProfileUrlFromAvatarKey } from "@helpers/location";
 import { convertToLocalTime } from "@helpers/time";
 
@@ -15,7 +15,7 @@ import Table from "@components/tables/Table";
 import { THeader } from "@helpers/types";
 
 const UsersTable = () => {
-    const usersQuery = useUsersQuery();
+    const usersQuery = useUsersPaginatedQuery();
 
     const { page, sortColumn, sortOrder } = useUsersStore(state => state?.filters);
     const { setFiltersField } = useUsersStore(state => state);

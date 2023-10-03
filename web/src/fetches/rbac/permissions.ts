@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { RBAC_ROLE__GET } from "@fetches/rbac/roles";
 
 import http from "@helpers/http";
-import useMutationErrorHandling from "@hooks/useMutationErrorHandling";
+import useMutationErrorMessage from "@hooks/useMutationErrorMessage";
 
 export type TPermission = TBase & {
     role_id: string;
@@ -36,7 +36,7 @@ export const useSavePermissionMutation = () => {
         mutationKey: [RBAC_PERMISSION__POST],
         onSuccess: permission => c.invalidateQueries([RBAC_ROLE__GET, permission.role_id]).then(),
     });
-    useMutationErrorHandling(m);
+    useMutationErrorMessage(m);
     return m;
 };
 
@@ -47,7 +47,7 @@ export const useDeletePermissionMutation = () => {
         mutationKey: [RBAC_PERMISSION__DELETE],
         onSuccess: (_, { roleId }) => c.invalidateQueries([RBAC_ROLE__GET, roleId]).then(),
     });
-    useMutationErrorHandling(m);
+    useMutationErrorMessage(m);
     return m;
 };
 
@@ -58,17 +58,17 @@ export const useGiveAllPermissionMutation = () => {
         mutationKey: [RBAC_PERMISSION_ALL__POST],
         onSuccess: (_, roleId) => c.invalidateQueries([RBAC_ROLE__GET, roleId]).then(),
     });
-    useMutationErrorHandling(m);
+    useMutationErrorMessage(m);
     return m;
 };
 
 export const useRemoveAllPermissionMutation = () => {
     const c = useQueryClient();
     const m = useMutation<null, TError, string>({
-        mutationFn: async roleId => await http.delete(`/rbac/permissions/all?role_id=${roleId}`, 200),
+        mutationFn: roleId => http.delete(`/rbac/permissions/all?role_id=${roleId}`, 200),
         mutationKey: [RBAC_PERMISSION_ALL__DELETE],
         onSuccess: (_, roleId) => c.invalidateQueries([RBAC_ROLE__GET, roleId]).then(),
     });
-    useMutationErrorHandling(m);
+    useMutationErrorMessage(m);
     return m;
 };
