@@ -34,6 +34,23 @@ services:
         networks:
             - law_network
 
+    worker:
+        build:
+            context: .
+            dockerfile: ./conf/php/php.dockerfile
+        container_name: law_worker
+        restart: unless-stopped
+        volumes:
+            - ./api:/var/www/html:cached
+            - ./conf/php/php-fpm.ini:/usr/local/etc/php/conf.d/custom.ini
+            - ~/.ssh:/root/.ssh
+        depends_on:
+            - postgresql
+            - redis
+        networks:
+            - law_network
+        command: php artisan queue:work --queue=high,default
+
     postgresql:
         image: postgres:15-alpine
         container_name: law_postgresql
