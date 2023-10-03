@@ -1,4 +1,4 @@
-import { useSaveRoleMutation } from "@fetches/rbac/roles";
+import { useSaveRoleMutation } from "../../queries/rbac/roles";
 import { useEffect } from "react";
 
 import SingleInputBox from "@components/inputs/SingleInputBox";

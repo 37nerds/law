@@ -1,4 +1,4 @@
-import type { TCreateUser, TEditUser, TUserColumn } from "@fetches/rbac/users";
+import type { TCreateUser, TEditUser, TUserColumn } from "../queries/rbac/users";
 import type { TOrder } from "@helpers/types";
 
 import { create } from "zustand";

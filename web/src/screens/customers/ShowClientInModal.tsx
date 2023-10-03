@@ -1,5 +1,5 @@
 import { gendersOptions } from "@config/base";
-import { useClientQuery, useFetchPopUpDataQuery, useUpdateClientMutation } from "@fetches/customers/customers";
+import { useClientQuery, useFetchPopUpDataQuery, useUpdateClientMutation } from "../../queries/customers/customers";
 import { useEffect, useState } from "react";
 
 import useCustomerListStore from "@states/customer_list_store";

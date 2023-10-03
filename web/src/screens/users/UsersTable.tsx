@@ -1,7 +1,7 @@
-import type { TUser, TUserColumn } from "@fetches/rbac/users";
+import type { TUser, TUserColumn } from "../../queries/rbac/users";
 import type { THeader, TThreeDropDownOption } from "@helpers/types";
 
-import { useUserDeleteMutation, useUsersPaginatedQuery } from "@fetches/rbac/users";
+import { useUserDeleteMutation, useUsersPaginatedQuery } from "../../queries/rbac/users";
 import { getProfileUrlFromAvatarKey } from "@helpers/location";
 import { convertToLocalTime } from "@helpers/time";
 import { isPermitted } from "@states/auth_store";

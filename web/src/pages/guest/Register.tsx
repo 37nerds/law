@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { useRegisterMutation } from "@fetches/auth/auth";
+import { useRegisterMutation } from "../../queries/auth/auth";
 import { redirect_after_login } from "@config/base";
 import { convertUsernameLogic, generateNameFromEmail, generateUsernameFromEmail } from "@helpers/strings";
 

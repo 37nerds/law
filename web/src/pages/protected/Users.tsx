@@ -1,4 +1,4 @@
-import { useRolesQuery } from "@fetches/rbac/roles";
+import { useRolesQuery } from "../../queries/rbac/roles";
 
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import useUsersStore from "@states/users_store";

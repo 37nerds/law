@@ -1,11 +1,4 @@
-import type {
-    TClient,
-    TCompany,
-    TGroupOfCompany,
-    TPopOfData,
-    TUnit,
-    TUpdateClient,
-} from "@fetches/customers/customers_type";
+import type { TClient, TCompany, TGroupOfCompany, TPopOfData, TUnit, TUpdateClient } from "../customers/customers_type";
 
 import type { TError, TPaginate } from "@helpers/types";
 

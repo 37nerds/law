@@ -1,8 +1,8 @@
 import type { THeader } from "@helpers/types";
-import type { TResource, TSortableResourceColumn } from "@fetches/rbac/resources";
+import type { TResource, TSortableResourceColumn } from "../../queries/rbac/resources";
 import type { TThreeDropDownOption } from "@helpers/types";
 
-import { useDeleteResourceMutation, usePaginatedResourcesQuery } from "@fetches/rbac/resources";
+import { useDeleteResourceMutation, usePaginatedResourcesQuery } from "../../queries/rbac/resources";
 import { convertToLocalTime } from "@helpers/time";
 import { isPermitted } from "@states/auth_store";
 

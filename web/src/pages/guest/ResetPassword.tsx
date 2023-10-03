@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { useResetPasswordMutation } from "@fetches/auth/auth";
+import { useResetPasswordMutation } from "../../queries/auth/auth";
 import { redirect } from "@helpers/location";
 
 import ErrorText from "@components/pure/ErrorText";

@@ -1,9 +1,9 @@
-import type { TResource } from "@fetches/rbac/resources";
+import type { TResource } from "../rbac/resources";
 import type { TBase } from "@helpers/types";
 import type { TError } from "@helpers/types";
 
 import { useMutation, useQueryClient } from "react-query";
-import { RBAC_ROLE__GET } from "@fetches/rbac/roles";
+import { RBAC_ROLE__GET } from "../rbac/roles";
 
 import http from "@helpers/http";
 import useMutationErrorMessage from "@hooks/useMutationErrorMessage";

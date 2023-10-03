@@ -1,5 +1,5 @@
 import type { TColumnErrors, TOrder } from "@helpers/types";
-import type { TCreateResource, TEditResource, TSortableResourceColumn } from "@fetches/rbac/resources";
+import type { TCreateResource, TEditResource, TSortableResourceColumn } from "../queries/rbac/resources";
 
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";

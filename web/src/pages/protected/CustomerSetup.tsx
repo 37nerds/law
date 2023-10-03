@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useFetchPopUpDataQuery } from "@fetches/customers/customers";
+import { useFetchPopUpDataQuery } from "../../queries/customers/customers";
 import { notify } from "@helpers/notify";
 import { customersSetupSteps, getStepComponentByLabel } from "src/screens/customer_setup";
 

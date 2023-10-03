@@ -1,4 +1,4 @@
-import type { TResource, TResourceDependency } from "@fetches/rbac/resources";
+import type { TResource, TResourceDependency } from "@queries/rbac/resources";
 import type { TOption, TMethod } from "@helpers/types";
 
 export const prepareDependenciesOptions = (

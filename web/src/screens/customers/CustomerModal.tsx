@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { TCustomerModalOpenFor } from "@fetches/customers/customers_type";
+import type { TCustomerModalOpenFor } from "../../queries/customers/customers_type";
 
 import ShowClientInModal from "./ShowClientInModal";
 import ShowUnitInModal from "./ShowUnitInModal";

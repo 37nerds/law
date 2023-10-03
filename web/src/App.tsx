@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { guest_routes, protected_routes, public_routes } from "@config/routes";
-import { useLoggedUserFetch } from "@fetches/auth/auth";
+import { useLoggedUserFetch } from "@queries/auth/auth";
 import { getPathname, isGuestRoute, isPublicRoute, redirect } from "@helpers/location";
 
 import Loading from "./components/pure/Loading";

@@ -1,4 +1,4 @@
-import type { TResource, TResourceDependency } from "@fetches/rbac/resources";
+import type { TResource, TResourceDependency } from "../../queries/rbac/resources";
 
 import {
     convertArraySelectInputValueStringArrayIntoResourceDependencyArray,
@@ -6,7 +6,7 @@ import {
 } from "@logic/resources";
 
 import { useEffect } from "react";
-import { useResourcesQuery, useSaveResourceMutation } from "@fetches/rbac/resources";
+import { useResourcesQuery, useSaveResourceMutation } from "../../queries/rbac/resources";
 
 import useResourcesStore from "@states/resources_store";
 
@@ -19,7 +19,6 @@ import SubmitButton from "@components/buttons/SubmitButton";
 import ArrayInput from "@components/inputs/ArrayInput";
 import QueryWrapper from "@components/wrappers/QueryWrapper";
 import ArraySelectInput from "@components/inputs/ArraySelectInput";
-
 
 const NewResourceModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
     const saveResourceMutation = useSaveResourceMutation();

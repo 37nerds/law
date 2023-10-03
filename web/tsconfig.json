@@ -19,12 +19,12 @@
         "paths": {
             "@components/*": ["src/components/*"],
             "@config/*": ["src/config/*"],
-            "@fetches/*": ["src/fetches/*"],
             "@helpers/*": ["src/helpers/*"],
             "@hooks/*": ["src/hooks/*"],
             "@layout/*": ["src/layout/*"],
             "@logic/*": ["src/logic/*"],
             "@pages/*": ["src/pages/*"],
+            "@queries/*": ["src/queries/*"],
             "@screens/*": ["src/screens/*"],
             "@states/*": ["src/states/*"]
         }

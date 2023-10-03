@@ -1,7 +1,7 @@
-import type { TGroupOfCompany } from "@fetches/customers/customers_type";
+import type { TGroupOfCompany } from "../../queries/customers/customers_type";
 import type { TBottomButton } from "@helpers/types";
 
-import { useSaveGroupOfCompanyMutation } from "@fetches/customers/customers";
+import { useSaveGroupOfCompanyMutation } from "../../queries/customers/customers";
 import { notify } from "@helpers/notify";
 import { useEffect, useState } from "react";
 import { legalFromOptions } from "@config/base";

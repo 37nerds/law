@@ -1,4 +1,4 @@
-import type { TResource } from "@fetches/rbac/resources";
+import type { TResource } from "../../queries/rbac/resources";
 
 import {
     convertArraySelectInputValueStringArrayIntoResourceDependencyArray,
@@ -6,7 +6,7 @@ import {
 } from "@logic/resources";
 
 import { useEffect } from "react";
-import { useEditResourceMutation, useResourceQuery, useResourcesQuery } from "@fetches/rbac/resources";
+import { useEditResourceMutation, useResourceQuery, useResourcesQuery } from "../../queries/rbac/resources";
 
 import useResourcesStore from "@states/resources_store";
 

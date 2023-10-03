@@ -1,7 +1,7 @@
-import type { TResource } from "@fetches/rbac/resources";
+import type { TResource } from "@queries/rbac/resources";
 
-import { useRoleQuery } from "@fetches/rbac/roles";
-import { useDeletePermissionMutation, useSavePermissionMutation } from "@fetches/rbac/permissions";
+import { useRoleQuery } from "@queries/rbac/roles";
+import { useDeletePermissionMutation, useSavePermissionMutation } from "@queries/rbac/permissions";
 import { useAuthStore } from "@states/auth_store";
 
 import CheckboxInput from "@components/inputs/CheckboxInput";

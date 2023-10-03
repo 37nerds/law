@@ -1,4 +1,4 @@
-import type { TRole } from "@fetches/rbac/roles";
+import type { TRole } from "../rbac/roles";
 import type { TBase, TError, TPaginate, TQueries } from "@helpers/types";
 
 import { useMutation, useQuery, useQueryClient } from "react-query";

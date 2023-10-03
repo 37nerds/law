@@ -1,7 +1,7 @@
 import type { TPaginate } from "@helpers/types";
-import type { TClient } from "@fetches/customers/customers_type";
+import type { TClient } from "../../queries/customers/customers_type";
 
-import { useClientsQuery } from "@fetches/customers/customers";
+import { useClientsQuery } from "../../queries/customers/customers";
 
 import useCustomerListStore from "@states/customer_list_store";
 import useSetPageTitle from "@hooks/useSetPageTitle";

@@ -1,6 +1,6 @@
 import type { TError } from "@helpers/types";
-import type { TUser } from "@fetches/rbac/users";
-import type { TPermission } from "@fetches/rbac/permissions";
+import type { TUser } from "../rbac/users";
+import type { TPermission } from "../rbac/permissions";
 
 import { notify } from "@helpers/notify";
 import { useEffect, useState } from "react";

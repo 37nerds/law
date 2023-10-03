@@ -1,6 +1,6 @@
-import { useResourcesQuery } from "@fetches/rbac/resources";
-import { useRoleQuery } from "@fetches/rbac/roles";
-import { useGiveAllPermissionMutation, useRemoveAllPermissionMutation } from "@fetches/rbac/permissions";
+import { useResourcesQuery } from "../../queries/rbac/resources";
+import { useRoleQuery } from "../../queries/rbac/roles";
+import { useGiveAllPermissionMutation, useRemoveAllPermissionMutation } from "../../queries/rbac/permissions";
 
 import CheckboxInput from "@components/inputs/CheckboxInput";
 

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLogoutMutation } from "@fetches/auth/auth";
+import { useLogoutMutation } from "../../queries/auth/auth";
 
 const LogoutButton = () => {
     const logoutMutation = useLogoutMutation();

@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import { TCustomerModalOpenFor } from "@fetches/customers/customers_type";
+import { TCustomerModalOpenFor } from "../../queries/customers/customers_type";
 
 import CustomerModal from "./CustomerModal";
 import HoverDropDownList from "./HoverDropDownList";

@@ -1,6 +1,6 @@
-import type { TResource } from "@fetches/rbac/resources";
+import type { TResource } from "../../queries/rbac/resources";
 
-import { useResourcesQuery } from "@fetches/rbac/resources";
+import { useResourcesQuery } from "../../queries/rbac/resources";
 
 import usePermissionsStore from "@states/permissions_store";
 

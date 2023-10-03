@@ -1,4 +1,4 @@
-import type { TPermission } from "@fetches/rbac/permissions";
+import type { TPermission } from "../rbac/permissions";
 import type { TBase, TError, TPaginate } from "@helpers/types";
 
 import { useMutation, useQuery, useQueryClient } from "react-query";

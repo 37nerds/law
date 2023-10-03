@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useForgotPasswordMutation } from "@fetches/auth/auth";
+import { useForgotPasswordMutation } from "../../queries/auth/auth";
 
 import ErrorText from "@components/pure/ErrorText";
 import EmailInput from "@components/inputs/EmailInput";

@@ -2,7 +2,7 @@ import type { TBottomButton, TOption } from "@helpers/types";
 
 import { useEffect } from "react";
 import { billToOptions, gendersOptions } from "@config/base";
-import { useSaveClientMutation } from "@fetches/customers/customers";
+import { useSaveClientMutation } from "../../queries/customers/customers";
 import { notify } from "@helpers/notify";
 
 import useCustomerSetupStore from "@states/customer_setup_store";

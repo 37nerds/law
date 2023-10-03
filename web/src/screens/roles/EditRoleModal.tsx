@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useEditRoleMutation, useRoleQuery } from "@fetches/rbac/roles";
+import { useEditRoleMutation, useRoleQuery } from "../../queries/rbac/roles";
 
 import useRolesStore from "@states/roles_store";
 

@@ -1,4 +1,4 @@
-import { useUpdateUserMutation } from "@fetches/auth/auth";
+import { useUpdateUserMutation } from "../../queries/auth/auth";
 import { convertUsernameLogic } from "@helpers/strings";
 import { useAuthStore } from "@states/auth_store";
 import { convertToLocalTime } from "@helpers/time";

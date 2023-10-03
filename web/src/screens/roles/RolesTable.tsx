@@ -1,7 +1,7 @@
-import type { TRoleColumn } from "@fetches/rbac/roles";
+import type { TRoleColumn } from "../../queries/rbac/roles";
 import type { THeader, TThreeDropDownOption } from "@helpers/types";
 
-import { useDeleteRoleMutation, useRolesPaginatedQuery } from "@fetches/rbac/roles";
+import { useDeleteRoleMutation, useRolesPaginatedQuery } from "../../queries/rbac/roles";
 import { isPermitted } from "@states/auth_store";
 
 import useRolesStore from "@states/roles_store";

@@ -1,4 +1,4 @@
-import type { TLoggedUser } from "@fetches/auth/auth";
+import type { TLoggedUser } from "../queries/auth/auth";
 import type { TMethod } from "@helpers/types";
 
 import { create } from "zustand";

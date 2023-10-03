@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { TPopUpUnit } from "@fetches/customers/customers_type";
-import { useFetchPopUpDataQuery, useUnitQuery, useUpdateUnitMutation } from "@fetches/customers/customers";
+import { TPopUpUnit } from "../../queries/customers/customers_type";
+import { useFetchPopUpDataQuery, useUnitQuery, useUpdateUnitMutation } from "../../queries/customers/customers";
 import { legalFromOptions } from "@config/base";
 
 import StringInput from "@components/inputs/StringInput";

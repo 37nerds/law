@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 
-import { useLoginMutation } from "@fetches/auth/auth";
+import { useLoginMutation } from "../../queries/auth/auth";
 import { redirect_after_login } from "@config/base";
 import { redirect } from "@helpers/location";
 

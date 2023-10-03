@@ -1,4 +1,4 @@
-import type { TCreateRole, TEditRole, TRoleColumn } from "@fetches/rbac/roles";
+import type { TCreateRole, TEditRole, TRoleColumn } from "../queries/rbac/roles";
 import { TOrder } from "@helpers/types";
 
 import { create } from "zustand";

@@ -1,9 +1,9 @@
 import type { TBottomButton, TOption } from "@helpers/types";
-import type { TCompany, TCompanyKey } from "@fetches/customers/customers_type";
+import type { TCompany, TCompanyKey } from "../../queries/customers/customers_type";
 
 import { useEffect } from "react";
 import { legalFromOptions } from "@config/base";
-import { useSaveCompanyMutation } from "@fetches/customers/customers";
+import { useSaveCompanyMutation } from "../../queries/customers/customers";
 import { notify } from "@helpers/notify";
 
 import useCustomerSetupStore from "@states/customer_setup_store";

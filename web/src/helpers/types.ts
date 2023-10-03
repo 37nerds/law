@@ -1,6 +1,6 @@
 import type { ForwardRefExoticComponent, LazyExoticComponent, PropsWithoutRef, SVGProps, JSX } from "react";
 import type { ReactNode } from "react";
-import { TUserColumn } from "@fetches/rbac/users";
+import { TUserColumn } from "../queries/rbac/users";
 
 export type TOption = {
     name: string;
