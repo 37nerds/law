@@ -1,6 +1,7 @@
 version: '3.7'
 
 services:
+
     nginx:
         image: nginx:1-alpine
         container_name: law_nginx
@@ -29,6 +30,7 @@ services:
             - ~/.ssh:/root/.ssh
         depends_on:
             - postgresql
+            - redis
         networks:
             - law_network
 
@@ -46,6 +48,19 @@ services:
             - POSTGRES_DB=law
         networks:
             - law_network
+
+    redis:
+        image: redis:7-alpine
+        container_name: law_redis
+        restart: unless-stopped
+        ports:
+            - '6379:6379'
+        volumes:
+            - ./.redis:/var/lib/redis
+            - ./conf/redis/redis.conf:/usr/local/etc/redis/redis.conf
+        networks:
+            - law_network
+        command: redis-server
 
 networks:
     law_network:

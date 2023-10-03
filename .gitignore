@@ -6,7 +6,10 @@
 .DS_Store
 .data
 tmp*
+
+# Docker
 .postgresql
+.redis
 
 api/public/vendor
 api/.phpstorm.meta.php
