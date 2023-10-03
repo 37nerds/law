@@ -10,6 +10,7 @@ tmp*
 # Docker
 .postgresql
 .redis
+.pnpm
 
 api/public/vendor
 api/.phpstorm.meta.php
