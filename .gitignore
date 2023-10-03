@@ -6,6 +6,7 @@
 .DS_Store
 .data
 tmp*
+.postgresql
 
 api/public/vendor
 api/.phpstorm.meta.php

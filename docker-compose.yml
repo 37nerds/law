@@ -1,0 +1,56 @@
+version: '3.7'
+
+services:
+    nginx:
+        image: nginx:1-alpine
+        container_name: law_nginx
+        restart: unless-stopped
+        ports:
+            - "8000:80"
+            - "443:443"
+        volumes:
+            - ./api:/var/www/html:cached
+            - ./conf/nginx:/etc/nginx/conf.d
+            - ./conf/nginx/ssl:/etc/nginx/conf.d/ssl
+        depends_on:
+            - php
+        networks:
+            - law_network
+
+    php:
+        build:
+            context: .
+            dockerfile: ./conf/php/php.dockerfile
+        container_name: law_php
+        restart: unless-stopped
+        volumes:
+            - ./api:/var/www/html:cached
+            - ./conf/php/php-fpm.ini:/usr/local/etc/php/conf.d/custom.ini
+            - ~/.ssh:/root/.ssh
+        depends_on:
+            - postgresql
+        networks:
+            - law_network
+
+    postgresql:
+        image: postgres:15-alpine
+        container_name: law_postgresql
+        restart: unless-stopped
+        ports:
+            - '5432:5432'
+        volumes:
+            - ./.postgresql:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=law
+        networks:
+            - law_network
+
+networks:
+    law_network:
+        driver: bridge
+
+volumes:
+    law_volume:
+        driver: local
