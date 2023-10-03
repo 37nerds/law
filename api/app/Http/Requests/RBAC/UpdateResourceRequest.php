@@ -14,11 +14,12 @@ class UpdateResourceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'api' => ['string', 'max:255'],
-            'web' => ['string', 'max:255'],
-            'method' => ['string', 'max:255'],
-            'label' => ['string', 'max:255'],
-            'group' => ['string', 'max:255'],
+            'api' => ['string', 'max:255', "nullable"],
+            'web' => ["nullable", 'array', "nullable"],
+            'method' => ['string', 'max:255', "nullable"],
+            'label' => ['string', 'max:255', "nullable"],
+            'group' => [ 'string', 'max:255', "nullable"],
+            "dependencies" => ["nullable", "array", "nullable"],
         ];
     }
 }

@@ -31,11 +31,11 @@ const ArrayInputLayout = ({
     return (
         <div className="flex flex-col gap-2">
             <div className="flex h-full items-center justify-between gap-2">
-                <div className={`input input-bordered w-full rounded-lg py-3 ${value.length > 0 ? "h-full" : ""}`}>
+                <div className={`input input-bordered w-full rounded-lg py-3 ${value?.length > 0 ? "h-full" : ""}`}>
                     {value?.length <= 0 ? (
                         <div>{placeholder}</div>
                     ) : (
-                        value.map((v, index) => (
+                        value?.map((v, index) => (
                             <div key={index} className="flex justify-between">
                                 <div>{v}</div>
                                 <XIcon
@@ -48,9 +48,9 @@ const ArrayInputLayout = ({
                         ))
                     )}
                 </div>
-                <button className="btn btn-primary h-full" onClick={() => setShow(!show)}>
+                <div className="btn btn-primary h-full" onClick={() => setShow(!show)}>
                     {!show ? "New" : "!New"}
-                </button>
+                </div>
             </div>
             {show ? (
                 <div className="flex h-full items-center justify-between gap-2">

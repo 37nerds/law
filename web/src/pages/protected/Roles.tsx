@@ -17,19 +17,21 @@ const Roles = () => {
 
     return (
         <PageCard>
-            <IsPermitted
-                api={"api/v1/rbac/roles"}
-                method={"patch"}
-                element={
-                    <EditRoleModal
-                        open={editRoleModalOpen}
-                        setOpen={value => {
-                            setFiltersField("editRoleModalOpen", value);
-                        }}
-                        roleId={editRoleId}
-                    />
-                }
-            />
+            {editRoleModalOpen && (
+                <IsPermitted
+                    api={"api/v1/rbac/roles"}
+                    method={"patch"}
+                    element={
+                        <EditRoleModal
+                            open={editRoleModalOpen}
+                            setOpen={value => {
+                                setFiltersField("editRoleModalOpen", value);
+                            }}
+                            roleId={editRoleId}
+                        />
+                    }
+                />
+            )}
             <BarWrapper>
                 <div>
                     <IsPermitted api={"api/v1/rbac/roles"} method={"post"} element={<NewRole />} />

@@ -49,6 +49,7 @@ const RBAC_RESOURCE__DELETE = "delete.rbac-resources";
 const RBAC_RESOURCE__POST = "post.rbac-resources";
 const RBAC_RESOURCE__PATCH = "patch.rbac-resources";
 const RBAC_RESOURCES__PAGINATED__GET = "get.paginated.rbac-resources";
+const RBAC_RESOURCE__GET = "get.rbac-resource";
 
 export const useResourcesQuery = () => {
     const q = useQuery<TResource[], TError>({
@@ -78,6 +79,15 @@ export const usePaginatedResourcesQuery = () => {
         },
         queryKey: [RBAC_RESOURCES__PAGINATED__GET, page, searchQuery, sortColumn, sortOrder],
         retry: false,
+    });
+    useQueryErrorMessage(q);
+    return q;
+};
+
+export const useResourceQuery = (resourceId: string) => {
+    const q = useQuery<TResource, TError>({
+        queryFn: () => (!resourceId ? Promise.resolve({}) : http.get_q(`/rbac/resources`, { id: resourceId }, 200)),
+        queryKey: [RBAC_RESOURCE__GET, resourceId],
     });
     useQueryErrorMessage(q);
     return q;
@@ -115,7 +125,6 @@ export const useSaveResourceMutation = () => {
 
 export const useEditResourceMutation = () => {
     const c = useQueryClient();
-
     const m = useMutation<TResource, TError, TEditResource>({
         mutationFn: editResource => http.patch(`/rbac/resources?foo=bar&id=${editResource.id}`, editResource, 200),
         mutationKey: [RBAC_RESOURCE__PATCH],

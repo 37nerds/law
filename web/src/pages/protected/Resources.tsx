@@ -3,11 +3,11 @@ import useResourcesStore from "@states/resources_store";
 
 import IsPermitted from "@components/auth/IsPermitted";
 import PageCard from "@components/cards/PageCard";
-import EditUserModal from "@screens/users/EditUserModal";
 import SearchInput from "@components/inputs/SearchInput";
 import BarWrapper from "@components/wrappers/BarWrapper";
 import ResourcesListTable from "@screens/resources/ResourcesListTable";
 import NewResource from "@screens/resources/NewResource";
+import EditResourceModal from "@screens/resources/EditResourceModal";
 
 const Resources = () => {
     useSetPageTitle("Resources");
@@ -17,20 +17,22 @@ const Resources = () => {
 
     return (
         <PageCard>
-            <IsPermitted
-                api="api/v1/rbac/users"
-                method="patch"
-                element={
-                    <EditUserModal
-                        open={editResourceModalOpen}
-                        setOpen={value => setFiltersField("editResourceModalOpen", value)}
-                        userId={editResourceId}
-                    />
-                }
-            />
+            {editResourceModalOpen && (
+                <IsPermitted
+                    api="api/v1/rbac/resources"
+                    method="patch"
+                    element={
+                        <EditResourceModal
+                            open={editResourceModalOpen}
+                            setOpen={value => setFiltersField("editResourceModalOpen", value)}
+                            resourceId={editResourceId}
+                        />
+                    }
+                />
+            )}
             <BarWrapper>
                 <div>
-                    <IsPermitted api="api/v1/rbac/users" method="post" element={<NewResource />} />
+                    <IsPermitted api="api/v1/rbac/resources" method="post" element={<NewResource />} />
                 </div>
                 <div>
                     <SearchInput
