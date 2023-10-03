@@ -43,7 +43,7 @@ const Users = () => {
                             value={filterRoleId}
                             setValue={value => setFiltersField("filterRoleId", value)}
                             options={[
-                                { name: "FILTER BY ROLE", value: " " },
+                                { name: "Filter by role", value: " " },
                                 ...(rolesQuery.data?.map(role => ({ name: role.name, value: role.id })) || []),
                             ]}
                         />

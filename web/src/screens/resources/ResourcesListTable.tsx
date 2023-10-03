@@ -39,6 +39,7 @@ const ResourcesThreeDotDropdown = ({ resourceId }: { resourceId: string }) => {
             handler: () => {
                 if (confirm("Are you sure you want to delete this resource?")) {
                     deleteResourceMutation.mutate(resourceId);
+                    setFiltersField("editResourceId", "");
                 }
             },
         });

@@ -76,6 +76,7 @@ const useRolesStore = create<TStore>()(
             },
 
             editRole: {
+                id: "",
                 name: "",
                 disable: false,
             },

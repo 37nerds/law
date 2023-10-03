@@ -1,18 +1,51 @@
 import type { TUser, TUserColumn } from "@fetches/rbac/users";
+import type { THeader, TThreeDropDownOption } from "@helpers/types";
 
-import { useUsersPaginatedQuery } from "@fetches/rbac/users";
+import { useUserDeleteMutation, useUsersPaginatedQuery } from "@fetches/rbac/users";
 import { getProfileUrlFromAvatarKey } from "@helpers/location";
 import { convertToLocalTime } from "@helpers/time";
+import { isPermitted } from "@states/auth_store";
 
 import useUsersStore from "@states/users_store";
 
 import PaginationWrapper from "@components/wrappers/PaginationWrapper";
 import Td from "@components/tables/Td";
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
-import UserThreeDotDropdown from "@screens/users/UserThreeDotDropdown";
 import Th from "@components/tables/Th";
 import Table from "@components/tables/Table";
-import { THeader } from "@helpers/types";
+import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
+
+const UserThreeDotDropdown = ({ userId }: { userId: string }) => {
+    const { setFiltersField } = useUsersStore();
+
+    const userDeleteMutation = useUserDeleteMutation();
+
+    const options: TThreeDropDownOption[] = [];
+
+    if (isPermitted("api/v1/rbac/users", "patch")) {
+        options.push({
+            content: <button className=" btn btn-success btn-sm w-full text-xs text-base-100">Edit</button>,
+            handler: () => {
+                setFiltersField("editUserId", userId);
+                setFiltersField("editUserModalOpen", true);
+            },
+        });
+    }
+
+    if (isPermitted("api/v1/rbac/users", "delete")) {
+        options.push({
+            content: <button className=" btn btn-error btn-sm w-full text-xs text-base-100">Delete</button>,
+            handler: () => {
+                if (confirm("Are you sure you want to delete this user?")) {
+                    userDeleteMutation.mutate(userId);
+                    setFiltersField("editUserId", "");
+                }
+            },
+        });
+    }
+
+    return <ThreeDotDropdown options={options} />;
+};
 
 const UsersTable = () => {
     const usersQuery = useUsersPaginatedQuery();

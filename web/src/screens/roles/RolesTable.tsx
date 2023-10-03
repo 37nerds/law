@@ -1,11 +1,47 @@
-import { TRoleColumn, useRolesPaginatedQuery } from "@fetches/rbac/roles";
+import type { TRoleColumn } from "@fetches/rbac/roles";
+import type { THeader, TThreeDropDownOption } from "@helpers/types";
+
+import { useDeleteRoleMutation, useRolesPaginatedQuery } from "@fetches/rbac/roles";
+import { isPermitted } from "@states/auth_store";
+
+import useRolesStore from "@states/roles_store";
 
 import Table from "@components/tables/Table";
 import Th from "@components/tables/Th";
 import PaginationWrapper from "@components/wrappers/PaginationWrapper";
-import useRolesStore from "@states/roles_store";
-import RoleThreeDotDropdown from "./RoleThreeDotDropdown";
-import { THeader } from "@helpers/types";
+import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
+
+const RoleThreeDotDropdown = ({ roleId }: { roleId: string }) => {
+    const { setFiltersField } = useRolesStore();
+
+    const roleDeleteMutation = useDeleteRoleMutation();
+
+    const options: TThreeDropDownOption[] = [];
+
+    if (isPermitted("api/v1/rbac/roles", "patch")) {
+        options.push({
+            content: <button className=" btn btn-success btn-sm w-full text-xs text-base-100">Edit</button>,
+            handler: () => {
+                setFiltersField("editRoleId", roleId);
+                setFiltersField("editRoleModalOpen", true);
+            },
+        });
+    }
+
+    if (isPermitted("api/v1/rbac/roles", "delete")) {
+        options.push({
+            content: <button className=" btn btn-error btn-sm w-full text-xs text-base-100">Delete</button>,
+            handler: () => {
+                if (confirm("Are you sure you want to delete this role?")) {
+                    roleDeleteMutation.mutate(roleId);
+                    setFiltersField("editRoleId", "");
+                }
+            },
+        });
+    }
+
+    return <ThreeDotDropdown options={options} />;
+};
 
 export const RolesTable = () => {
     const rolesQuery = useRolesPaginatedQuery();

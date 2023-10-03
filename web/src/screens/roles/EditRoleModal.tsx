@@ -34,8 +34,9 @@ const EditRoleModal = ({
     useEffect(() => {
         if (roleQuery.isSuccess) {
             setEditRole({
+                id: roleQuery.data?.id,
                 name: roleQuery.data?.name,
-                disable: roleQuery.data.disable,
+                disable: roleQuery.data?.disable,
             });
         }
     }, [roleQuery.isSuccess, roleQuery.data]);

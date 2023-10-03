@@ -106,3 +106,5 @@ export type TThreeDropDownOption = {
 export type TOrder = "desc" | "asc";
 
 export type THeader<T> = { name: T | null; label: string };
+
+export type TQueries = Record<string, any>;

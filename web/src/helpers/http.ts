@@ -1,4 +1,4 @@
-import type { TJsonS, TResponse } from "@helpers/types";
+import type { TJsonS, TQueries, TResponse } from "@helpers/types";
 
 import { server_base_url } from "@config/env";
 
@@ -68,34 +68,89 @@ const lara_request = async (
     return response.payload;
 };
 
-const get = async (path: string, happyStatus: number, csrf = true): Promise<any> => {
-    return lara_request("GET", path, null, happyStatus, { csrf });
+const get = async (path: string, happy: number, csrf = true): Promise<any> => {
+    return lara_request("GET", path, null, happy, { csrf });
 };
 
-const post = async (path: string, body: TJsonS, happyStatus: number, csrf = true): Promise<any> => {
-    return lara_request("POST", path, JSON.stringify(body), happyStatus, { csrf });
+const post = async (path: string, body: TJsonS, happy: number, csrf = true): Promise<any> => {
+    return lara_request("POST", path, JSON.stringify(body), happy, { csrf });
 };
 
-const form_post = async (path: string, body: FormData, happyStatus: number, csrf = true): Promise<any> => {
-    return await lara_request("POST", path, body, happyStatus, {
+const form_post = async (path: string, body: FormData, happy: number, csrf = true): Promise<any> => {
+    return await lara_request("POST", path, body, happy, {
         contentType: "x/none",
         csrf,
     });
 };
 
-const csrf_post = async (path: string, body: TJsonS, happyStatus: number, csrf = true): Promise<any> => {
+const csrf_post = async (path: string, body: TJsonS, happy: number, csrf = true): Promise<any> => {
     await http.get("/csrf-cookie", 204, false);
-    return http.post(path, body, happyStatus, csrf);
+    return http.post(path, body, happy, csrf);
 };
 
-const patch = (path: string, body: TJsonS, happyStatus: number, csrf = true): Promise<any> => {
-    return lara_request("PATCH", path, JSON.stringify(body), happyStatus, { csrf });
+const patch = (path: string, body: TJsonS, happy: number, csrf = true): Promise<any> => {
+    return lara_request("PATCH", path, JSON.stringify(body), happy, { csrf });
 };
 
-const _delete = (path: string, happyStatus: number, csrf: boolean = true): Promise<any> => {
-    return lara_request("DELETE", path, null, happyStatus, { csrf });
+const _delete = (path: string, happy: number, csrf: boolean = true): Promise<any> => {
+    return lara_request("DELETE", path, null, happy, { csrf });
 };
 
-const http = { lara_request, get, post, csrf_post, form_post, patch, delete: _delete };
+const buildQueryString = (queries: TQueries) => {
+    return [...Object.keys(queries)].reduce((s, key) => s + `&${key}=${queries[key]}`, "?f=b");
+};
+
+const get_q = async (path: string, queries: TQueries = {}, happy: number, csrf = true): Promise<any> => {
+    return get(path + buildQueryString(queries), happy, csrf);
+};
+
+const post_q = async (
+    path: string,
+    queries: TQueries = {},
+    body: TJsonS,
+    happyStatus: number,
+    csrf = true
+): Promise<any> => {
+    return post(path + buildQueryString(queries), body, happyStatus, csrf);
+};
+
+const patch_q = async (
+    path: string,
+    queries: TQueries = {},
+    body: TJsonS,
+    happy: number,
+    csrf = true
+): Promise<any> => {
+    return patch(path + buildQueryString(queries), body, happy, csrf);
+};
+
+const delete_q = async (path: string, queries: TQueries = {}, happy: number, csrf = true): Promise<any> => {
+    return _delete(path + buildQueryString(queries), happy, csrf);
+};
+
+const form_post_q = async (
+    path: string,
+    queries: TQueries = {},
+    body: FormData,
+    happy: number,
+    csrf = true
+): Promise<any> => {
+    return form_post(path + buildQueryString(queries), body, happy, csrf);
+};
+
+const http = {
+    lara_request,
+    get,
+    post,
+    csrf_post,
+    form_post,
+    patch,
+    delete: _delete,
+    get_q,
+    post_q,
+    patch_q,
+    delete_q,
+    form_post_q,
+};
 
 export default http;
