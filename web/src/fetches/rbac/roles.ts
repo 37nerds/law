@@ -48,10 +48,11 @@ export const useRolesPaginatedQuery = () => {
     const q = useQuery<TPaginate<TRole>, TError>({
         queryFn: () => {
             let url =
-                `/rbac/roles?paginated=true` +
-                `&per_page=10&page=${page}` +
+                `/rbac/roles` +
+                `?per_page=10&page=${page}` +
                 `&sort_column=${sortColumn}` +
-                `&sort_order=${sortOrder}`;
+                `&sort_order=${sortOrder}` +
+                `&paginated=true`;
             if (searchQuery.trim() !== "") {
                 url += `&search=${encodeURIComponent(searchQuery.trim())}`;
             }

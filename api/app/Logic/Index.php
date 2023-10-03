@@ -7,11 +7,13 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule as LaraRule;
 
 class Index
 {
-    public static function isPaginatedRequest(Request $request) {
+    public static function isPaginatedRequest(Request $request)
+    {
         $validated = $request->validate(["paginated" => ["nullable", "in:true,false"]]);
         return array_key_exists("paginated", $validated) && $validated["paginated"] === "true";
     }
@@ -30,8 +32,7 @@ class Index
         Builder $query,
         array   $allowedColumnsForSearch,
         array   $allowedColumnsForSorting
-    ): LengthAwarePaginator
-    {
+    ): LengthAwarePaginator {
         $params = self::validateRequestQueryStringForPaginatedSearchAndSort(
             request: $request,
             allowedColumnsForSorting: $allowedColumnsForSorting
@@ -68,8 +69,7 @@ class Index
         Builder   $query,
         array     $allowedColumnsForSearch,
         PSSParams $params,
-    ): LengthAwarePaginator
-    {
+    ): LengthAwarePaginator {
         $search = $params->search;
         if ($search !== "") {
             $query = $query

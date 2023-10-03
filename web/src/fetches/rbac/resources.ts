@@ -65,10 +65,11 @@ export const usePaginatedResourcesQuery = () => {
     const q = useQuery<TPaginate<TResource>, TError>({
         queryFn: () => {
             let uri =
-                `/rbac/resources?paginated=true` +
-                `&per_page=10&page=${page}` +
+                `/rbac/resources` +
+                `?per_page=10&page=${page}` +
                 `&sort_column=${sortColumn}` +
-                `&sort_order=${sortOrder}`;
+                `&sort_order=${sortOrder}` +
+                `&paginated=true`;
 
             if (searchQuery.trim() !== "") {
                 uri += `&search=${encodeURIComponent(searchQuery.trim())}`;

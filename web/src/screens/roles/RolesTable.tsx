@@ -53,7 +53,7 @@ export const RolesTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {rolesQuery?.data?.data.map((role, index) => {
+                    {rolesQuery.data?.data?.map((role, index) => {
                         return (
                             <tr key={index} className={`${index % 2 === 1 ? "bg-base-200" : ""}`}>
                                 <td>{role.name}</td>

@@ -8,7 +8,6 @@ use App\Http\Requests\RBAC\CreateRoleRequest;
 use App\Http\Requests\RBAC\UpdateRoleRequest;
 use App\Http\Resources\RBAC\RoleResource;
 use App\Logic\Index;
-use App\Models\RBAC\Resource;
 use App\Models\RBAC\Role;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

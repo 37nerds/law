@@ -54,10 +54,11 @@ export const useUsersPaginatedQuery = () => {
     const q = useQuery<TPaginate<TUser>, TError>({
         queryFn: () => {
             let url =
-                `/rbac/users?paginated=true` +
-                `&per_page=10&page=${page}` +
+                `/rbac/users` +
+                `?per_page=10&page=${page}` +
                 `&sort_column=${sortColumn}` +
-                `&sort_order=${sortOrder}`;
+                `&sort_order=${sortOrder}` +
+                `&paginated=true`;
             if (filterRoleId.trim() !== "") {
                 url += `&filter_role_id=${filterRoleId}`;
             }
