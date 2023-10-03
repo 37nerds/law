@@ -19,6 +19,10 @@ const EditRoleModal = ({
     setOpen: (open: boolean) => void;
     roleId: string;
 }) => {
+    if (!open) {
+        return <></>;
+    }
+
     const {
         setEditRole,
         editRole,

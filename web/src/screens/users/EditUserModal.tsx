@@ -21,6 +21,10 @@ const EditUserModal = ({
     setOpen: (open: boolean) => void;
     userId: string;
 }) => {
+    if (!open) {
+        return <></>;
+    }
+
     const {
         editUser,
         setEditUserField,

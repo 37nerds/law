@@ -24,6 +24,10 @@ const EditResourceModal = ({
     setOpen: (open: boolean) => void;
     resourceId: string;
 }) => {
+    if (!open) {
+        return <></>;
+    }
+
     const {
         editResource,
         setEditResourceField,

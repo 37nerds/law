@@ -17,19 +17,17 @@ const Resources = () => {
 
     return (
         <PageCard>
-            {editResourceModalOpen && (
-                <IsPermitted
-                    api="api/v1/rbac/resources"
-                    method="patch"
-                    element={
-                        <EditResourceModal
-                            open={editResourceModalOpen}
-                            setOpen={value => setFiltersField("editResourceModalOpen", value)}
-                            resourceId={editResourceId}
-                        />
-                    }
-                />
-            )}
+            <IsPermitted
+                api="api/v1/rbac/resources"
+                method="patch"
+                element={
+                    <EditResourceModal
+                        open={editResourceModalOpen}
+                        setOpen={value => setFiltersField("editResourceModalOpen", value)}
+                        resourceId={editResourceId}
+                    />
+                }
+            />
             <BarWrapper>
                 <div>
                     <IsPermitted api="api/v1/rbac/resources" method="post" element={<NewResource />} />

@@ -22,19 +22,17 @@ const Users = () => {
 
     return (
         <PageCard>
-            {editUserModalOpen && (
-                <IsPermitted
-                    api="api/v1/rbac/users"
-                    method="patch"
-                    element={
-                        <EditUserModal
-                            open={editUserModalOpen}
-                            setOpen={value => setFiltersField("editUserModalOpen", value)}
-                            userId={editUserId}
-                        />
-                    }
-                />
-            )}
+            <IsPermitted
+                api="api/v1/rbac/users"
+                method="patch"
+                element={
+                    <EditUserModal
+                        open={editUserModalOpen}
+                        setOpen={value => setFiltersField("editUserModalOpen", value)}
+                        userId={editUserId}
+                    />
+                }
+            />
             <BarWrapper>
                 <div>
                     <IsPermitted api="api/v1/rbac/users" method="post" element={<NewUser />} />
