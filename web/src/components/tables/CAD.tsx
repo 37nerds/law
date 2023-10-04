@@ -1,5 +1,5 @@
-import CheckboxInput from "@components/inputs/CheckboxInput";
 import IsPermitted from "@components/auth/IsPermitted";
+import CheckboxInput from "@components/inputs/CheckboxInput";
 
 const CAD = ({
     onSelect,
@@ -15,7 +15,7 @@ const CAD = ({
     checked: boolean;
     length: number;
     api: string;
-    onClick?: () => void;
+    onClick: () => void;
     disabled?: boolean;
 }) => {
     return (
