@@ -13,7 +13,7 @@ import BarWrapper from "@components/wrappers/BarWrapper";
 import NewUser from "@screens/users/NewUser";
 import SelectInput from "@components/inputs/SelectInput";
 import CheckboxInput from "@components/inputs/CheckboxInput";
-import SelectButtonAndCheckbox from "@screens/users/SelectButtonAndCheckbox";
+import UserCAD from "@screens/users/UserCAD";
 
 const Users = () => {
     useSetPageTitle("Users List");
@@ -39,7 +39,7 @@ const Users = () => {
             />
             <BarWrapper>
                 <div className="flex items-center gap-2">
-                    <SelectButtonAndCheckbox />
+                    <UserCAD />
                     <IsPermitted api="api/v1/rbac/users" method="post" element={<NewUser />} />
                 </div>
                 <div className="flex gap-2">

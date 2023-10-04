@@ -2,7 +2,6 @@ import type { TUser, TUserColumn } from "@queries/rbac/users";
 import type { THeader, TThreeDropDownOption } from "@helpers/types";
 
 import { useUserDeleteMutation, useUsersPaginatedQuery } from "@queries/rbac/users";
-import { getProfileUrlFromAvatarKey } from "@helpers/location";
 import { convertToLocalTime } from "@helpers/time";
 import { isPermitted } from "@states/auth_store";
 
@@ -10,11 +9,11 @@ import useUsersStore from "@states/users_store";
 
 import PaginationWrapper from "@components/wrappers/PaginationWrapper";
 import Td from "@components/tables/Td";
-import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import Th from "@components/tables/Th";
 import Table from "@components/tables/Table";
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
-import CheckboxInput from "@components/inputs/CheckboxInput";
+import FCheckBox from "@components/tables/FCheckBox";
+import UserAvatar from "@screens/users/UserAvatar";
 
 const UserThreeDotDropdown = ({ userId }: { userId: string }) => {
     const { setFiltersField } = useUsersStore();
@@ -87,6 +86,7 @@ const UsersTable = () => {
                 <thead>
                     <tr>
                         <th></th>
+                        <th></th>
                         {headers.map((header, index) => (
                             <Th<TUserColumn>
                                 key={index}
@@ -104,22 +104,14 @@ const UsersTable = () => {
                         return (
                             <tr key={index} className={`${index % 2 === 1 ? "bg-base-200" : ""}`}>
                                 <Td>
-                                    <CheckboxInput
-                                        checked={!!selectionList.find(s => s === user.id)}
-                                        onChange={() => toggleSelectionListItem(user.id)}
-                                        className="checkbox-success"
+                                    <FCheckBox
+                                        list={selectionList}
+                                        currentItemId={user.id}
+                                        onChange={toggleSelectionListItem}
                                     />
                                 </Td>
                                 <Td>
-                                    <div className="avatar">
-                                        <div className="w-8 rounded-full ring ring-success ring-offset-2 ring-offset-base-100">
-                                            {user?.avatar ? (
-                                                <img src={getProfileUrlFromAvatarKey(user.avatar)} alt="" />
-                                            ) : (
-                                                <UserIcon className="bg-base-200 p-1" />
-                                            )}
-                                        </div>
-                                    </div>
+                                    <UserAvatar avatarUri={user?.avatar} />
                                 </Td>
 
                                 <Td>

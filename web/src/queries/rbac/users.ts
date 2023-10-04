@@ -1,4 +1,4 @@
-import type { TRole } from "../rbac/roles";
+import type { TRole } from "@queries/rbac/roles";
 import type { TBase, TError, TPaginate, TQueries } from "@helpers/types";
 
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -9,11 +9,12 @@ import useQueryErrorMessage from "@hooks/useQueryErrorMessage";
 import useMutationErrorMessage from "@hooks/useMutationErrorMessage";
 import useMutationSuccessMessage from "@hooks/useMutationSuccessMessage";
 
-export const RBAC_USERS__GET = "get.rbac-users";
+export const RBAC_USERS__PAGINATED_GET = "get.paginated.rbac-users";
 export const RBAC_USERS__POST = "post.rbac-users";
 export const RBAC_USER__GET = "get.rbac-user";
-export const RBAC_USER_PATCH = "patch.rbac-user";
-export const RBAC_USER_DELETE = "delete.rbac-user";
+export const RBAC_USER__PATCH = "patch.rbac-user";
+export const RBAC_USER__DELETE = "delete.rbac-user";
+export const RBAC_USERS__DELETE = "delete.rbac-users";
 
 export type TUser = TBase & {
     name: string;
@@ -54,7 +55,7 @@ export const useUsersPaginatedQuery = () => {
     const q = useQuery<TPaginate<TUser>, TError>({
         queryFn: () => {
             const queries: TQueries = {
-                per_page: 10,
+                per_page: 11,
                 page: page,
                 sort_column: sortColumn,
                 sort_order: sortOrder,
@@ -68,7 +69,7 @@ export const useUsersPaginatedQuery = () => {
             }
             return http.get_q("/rbac/users", queries, 200);
         },
-        queryKey: [RBAC_USERS__GET, page, searchQuery, sortColumn, sortOrder, filterRoleId],
+        queryKey: [RBAC_USERS__PAGINATED_GET, page, searchQuery, sortColumn, sortOrder, filterRoleId],
         retry: false,
     });
     useQueryErrorMessage(q);
@@ -89,7 +90,7 @@ export const useUserSaveMutation = () => {
     const m = useMutation<TUser, TError, TCreateUser>({
         mutationFn: user => http.post("/rbac/users", { ...user, password_confirmation: user.password }, 201),
         mutationKey: [RBAC_USERS__POST],
-        onSuccess: () => c.invalidateQueries(RBAC_USERS__GET).then(),
+        onSuccess: () => c.invalidateQueries(RBAC_USERS__PAGINATED_GET).then(),
     });
     useMutationErrorMessage(m);
     useMutationSuccessMessage(m, `New user created: ${m?.data?.username}`);
@@ -100,9 +101,9 @@ export const useUserEditMutation = () => {
     const c = useQueryClient();
     const m = useMutation<TUser, TError, TEditUser>({
         mutationFn: user => http.patch_q(`/rbac/users`, { id: user.id }, user, 200),
-        mutationKey: [RBAC_USER_PATCH],
+        mutationKey: [RBAC_USER__PATCH],
         onSuccess: user => {
-            c.invalidateQueries([RBAC_USERS__GET]).then();
+            c.invalidateQueries([RBAC_USERS__PAGINATED_GET]).then();
             c.invalidateQueries([RBAC_USER__GET, user.id]).then();
         },
     });
@@ -113,15 +114,38 @@ export const useUserEditMutation = () => {
 
 export const useUserDeleteMutation = () => {
     const c = useQueryClient();
-    const m = useMutation<TUser, TError, string>({
+    const m = useMutation<null, TError, string>({
         mutationFn: userId => http.delete_q(`/rbac/users`, { id: userId }, 204),
-        mutationKey: [RBAC_USER_DELETE],
+        mutationKey: [RBAC_USER__DELETE],
         onSuccess: (_, userId) => {
-            c.invalidateQueries([RBAC_USERS__GET]).then();
+            c.invalidateQueries([RBAC_USERS__PAGINATED_GET]).then();
             c.invalidateQueries([RBAC_USER__GET, userId]).then();
         },
     });
     useMutationErrorMessage(m);
     useMutationSuccessMessage(m, `User deleted successfully.`);
+    return m;
+};
+
+export const useUsersDeleteMutation = () => {
+    const { searchQuery, page, sortColumn, sortOrder, filterRoleId } = useUsersStore(state => state.filters);
+    const c = useQueryClient();
+    const m = useMutation<null, TError, string[]>({
+        mutationFn: userIds => http.delete_b(`/rbac/users`, { ids: userIds }, 204),
+        mutationKey: [RBAC_USERS__DELETE],
+        onSuccess: (_, userId) => {
+            c.invalidateQueries([
+                RBAC_USERS__PAGINATED_GET,
+                page,
+                searchQuery,
+                sortColumn,
+                sortOrder,
+                filterRoleId,
+            ]).then();
+            c.invalidateQueries([RBAC_USER__GET, userId]).then();
+        },
+    });
+    useMutationErrorMessage(m);
+    useMutationSuccessMessage(m, `Selected users deleted successfully.`);
     return m;
 };

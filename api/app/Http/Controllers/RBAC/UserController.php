@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\RBAC;
 
 use App\Exceptions\JsonException;
+use App\Helpers\ArrayH;
 use App\Helpers\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreateUserRequest;
@@ -13,7 +14,7 @@ use App\Logic\RBAC;
 use App\Models\RBAC\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -32,7 +33,7 @@ class UserController extends Controller
         $validated = $request->validate([
            "filter_role_id" => ["nullable", "string"]
         ]);
-        if (array_key_exists("filter_role_id", $validated) && $validated["filter_role_id"] ) {
+        if (ArrayH::isIn($validated, "filter_role_id") && $validated["filter_role_id"] ) {
             $query = $query->where("role_id", "=", $validated["filter_role_id"]);
         }
 
@@ -63,14 +64,19 @@ class UserController extends Controller
 
     public function destroy(Request $request): JsonResponse
     {
-        $userId = $request->query("id");
-        $user = User::query()->findOrFail($userId);
-
-        if ($user->id === Auth::id()) {
-            return Response::error(400, "You can't delete yourself");
+        $validated = $request->validate([
+            "id" => ["nullable", "string"],
+            "ids" => ["nullable", "array"]
+        ]);
+        if (ArrayH::isIn($validated, "id")) {
+           User::query()->findOrFail($validated["id"])->delete();
         }
-
-        $user->delete();
+        else if (ArrayH::isIn($validated, "ids")) {
+            collect($validated["ids"])->each(function (string $id) {
+                Log::info($id);
+                User::query()->findOrFail($id)->delete();
+            });
+        }
         return Response::happy(204);
     }
 }

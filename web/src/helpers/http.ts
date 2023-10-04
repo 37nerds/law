@@ -128,6 +128,10 @@ const delete_q = async (path: string, queries: TQueries = {}, happy: number, csr
     return _delete(path + buildQueryString(queries), happy, csrf);
 };
 
+const delete_b = async (path: string, body: TJsonS, happy: number, csrf = true): Promise<any> => {
+    return lara_request("DELETE", path, JSON.stringify(body), happy, { csrf });
+};
+
 const form_post_q = async (
     path: string,
     queries: TQueries = {},
@@ -151,6 +155,7 @@ const http = {
     patch_q,
     delete_q,
     form_post_q,
+    delete_b,
 };
 
 export default http;
