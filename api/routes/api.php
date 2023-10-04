@@ -105,7 +105,9 @@ Route::prefix("/v1")
                 Route::prefix("/permissions")->group(function () {
 
                     Route::post("/", [PermissionController::class, "store"]);
+                    Route::post("/all", [PermissionController::class, "storeAll"]);
                     Route::delete("/", [PermissionController::class, "destroy"]);
+                    Route::delete("/all", [PermissionController::class, "destroyAll"]);
 
                 });
 

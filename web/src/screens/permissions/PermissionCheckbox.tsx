@@ -2,7 +2,7 @@ import type { TResource } from "@queries/rbac/resources";
 
 import { useRoleQuery } from "@queries/rbac/roles";
 import { useDeletePermissionMutation, useSavePermissionMutation } from "@queries/rbac/permissions";
-import { useAuthStore } from "@states/auth_store";
+import { selectLoggedUserRoleId } from "@states/auth_store";
 
 import CheckboxInput from "@components/inputs/CheckboxInput";
 
@@ -25,7 +25,7 @@ const PermissionCheckbox = ({ resource, roleId = "" }: { resource?: TResource | 
         }
     };
 
-    const loggedUserRoleId = useAuthStore(state => state.loggedUser?.role_id);
+    const loggedUserRoleId = selectLoggedUserRoleId();
 
     return (
         <CheckboxInput

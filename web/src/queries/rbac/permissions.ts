@@ -54,7 +54,7 @@ export const useDeletePermissionMutation = () => {
 export const useGiveAllPermissionMutation = () => {
     const c = useQueryClient();
     const m = useMutation<null, TError, string>({
-        mutationFn: roleId => http.post("/rbac/permissions/all", { role_id: roleId }, 200),
+        mutationFn: roleId => http.post("/rbac/permissions/all", { role_id: roleId }, 204),
         mutationKey: [RBAC_PERMISSION_ALL__POST],
         onSuccess: (_, roleId) => c.invalidateQueries([RBAC_ROLE__GET, roleId]).then(),
     });
@@ -65,7 +65,7 @@ export const useGiveAllPermissionMutation = () => {
 export const useRemoveAllPermissionMutation = () => {
     const c = useQueryClient();
     const m = useMutation<null, TError, string>({
-        mutationFn: roleId => http.delete(`/rbac/permissions/all?foo=bar&role_id=${roleId}`, 200),
+        mutationFn: roleId => http.delete(`/rbac/permissions/all?foo=bar&role_id=${roleId}`, 204),
         mutationKey: [RBAC_PERMISSION_ALL__DELETE],
         onSuccess: (_, roleId) => c.invalidateQueries([RBAC_ROLE__GET, roleId]).then(),
     });

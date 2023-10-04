@@ -51,3 +51,7 @@ export const isPermitted = (api: string, method: TMethod) => {
         return permission?.resource?.api === api && permission?.resource?.method === method;
     });
 };
+
+export const selectLoggedUserRoleId = (): string | undefined => {
+    return useAuthStore(state => state.loggedUser?.role_id);
+};

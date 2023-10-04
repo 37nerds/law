@@ -1,6 +1,7 @@
-import { useResourcesQuery } from "../../queries/rbac/resources";
-import { useRoleQuery } from "../../queries/rbac/roles";
-import { useGiveAllPermissionMutation, useRemoveAllPermissionMutation } from "../../queries/rbac/permissions";
+import { useResourcesQuery } from "@queries/rbac/resources";
+import { useRoleQuery } from "@queries/rbac/roles";
+import { useGiveAllPermissionMutation, useRemoveAllPermissionMutation } from "@queries/rbac/permissions";
+import { selectLoggedUserRoleId } from "@states/auth_store";
 
 import CheckboxInput from "@components/inputs/CheckboxInput";
 
@@ -14,11 +15,13 @@ const SelectDeselectAllButton = ({ roleId }: { roleId: string }) => {
     const giveAllPermissionMutation = useGiveAllPermissionMutation();
     const removeAllPermissionMutation = useRemoveAllPermissionMutation();
 
+    const loggedUserRoleId = selectLoggedUserRoleId();
+
     return (
         <div className="flex justify-end gap-5">
             <div>Select/Deselect All</div>
             <CheckboxInput
-                disabled={!resourcesCount || !roleId}
+                disabled={!resourcesCount || !roleId || loggedUserRoleId === roleId}
                 checked={!!(resourcesCount && resourcesCount === permissionsCount)}
                 onChange={() => {
                     if (resourcesCount != null) {
