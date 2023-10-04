@@ -1,13 +1,12 @@
-import type { TBase, TMethod, TPaginate } from "@helpers/types";
-import type { TError } from "@helpers/types";
+import type { TBase, TError, TMethod, TPaginate } from "@helpers/types";
 
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import http from "@helpers/http";
-import useResourcesStore from "@states/resources_store";
 import useMutationErrorMessage from "@hooks/useMutationErrorMessage";
 import useMutationSuccessMessage from "@hooks/useMutationSuccessMessage";
 import useQueryErrorMessage from "@hooks/useQueryErrorMessage";
+import useResourcesStore from "@states/resources_store";
 
 export type TResourceDependency = {
     api: string;
@@ -45,7 +44,8 @@ export type TEditResource = {
 export type TSortableResourceColumn = "api" | "method" | "label" | "group" | "created_at";
 
 const RBAC_RESOURCES__GET = "get.rbac-resources";
-const RBAC_RESOURCE__DELETE = "delete.rbac-resources";
+const RBAC_RESOURCE__DELETE = "delete.rbac-resource";
+const RBAC_RESOURCES__DELETE = "delete.rbac-resources";
 const RBAC_RESOURCE__POST = "post.rbac-resources";
 const RBAC_RESOURCE__PATCH = "patch.rbac-resources";
 const RBAC_RESOURCES__PAGINATED__GET = "get.paginated.rbac-resources";
@@ -135,5 +135,19 @@ export const useEditResourceMutation = () => {
     });
     useMutationErrorMessage(m);
     useMutationSuccessMessage(m, `Resource updated: ${m?.data?.method} ${m?.data?.api}`);
+    return m;
+};
+
+export const useResourcesDeleteMutation = () => {
+    const { searchQuery, page, sortColumn, sortOrder } = useResourcesStore(state => state.filters);
+    const c = useQueryClient();
+    const m = useMutation<null, TError, string[]>({
+        mutationFn: resourceIds => http.delete_b(`/rbac/resources`, { ids: resourceIds }, 204),
+        mutationKey: [RBAC_RESOURCES__DELETE],
+        onSuccess: () =>
+            c.invalidateQueries([RBAC_RESOURCES__PAGINATED__GET, page, searchQuery, sortColumn, sortOrder]).then(),
+    });
+    useMutationErrorMessage(m);
+    useMutationSuccessMessage(m, `Selected resources deleted successfully.`);
     return m;
 };
