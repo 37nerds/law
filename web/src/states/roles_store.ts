@@ -1,5 +1,5 @@
-import type { TCreateRole, TEditRole, TRoleColumn } from "../queries/rbac/roles";
 import { TOrder } from "@helpers/types";
+import type { TCreateRole, TEditRole, TRoleColumn } from "../queries/rbac/roles";
 
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
@@ -32,6 +32,10 @@ type TStore = {
     setEditRoleError: (newRoleError: Record<string, string[]>) => void;
     setEditRoleEmpty: () => void;
     setEditRoleErrorEmpty: () => void;
+
+    selectionList: string[];
+    setSelectionList: (selectionList: string[]) => void;
+    toggleSelectionListItem: (roleId: string) => void;
 };
 
 const useRolesStore = create<TStore>()(
@@ -104,6 +108,22 @@ const useRolesStore = create<TStore>()(
             setEditRoleErrorEmpty: () => {
                 set(state => {
                     state.editRoleError = {};
+                });
+            },
+
+            selectionList: [],
+            setSelectionList: selectionList => {
+                set(state => {
+                    state.selectionList = selectionList;
+                });
+            },
+            toggleSelectionListItem: roleId => {
+                set(state => {
+                    if (!state.selectionList.find(s => s == roleId)) {
+                        state.selectionList.push(roleId);
+                    } else {
+                        state.selectionList = state.selectionList.filter(s => s !== roleId);
+                    }
                 });
             },
         }))

@@ -1,20 +1,20 @@
-import type { THeader } from "@helpers/types";
+import type { THeader, TThreeDropDownOption } from "@helpers/types";
 import type { TResource, TSortableResourceColumn } from "../../queries/rbac/resources";
-import type { TThreeDropDownOption } from "@helpers/types";
 
-import { useDeleteResourceMutation, usePaginatedResourcesQuery } from "../../queries/rbac/resources";
 import { convertToLocalTime } from "@helpers/time";
 import { isPermitted } from "@states/auth_store";
+import { useDeleteResourceMutation, usePaginatedResourcesQuery } from "../../queries/rbac/resources";
 
 import useResourcesStore from "@states/resources_store";
 
-import PaginationWrapper from "@components/wrappers/PaginationWrapper";
+import DeleteButton from "@components/buttons/DeleteButton";
+import EditButton from "@components/buttons/EditButton";
+import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
+import FCheckBox from "@components/tables/FCheckBox";
+import Table from "@components/tables/Table";
 import Td from "@components/tables/Td";
 import Th from "@components/tables/Th";
-import Table from "@components/tables/Table";
-import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
-import EditButton from "@components/buttons/EditButton";
-import DeleteButton from "@components/buttons/DeleteButton";
+import PaginationWrapper from "@components/wrappers/PaginationWrapper";
 
 const ResourcesThreeDotDropdown = ({ resourceId }: { resourceId: string }) => {
     const { setFiltersField } = useResourcesStore();
@@ -52,7 +52,9 @@ const ResourcesListTable = () => {
     const resourcesQuery = usePaginatedResourcesQuery();
 
     const { page, sortColumn, sortOrder } = useResourcesStore(state => state?.filters);
-    const { setFiltersField } = useResourcesStore(state => state);
+    const { setFiltersField, selectionList, setSelectionList, toggleSelectionListItem } = useResourcesStore(
+        state => state
+    );
 
     const handleSort = (column: TSortableResourceColumn) => {
         setFiltersField("page", 1);
@@ -86,6 +88,7 @@ const ResourcesListTable = () => {
             <Table>
                 <thead>
                     <tr>
+                        <th></th>
                         {headers.map((header, index) => (
                             <Th<TSortableResourceColumn>
                                 key={index}
@@ -102,6 +105,13 @@ const ResourcesListTable = () => {
                     {resourcesQuery?.data?.data?.map((resource, index) => {
                         return (
                             <tr key={index} className={`${index % 2 === 1 ? "bg-base-200" : ""}`}>
+                                <Td>
+                                    <FCheckBox
+                                        list={selectionList}
+                                        currentItemId={resource.id}
+                                        onChange={toggleSelectionListItem}
+                                    />
+                                </Td>
                                 <Td>{resource.label}</Td>
                                 <Td>{resource.method}</Td>
                                 <Td>{resource.api}</Td>

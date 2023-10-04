@@ -21,7 +21,7 @@ class Protect
     public function handle(Request $request, Closure $next)
     {
         $role = Role::query()->find(Auth::user()->role_id);
-        if ($role->disable) {
+        if (!$role || $role->disable ) {
             abort(403, "Forbidden !!");
         }
 

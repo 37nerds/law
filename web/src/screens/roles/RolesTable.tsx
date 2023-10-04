@@ -1,15 +1,17 @@
-import type { TRoleColumn } from "../../queries/rbac/roles";
 import type { THeader, TThreeDropDownOption } from "@helpers/types";
+import type { TRoleColumn } from "../../queries/rbac/roles";
 
-import { useDeleteRoleMutation, useRolesPaginatedQuery } from "../../queries/rbac/roles";
 import { isPermitted } from "@states/auth_store";
+import { useDeleteRoleMutation, useRolesPaginatedQuery } from "../../queries/rbac/roles";
 
 import useRolesStore from "@states/roles_store";
 
+import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
+import FCheckBox from "@components/tables/FCheckBox";
 import Table from "@components/tables/Table";
+import Td from "@components/tables/Td";
 import Th from "@components/tables/Th";
 import PaginationWrapper from "@components/wrappers/PaginationWrapper";
-import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
 
 const RoleThreeDotDropdown = ({ roleId }: { roleId: string }) => {
     const { setFiltersField } = useRolesStore();
@@ -47,7 +49,7 @@ export const RolesTable = () => {
     const rolesQuery = useRolesPaginatedQuery();
 
     const { page, sortColumn, sortOrder } = useRolesStore(state => state.filters);
-    const { setFiltersField } = useRolesStore(state => state);
+    const { setFiltersField, selectionList, setSelectionList, toggleSelectionListItem } = useRolesStore(state => state);
 
     const handleSort = (column: TRoleColumn) => {
         setFiltersField("page", 1);
@@ -92,11 +94,22 @@ export const RolesTable = () => {
                     {rolesQuery.data?.data?.map((role, index) => {
                         return (
                             <tr key={index} className={`${index % 2 === 1 ? "bg-base-200" : ""}`}>
-                                <td>{role.name}</td>
-                                <td>{role.disable ? "Inactive" : "Active"}</td>
-                                <td className="flex justify-end">
-                                    <RoleThreeDotDropdown roleId={role.id} />
-                                </td>
+                                <Td>
+                                    <div className="flex items-center gap-4">
+                                        <FCheckBox
+                                            list={selectionList}
+                                            currentItemId={role.id}
+                                            onChange={toggleSelectionListItem}
+                                        />
+                                        {role.name}
+                                    </div>
+                                </Td>
+                                <Td>{role.disable ? "Inactive" : "Active"}</Td>
+                                <Td>
+                                    <div className="flex justify-end">
+                                        <RoleThreeDotDropdown roleId={role.id} />
+                                    </div>
+                                </Td>
                             </tr>
                         );
                     })}

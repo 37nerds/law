@@ -5,9 +5,10 @@ import IsPermitted from "@components/auth/IsPermitted";
 import PageCard from "@components/cards/PageCard";
 import SearchInput from "@components/inputs/SearchInput";
 import BarWrapper from "@components/wrappers/BarWrapper";
-import ResourcesListTable from "@screens/resources/ResourcesListTable";
-import NewResource from "@screens/resources/NewResource";
 import EditResourceModal from "@screens/resources/EditResourceModal";
+import NewResource from "@screens/resources/NewResource";
+import ResourceCAD from "@screens/resources/ResourceCAD";
+import ResourcesListTable from "@screens/resources/ResourcesListTable";
 
 const Resources = () => {
     useSetPageTitle("Resources");
@@ -29,7 +30,8 @@ const Resources = () => {
                 }
             />
             <BarWrapper>
-                <div>
+                <div className="flex items-center gap-2">
+                    <ResourceCAD />
                     <IsPermitted api="api/v1/rbac/resources" method="post" element={<NewResource />} />
                 </div>
                 <div>
