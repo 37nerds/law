@@ -15,7 +15,7 @@ const CAD = ({
     checked: boolean;
     length: number;
     api: string;
-    onClick: () => void;
+    onClick?: () => void;
     disabled?: boolean;
 }) => {
     return (

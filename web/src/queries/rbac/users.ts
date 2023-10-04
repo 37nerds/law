@@ -1,13 +1,13 @@
-import type { TRole } from "@queries/rbac/roles";
 import type { TBase, TError, TPaginate, TQueries } from "@helpers/types";
+import type { TRole } from "@queries/rbac/roles";
 
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import http from "@helpers/http";
-import useUsersStore from "@states/users_store";
-import useQueryErrorMessage from "@hooks/useQueryErrorMessage";
 import useMutationErrorMessage from "@hooks/useMutationErrorMessage";
 import useMutationSuccessMessage from "@hooks/useMutationSuccessMessage";
+import useQueryErrorMessage from "@hooks/useQueryErrorMessage";
+import useUsersStore from "@states/users_store";
 
 export const RBAC_USERS__PAGINATED_GET = "get.paginated.rbac-users";
 export const RBAC_USERS__POST = "post.rbac-users";
@@ -133,7 +133,7 @@ export const useUsersDeleteMutation = () => {
     const m = useMutation<null, TError, string[]>({
         mutationFn: userIds => http.delete_b(`/rbac/users`, { ids: userIds }, 204),
         mutationKey: [RBAC_USERS__DELETE],
-        onSuccess: (_, userId) => {
+        onSuccess: () => {
             c.invalidateQueries([
                 RBAC_USERS__PAGINATED_GET,
                 page,
@@ -142,7 +142,6 @@ export const useUsersDeleteMutation = () => {
                 sortOrder,
                 filterRoleId,
             ]).then();
-            c.invalidateQueries([RBAC_USER__GET, userId]).then();
         },
     });
     useMutationErrorMessage(m);

@@ -35,6 +35,10 @@ type TStore = {
     setEditResourceError: (newResourceError: TColumnErrors) => void;
     setEditResourceErrorField: (key: string, value: string[]) => void;
     setEditResourceErrorEmpty: () => void;
+
+    selectionList: string[];
+    setSelectionList: (selectionList: string[]) => void;
+    toggleSelectionListItem: (resourceId: string) => void;
 };
 
 const useResourcesStore = create<TStore>()(
@@ -138,6 +142,22 @@ const useResourcesStore = create<TStore>()(
             setEditResourceErrorEmpty: () => {
                 set(state => {
                     state.newResourceError = {};
+                });
+            },
+
+            selectionList: [],
+            setSelectionList: selectionList => {
+                set(state => {
+                    state.selectionList = selectionList;
+                });
+            },
+            toggleSelectionListItem: resourceId => {
+                set(state => {
+                    if (!state.selectionList.find(s => s == resourceId)) {
+                        state.selectionList.push(resourceId);
+                    } else {
+                        state.selectionList = state.selectionList.filter(s => s !== resourceId);
+                    }
                 });
             },
         }))

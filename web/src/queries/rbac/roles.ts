@@ -1,13 +1,13 @@
-import type { TPermission } from "../rbac/permissions";
 import type { TBase, TError, TPaginate } from "@helpers/types";
+import type { TPermission } from "../rbac/permissions";
 
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import http from "@helpers/http";
-import useRolesStore from "@states/roles_store";
-import useQueryErrorMessage from "@hooks/useQueryErrorMessage";
 import useMutationErrorMessage from "@hooks/useMutationErrorMessage";
 import useMutationSuccessMessage from "@hooks/useMutationSuccessMessage";
+import useQueryErrorMessage from "@hooks/useQueryErrorMessage";
+import useRolesStore from "@states/roles_store";
 
 export type TRole = TBase & {
     name: string;
@@ -31,7 +31,8 @@ export const RBAC_ROLES__GET = "get.rbac-roles";
 export const RBAC_ROLES__PAGINATED__GET = "get.paginated.rbac-roles";
 export const RBAC_ROLE__GET = "get.rbac-role";
 export const RBAC_ROLE__POST = "post.rbac-roles";
-export const RBAC_ROLE__DELETE = "delete.rbac-roles";
+export const RBAC_ROLE__DELETE = "delete.rbac-role";
+export const RBAC_ROLES__DELETE = "delete.rbac-roles";
 export const RBAC_ROLE__PATCH = "patch.rbac-roles";
 
 export const useRolesQuery = () => {
@@ -117,5 +118,19 @@ export const useEditRoleMutation = () => {
     });
     useMutationErrorMessage(m);
     useMutationSuccessMessage(m, `Role updated: ${m?.data?.name}`);
+    return m;
+};
+
+export const useRolesDeleteMutation = () => {
+    const { searchQuery, page, sortColumn, sortOrder } = useRolesStore(state => state.filters);
+    const c = useQueryClient();
+    const m = useMutation<null, TError, string[]>({
+        mutationFn: roleIds => http.delete_b(`/rbac/roles`, { ids: roleIds }, 204),
+        mutationKey: [RBAC_ROLES__DELETE],
+        onSuccess: () =>
+            c.invalidateQueries([RBAC_ROLES__PAGINATED__GET, page, searchQuery, sortColumn, sortOrder]).then(),
+    });
+    useMutationErrorMessage(m);
+    useMutationSuccessMessage(m, `Selected roles deleted successfully.`);
     return m;
 };

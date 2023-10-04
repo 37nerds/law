@@ -7,6 +7,7 @@ import SearchInput from "@components/inputs/SearchInput";
 import BarWrapper from "@components/wrappers/BarWrapper";
 import EditRoleModal from "@screens/roles/EditRoleModal";
 import NewRole from "@screens/roles/NewRole";
+import RoleCAD from "@screens/roles/RoleCAD";
 import { RolesTable } from "@screens/roles/RolesTable";
 
 const Roles = () => {
@@ -31,7 +32,8 @@ const Roles = () => {
                 }
             />
             <BarWrapper>
-                <div>
+                <div className="flex items-center gap-2">
+                    <RoleCAD />
                     <IsPermitted api={"api/v1/rbac/roles"} method={"post"} element={<NewRole />} />
                 </div>
                 <div>
