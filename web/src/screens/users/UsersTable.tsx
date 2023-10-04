@@ -1,7 +1,7 @@
-import type { TUser, TUserColumn } from "../../queries/rbac/users";
+import type { TUser, TUserColumn } from "@queries/rbac/users";
 import type { THeader, TThreeDropDownOption } from "@helpers/types";
 
-import { useUserDeleteMutation, useUsersPaginatedQuery } from "../../queries/rbac/users";
+import { useUserDeleteMutation, useUsersPaginatedQuery } from "@queries/rbac/users";
 import { getProfileUrlFromAvatarKey } from "@helpers/location";
 import { convertToLocalTime } from "@helpers/time";
 import { isPermitted } from "@states/auth_store";
@@ -14,6 +14,7 @@ import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import Th from "@components/tables/Th";
 import Table from "@components/tables/Table";
 import ThreeDotDropdown from "@components/dropdowns/ThreeDotDropdown";
+import CheckboxInput from "@components/inputs/CheckboxInput";
 
 const UserThreeDotDropdown = ({ userId }: { userId: string }) => {
     const { setFiltersField } = useUsersStore();
@@ -51,7 +52,7 @@ const UsersTable = () => {
     const usersQuery = useUsersPaginatedQuery();
 
     const { page, sortColumn, sortOrder } = useUsersStore(state => state?.filters);
-    const { setFiltersField } = useUsersStore(state => state);
+    const { setFiltersField, selectionList, toggleSelectionListItem } = useUsersStore(state => state);
 
     const handleSort = (column: TUserColumn) => {
         setFiltersField("page", 1);
@@ -102,6 +103,13 @@ const UsersTable = () => {
                     {usersQuery?.data?.data?.map((user, index) => {
                         return (
                             <tr key={index} className={`${index % 2 === 1 ? "bg-base-200" : ""}`}>
+                                <Td>
+                                    <CheckboxInput
+                                        checked={!!selectionList.find(s => s === user.id)}
+                                        onChange={() => toggleSelectionListItem(user.id)}
+                                        className="checkbox-success"
+                                    />
+                                </Td>
                                 <Td>
                                     <div className="avatar">
                                         <div className="w-8 rounded-full ring ring-success ring-offset-2 ring-offset-base-100">

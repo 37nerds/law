@@ -2,7 +2,7 @@
 
 namespace App\Logic;
 
-class Permission
+class PermissionLogic
 {
     public static function find(string $roleId, string $resourceId): \App\Models\RBAC\Permission|null
     {

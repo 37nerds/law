@@ -1,4 +1,4 @@
-import type { TCreateUser, TEditUser, TUserColumn } from "../queries/rbac/users";
+import type { TCreateUser, TEditUser, TUserColumn } from "@queries/rbac/users";
 import type { TOrder } from "@helpers/types";
 
 import { create } from "zustand";
@@ -36,6 +36,10 @@ type TStore = {
     setEditUserError: (newUserError: Record<string, string[]>) => void;
     setEditUserErrorField: (key: string, value: string[]) => void;
     setEditUserErrorEmpty: () => void;
+
+    selectionList: string[];
+    setSelectionList: (selectionList: string[]) => void;
+    toggleSelectionListItem: (userId: string) => void;
 };
 
 const useUsersStore = create<TStore>()(
@@ -141,6 +145,22 @@ const useUsersStore = create<TStore>()(
             setEditUserErrorEmpty: () => {
                 set(state => {
                     state.newUserError = {};
+                });
+            },
+
+            selectionList: [],
+            setSelectionList: selectionList => {
+                set(state => {
+                    state.selectionList = selectionList;
+                });
+            },
+            toggleSelectionListItem: userId => {
+                set(state => {
+                    if (!state.selectionList.find(s => s == userId)) {
+                        state.selectionList.push(userId);
+                    } else {
+                        state.selectionList = state.selectionList.filter(s => s !== userId);
+                    }
                 });
             },
         }))

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useRolesQuery } from "../../queries/rbac/roles";
-import { useUserSaveMutation } from "../../queries/rbac/users";
+import { useRolesQuery } from "@queries/rbac/roles";
+import { useUserSaveMutation } from "@queries/rbac/users";
 
 import useUsersStore from "@states/users_store";
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreatePermissionAllRequest;
 use App\Http\Requests\RBAC\CreatePermissionRequest;
 use App\Http\Resources\RBAC\PermissionResource;
+use App\Logic\PermissionLogic;
 use App\Models\RBAC\Permission;
 use App\Models\RBAC\Resource;
 use Illuminate\Http\JsonResponse;
@@ -26,7 +27,7 @@ class PermissionController extends Controller
                 ->where("method", "=", $dependency["method"])
                 ->first();
 
-            $dependencyPermission = \App\Logic\Permission::find($request->role_id, $dependencyResource["id"]);
+            $dependencyPermission = PermissionLogic::find($request->role_id, $dependencyResource["id"]);
             if ($dependencyPermission) {
                 return;
             }
@@ -46,7 +47,7 @@ class PermissionController extends Controller
         $resources = Resource::query()->get();
 
         collect($resources->each(function (Resource $resource) use ($request) {
-            $permission = \App\Logic\Permission::find($request->role_id, $resource->id);
+            $permission = PermissionLogic::find($request->role_id, $resource->id);
             if ($permission) {
                 return;
             }

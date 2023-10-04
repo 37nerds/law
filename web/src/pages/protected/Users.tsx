@@ -1,4 +1,5 @@
-import { useRolesQuery } from "../../queries/rbac/roles";
+import { useRolesQuery } from "@queries/rbac/roles";
+import { useUsersPaginatedQuery } from "@queries/rbac/users";
 
 import useSetPageTitle from "@hooks/useSetPageTitle";
 import useUsersStore from "@states/users_store";
@@ -11,14 +12,17 @@ import SearchInput from "@components/inputs/SearchInput";
 import BarWrapper from "@components/wrappers/BarWrapper";
 import NewUser from "@screens/users/NewUser";
 import SelectInput from "@components/inputs/SelectInput";
+import CheckboxInput from "@components/inputs/CheckboxInput";
+import SelectButtonAndCheckbox from "@screens/users/SelectButtonAndCheckbox";
 
 const Users = () => {
     useSetPageTitle("Users List");
 
     const { editUserModalOpen, editUserId, searchQuery, filterRoleId } = useUsersStore(state => state.filters);
-    const { setFiltersField } = useUsersStore();
+    const { setFiltersField, selectionList, setSelectionList } = useUsersStore();
 
     const rolesQuery = useRolesQuery();
+    const usersQuery = useUsersPaginatedQuery();
 
     return (
         <PageCard>
@@ -34,7 +38,8 @@ const Users = () => {
                 }
             />
             <BarWrapper>
-                <div>
+                <div className="flex items-center gap-2">
+                    <SelectButtonAndCheckbox />
                     <IsPermitted api="api/v1/rbac/users" method="post" element={<NewUser />} />
                 </div>
                 <div className="flex gap-2">
