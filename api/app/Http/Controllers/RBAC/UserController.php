@@ -9,12 +9,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreateUserRequest;
 use App\Http\Requests\RBAC\UpdateUserRequest;
 use App\Http\Resources\RBAC\UserResource;
+use App\Logic\Destroy;
 use App\Logic\Index;
 use App\Logic\RBAC;
 use App\Models\RBAC\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -31,9 +31,9 @@ class UserController extends Controller
         $query = User::query()->with("role");
 
         $validated = $request->validate([
-           "filter_role_id" => ["nullable", "string"]
+            "filter_role_id" => ["nullable", "string"]
         ]);
-        if (ArrayH::isIn($validated, "filter_role_id") && $validated["filter_role_id"] ) {
+        if (ArrayH::isIn($validated, "filter_role_id") && $validated["filter_role_id"]) {
             $query = $query->where("role_id", "=", $validated["filter_role_id"]);
         }
 
@@ -64,19 +64,7 @@ class UserController extends Controller
 
     public function destroy(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            "id" => ["nullable", "string"],
-            "ids" => ["nullable", "array"]
-        ]);
-        if (ArrayH::isIn($validated, "id")) {
-           User::query()->findOrFail($validated["id"])->delete();
-        }
-        else if (ArrayH::isIn($validated, "ids")) {
-            collect($validated["ids"])->each(function (string $id) {
-                Log::info($id);
-                User::query()->findOrFail($id)->delete();
-            });
-        }
+        Destroy::destroyFromIdOrIds($request, User::query());
         return Response::happy(204);
     }
 }

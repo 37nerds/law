@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreateRoleRequest;
 use App\Http\Requests\RBAC\UpdateRoleRequest;
 use App\Http\Resources\RBAC\RoleResource;
+use App\Logic\Destroy;
 use App\Logic\Index;
 use App\Models\RBAC\Role;
 use Illuminate\Http\JsonResponse;
@@ -68,9 +69,7 @@ class RoleController extends Controller
 
     public function destroy(Request $request): JsonResponse
     {
-        $roleId = $request->query("id");
-        $role = Role::query()->findOrFail($roleId);
-        $role->delete();
+        Destroy::destroyFromIdOrIds($request, Role::query());
         return Response::happy(204);
     }
 }

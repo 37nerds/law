@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RBAC\CreateResourceRequest;
 use App\Http\Requests\RBAC\UpdateResourceRequest;
 use App\Http\Resources\RBAC\ResourceResource;
+use App\Logic\Destroy;
 use App\Logic\Index;
 use App\Models\RBAC\Resource;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -26,10 +27,10 @@ class ResourceController extends Controller
         }
 
         if (Index::isPaginatedRequest($request)) {
-            $resources =  Index::paginatedSearchAndSort(
+            $resources = Index::paginatedSearchAndSort(
                 request: $request,
                 query: Resource::query(),
-                allowedColumnsForSearch: ['api', 'method', 'label', 'group', "created_at" ],
+                allowedColumnsForSearch: ['api', 'method', 'label', 'group', "created_at"],
                 allowedColumnsForSorting: ['api', 'method', 'label', 'group', "created_at"]
             );
         } else {
@@ -55,9 +56,7 @@ class ResourceController extends Controller
 
     public function destroy(Request $request): JsonResponse
     {
-        $resourceId = $request->query("id");
-        $resource = Resource::query()->findOrFail($resourceId);
-        $resource->delete();
+        Destroy::destroyFromIdOrIds($request, Resource::query());
         return Response::happy(204);
     }
 }
