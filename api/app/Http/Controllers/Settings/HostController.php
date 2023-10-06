@@ -13,14 +13,14 @@ class HostController extends Controller
 {
     public function index(): JsonResponse
     {
-        $hostId = config("host.host_entry_id", "");
+        $hostId = "ce35ce26-ea64-4733-bb6b-1edee87c6d32";
         $host = Host::query()->findOrFail($hostId);
         return Response::happy(200, new HostResource($host));
     }
 
     public function update(UpdateHostRequest $request): JsonResponse
     {
-        $hostId = config("host.host_entry_id", "");
+        $hostId = "ce35ce26-ea64-4733-bb6b-1edee87c6d32";
         $host = Host::query()->findOrFail($hostId);
         $host->fill($request->all())->save();
         return Response::happy(200, new HostResource($host));

@@ -229,7 +229,7 @@ const Host = () => {
                     <div className="flex justify-end">
                         {isEdit && (
                             <button
-                                className={`btn btn-success`}
+                                className={`btn btn-success ${hostMutation.isLoading ? "loading" : ""}`}
                                 onClick={() => {
                                     hostMutation.mutate(host);
                                 }}
