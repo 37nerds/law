@@ -59,6 +59,10 @@ export const protected_routes: TRoute[] = [
         component: lazy(() => import("@pages/protected/Resources")),
     },
     {
+        path: "/settings/host",
+        component: lazy(() => import("@pages/protected/Host")),
+    },
+    {
         path: "/settings/profile",
         component: lazy(() => import("@pages/protected/Profile")),
     },
