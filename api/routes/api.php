@@ -117,7 +117,7 @@ Route::prefix("/v1")
         Route::prefix("/settings")
             ->middleware("protect")
             ->group(function () {
-                Route::prefix("/users")->group(function () {
+                Route::prefix("/hosts")->group(function () {
 
                     Route::get("/", [HostController::class, "index"]);
                     Route::patch("/", [HostController::class, "update"]);

@@ -1,19 +1,19 @@
 import type { TSidebarLink } from "@helpers/types";
 
+import ArrowLeftOnRectangleIcon from "@heroicons/react/24/outline/ArrowLeftOnRectangleIcon";
+import ArrowsPointingInIcon from "@heroicons/react/24/outline/ArrowsPointingInIcon";
 import BoltIcon from "@heroicons/react/24/outline/BoltIcon";
 import ChartBarIcon from "@heroicons/react/24/outline/ChartBarIcon";
 import CheckBadgeIcon from "@heroicons/react/24/outline/CheckBadgeIcon";
 import Cog6ToothIcon from "@heroicons/react/24/outline/Cog6ToothIcon";
 import CogIcon from "@heroicons/react/24/outline/CogIcon";
+import DocumentChartBarIcon from "@heroicons/react/24/outline/DocumentChartBarIcon";
+import PaperClipIcon from "@heroicons/react/24/outline/PaperClipIcon";
+import PuzzlePieceIcon from "@heroicons/react/24/outline/PuzzlePieceIcon";
 import QueueListIcon from "@heroicons/react/24/outline/QueueListIcon";
 import Squares2X2Icon from "@heroicons/react/24/outline/Squares2X2Icon";
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
-import ArrowLeftOnRectangleIcon from "@heroicons/react/24/outline/ArrowLeftOnRectangleIcon";
-import PuzzlePieceIcon from "@heroicons/react/24/outline/PuzzlePieceIcon";
-import ArrowsPointingInIcon from "@heroicons/react/24/outline/ArrowsPointingInIcon";
-import DocumentChartBarIcon from "@heroicons/react/24/outline/DocumentChartBarIcon";
-import PaperClipIcon from "@heroicons/react/24/outline/PaperClipIcon";
 
 /**
  * Configuration for setting the left Sidebar links with title, icon
@@ -96,6 +96,12 @@ export const sidebar_links: TSidebarLink[] = [
         name: "Settings",
         group: "settings",
         submenus: [
+            {
+                path: "/_/settings/host",
+                icon: PaperClipIcon,
+                name: "Global Setup",
+                omit: true,
+            },
             {
                 path: "/_/settings/profile",
                 icon: UserIcon,
