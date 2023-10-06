@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Logic\SeederTrait;
+use App\Logic\Store;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +19,7 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             RBACSeeder::class
         ]);
+
+        Store::createInitialHostEntryWithFixID();
     }
 }

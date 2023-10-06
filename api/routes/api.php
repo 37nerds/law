@@ -6,6 +6,7 @@ use App\Http\Controllers\Customers\CompanyController;
 use App\Http\Controllers\Customers\CustomerController;
 use App\Http\Controllers\Customers\GroupOfCompanyController;
 use App\Http\Controllers\Customers\UnitController;
+use App\Http\Controllers\HostController;
 use App\Http\Controllers\RBAC\PermissionController;
 use App\Http\Controllers\RBAC\ResourceController;
 use App\Http\Controllers\RBAC\RoleController;
@@ -111,5 +112,16 @@ Route::prefix("/v1")
 
                 });
 
+            });
+
+        Route::prefix("/settings")
+            ->middleware("protect")
+            ->group(function () {
+                Route::prefix("/users")->group(function () {
+
+                    Route::get("/", [HostController::class, "index"]);
+                    Route::patch("/", [HostController::class, "update"]);
+
+                });
             });
     });

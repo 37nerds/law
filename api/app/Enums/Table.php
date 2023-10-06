@@ -15,4 +15,5 @@ enum Table
     const roles = "roles";
     const permissions = 'permissions';
     const resources = "resources";
+    const hosts = "hosts";
 }

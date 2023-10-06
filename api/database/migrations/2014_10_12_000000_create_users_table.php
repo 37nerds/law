@@ -10,17 +10,21 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create(Table::users, function (Blueprint $table) {
+            // relationship
             $table->uuid("id");
             $table->foreignIdFor(Role::class, "role_id");
 
+            // app meta
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
+            // required real data
             $table->string('email')->unique();
             $table->string("username")->unique();
             $table->string('password');
 
+            // nullable real data
             $table->string('name')->nullable();
             $table->string("avatar")->nullable();
             $table->string("phone")->nullable();
