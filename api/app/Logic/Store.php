@@ -2,7 +2,7 @@
 
 namespace App\Logic;
 
-use App\Models\Host;
+use App\Models\Settings\Host;
 
 class Store
 {

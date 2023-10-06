@@ -6,11 +6,11 @@ use App\Http\Controllers\Customers\CompanyController;
 use App\Http\Controllers\Customers\CustomerController;
 use App\Http\Controllers\Customers\GroupOfCompanyController;
 use App\Http\Controllers\Customers\UnitController;
-use App\Http\Controllers\HostController;
 use App\Http\Controllers\RBAC\PermissionController;
 use App\Http\Controllers\RBAC\ResourceController;
 use App\Http\Controllers\RBAC\RoleController;
 use App\Http\Controllers\RBAC\UserController;
+use App\Http\Controllers\Settings\HostController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix("/v1")

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Settings;
 
 use App\Helpers\Response;
-use App\Http\Requests\UpdateHostRequest;
-use App\Http\Resources\RBAC\UserResource;
-use App\Models\Host;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Settings\UpdateHostRequest;
+use App\Http\Resources\Settings\HostResource;
+use App\Models\Settings\Host;
 use Illuminate\Http\JsonResponse;
 
 class HostController extends Controller
@@ -14,10 +15,7 @@ class HostController extends Controller
     {
         $hostId = config("host.host_entry_id", "");
         $host = Host::query()->findOrFail($hostId);
-        if (!$host) {
-            return Response::error(404, "Host entry not found");
-        }
-        return Response::happy(200, new UserResource($host));
+        return Response::happy(200, new HostResource($host));
     }
 
     public function update(UpdateHostRequest $request): JsonResponse
@@ -25,6 +23,6 @@ class HostController extends Controller
         $hostId = config("host.host_entry_id", "");
         $host = Host::query()->findOrFail($hostId);
         $host->fill($request->all())->save();
-        return Response::happy(200, $host);
+        return Response::happy(200, new HostResource($host));
     }
 }
