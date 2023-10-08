@@ -57,7 +57,7 @@ If you prefer to set up the development servers manually, follow these instructi
     4. Start the server:
         ```sh
         $ pnpm dev
-        The server will be accessible at [`http://127.0.0.1:3000`](http://127.0.0.1:3000).
         ```
+        The server will be accessible at [`http://127.0.0.1:3000`](http://127.0.0.1:3000).
 
 These guidelines provide both Docker-based and manual setup options for running the development servers, allowing you to choose the approach that best suits your needs.
